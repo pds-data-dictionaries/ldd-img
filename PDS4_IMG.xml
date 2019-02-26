@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1101.sch"
+  schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_XML_Schema
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1
+                        http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1101.xsd">
+
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:system_bundle:xml_schema:pds-imaging</logical_identifier>
+        <version_id>1.9</version_id>
+        <title>PDS4 Imaging XML Schema V1.9</title>
+        <information_model_version>1.1.0.1</information_model_version>
+        <product_class>Product_XML_Schema</product_class>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2013-11-18</modification_date>
+                <version_id>1.9</version_id>
+                <description>This version of the Imaging dictionary has
+                    been upgraded to comply with version 1.1.0.0 of the
+                    PDS4 Information Model.  Additionally, it has the
+                    following changes:
+                    
+                    1) The Cartography related classes have been removed
+                       into a separate discipline dictionary.
+                    
+                    2) Two new attributes have been added to the
+                       Command_Parameters class: name and description.
+                    
+                    3) Added new attributes to the
+                       Imaging_Instrument_Parameters class:
+                       crosstrack_summing, downtrack_summing, gain_mode_id,
+                       and offset_mode_id.
+                    
+                    4) Moved the Imaging_Instrument_Parameters class
+                       attributes filter_id and filter_name into a new
+                       associated class, "Filter".
+                    
+                    5) Renamed the Imaging_Instrument_Parameters associated
+                       class, "Instrument_Temperature" to
+                       "Device_Temperature".
+                    
+                    6) Deleted the Imaging_Instrument_Parameters class
+                       attribute frame_sequence_number.
+                    
+                    7) Modified the Instrument/Device_Temperature class by
+                       changing the following attribute names: raw_count to
+                       temperature_raw and calibrated_value to
+                       temperature_calibrated.
+                    
+                    8) Added new filter-related attributes in the Filter
+                       class: filter_number, center_filter_wavelength,
+                       full_width_half_maximum, and comment.
+                    
+                    9) Temporarily dropped the
+                       Instrument_Compression_Parameters class.  It will be
+                       re-issued in the next version of the dictionary.
+                    
+                    10) Dropped the Geometry class.  It will either be
+                       introduced as part of this dictionary or as a
+                       separate stand-alone dictionary.
+                    
+                    11) In the Software class, changed the single date_time
+                       attribute to two separate attributes start_date_time
+                       and stop_date_time.
+                    
+                    12) Significantly redesigned the Telemtry_Parameters
+                       class, moving several attributes into an associated
+                       Packet_Parameters class.
+                    
+                    13) Removed an extraneous closing 'A' tag for
+                       associated classes in the HTML documentation.
+                    
+                    14) Added a missing cloaing paragraph tag for
+                       terminological entires in the HTML documentation.
+                </description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+
+    <File_Area_XML_Schema>
+        <File>
+            <file_name>PDS4_IMG_1100.xsd</file_name>
+            <creation_date_time>2013-11-18T22:49:19Z</creation_date_time>
+            <file_size unit="byte">28623</file_size>
+            <md5_checksum>6e9f012554ccfebba9349b42f93e7b8d</md5_checksum>
+        </File>
+        <XML_Schema>
+            <name>PDS4 XML/Schema for Imaging Dictionary</name>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>XML Schema Version 1.1</parsing_standard_id>
+            <description>This is the PDS4 XML Schema file for the Imaging
+                dictionary, version 1.1.0.0, which uses the "img"
+                namespace.</description>
+        </XML_Schema>
+    </File_Area_XML_Schema>
+
+    <File_Area_XML_Schema>
+        <File>
+            <file_name>PDS4_IMG_1100.sch</file_name>
+            <creation_date_time>2013-11-18T22:49:19Z</creation_date_time>
+            <file_size unit="byte">1874</file_size>
+            <md5_checksum>9ee7ac7a37053ced277f0233ba290473</md5_checksum>
+        </File>
+        <XML_Schema>
+            <name>PDS4 Schematron File for Imaging Dictionary</name>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>Schematron ISO/IEC 19757-3:2006</parsing_standard_id>
+            <description>This is the PDS4 Schematron file for the "img"
+                namespace.  Schematron provides rule-based validation for
+                XML Schema.</description>
+        </XML_Schema>
+    </File_Area_XML_Schema>
+
+</Product_XML_Schema>

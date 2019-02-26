@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PDS4 XML/Schema for Imaging Dictionary -->
+<!-- Generated from the PDS4_Imaging_1100_20131118224915_ext.xml Ingest_LDD file -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://pds.nasa.gov/pds4/img/v1"
+  xmlns:img="http://pds.nasa.gov/pds4/img/v1"
+  xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified"
+  version="1.1.0.0">
+
+  <xs:annotation>
+    <xs:documentation>This dictionary contains high level classes and
+      attributes used in imaging and spectrometer products.  It also
+      contains classes with attributes used during active mission
+      operations.  Many of these classes are designed to be extended into
+      local mission dictionaries.</xs:documentation>
+  </xs:annotation>
+
+  <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1"
+    schemaLocation="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1101.xsd"/>
+  
+  <xs:element name="Command_Parameters" type="img:Command_Parameters"/>
+  <xs:element name="Telemetry_Parameters" type="img:Telemetry_Parameters"/>
+  <xs:element name="Imaging_Instrument_Parameters" type="img:Imaging_Instrument_Parameters"/>
+  <xs:element name="Processing_History" type="img:Processing_History"/>
+  <xs:element name="Packet_Parameters" type="img:Packet_Parameters"/>
+  <xs:element name="Device_Temperature" type="img:Device_Temperature"/>
+  <xs:element name="Filter" type="img:Filter"/>
+  <xs:element name="Process" type="img:Process"/>
+  <xs:element name="Process_Owner" type="img:Process_Owner"/>
+  <xs:element name="Software" type="img:Software"/>
+  
+  <xs:complexType name="Command_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Command_Parameters class contains attributes
+        used to identify or describe the commands sent to a spacecraft to
+        perform one or more actions resulting in the acquisition of the
+        current data product.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="img:name" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="description" type="img:description" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="command_sequence_number" type="img:command_sequence_number" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Temperature">
+    <xs:annotation>
+      <xs:documentation>The Device_Temperature class provides the
+        temperature of some point on an instrumnet or other
+        device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="img:name" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="temperature_raw" type="img:temperature_raw" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="temperature_calibrated" type="img:temperature_calibrated" minOccurs="1" maxOccurs="1"/>
+      <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Filter">
+    <xs:annotation>
+      <xs:documentation>The Filter class describes the filter associated
+        with a particular observation.        The filter may be identified by
+        name, identifier, number or some combination of
+        these.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="filter_name" type="img:filter_name" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="filter_id" type="img:filter_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="filter_number" type="img:filter_number" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="center_filter_wavelength" type="img:center_filter_wavelength" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="full_width_half_maximum" type="img:full_width_half_maximum" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="comment" type="img:comment" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Imaging_Instrument_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Imaging_Instrument_Parameters class contains
+        attributes providing the values of any dynamic physical or
+        operating characteristics of an instrument.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="crosstrack_summing" type="img:crosstrack_summing" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Device_Temperature" type="img:Device_Temperature" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="downtrack_summing" type="img:downtrack_summing" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="exposure_count" type="img:exposure_count" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="exposure_duration" type="img:exposure_duration" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="exposure_type" type="img:exposure_type" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Filter" type="img:Filter" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="first_line" type="img:first_line" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="first_line_sample" type="img:first_line_sample" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="gain_mode_id" type="img:gain_mode_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="light_flood_state_flag" type="img:light_flood_state_flag" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="offset_mode_id" type="img:offset_mode_id" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Packet_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Packet_Parameters class contains parameters
+        describing the packetized telemetry data.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="packet_creation_sclk" type="img:packet_creation_sclk" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="packet_creation_date_time" type="img:packet_creation_date_time" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="expected_packets" type="img:expected_packets" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="received_packets" type="img:received_packets" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="missing_packet_flag" type="img:missing_packet_flag" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="packet_map_mask" type="img:packet_map_mask" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Process">
+    <xs:annotation>
+      <xs:documentation>The Process class describes an action taken upon a
+        product, typically by a software program.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Process_Owner" type="img:Process_Owner" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Software" type="img:Software" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Process_Owner">
+    <xs:annotation>
+      <xs:documentation>The Process_Owner class describes the individual
+        and/or organization that made changes to a
+        product.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="producer_id" type="img:producer_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="producer_full_name" type="img:producer_full_name" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="producer_institution_name" type="img:producer_institution_name" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Processing_History">
+    <xs:annotation>
+      <xs:documentation>The Processing_History class provides a listing of
+        the programs used to create the current product.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Process" type="img:Process" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Software">
+    <xs:annotation>
+      <xs:documentation>The Software class identifies the software program
+        used to make changes to a product.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="img:name" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="version_id" type="img:version_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="description" type="img:description" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="user_id" type="img:user_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="host_name" type="img:host_name" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="start_date_time" type="pds:start_date_time" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="stop_date_time" type="pds:stop_date_time" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Telemetry_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Telemetry_Parameters class contains
+        downlink-related attributes used primarily during mission
+        operations.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="downlink_telemetry_protocol_type" type="img:downlink_telemetry_protocol_type" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="telemetry_application_id" type="img:telemetry_application_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="telemetry_application_name" type="img:telemetry_application_name" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="telemetry_application_subtype_id" type="img:telemetry_application_subtype_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="telemetry_provider_id" type="img:telemetry_provider_id" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="earth_received_start_date_time" type="img:earth_received_start_date_time" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="earth_received_stop_date_time" type="img:earth_received_stop_date_time" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Packet_Parameters" type="img:Packet_Parameters" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="center_filter_wavelength_WO_Units">
+    <xs:restriction base="pds:ASCII_Real"/>
+  </xs:simpleType>
+
+  <xs:complexType name="center_filter_wavelength">
+    <xs:annotation>
+      <xs:documentation>The center_filter_wavelength attribute provides the
+        mid_point wavelength value between the minimum and maximum
+        instrument filter wavelength values.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:center_filter_wavelength_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="command_sequence_number">
+    <xs:annotation>
+      <xs:documentation>The command_sequence_number attribute provides a
+        numeric identifier for a sequence of commands sent to a spacecraft
+        or instrument.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="crosstrack_summing">
+    <xs:annotation>
+      <xs:documentation>The crosstrack_summing attribute provides the
+        number of detector pixel values in the crosstrack direction that
+        have been averaged to produce the final output
+        pixel.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="127"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="downlink_telemetry_protocol_type">
+    <xs:annotation>
+      <xs:documentation>The downlink_telemetry_protocol_type attribute
+        specifies the protocol used by the source of a telemetry stream for
+        creating telemetry data products.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="downtrack_summing">
+    <xs:annotation>
+      <xs:documentation>The downtrack_summing attribute provides the number
+        of detector pixel values in the downtrack direction that have been
+        averaged to produce the final output pixel.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="127"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="earth_received_start_date_time">
+    <xs:annotation>
+      <xs:documentation>The earth_received_start_date_time attribute
+        provides the earliest time at which any component telemetry data
+        for a particular product was received.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Date_Time_UTC"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="earth_received_stop_date_time">
+    <xs:annotation>
+      <xs:documentation>The earth_received_stop_date_time attribute
+        provides the latest time at which any component telemetry data for
+        a particular product was received.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Date_Time_UTC"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="expected_packets">
+    <xs:annotation>
+      <xs:documentation>The expected_packets attribute provides the total
+        number of telemetry packets which constitute a complete data
+        product, i.e., a data product without missing
+        data.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="exposure_count">
+    <xs:annotation>
+      <xs:documentation>The exposure count attribute provides the maximum
+        number of exposures taken during a specified interval.        The value
+        is dependent on exposure type.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="exposure_duration_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="exposure_duration">
+    <xs:annotation>
+      <xs:documentation>The exposure_duration attribute provides the value
+        of the time interval between the opening and closing of an
+        instrument aperture (such as a camera shutter).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:exposure_duration_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Time" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="exposure_type">
+    <xs:annotation>
+      <xs:documentation>The exposure_type attribute indicates the exposure
+        setting on a camera.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="filter_id">
+    <xs:annotation>
+      <xs:documentation>The filter_id attribute provides the number of an
+        instrument filter through which an image or measurement was
+        acquired or which is associated with a given instrument
+        mode.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="filter_name">
+    <xs:annotation>
+      <xs:documentation>The filter_name attribute provides the
+        commonly-used name of the instrument filter through which an image
+        or measurement was acquired or which is associated with a given
+        instrument mode.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="filter_number">
+    <xs:annotation>
+      <xs:documentation>The filter_number attribute provides the numeric
+        identifier of an instrument filter through which an image or
+        measurement was acquired or which is associated with a given
+        instrument mode.  Within the bin class of a spectral data object,
+        it identifies the filter through which data in the given band were
+        acquired.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="first_line">
+    <xs:annotation>
+      <xs:documentation>The first_line attribute indicates the line within
+        a source image that corresponds to the first line in a
+        sub-image.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="first_line_sample">
+    <xs:annotation>
+      <xs:documentation>The first_line_sample attribute indicates the
+        sample within a source image that corresponds to the first sample
+        in a sub-image.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="full_width_half_maximum_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="full_width_half_maximum">
+    <xs:annotation>
+      <xs:documentation>The full_width_half_maximum attribute describes the
+        width of a "bump" on a curve or function.  It is given by the
+        distance between points on the curve at which the function reaches
+        half of its maximum value.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:full_width_half_maximum_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="gain_mode_id">
+    <xs:annotation>
+      <xs:documentation>The gain_mode_id attribute identifies the gain
+        state of an instrument.  Gain is a constant value which is
+        multiplied with an instrument's output signal to increase or
+        decrease the level of that output.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="host_name">
+    <xs:annotation>
+      <xs:documentation>The name of a computer on which a process was
+        run.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="light_flood_state_flag">
+    <xs:annotation>
+      <xs:documentation>The light_flood_state_flag attribute indicates the
+        mode (on or off) of light flooding for an
+        instrument.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:minLength value="2"/>
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="missing_packet_flag">
+    <xs:annotation>
+      <xs:documentation>The missing_packet_flag attribute indicates whether
+        or not there were telemetry packets that were expected but not
+        received.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="offset_mode_id">
+    <xs:annotation>
+      <xs:documentation>The offset_mode_id attribute identifies the analog
+        value that is subtracted from the video signal prior to the
+        analog/digital converters.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="packet_creation_date_time">
+    <xs:annotation>
+      <xs:documentation>The packet_creation_date_time attribute specifies
+        the time, in standard UTC format, that data was packetized on board
+        a spacecraft.  This value is not always co-incident with the data
+        acquisition time.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Date_Time"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="packet_creation_sclk">
+    <xs:annotation>
+      <xs:documentation>The packet_creation_sclk attribute specifies the
+        value of the spacecraft clock at the time that data was packetized
+        on board a spacecraft.        This value is not always co-incident with
+        the data acquisition time.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="packet_map_mask">
+    <xs:annotation>
+      <xs:documentation>The packet_map_mask attribute is a binary or
+        hexadecimal number identifying which of a data file's expected
+        packets were actually received.  The digits correspond positionally
+        with the relative packet numbers of the data file.  The bits are to
+        be read left to right; i.e., the first (left-most) digit of the
+        number corresponds to the first packet of the data file.  A bit
+        value of 1 indicates that the packet was received; a value of 0
+        indicates that it was not received.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Numeric_Base16"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="producer_full_name">
+    <xs:annotation>
+      <xs:documentation>The producer_full_name attribute provides the
+        complete name for a person and includes titles and
+        suffixes.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="127"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="producer_id">
+    <xs:annotation>
+      <xs:documentation>The producer_id attribute provides a short name or
+        acronym identifying the organization or team which produced a
+        product. Ex. "LRO_LROC_TEAM", "MIPL of JPL"</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="producer_institution_name">
+    <xs:annotation>
+      <xs:documentation>The producer_institution_name attribute identifies
+        a university, research center, national space agency, or other
+        institution associated with the production of a PDS archive.  This
+        is generally an institution associated with the Producer_Name.        Ex.
+        "Max Planck Institute", "NASA/Goddard Space Flight
+        Center"</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="received_packets">
+    <xs:annotation>
+      <xs:documentation>The received_packets attribute provides the total
+        number of telemetry packets which constitute a reconstructed data
+        product, cf. expected_packets.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="telemetry_application_id">
+    <xs:annotation>
+      <xs:documentation>The telemetry_application_id attribute identifies
+        the process, or source, which created the data.  This can include
+        information such as an identification of the instrument which
+        generated the telemetry stream, its operating mode at the time of
+        data acquisition, and any onboard compression of the
+        data.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="telemetry_application_name">
+    <xs:annotation>
+      <xs:documentation>The telemetry_application_name attribute provides
+        the name associated with the source or process which created the
+        data.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="telemetry_application_subtype_id">
+    <xs:annotation>
+      <xs:documentation>The telemetry_application_subtype_id attribute
+        provides further distinction (i.e., greater specificity) among
+        telemetry_application_id types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="telemetry_provider_id">
+    <xs:annotation>
+      <xs:documentation>The telemetry_provider_id attribute identifies the
+        organization or subsystem that supplied the telemetry data product
+        to the producer of the raw (EDR) PDS data product.  This is
+        typically (but not always) the organization responsible for
+        reassembling packetized data into a single
+        product.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="temperature_calibrated_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+      <xs:minInclusive value="-273.15"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="temperature_calibrated">
+    <xs:annotation>
+      <xs:documentation>The temperature_calibrated attribute provides the
+        temperature, in the specified units, of some point on an instrument
+        or other device.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:temperature_calibrated_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Temperature" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="temperature_raw">
+    <xs:annotation>
+      <xs:documentation>The temperature_raw attribute provides the raw,
+        uncalibrated, temperature of some point on an instrument or other
+        device.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="user_id">
+    <xs:annotation>
+      <xs:documentation>A short identifier used to run a computer
+        process.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="version_id">
+    <xs:annotation>
+      <xs:documentation>The version_id attribute provides the version of
+        the software program.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+  <!-- The following section contains attributes that should be referenced
+    from the pds namespace, but can't be at the current time.  Instead,
+    they have been copied into the local namespace. -->
+  
+  <xs:simpleType name="comment">
+    <xs:annotation>
+      <xs:documentation>The comment attribute provides one or more remarks
+        or thoughts relevant to the object.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Text_Preserved">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="description">
+    <xs:annotation>
+      <xs:documentation>The description attribute provides a statement,
+        picture in words, or account that describes or is otherwise
+        relevant to the object.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Text_Preserved"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="name">
+    <xs:annotation>
+      <xs:documentation>The name attribute provides a word or combination
+        of words by which the object is known.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed"/>
+  </xs:simpleType>
+
+</xs:schema>
