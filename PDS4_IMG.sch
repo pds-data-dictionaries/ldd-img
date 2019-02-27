@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.9.0.0 - Fri Dec 29 21:16:40 PST 2017 -->
-  <!-- Generated from the PDS4 Information Model Version 1.9.0.0 - System Build 8a -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.10.1.0 - Thu Dec 06 19:44:53 PST 2018 -->
+  <!-- Generated from the PDS4 Information Model Version 1.10.1.0 - System Build 8b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -18,10 +18,14 @@
 		   <!--        merged together in the rules below.       -->
 		   <!-- ================================================ -->
   <sch:pattern>
-    <sch:rule context="//img:Bayer_Parameters">
-      <sch:assert test="(img:bayer_state = 'Debayered' and exists(img:debayer_venue) and exists(img:debayer_algorithm)) or img:bayer_state = 'No Bayer' or img:bayer_state = 'Bayer Encoded' ">
-        IMG:error:bayer_state_check: img:debayer_venue and img:debayer_algorithm attributes must be 
-        specified when img:bayer_state = 'Debayered'.
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters">
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Color_Filter_Array_Parameters">
+      <sch:assert test="(img:color_filter_array_state = 'Decoded' and img:color_filter_array_type = 'Bayer RGGB' and exists(img:bayer_algorithm)) or img:color_filter_array_state = 'No CFA' or img:color_filter_array_state = 'Encoded' ">
+        IMG:error:img:color_filter_array_state_check: img:bayer_algorithm attribute must be specified when 
+        img:color_filter_array_state = 'Decoded' and img:color_filter_array_type = 'Bayer RGGB'.
       </sch:assert>
     </sch:rule>
   </sch:pattern>
@@ -29,6 +33,23 @@
     <sch:rule context="//img:Command_Parameters/img:Exposure_Parameters">
       <sch:assert test="count(child::*) > 0">
         IMG:error:commanded_exposure_parameters_check: img:Exposure_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Image_Product_Information/img:Data_Correction_Parameters">
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters/img:Exposure_Parameters">
+      <sch:assert test="img:exposure_duration_count &gt;= 0 and img:exposure_duration_count &lt;= 65535">
+        insight:error:exp_params_0: The attribute img:exposure_duration_count must be within the value range 0-65535 inclusive.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters/img:Exposure_Parameters">
+      <sch:assert test="img:exposure_type = ('MANUAL', 'AUTO', 'TEST')">
+        insight:error:exp_params_1: The attribute img:exposure_type must be equal to one of the following
+        values: 'MANUAL', 'AUTO', 'TEST'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -62,21 +83,27 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Bayer_Parameters/img:bayer_state">
-      <sch:assert test=". = ('Bayer Encoded', 'Debayered', 'No Bayer')">
-        The attribute img:bayer_state must be equal to one of the following values 'Bayer Encoded', 'Debayered', 'No Bayer'.</sch:assert>
+    <sch:rule context="img:Color_Filter_Array_Parameters/img:bayer_algorithm">
+      <sch:assert test=". = ('Averaged', 'Bilinear', 'Blue Averaged', 'Blue Bilinear', 'Green Averaged', 'Green Bilinear', 'Identity', 'Malvar', 'None', 'Panchromatic', 'Raw Bayer', 'Red Averaged', 'Red Bilinear', 'Zhang-Wu')">
+        The attribute img:bayer_algorithm must be equal to one of the following values 'Averaged', 'Bilinear', 'Blue Averaged', 'Blue Bilinear', 'Green Averaged', 'Green Bilinear', 'Identity', 'Malvar', 'None', 'Panchromatic', 'Raw Bayer', 'Red Averaged', 'Red Bilinear', 'Zhang-Wu'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Bayer_Parameters/img:debayer_algorithm">
-      <sch:assert test=". = ('Malvar', 'Zhang-Wu')">
-        The attribute img:debayer_algorithm must be equal to one of the following values 'Malvar', 'Zhang-Wu'.</sch:assert>
+    <sch:rule context="img:Color_Filter_Array_Parameters/img:color_filter_array_state">
+      <sch:assert test=". = ('Decoded', 'Encoded', 'No CFA')">
+        The attribute img:color_filter_array_state must be equal to one of the following values 'Decoded', 'Encoded', 'No CFA'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Bayer_Parameters/img:debayer_venue">
-      <sch:assert test=". = ('Ground', 'Onboard')">
-        The attribute img:debayer_venue must be equal to one of the following values 'Ground', 'Onboard'.</sch:assert>
+    <sch:rule context="img:Color_Filter_Array_Parameters/img:color_filter_array_type">
+      <sch:assert test=". = ('Bayer RGGB')">
+        The attribute img:color_filter_array_type must be equal to the value 'Bayer RGGB'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Color_Filter_Array_Parameters/img:color_filter_array_venue">
+      <sch:assert test=". = ('Ground', 'None', 'Onboard')">
+        The attribute img:color_filter_array_venue must be equal to one of the following values 'Ground', 'None', 'Onboard'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -139,8 +166,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Filter/img:bandwidth">
-      <sch:assert test="@unit = ('Hz')">
-        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -177,14 +204,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Image_Compression_Parameters/img:compression_type">
-      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless')">
-        The attribute img:compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:azimuth_fov">
-      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
-        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
+      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
+        The attribute img:compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -194,7 +215,13 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:elevation_fov">
+    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:line_fov">
+      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
+        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:sample_fov">
       <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
         The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
     </sch:rule>
@@ -242,6 +269,18 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction_Parameters/img:radiance_offset">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction_Parameters/img:radiance_scaling_factor">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Shutter_Subtraction_Parameters/img:shutter_subtraction_mode">
       <sch:assert test=". = ('Conditional', 'True')">
         The attribute img:shutter_subtraction_mode must be equal to one of the following values 'Conditional', 'True'.</sch:assert>
@@ -263,6 +302,22 @@
     <sch:rule context="//img:Imaging_Instrument_State_Parameters">
       <sch:assert test="count(child::*) > 0">
         IMG:error:img_inst_state_params_child_check: img:Imaging_Instrument_State_Parameters class must contain at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature">
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature">
+      <sch:assert test="count(img:Instrument_Device_Temperature_Index) = 2">
+        insight:error:inst_device_temp_1: The class img:Instrument_Device_Temperature must have exactly 2 img:Instrument_Device_Temperature_Index subclasses.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature">
+      <sch:assert test="(img:Instrument_Device_Temperature_Index[1]/img:name = 'IDC_CCD' and img:Instrument_Device_Temperature_Index[2]/img:name = 'IDC_ELECTRONICS') or (img:Instrument_Device_Temperature_Index[1]/img:name = 'ICC_CCD' and img:Instrument_Device_Temperature_Index[2]/img:name = 'ICC_ELECTRONICS')">
+        insight:error:inst_device_temp_2: The img:name values for the Instrument_Device_Temperature_Index classes must be either combination of 'IDC_CCD' and 'IDC_ELECTRONICS' or  'ICC_CCD' and 'ICC_ELECTRONICS'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -311,6 +366,16 @@
     <sch:rule context="//img:Shutter_Subtraction_Parameters">
       <sch:assert test="(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))">
         IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Image_Product_Information/img:Subframe_Parameters">
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Image_Product_Information/img:Subframe_Parameters">
+      <sch:assert test="img:first_line = '1' and img:first_sample = '1'">
+        insight:error:subframe_params_1: The attributes img:first_line and img:first_sample must each have values equal to '1'.</sch:assert>
     </sch:rule>
   </sch:pattern>
 </sch:schema>
