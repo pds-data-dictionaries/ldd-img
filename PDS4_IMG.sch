@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.10.1.0 - Thu Dec 06 19:44:53 PST 2018 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.10.1.0 - Sat Apr 13 15:38:20 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.10.1.0 - System Build 8b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -119,6 +119,24 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Compression_Parameters">
+      <sch:assert test="if (img:deferred_flag) then img:deferred_flag = ('true', 'false') else true()">
+        The attribute img:deferred_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Compression_Parameters/img:compression_class">
+      <sch:assert test=". = ('Lossless', 'Lossy', 'Uncompressed')">
+        The attribute img:compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'Uncompressed'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Compression_Parameters/img:compression_type">
+      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
+        The attribute img:compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Data_Correction">
       <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
         The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
@@ -134,6 +152,24 @@
     <sch:rule context="img:Data_Correction/img:data_correction_venue">
       <sch:assert test=". = ('Ground', 'Onboard')">
         The attribute img:data_correction_venue must be equal to one of the following values 'Ground', 'Onboard'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Detector_Parameters/img:detector_to_image_rotation">
+      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
+        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Device_Current/img:current_value">
+      <sch:assert test="@unit = ('A', 'mA')">
+        The attribute @unit must be equal to one of the following values 'A', 'mA'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Device_Voltage/img:voltage_value">
+      <sch:assert test="@unit = ('V', 'mV')">
+        The attribute @unit must be equal to one of the following values 'V', 'mV'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -165,13 +201,13 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Filter/img:bandwidth">
+    <sch:rule context="img:Filter_Parameters/img:bandwidth">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Filter/img:center_filter_wavelength">
+    <sch:rule context="img:Filter_Parameters/img:center_filter_wavelength">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
@@ -188,60 +224,6 @@
     <sch:rule context="img:Frame_Parameters/img:interframe_delay">
       <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Compression_Parameters">
-      <sch:assert test="if (img:deferred_flag) then img:deferred_flag = ('true', 'false') else true()">
-        The attribute img:deferred_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Compression_Parameters/img:compression_class">
-      <sch:assert test=". = ('Lossless', 'Lossy', 'Uncompressed')">
-        The attribute img:compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'Uncompressed'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Compression_Parameters/img:compression_type">
-      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
-        The attribute img:compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:detector_to_image_rotation">
-      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
-        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:line_fov">
-      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
-        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Imaging_Instrument_State_Parameters/img:sample_fov">
-      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
-        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Instrument_Device_Current_Index/img:current_value">
-      <sch:assert test="@unit = ('A', 'mA')">
-        The attribute @unit must be equal to one of the following values 'A', 'mA'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Instrument_Device_Temperature_Index/img:temperature_value">
-      <sch:assert test="@unit = ('K', 'degC')">
-        The attribute @unit must be equal to one of the following values 'K', 'degC'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Instrument_Device_Voltage_Index/img:voltage_value">
-      <sch:assert test="@unit = ('V', 'mV')">
-        The attribute @unit must be equal to one of the following values 'V', 'mV'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

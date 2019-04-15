@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.10.1.0 - Thu Dec 06 19:44:53 PST 2018 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.10.1.0 - Sat Apr 13 15:38:20 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.10.1.0 - System Build 8b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.10.1.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.10.1.0 - img: - Imaging - PDS4_IMG_IngestLDD_1A10.xml                   -->
+  <!-- 1.10.1.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                        -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -30,11 +30,11 @@
     - new/improved definitions for Companding_Parameters, Downsampling_Parameters, Exposure_Parameters
     - removed the following attributes: Data_Correction.data_correction_subtype
     - removed the following classes because they were insufficiently multi-mission:
-      - Derived_Product_Parameters
-      - Frame_Parameters
-      - Product_Identification 
-      - Stereo_Product_Parameters
-      - Vector_Range_Origin
+    - Derived_Product_Parameters
+    - Frame_Parameters
+    - Product_Identification 
+    - Stereo_Product_Parameters
+    - Vector_Range_Origin
     - added exposure_type enumeration
     - new flat_field_algorithm attribute
     - changed compression_type to compression_class and compression_mode_name to compression_type
@@ -49,6 +49,10 @@
     
     1.5.1.0
     - changed unit of bandwidth attribute from Units_of_Frequency to Units_of_Length
+    
+    1.6.0.0
+    - 
+    
   
     </xs:documentation>
   </xs:annotation>
@@ -127,7 +131,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Command_Parameters">
+  <xs:complexType name="Commanded_Parameters">
     <xs:annotation>
       <xs:documentation>The Command_Parameters class contains attributes
         used to identify or describe the commands sent to a spacecraft
@@ -136,10 +140,18 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_erase_count" type="img:detector_erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -160,6 +172,34 @@
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:companding_state = ('Companded', 'Expanded', 'None')"/> -->
     <!-- <xs:assert test="img:companding_venue = ('Hardware', 'None', 'Software')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
+  <xs:complexType name="Compression_Parameters">
+    <xs:annotation>
+      <xs:documentation> The Compression_Parameters class contains
+        attributes describing onboard compression parameters used for
+        data storage and transmission.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="compression_class" type="img:compression_class" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="compression_mode" type="img:compression_mode" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="compression_type" type="img:compression_type" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="compression_rate" type="img:compression_rate" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="compression_ratio" type="img:compression_ratio" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="compression_quality" type="img:compression_quality" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="deferred_flag" type="img:deferred_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ICER_Parameters" type="img:ICER_Parameters"> </xs:element>
+        <xs:element name="JPEG_Parameters" type="img:JPEG_Parameters"> </xs:element>
+        <xs:element name="JPEG_Progressive_Parameters" type="img:JPEG_Progressive_Parameters"> </xs:element>
+        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
+    <!-- <xs:assert test="img:compression_type = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
@@ -250,6 +290,133 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Detector_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Detector_Parameters class contains
+        attributes describing the state of the instrument
+        detector.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="detector_erase_count" type="img:detector_erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="detector_first_line" type="img:detector_first_line" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="detector_first_sample" type="img:detector_first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="detector_lines" type="img:detector_lines" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="detector_to_image_rotation" type="img:detector_to_image_rotation" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Component_States">
+    <xs:annotation>
+      <xs:documentation>The Device_Component_States class provides a
+        container for the set of states of a component of an imaging
+        instrument or other imaging device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Component_State" type="geom:Device_Component_State" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Current">
+    <xs:annotation>
+      <xs:documentation>The Device_Current class provides the current of
+        some point on an imaging instrument or other imaging
+        device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="current_value" nillable="true" type="img:current_value" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Currents">
+    <xs:annotation>
+      <xs:documentation>The Device_Currents class provides a container
+        for the set of currents of an imaging instrument or other
+        imaging device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Current" type="img:Device_Current" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Motor_Count">
+    <xs:annotation>
+      <xs:documentation>The Device_Motor_Count class describes the raw
+        motor count of one actuator on an imaging instrument or other
+        imaging device (such as a filter wheel, focus motor, or zoom
+        motor). This information should typically be reported in a more
+        specific and useable form in other classes, such as a filter
+        number or wavelength in the Filter_Parameters class or a focus
+        distnace in the Focus_Parameters class.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="motor_count" type="img:motor_count" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Motor_Counts">
+    <xs:annotation>
+      <xs:documentation>The Device_Motor_Counts class provides a
+        container for the set of raw motor counts of actuators on an
+        imaging instrument or other imaging device (such as a filter
+        wheel, focus motor, or zoom motor).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Motor_Count" type="img:Device_Motor_Count" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Device_Parameters class identifies where a
+        measurement was made. It may refer to an individual imaging
+        instrument, imaging instrument device, or some defined point on
+        the instrument or device. The class is intended to be extended
+        (for example, by Device_Temperature) to add the associated
+        measurement rather than being used directly.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="device_name" nillable="true" type="img:device_name" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="device_id" nillable="true" type="img:device_id" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="sequence_number" type="img:sequence_number" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Temperatures">
+    <xs:annotation>
+      <xs:documentation>The Device_Temperature class provides a
+        container for the set of temperatures of an imaging instrument
+        or other imaging device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Temperature" type="geom:Device_Temperature" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Voltage">
+    <xs:annotation>
+      <xs:documentation>The Device_Voltage class provides the voltage of
+        some point on an imaging instrument or other imaging
+        device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="voltage_value" nillable="true" type="img:voltage_value" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Voltages">
+    <xs:annotation>
+      <xs:documentation>The Device_Voltage class provides a container
+        for the set of voltages of an imaging instrument or other
+        imaging device.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Device_Voltage" type="img:Device_Voltage" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Downsampling_Parameters">
     <xs:annotation>
       <xs:documentation> The Downsampling_Parameters class describes
@@ -293,11 +460,11 @@
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
-  <xs:complexType name="Filter">
+  <xs:complexType name="Filter_Parameters">
     <xs:annotation>
-      <xs:documentation>The Filter class describes the filter associated
-        with a particular observation. The filter may be identified by
-        name, identifier, number or some combination of
+      <xs:documentation>The Filter_Parameters class describes the filter
+        associated with a particular observation. The filter may be
+        identified by name, identifier, number or some combination of
         these.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -361,34 +528,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Image_Compression_Parameters">
-    <xs:annotation>
-      <xs:documentation> The Image_Compression_Parameters class contains
-        attributes describing onboard compression parameters used for
-        data storage and transmission.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="compression_class" type="img:compression_class" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_mode" type="img:compression_mode" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_type" type="img:compression_type" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_rate" type="img:compression_rate" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_ratio" type="img:compression_ratio" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_quality" type="img:compression_quality" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="deferred_flag" type="img:deferred_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ICER_Parameters" type="img:ICER_Parameters"> </xs:element>
-        <xs:element name="JPEG_Parameters" type="img:JPEG_Parameters"> </xs:element>
-        <xs:element name="JPEG_Progressive_Parameters" type="img:JPEG_Progressive_Parameters"> </xs:element>
-        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
-      </xs:choice>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:compression_type = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
-  </xs:complexType>
-
   <xs:complexType name="Image_Compression_Segment">
     <xs:annotation>
       <xs:documentation> The Image_Compression_Segment class provides
@@ -408,28 +547,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Image_Product_Information">
-    <xs:annotation>
-      <xs:documentation>The Image_Product_Information class contains
-        classes and attributes that describe the image product itself,
-        including information about the exposure duration, filters, data
-        correction, sampling, frame, sub-frames, and how the product was
-        derived.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Filter" type="img:Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:complexType name="Imaging">
     <xs:annotation>
       <xs:documentation>The Imaging class contains classes and
@@ -443,105 +560,36 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Command_Parameters" type="img:Command_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Image_Product_Information" type="img:Image_Product_Information" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Imaging_Instrument_State_Parameters" type="img:Imaging_Instrument_State_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Image_Compression_Parameters" type="img:Image_Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Instrument_State_Parameters" type="img:Instrument_State_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Commanded_Parameters" type="img:Commanded_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Imaging_Instrument_State_Parameters">
+  <xs:complexType name="Instrument_State_Parameters">
     <xs:annotation>
-      <xs:documentation>The Imaging_Instrument_State_Parameters class
-        contains attributes providing the values of any dynamic physical
-        or operating characteristics of the imaging
-        instrument.</xs:documentation>
+      <xs:documentation>The Instrument_State_Parameters class contains
+        classes providing the values of any dynamic physical or
+        operating characteristics of the imaging
+        instruments.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="analog_offset" type="img:analog_offset" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="line_fov" type="img:line_fov" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_first_line" type="img:detector_first_line" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_first_sample" type="img:detector_first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_lines" type="img:detector_lines" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_to_image_rotation" type="img:detector_to_image_rotation" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="gain_mode_id" type="img:gain_mode_id" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="gain_number" type="img:gain_number" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Instrument_Device_Current" type="img:Instrument_Device_Current" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Instrument_Device_Temperature" type="img:Instrument_Device_Temperature" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Instrument_Device_Voltage" type="img:Instrument_Device_Voltage" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Current">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Current class provides a
-        container for the set of current of some point on an instrument
-        or other device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Instrument_Device_Current_Index" type="img:Instrument_Device_Current_Index" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Current_Index">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Current_Index class
-        provides the current of some point on an instrument or other
-        device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="device_name" nillable="true" type="img:device_name" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="current_value" nillable="true" type="img:current_value" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Temperature">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Temperature class provides
-        a container for the set of temperatures of some point on an
-        instrument or other device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Instrument_Device_Temperature_Index" type="img:Instrument_Device_Temperature_Index" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Temperature_Index">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Temperature_Index class
-        provides the temperature of some point on an instrument or other
-        device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="device_name" nillable="true" type="img:device_name" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:choice minOccurs="1" maxOccurs="2">
-        <xs:element name="raw_count" type="img:raw_count"> </xs:element>
-        <xs:element name="temperature_value" type="img:temperature_value"> </xs:element>
-    </xs:choice>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Voltage">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Voltage class provides a
-        container for the set of voltages of some point on an instrument
-        or other device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Instrument_Device_Voltage_Index" type="img:Instrument_Device_Voltage_Index" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Instrument_Device_Voltage_Index">
-    <xs:annotation>
-      <xs:documentation>The Instrument_Device_Voltage_Index class
-        provides the voltage of some point on an instrument or other
-        device.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="device_name" nillable="true" type="img:device_name" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="voltage_value" nillable="true" type="img:voltage_value" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="Device_Component_States" type="img:Device_Component_States" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Device_Currents" type="img:Device_Currents" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Device_Motor_Counts" type="img:Device_Motor_Counts" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Device_Temperatures" type="img:Device_Temperatures" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Device_Voltages" type="img:Device_Voltages" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -657,21 +705,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Packet_Parameters">
-    <xs:annotation>
-      <xs:documentation>The Packet_Parameters class contains parameters
-        describing the packetized telemetry data.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="creation_sclk" type="img:creation_sclk" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="creation_date_time" type="img:creation_date_time" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="expected_packets" type="img:expected_packets" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="received_packets" type="img:received_packets" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="missing_packet_flag" type="img:missing_packet_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="packet_map_mask" type="img:packet_map_mask" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:complexType name="Pixel_Averaging_Dimensions">
     <xs:annotation>
       <xs:documentation> The Pixel_Averaging class provides the height
@@ -761,18 +794,6 @@
         active.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Boolean">
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="analog_offset">
-    <xs:annotation>
-      <xs:documentation>The analog_offset attribute identifies the
-        analog value that is subtracted from the signal prior to the
-        analog/digital conversion.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -1084,31 +1105,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="creation_date_time">
-    <xs:annotation>
-      <xs:documentation>The creation_date_time attribute specifies the
-        time, in standard UTC format, that the data or product was
-        created on board a spacecraft. This value is not always
-        co-incident with the data acquisition time.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Date_Time_YMD">
-  <!-- format="YYYY-MM-DDTHH:MM:SS.SSS(Z)" -->
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="creation_sclk">
-    <xs:annotation>
-      <xs:documentation>The creation_sclk attribute specifies the value
-        of the spacecraft clock at the time the data or product was
-        created on board a spacecraft. This value is not always
-        co-incident with the data acquisition time.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="crosstrack_summing">
     <xs:annotation>
       <xs:documentation>The crosstrack_summing attribute provides the
@@ -1271,6 +1267,19 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:complexType name="device_id">
+    <xs:annotation>
+      <xs:documentation>The device_id attribute supplies the identifier
+        of an imaging instrument, an imaging instrument device, or some
+        point on the instrument or device.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Short_String_Collapsed">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:complexType name="device_name">
     <xs:annotation>
       <xs:documentation>The device_name attribute supplies the formal
@@ -1360,20 +1369,6 @@
         number of pixels that are outside a valid DN range, after all
         decompression and post decompression processing has been
         completed. </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="expected_packets">
-    <xs:annotation>
-      <xs:documentation>The expected_packets attribute provides the
-        total number of telemetry packets which constitute a complete
-        data product, i.e., a data product without missing
-        data.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -1577,34 +1572,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="gain_mode_id">
-    <xs:annotation>
-      <xs:documentation>The gain_mode_id attribute identifies the gain
-        state of an instrument. Gain is a constant value which is
-        multiplied with an instrument's output signal to increase or
-        decrease the level of that output. These modes may vary by
-        mission so the permissible values should be set by the mission
-        dictionaries.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="gain_number">
-    <xs:annotation>
-      <xs:documentation>The gain_number attribute specifies the gain
-        value used in the analog to digital conversion. The gain value
-        is a multiplicative factor used in the analog to digital
-        conversion.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="height_pixels_WO_Units">
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -1708,27 +1675,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="line_fov_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
-     <xs:minInclusive value="0.0"/>
-     <xs:maxInclusive value="360.0"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="line_fov">
-    <xs:annotation>
-      <xs:documentation>The line_fov attribute specifies the angular
-        measure of the field of view of an imaged scene, as measured in
-        the image line direction (generally vertical).</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:line_fov_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Angle" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
   <xs:simpleType name="lines">
     <xs:annotation>
       <xs:documentation>The lines attribute indicates the total number
@@ -1742,21 +1688,23 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="missing_packet_flag">
-    <xs:annotation>
-      <xs:documentation>The missing_packet_flag attribute indicates
-        whether or not there were telemetry packets that were expected
-        but not received.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Boolean">
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="missing_pixel_count">
     <xs:annotation>
       <xs:documentation> The missing_pixel_count attribute identifies
         the total number of missing pixels defined by the image or image
         segment.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="motor_count">
+    <xs:annotation>
+      <xs:documentation>The motor_count attribute
+        specifies...</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -1891,24 +1839,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="packet_map_mask">
-    <xs:annotation>
-      <xs:documentation>The packet_map_mask attribute is a binary or
-        hexadecimal number identifying which of a data file's expected
-        packets were actually received. The digits correspond
-        positionally with the relative packet numbers of the data file.
-        The bits are to be read left to right; i.e., the first
-        (left-most) digit of the number corresponds to the first packet
-        of the data file. A bit value of 1 indicates that the packet was
-        received; a value of 0 indicates that it was not
-        received.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Numeric_Base16">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="progressive_stage">
     <xs:annotation>
       <xs:documentation> The progressive_stage attribute specifies
@@ -1998,37 +1928,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="raw_count">
-    <xs:annotation>
-      <xs:documentation> The raw_count attribute provides the value of
-        some parameter measured by a spacecraft or instrument sensor in
-        the raw units reported by that sensor. A separate attribute
-        should be included alongside the raw_count that translates this
-        value into the appropriate engineering units. i.e.
-        temperature_value in degrees C or voltage_value in
-        Volts</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="received_packets">
-    <xs:annotation>
-      <xs:documentation>The received_packets attribute provides the
-        total number of telemetry packets which constitute a
-        reconstructed data product, cf.
-        expected_packets.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="responsivity_b">
     <xs:annotation>
       <xs:documentation>Specifies the factor that has been applied to
@@ -2115,28 +2014,6 @@
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
-
-  <xs:simpleType name="sample_fov_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
-     <xs:minInclusive value="0.0"/>
-     <xs:maxInclusive value="360.0"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="sample_fov">
-    <xs:annotation>
-      <xs:documentation>The sample_fov attribute specifies the angular
-        measure of the field of view of an imaged scene, as measured in
-        the image sample direction (generally
-        horizontal).</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:sample_fov_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Angle" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
 
   <xs:simpleType name="samples">
     <xs:annotation>
@@ -2303,27 +2180,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="temperature_value_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="temperature_value">
-    <xs:annotation>
-      <xs:documentation>The temperature_value attribute provides the
-        temperature, in the specified units, of some point on an imaging
-        instrument or other imaging instrument device.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:temperature_value_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Temperature" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
   <xs:simpleType name="value_number">
     <xs:annotation>
       <xs:documentation>The value_number attribute provides the value
@@ -2411,7 +2267,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.10.1.0" ,
-      "Date": "Thu Dec 06 19:44:53 PST 2018" ,
+      "Date": "Sat Apr 13 15:38:20 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
