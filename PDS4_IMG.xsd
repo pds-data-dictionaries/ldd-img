@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.10.1.0 - Sat Apr 13 15:38:20 PDT 2019 -->
-  <!-- Generated from the PDS4 Information Model Version 1.10.1.0 - System Build 8b -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 13:51:40 PDT 2019 -->
+  <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.10.1.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.10.1.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                        -->
+  <!-- 1.11.0.0 - pds: - Common Dictionary - N/A                                 -->
+  <!-- 1.11.0.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                        -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -13,9 +13,9 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.10.1.0">
+    version="1.11.0.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A10.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -140,7 +140,6 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
@@ -149,6 +148,8 @@
       <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Parameters" type="img:Focus_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Stack_Parameters" type="img:Focus_Stack_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -242,7 +243,7 @@
       <xs:element name="active_flag" type="img:active_flag" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="data_correction_type" type="img:data_correction_type" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="data_correction_venue" type="img:data_correction_venue" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Data_Correction_File" type="img:Data_Correction_File" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Data_Correction_File" type="img:Data_Correction_File" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Flat_Field_Correction_Parameters" type="img:Flat_Field_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Radiometric_Correction_Parameters" type="img:Radiometric_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction_Parameters" type="img:Shutter_Subtraction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -255,19 +256,14 @@
 
   <xs:complexType name="Data_Correction_File">
     <xs:annotation>
-      <xs:documentation> The Data_Correction_File class specifies a file
-        containing explicit details regarding the calibration and/or
-        processing performed on the data product. The enclosing class
-        and surrounding attribute provide the necessary context to
-        interpret this file. As a subclass of the
-        Data_Correction_Parameters class, this specifies calibration
-        applied to the science data as opposed to calibration the
-        instrument before launch. As a subclass of the
-        Derived_Product_Parameters class, this specifies a file
-        describing the post processing of the product after radiometric
-        and photometric calibrations.</xs:documentation>
+      <xs:documentation>The Data_Correction_File class specifies a file
+        containing calibration data that was applied to the science data
+        as part of a Data Correction. If more than one file applies to a
+        given Data_Correction, the name/id/sequence_number identifies
+        the type of file.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="1" maxOccurs="1">
         <xs:element ref="pds:External_Reference"> </xs:element>
@@ -297,11 +293,18 @@
         detector.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="detector_erase_count" type="img:detector_erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_first_line" type="img:detector_first_line" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_first_sample" type="img:detector_first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="detector_lines" type="img:detector_lines" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="first_line" type="img:first_line" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="first_sample" type="img:first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="lines" type="img:lines" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="samples" type="img:samples" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="detector_to_image_rotation" type="img:detector_to_image_rotation" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="erase_count" nillable="true" type="img:erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="readout_rate" nillable="true" type="img:readout_rate" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="gain_mode_id" type="img:gain_mode_id" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="gain_number" type="img:gain_number" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="analog_offset" type="img:analog_offset" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="line_fov" type="img:line_fov" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -385,7 +388,7 @@
 
   <xs:complexType name="Device_Temperatures">
     <xs:annotation>
-      <xs:documentation>The Device_Temperature class provides a
+      <xs:documentation>The Device_Temperatures class provides a
         container for the set of temperatures of an imaging instrument
         or other imaging device.</xs:documentation>
     </xs:annotation>
@@ -454,6 +457,7 @@
       <xs:element name="exposure_duration" type="img:exposure_duration" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="exposure_duration_count" type="img:exposure_duration_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="exposure_type" type="img:exposure_type" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:exposure_type = ('Auto', 'Manual', 'Test')"/> -->
@@ -490,6 +494,46 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Focus_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Focus_Parameters class contains attributes
+        that describe the focus or autofocus parameters for an
+        observation. As a child of Commanded_Parameters, these indicate
+        the focus settings used to command the instrument. Otherwise,
+        they indicate the actual focus used by the
+        observation.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="focus_mode" nillable="true" type="img:focus_mode" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_position" type="img:focus_position" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="autofocus_step_size" nillable="true" type="img:autofocus_step_size" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="autofocus_step_count" nillable="true" type="img:autofocus_step_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="minimum_focus_distance" nillable="true" type="img:minimum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="best_focus_distance" nillable="true" type="img:best_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="maximum_focus_distance" nillable="true" type="img:maximum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:focus_mode = ('Autofocus', 'Manual', 'Relative', 'ZStack')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
+  <xs:complexType name="Focus_Stack_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Focus_Stack_Parameters class contains
+        attributes that describe a set of images taken at different
+        focus settings, which are often merged to create a best-focus
+        image or combined to extract range information. Focus stacks are
+        also sometimes called ZStacks.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="video_flag" nillable="true" type="img:video_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_stack_flag" nillable="true" type="img:focus_stack_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="frame_count" nillable="true" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_merge_blending_flag" nillable="true" type="img:focus_merge_blending_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_merge_registration_flag" nillable="true" type="img:focus_merge_registration_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Frame_Parameters">
     <xs:annotation>
       <xs:documentation>The Frame_Parameters class contains attributes
@@ -501,10 +545,8 @@
     <xs:sequence>
       <xs:element name="frame_id" type="img:frame_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_type_name" type="img:frame_type_name" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="interframe_delay" type="img:interframe_delay" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test=")"/> -->
     <!-- <xs:assert test=")"/> -->
     <!-- <xs:assert test=")"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
@@ -560,7 +602,6 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
@@ -569,9 +610,12 @@
       <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Parameters" type="img:Focus_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Stack_Parameters" type="img:Focus_Stack_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Video_Parameters" type="img:Video_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Instrument_State_Parameters" type="img:Instrument_State_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Commanded_Parameters" type="img:Commanded_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
@@ -699,9 +743,9 @@
         present, no correction was performed.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="responsivity_b" type="img:responsivity_b" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="responsivity_factor_r" type="img:responsivity_factor_r" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="responsivity_factor_g" type="img:responsivity_factor_g" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="responsivity_factor_b" type="img:responsivity_factor_b" minOccurs="1" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -779,6 +823,27 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Video_Parameters">
+    <xs:annotation>
+      <xs:documentation>The Video_Parameters class contains attributes
+        related to video observations, defined as a regular time series
+        of frames. The class can be used to describe a single frame
+        within the video, or the video as a whole.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="frame_count" nillable="true" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="interframe_delay" type="img:interframe_delay" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="frame_rate" nillable="true" type="img:frame_rate" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="frame_interval" type="img:frame_interval" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="gop_frame_index" nillable="true" type="img:gop_frame_index" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="gop_frame_count" nillable="true" type="img:gop_frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test=")"/> -->
+    <!-- <xs:assert test=")"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
     <xs:annotation>
       <xs:documentation>This section contains the simpleTypes that provide more constraints
         than those at the base data type level. The simpleTypes defined here build on the base data
@@ -797,6 +862,18 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="analog_offset">
+    <xs:annotation>
+      <xs:documentation>The analog_offset attribute identifies the
+        analog value that is subtracted from the signal prior to the
+        analog/digital conversion.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="autoexposure_algorithm_name">
     <xs:annotation>
       <xs:documentation> The autoexposure_algorithm_name attribute
@@ -812,9 +889,35 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:complexType name="autofocus_step_count">
+    <xs:annotation>
+      <xs:documentation> The autofocus_step_count attribute specifies
+        the number of steps (images) to be taken by an autofocus
+        algorithm.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="autofocus_step_size">
+    <xs:annotation>
+      <xs:documentation> The autofocus_step_size attribute specifies the
+        size in motor counts of each (or the initial) step taken by the
+        focus adjustment mechanism in an autofocus
+        algorithm.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="bandwidth_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -851,9 +954,28 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="best_focus_distance_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="best_focus_distance">
+    <xs:annotation>
+      <xs:documentation>The best_focus_distance attribute specifies the
+        estimated distance to best focus.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:best_focus_distance_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="center_filter_wavelength_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1059,7 +1181,6 @@
         mode.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0"/>
      <xs:maxInclusive value="1.0"/>
 	   </xs:restriction>
@@ -1072,7 +1193,6 @@
         on-board compressed image. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1086,7 +1206,6 @@
         </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0.0"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1121,7 +1240,6 @@
 
   <xs:simpleType name="current_value_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1193,61 +1311,8 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="detector_erase_count">
-    <xs:annotation>
-      <xs:documentation>The detector_erase_count specifies the number of
-        times a detector has been or will be flushed of data in raw
-        counts, dependent on the parent class for the
-        attribute.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="detector_first_line">
-    <xs:annotation>
-      <xs:documentation> The detector_first_line attribute specifies the
-        starting row from the hardware, such as a charge-coupled device
-        (CCD), that contains data.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="detector_first_sample">
-    <xs:annotation>
-      <xs:documentation> The detector_first_sample attribute specifies
-        the starting column from the hardware, such as a charge-coupled
-        device (CCD), that contains data.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="detector_lines">
-    <xs:annotation>
-      <xs:documentation> The detector_lines attribute specifies the
-        number of rows extracted from the hardware, such as a
-        charge-coupled device (CCD), that contain
-        data.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="detector_to_image_rotation_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0.0"/>
      <xs:maxInclusive value="360.0"/>
 	   </xs:restriction>
@@ -1363,6 +1428,20 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:complexType name="erase_count">
+    <xs:annotation>
+      <xs:documentation>The erase_count specifies the number of times a
+        detector has been or will be flushed of data in raw counts,
+        dependent on the parent class for the
+        attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="error_pixel_count">
     <xs:annotation>
       <xs:documentation> The error_pixel_count attribute specifies the
@@ -1394,7 +1473,6 @@
 
   <xs:simpleType name="exposure_duration_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1447,7 +1525,6 @@
         shutter_subtraction_mode = 'Conditional'.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1544,9 +1621,93 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:complexType name="focus_merge_blending_flag">
+    <xs:annotation>
+      <xs:documentation>The focus_merge_blending_flag attribute
+        indicates whether intra-stack image blending has been performed
+        during a focus merge operation. A value of 'false' means images
+        were merged without blending.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Boolean">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="focus_merge_registration_flag">
+    <xs:annotation>
+      <xs:documentation>The focus_merge_registration_flag attribute
+        indicates whether intra-stack image registration has been
+        performed during a focus merge operation. A value of 'true'
+        indicates that intra-stack image registration has been performed
+        during the focus merge operation, while 'false' indicates that
+        images have been merged without translation.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Boolean">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="focus_mode">
+    <xs:annotation>
+      <xs:documentation>The focus_mode attribute specifies the type of
+        focus command, for example: Autofocus, Manual, ZStack, or
+        Relative (focus adjustment based on a previous
+        autofocus).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Short_String_Collapsed">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="focus_position">
+    <xs:annotation>
+      <xs:documentation>The focus_position attribute defines, in a
+        camera-specific way, the focus metric that should be used for
+        geometric processing of the data (e.g. for creating camera
+        models). This will often be the focus motor
+        count.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="focus_stack_flag">
+    <xs:annotation>
+      <xs:documentation> The focus_stack_flag attribute indicates
+        whether or not focus stack image products were created during
+        the autofocus imaging step.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Boolean">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="frame_count">
+    <xs:annotation>
+      <xs:documentation> The frame_count attribute indicates the total
+        number of image frames acquired, such as for a video or focus
+        stack observation.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="frame_id">
     <xs:annotation>
-      <xs:documentation> The frame_id attribute specifies an
+      <xs:documentation>The frame_id attribute specifies an
         identification for a particular instrument measurement frame. A
         frame consists of a sequence of measurements made over a
         specified time interval, and may include measurements from
@@ -1558,6 +1719,36 @@
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="frame_interval">
+    <xs:annotation>
+<xs:documentation>The frame_interval attribute</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="frame_rate_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="frame_rate">
+    <xs:annotation>
+      <xs:documentation> The frame_rate attribute specifies the
+        calculated frame rate for video products.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:frame_rate_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Frame_Rate" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="frame_type_name">
     <xs:annotation>
@@ -1571,6 +1762,62 @@
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="gain_mode_id">
+    <xs:annotation>
+      <xs:documentation>The gain_mode_id attribute identifies the gain
+        state of an instrument. Gain is a constant value which is
+        multiplied with an instrument's output signal to increase or
+        decrease the level of that output. These modes may vary by
+        mission so the permissible values should be set by the mission
+        dictionaries.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="gain_number">
+    <xs:annotation>
+      <xs:documentation>The gain_number attribute specifies the gain
+        value used in the analog to digital conversion. The gain value
+        is a multiplicative factor used in the analog to digital
+        conversion.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="gop_frame_count">
+    <xs:annotation>
+      <xs:documentation> The gop_frame_count attribute indicates, for
+        video products compressed into a group of images (Group Of
+        Pictures or GOP), the number of images in a GOP. This is not
+        necessarily the total number of frames in the observation (see
+        frame_count), as the observation may consist of a number of
+        GOPs.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="gop_frame_index">
+    <xs:annotation>
+      <xs:documentation> The gop_frame_index attribute specifies the
+        frame index within a Group Of Pictures (GOP).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_NonNegative_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="height_pixels_WO_Units">
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
@@ -1630,7 +1877,6 @@
 
   <xs:simpleType name="interframe_delay_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="0"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1675,6 +1921,26 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="line_fov_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="0.0"/>
+     <xs:maxInclusive value="360.0"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="line_fov">
+    <xs:annotation>
+      <xs:documentation>The line_fov attribute specifies the angular
+        measure of the field of view of an imaged scene, as measured in
+        the image line direction (generally vertical).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:line_fov_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Angle" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="lines">
     <xs:annotation>
       <xs:documentation>The lines attribute indicates the total number
@@ -1687,6 +1953,48 @@
      <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="maximum_focus_distance_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="maximum_focus_distance">
+    <xs:annotation>
+      <xs:documentation>The maximum_focus_distance attribute specifies
+        the estimated distance to the farthest pixel with less than 1
+        pixel of gaussian blur.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:maximum_focus_distance_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="minimum_focus_distance_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="minimum_focus_distance">
+    <xs:annotation>
+      <xs:documentation>The minimum_focus_distance attribute specifies
+        the estimated distance to the nearest pixel with less than 1
+        pixel of gaussian blur.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:minimum_focus_distance_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="missing_pixel_count">
     <xs:annotation>
@@ -1703,8 +2011,10 @@
 
   <xs:simpleType name="motor_count">
     <xs:annotation>
-      <xs:documentation>The motor_count attribute
-        specifies...</xs:documentation>
+      <xs:documentation>The motor_count attribute specifies the raw
+        motor counts for the specified device, which indicates the
+        position of the associated mechanism in a device-specific
+        way.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -1721,7 +2031,6 @@
         produce the output Blue value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1735,7 +2044,6 @@
         produce the output Blue value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1749,7 +2057,6 @@
         produce the output Blue value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1763,7 +2070,6 @@
         produce the output Green value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1777,7 +2083,6 @@
         produce the output Green value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1791,7 +2096,6 @@
         produce the output Green value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1805,7 +2109,6 @@
         produce the output Red value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1819,7 +2122,6 @@
         produce the output Red value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1833,7 +2135,6 @@
         produce the output Red value.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1853,7 +2154,6 @@
 
   <xs:simpleType name="radiance_offset_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1886,7 +2186,6 @@
 
   <xs:simpleType name="radiance_scaling_factor_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -1928,40 +2227,57 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="responsivity_b">
+  <xs:simpleType name="readout_rate_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="readout_rate">
+    <xs:annotation>
+      <xs:documentation>The readout_rate attribute specifies the clock
+        rate at which values are read from the sensor.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:readout_rate_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Frequency" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="responsivity_factor_b">
     <xs:annotation>
       <xs:documentation>Specifies the factor that has been applied to
         the B cell of the Bayer pattern, before de-Bayering
         (demosaicking) takes place.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="responsivity_g">
+  <xs:simpleType name="responsivity_factor_g">
     <xs:annotation>
       <xs:documentation>Specifies the factor that has been applied to
         the G cell of the Bayer pattern, before de-Bayering
         (demosaicking) takes place.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="responsivity_r">
+  <xs:simpleType name="responsivity_factor_r">
     <xs:annotation>
       <xs:documentation>Specifies the factor that has been applied to
         the R cell of the Bayer pattern, before de-Bayering
         (demosaicking) takes place.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -2014,6 +2330,27 @@
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="sample_fov_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="0.0"/>
+     <xs:maxInclusive value="360.0"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="sample_fov">
+    <xs:annotation>
+      <xs:documentation>The sample_fov attribute specifies the angular
+        measure of the field of view of an imaged scene, as measured in
+        the image sample direction (generally
+        horizontal).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:sample_fov_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Angle" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="samples">
     <xs:annotation>
@@ -2094,7 +2431,6 @@
         decoding any bit plane information. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -2187,7 +2523,6 @@
         sequence_number. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -2200,15 +2535,25 @@
         sequence_number. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:complexType name="video_flag">
+    <xs:annotation>
+      <xs:documentation> The video_flag attribute indicates whether or
+        not video products were commanded. </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Boolean">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="voltage_value_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
-    	<xs:pattern value='[-+]?[0-9]+(\.?[0-9]+)?([eE][-+]?[0-9]+)?'/>
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
@@ -2266,8 +2611,8 @@
   {
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
-      "Version": "1.10.1.0" ,
-      "Date": "Sat Apr 13 15:38:20 PDT 2019" ,
+      "Version": "1.11.0.0" ,
+      "Date": "Thu Apr 18 13:51:40 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
