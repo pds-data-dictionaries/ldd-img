@@ -68,6 +68,21 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>analog_offset</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The analog_offset attribute identifies the analog value that is subtracted from the
+      signal prior to the analog/digital conversion.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>autoexposure_algorithm_name</name>
     <version_id>1.0</version_id>
     <local_identifier>autoexposure_algorithm_name</local_identifier>
@@ -93,6 +108,34 @@
         <value_meaning>Autoexposure is performed using histogramming in a manner similar to that described in  "The ChemCam Instrument Suite on the Mars Science Laboratory (MSL) Rover: Science Objectives and Mast Unit Description",  Smith, P. H., et al.,  Journal of Geophysical Research, 102(E2), 1997.</value_meaning>
       </DD_Permissible_Value>
       -->
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>autofocus_step_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>autofocus_step_count</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The autofocus_step_count attribute specifies the number of steps (images) to be taken by an autofocus algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>autofocus_step_size</name>
+    <version_id>1.0</version_id>
+    <local_identifier>autofocus_step_size</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The autofocus_step_size attribute specifies the size in motor counts of each (or the initial) step taken by the focus adjustment mechanism in an autofocus algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -198,6 +241,20 @@
         <value_meaning>Sensor has a Bayer pattern but the image can be used as-is due to the presence of other filters. 
           (e.g. On MSL Mastcam, the R,G,B filters have equal responsivities when using an infrared filter.)</value_meaning>
       </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>best_focus_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>best_focus_distance</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The best_focus_distance attribute specifies the estimated distance to best focus.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -945,14 +1002,14 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
-  <!-- TODO add definition -->
   <DD_Attribute>
     <name>device_state</name>
     <version_id>1.0</version_id>
     <local_identifier>device_state</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>TBD</definition>
+    <definition>The device_state attribute indicates the state of a sensor or other device associated with the imaging instrument. 
+      These states are interpreted in an instrument-specific way.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -1050,6 +1107,21 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>erase_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>erase_count</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The erase_count specifies the number of times a detector has been or will be flushed
+      of data in raw counts, dependent on the parent class for the attribute.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1262,18 +1334,173 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>focus_merge_blending_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_merge_blending_flag</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The focus_merge_blending_flag attribute indicates whether intra-stack image 
+      blending has been performed during a focus merge operation. A value of 'false' means images 
+      were merged without blending.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>focus_merge_registration_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_merge_registration_flag</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The focus_merge_registration_flag attribute indicates whether intra-stack image 
+      registration has been performed during a focus merge operation. A value of 'true' indicates 
+      that intra-stack image registration has been performed during the focus merge operation, while
+      'false' indicates that images have been merged without translation.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>focus_mode</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_mode</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The focus_mode attribute specifies the type of focus command, for example:
+      Autofocus, Manual, ZStack, or Relative (focus adjustment based on a previous autofocus).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Autofocus</value>
+        <value_meaning>The focus was commanded by the autofocus algorithm.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Manual</value>
+        <value_meaning>The exact focus position was set manually.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>ZStack</value>
+        <value_meaning>Images were acquired at multiple autofocus positions.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Relative</value>
+        <value_meaning>A focus adjustment was made relative to a previous position.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <!-- TODO check data type & units -->
+  <DD_Attribute>
+    <name>focus_position</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_position</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The focus_position attribute defines, in a camera-specific way, the
+      focus metric that should be used for geometric processing of the data
+      (e.g. for creating camera models). This will often be the focus motor
+      count.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>focus_position_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_position_count</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The focus_position_count attribute specifies a commanded focus, or the initial focus position used by the autofocus algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>focus_stack_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_stack_flag</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>frame_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_count</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The frame_count attribute indicates the total number of image frames acquired,
+      such as for a video or focus stack observation.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>frame_id</name>
     <version_id>1.0</version_id>
     <local_identifier>frame_id</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The frame_id attribute specifies an identification for a particular instrument measurement frame. A frame 
+    <definition>The frame_id attribute specifies an identification for a particular instrument measurement frame. A frame 
       consists of a sequence of measurements made over a specified time interval, and may include measurements from different 
       instrument modes. These sequences repeat from cycle to cycle and sometimes within a cycle.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <!-- TODO definition -->
+  <!-- TODO data type -->
+  <DD_Attribute>
+    <name>frame_interval</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_interval</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The frame_interval attribute</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>frame_rate</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_rate</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The frame_rate attribute specifies the calculated frame rate for video products.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Frame_Rate</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1301,6 +1528,68 @@
         <value_meaning> image was commanded as part of a stereo pair </value_meaning>
       </DD_Permissible_Value>
       -->
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>gain_mode_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_mode_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The gain_mode_id attribute identifies the gain state of an instrument. Gain is a
+      constant value which is multiplied with an instrument's output signal to increase or decrease
+      the level of that output. These modes may vary by mission so the permissible values should be set 
+      by the mission dictionaries.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>gain_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The gain_number attribute specifies the gain value used in the analog to digital conversion. The gain value is a multiplicative factor used in the analog to digital conversion.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>gop_frame_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gop_frame_count</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The gop_frame_count attribute indicates, for video products compressed into a 
+      group of images (Group Of Pictures or GOP), the number of images in a GOP. This is not necessarily
+      the total number of frames in the observation (see frame_count), as the observation may
+      consist of a number of GOPs.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>gop_frame_index</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gop_frame_index</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The gop_frame_index attribute specifies the frame index within a Group Of Pictures (GOP).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1444,6 +1733,53 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>line_fov</name>
+    <version_id>1.0</version_id>
+    <local_identifier>line_fov</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The line_fov attribute specifies the angular measure of the field of
+      view of an imaged scene, as measured in the image line direction
+      (generally vertical).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0.0</minimum_value>
+      <maximum_value>360.0</maximum_value>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+      <specified_unit_id>deg</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>maximum_focus_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>maximum_focus_distance</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>minimum_focus_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>minimum_focus_distance</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The minimum_focus_distance attribute specifies the estimated distance to the nearest pixel with less than 1 pixel of gaussian blur.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>missing_pixel_count</name>
     <version_id>1.0</version_id>
     <local_identifier>missing_pixel_count</local_identifier>
@@ -1465,7 +1801,9 @@
     <local_identifier>motor_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The motor_count attribute specifies...</definition>
+    <definition>The motor_count attribute specifies the raw motor counts for the
+      specified device, which indicates the position of the associated
+      mechanism in a device-specific way.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -1711,9 +2049,23 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>responsivity_b</name>
+    <name>readout_rate</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_b</local_identifier>
+    <local_identifier>readout_rate</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition>The readout_rate attribute specifies the clock rate at which values are read from the sensor.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Frequency</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>responsivity_factor_b</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_factor_b</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the factor that has been applied to the B cell  
@@ -1726,9 +2078,9 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>responsivity_g</name>
+    <name>responsivity_factor_g</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_g</local_identifier>
+    <local_identifier>responsivity_factor_g</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the factor that has been applied to the G cell  
@@ -1741,13 +2093,59 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>responsivity_r</name>
+    <name>responsivity_factor_r</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_r</local_identifier>
+    <local_identifier>responsivity_factor_r</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the factor that has been applied to the R cell  
       of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <!-- TODO add definitions for responsivity_pan_* -->
+  <DD_Attribute>
+    <name>responsivity_pan_b</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_pan_b</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the conversion factor between DN and radiance units that has been applied 
+      to the B cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>responsivity_pan_g</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_pan_g</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the conversion factor between DN and radiance units that has been applied 
+      to the G cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>responsivity_pan_r</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_pan_r</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the conversion factor between DN and radiance units that has been applied 
+      to the R cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1804,6 +2202,25 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>sample_fov</name>
+    <version_id>1.0</version_id>
+    <local_identifier>sample_fov</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The sample_fov attribute specifies the angular measure of the field of
+      view of an imaged scene, as measured in the image sample direction
+      (generally horizontal).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0.0</minimum_value>
+      <maximum_value>360.0</maximum_value>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+      <specified_unit_id>deg</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1951,8 +2368,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
-  <!-- TODO definition -->
+
   <!-- TODO data type -->
   <DD_Attribute>
     <name>temperature_status</name>
@@ -1960,10 +2376,12 @@
     <local_identifier>temperature_status</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The temperature_status attribute provides </definition>
+    <definition>The temperature_status attribute defines the status of the associated
+      temperature measurement. The status is interpreted in a device-specific
+      way, but generally 0 indicates a successful measurement.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2011,6 +2429,20 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>video_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>video_flag</local_identifier>
+    <nillable_flag>true</nillable_flag>
+    <submitter_name>Danika F. Wellington</submitter_name>
+    <definition> The video_flag attribute indicates whether or not video products were commanded. </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2089,12 +2521,6 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Autoexposure_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>Color_Filter_Array_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2142,7 +2568,6 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
-    <!--
       <DD_Association>
           <identifier_reference>Focus_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -2155,7 +2580,6 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
-      -->
       <DD_Association>
           <identifier_reference>Frame_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -2174,14 +2598,12 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-    <!--
       <DD_Association>
           <identifier_reference>Video_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-      -->
       <DD_Association>
           <identifier_reference>Instrument_State_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -2344,12 +2766,6 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Autoexposure_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>Color_Filter_Array_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2397,7 +2813,6 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
-    <!--
       <DD_Association>
           <identifier_reference>Focus_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -2410,7 +2825,6 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
-    -->
       <DD_Association>
           <identifier_reference>Frame_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -2596,7 +3010,7 @@
           <identifier_reference>Data_Correction_File</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+          <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Flat_Field_Correction_Parameters</identifier_reference>
@@ -2624,14 +3038,17 @@
       <version_id>1.0</version_id>
       <local_identifier>Data_Correction_File</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Data_Correction_File class specifies a file containing explicit details regarding
-          the calibration and/or processing performed on the data product. The enclosing class and surrounding
-          attribute provide the necessary context to interpret this file. As a subclass of the
-          Data_Correction_Parameters class, this specifies calibration applied to the science data as
-          opposed to calibration the instrument before launch. As a subclass of the
-          Derived_Product_Parameters class, this specifies a file describing the post processing of the
-          product after radiometric and photometric calibrations.</definition>
+    <definition>The Data_Correction_File class specifies a file containing calibration
+      data that was applied to the science data as part of a Data Correction.
+      If more than one file applies to a given Data_Correction, the
+      name/id/sequence_number identifies the type of file.</definition>
       <DD_Association>
+        <identifier_reference>pds.name</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+    <DD_Association>
           <identifier_reference>pds.description</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2655,37 +3072,78 @@
       <submitter_name>Cristina De Cesare</submitter_name>
       <definition>The Detector_Parameters class contains attributes describing the state
       of the instrument detector.</definition>
-      <!-- TODO define members of this class -->
       <DD_Association>
-        <identifier_reference>detector_erase_count</identifier_reference>
+        <identifier_reference>first_line</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-        <identifier_reference>detector_first_line</identifier_reference>
+        <identifier_reference>first_sample</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-    <DD_Association>
-      <identifier_reference>detector_first_sample</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>detector_lines</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>detector_to_image_rotation</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
+      <DD_Association>
+        <identifier_reference>lines</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>samples</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>detector_to_image_rotation</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>erase_count</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>readout_rate</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>gain_mode_id</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>gain_number</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>analog_offset</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>line_fov</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>sample_fov</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
   </DD_Class>
   
   <!-- Class: Device_Component_States -->
@@ -2843,7 +3301,7 @@
       <version_id>1.0</version_id>
       <local_identifier>Device_Temperatures</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Device_Temperature class provides a container for the set of
+      <definition>The Device_Temperatures class provides a container for the set of
           temperatures of an imaging instrument or other imaging device.</definition>
       <DD_Association>
           <identifier_reference>Device_Temperature</identifier_reference>
@@ -2995,6 +3453,12 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+      <DD_Association>
+        <identifier_reference>Autoexposure_Parameters</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
   </DD_Class>
   
   <!-- Class: Filter_Parameters  -->
@@ -3066,7 +3530,6 @@
   </DD_Class>
   
   <!-- Class: Focus_Parameters  -->
-  <!--
   <DD_Class>
       <name>Focus_Parameters</name>
       <version_id>1.0</version_id>
@@ -3076,11 +3539,51 @@
       autofocus parameters for an observation. As a child of Commanded_Parameters, these 
       indicate the focus settings used to command the instrument. Otherwise, they indicate 
       the actual focus used by the observation.</definition>
+    <DD_Association>
+      <identifier_reference>focus_mode</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>focus_position</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>autofocus_step_size</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>autofocus_step_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>minimum_focus_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>best_focus_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>maximum_focus_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
-  -->
   
   <!-- Class: Focus_Stack_Parameters  -->
-  <!--
   <DD_Class>
       <name>Focus_Stack_Parameters</name>
       <version_id>1.0</version_id>
@@ -3089,9 +3592,37 @@
     <definition>The Focus_Stack_Parameters class contains attributes that describe a set of images
       taken at different focus settings, which are often merged to create a best-focus image or 
       combined to extract range information. Focus stacks are also sometimes called ZStacks.</definition>
-
+    <DD_Association>
+      <identifier_reference>video_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>focus_stack_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>focus_merge_blending_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>focus_merge_registration_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
-  -->
   
   <!-- Class: Frame_Parameters -->
   <DD_Class>
@@ -3114,12 +3645,7 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-      <DD_Association>
-          <identifier_reference>interframe_delay</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
+ 
   </DD_Class>
   
   <!-- Class: ICER_Parameters -->
@@ -3442,19 +3968,19 @@
       products look reasonable before full radiometric or color correction is done on the ground. If these factors
       are not present, no correction was performed.</definition>
     <DD_Association>
-      <identifier_reference>responsivity_r</identifier_reference>
+      <identifier_reference>responsivity_factor_r</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>responsivity_g</identifier_reference>
+      <identifier_reference>responsivity_factor_g</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>responsivity_b</identifier_reference>
+      <identifier_reference>responsivity_factor_b</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -3631,7 +4157,6 @@
   </DD_Class>
   
   <!-- Class: Video_Parameters -->
-  <!--
   <DD_Class>
       <name>Video_Parameters</name>
       <version_id>1.0</version_id>
@@ -3640,8 +4165,43 @@
       <definition>The Video_Parameters class contains attributes related to video 
         observations, defined as a regular time series of frames. The class can be used
         to describe a single frame within the video, or the video as a whole.</definition>
+      <DD_Association>
+        <identifier_reference>frame_count</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>interframe_delay</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>frame_rate</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>frame_interval</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>gop_frame_index</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>gop_frame_count</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
   </DD_Class>
-  -->
 
   <!--                   -->
   <!--   Classes: END    -->
@@ -3671,6 +4231,371 @@
       <rule_type>Assert</rule_type>
       <rule_test>pds:local_reference_type = 'imaging_parameters_to_image_object'</rule_test>
       <rule_message>In img:Imaging, Local_Internal_Reference.local_reference_type must be equal to 'imaging_parameters_to_image_object'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>internal_reference_type_check_autoexposure</local_identifier>
+    <rule_context>//img:Autoexposure_Parameters/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:internal_reference_type = 'data_to_document'</rule_test>
+      <rule_message>IMG:error:internal_reference_type_check_autoexposure: In img:Autoexposure_Parameters, Internal_Reference.reference_type must be equal to 'data_to_document'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>internal_reference_type_check_data_correction</local_identifier>
+    <rule_context>//img:Data_Correction_File/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_data_correction_file'</rule_test>
+      <rule_message>IMG:error:internal_reference_type_check_data_correction: In img:Data_Correction_File, the Internal_Reference.reference_type must be equal to 'data_to_data_correction_file'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>detector_params_child_check</local_identifier>
+    <rule_context>//img:Detector_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:detector_params_child_check: img:Detector_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>command_params_child_check</local_identifier>
+    <rule_context>//img:Command_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:command_params_child_check: img:Command_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>sampling_params_child_check</local_identifier>
+    <rule_context>//img:Sampling_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:sampling_params_child_check: img:Sampling_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>frame_params_child_check</local_identifier>
+    <rule_context>//img:Frame_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:frame_params_child_check: img:Frame_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>subframe_params_child_check</local_identifier>
+    <rule_context>//img:Subframe_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:subframe_params_child_check: img:Subframe_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>color_params_child_check</local_identifier>
+    <rule_context>//img:Color_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:color_params_child_check: img:Color_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>downsampling_params_child_check</local_identifier>
+    <rule_context>//img:Downsampling_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:downsampling_params_child_check: img:Downsampling_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>exposure_params_child_check</local_identifier>
+    <rule_context>//img:Exposure_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:exposure_params_child_check: img:Exposure_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>focus_params_child_check</local_identifier>
+    <rule_context>//img:Focus_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:focus_params_child_check: img:Focus_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>focus_stack_params_child_check</local_identifier>
+    <rule_context>//img:Focus_Stack_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:focus_stack_params_child_check: img:Focus_Stack_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>video_params_child_check</local_identifier>
+    <rule_context>//img:Video_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:video_params_child_check: img:Video_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>packet_params_child_check</local_identifier>
+    <rule_context>//img:Packet_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:packet_params_child_check: img:Packet_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>inst_times_child_check</local_identifier>
+    <rule_context>//img:Instrument_Time_Values</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:inst_times_child_check: img:Instrument_Time_Values must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>filter_params_child_check</local_identifier>
+    <rule_context>//img:Filter_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:filter_params_child_check: img:Filter_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>cmprs_params_child_check</local_identifier>
+    <rule_context>//img:Compression_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:cmprs_params_child_check: img:Compression_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>jpeg_params_child_check</local_identifier>
+    <rule_context>//img:JPEG_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:jpeg_params_child_check: img:JPEG_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>loco_params_child_check</local_identifier>
+    <rule_context>//img:LOCO_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:loco_params_child_check: img:LOCO_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>icer_params_child_check</local_identifier>
+    <rule_context>//img:ICER_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:icer_params_child_check: img:ICER_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>inst_state_params_child_check</local_identifier>
+    <rule_context>//img:Instrument_State_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:inst_state_params_child_check: img:Instrument_State_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>image_data_params_child_check</local_identifier>
+    <rule_context>//img:Image_Product_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:image_data_params_child_check: img:Image_Product_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>derived_params_child_check</local_identifier>
+    <rule_context>//img:Derived_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:derived_params_child_check: img:Derived_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <!-- END child checks -->
+  
+  <!-- TODO check validity of this rule -->
+  <DD_Rule>
+    <local_identifier>color_filter_array_state_check</local_identifier>
+    <rule_context>//img:Demosaicing_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>(img:color_filter_array_state = 'Decoded') and exists(img:demosaicing_algorithm)</rule_test>
+      <rule_message>IMG:error:img:color_filter_array_state_check: img:demosaicing_algorithm attribute must be specified when 
+        img:color_filter_array_state = 'Decoded'.
+      </rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <DD_Rule>
+    <local_identifier>icer_comprs_segment_check</local_identifier>
+    <rule_context>//img:ICER_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(img:Image_Compression_Segment) = img:segment_count </rule_test>
+      <rule_message>IMG:error:icer_comprs_segment_check: img:ICER_Parameters/img:segment_count must match the number of img:Image_Compression_Segment classes.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>radiometric_corr_check</local_identifier>
+    <rule_context>//img:Radiometric_Correction_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>(count(img:radiance_offset) = 1 and count(img:radiance_scaling_factor) = 1) or (count(img:radiance_offset) = 0 and count(img:radiance_scaling_factor) = 0)</rule_test>
+      <rule_message>IMG:error:radiometric_corr_check: Both img:radiance_offset and img:radiance_scaling_factor must exist together.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>shutter_subtraction_check</local_identifier>
+    <rule_context>//img:Shutter_Subtraction_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))</rule_test>
+      <rule_message>IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>exposure_duration_check</local_identifier>
+    <rule_context>//img:Instrument_State_Parameters/img:Exposure_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>(count(img:exposure_duration) = 1)</rule_test>
+      <rule_message>IMG:error:exposure_duration_check: img:exposure_duration must be specified in the img:Instrument_State_Parameters/img:Exposure_Parameters class.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>focus_command_check</local_identifier>
+    <rule_context>//img:Command_Parameters/img:Focus_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:minimum_focus_distance) and not(img:best_focus_distance) and not(img:maximum_focus_distance)</rule_test>
+      <rule_message>IMG:error:focus_command_check: *_focus_distance keywords should be in img:Derived_Parameters/img:Focus_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>focus_derived_check</local_identifier>
+    <rule_context>//img:Derived_Parameters/img:Focus_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:focus_mode) and not(img:focus_position_count) and not(img:autofocus_step_size) and not(img:autofocus_step_count) and not(img:focus_stack_flag) and not(img:Focus_Stack_Parameters)</rule_test>
+      <rule_message>IMG:error:focus_derived_check: commanding focus parameters should be in img:Command_Parameters/img:Focus_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>autoexposure_inst_state_check</local_identifier>
+    <rule_context>//img:Instrument_State_Parameters/img:Exposure_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:Autoexposure_Parameters)</rule_test>
+      <rule_message>IMG:error:autoexposure_inst_state_check: Autoexposure_Parameters should be in img:Command_Parameters/img:Exposure_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>subframe_command_check1</local_identifier>
+    <rule_context>//img:Command_Parameters/img:Subframe_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
+      <rule_message>IMG:error:subframe_command_check1: derived subframe parameters should be in img:Derived_Parameters/img:Subframe_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>subframe_command_check2</local_identifier>
+    <rule_context>//img:Command_Parameters/img:Subframe_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>(img:first_line) and (img:first_sample) and (img:lines) and (img:samples)</rule_test>
+      <rule_message>IMG:error:subframe_command_check2: img:Command_Parameters/img:Subframe_Parameters must include all of img:first_line, img:first_sample, img:lines, img:samples</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>subframe_derived_check</local_identifier>
+    <rule_context>//img:Derived_Parameters/img:Subframe_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:first_line) and not(img:first_sample) and not(img:lines) and not(img:samples) and not(pds:name) and not(pds:description) and not(img:subframe_type)</rule_test>
+      <rule_message>IMG:error:subframe_derived_check: commanding subframe parameters should be in img:Command_Parameters/img:Subframe_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>detector_inst_state_check</local_identifier>
+    <rule_context>//img:Instrument_State_Parameters/img:Detector_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
+      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived_Parameters/img:Detector_Parameters.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>detector_derived_check</local_identifier>
+    <rule_context>//img:Derived_Parameters/img:Detector_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:first_line) and not(img:first_sample) and not(img:lines) and not(img:samples) and not(img:detector_to_image_rotation) and not(img:erase_count) and not(img:readout_rate) and not(img:gain_mode_id) and not(img:gain_number) and not(img:analog_offset)</rule_test>
+      <rule_message>IMG:error:detector_derived_check: detector state parameters should be in img:Instrument_State_Parameters/img:Detector_Parameters.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -3924,6 +4849,16 @@
       <rule_type>Assert</rule_type>
       <rule_test>img:first_line = '1' and img:first_sample = '1'</rule_test>
       <rule_message>img:error:subframe_params_1: The attributes img:first_line and img:first_sample must each have values equal to '1'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>detector_inst_state_check</local_identifier>
+    <rule_context>//img:Instrument_State_Parameters/img:Detector_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
+      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived_Parameters/img:Detector_Parameters.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
