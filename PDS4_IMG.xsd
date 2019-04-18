@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 13:51:40 PDT 2019 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 15:57:44 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -142,7 +142,7 @@
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Onboard_Compression_Parameters" type="img:Onboard_Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -173,34 +173,6 @@
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:companding_state = ('Companded', 'Expanded', 'None')"/> -->
     <!-- <xs:assert test="img:companding_venue = ('Hardware', 'None', 'Software')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
-  </xs:complexType>
-
-  <xs:complexType name="Compression_Parameters">
-    <xs:annotation>
-      <xs:documentation> The Compression_Parameters class contains
-        attributes describing onboard compression parameters used for
-        data storage and transmission.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="compression_class" type="img:compression_class" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_mode" type="img:compression_mode" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_type" type="img:compression_type" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_rate" type="img:compression_rate" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_ratio" type="img:compression_ratio" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="compression_quality" type="img:compression_quality" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="deferred_flag" type="img:deferred_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ICER_Parameters" type="img:ICER_Parameters"> </xs:element>
-        <xs:element name="JPEG_Parameters" type="img:JPEG_Parameters"> </xs:element>
-        <xs:element name="JPEG_Progressive_Parameters" type="img:JPEG_Progressive_Parameters"> </xs:element>
-        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
-      </xs:choice>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:compression_type = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
@@ -604,7 +576,7 @@
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Compression_Parameters" type="img:Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Onboard_Compression_Parameters" type="img:Onboard_Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -729,6 +701,34 @@
       <xs:element name="onboard_B_g" type="img:onboard_B_g" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="onboard_B_b" type="img:onboard_B_b" minOccurs="1" maxOccurs="1"> </xs:element>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Onboard_Compression_Parameters">
+    <xs:annotation>
+      <xs:documentation> The Onboard_Compression_Parameters class
+        contains attributes describing onboard compression parameters
+        used for data storage and transmission.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="onboard_compression_class" type="img:onboard_compression_class" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_mode" type="img:onboard_compression_mode" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_type" type="img:onboard_compression_type" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_rate" type="img:onboard_compression_rate" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_ratio" type="img:onboard_compression_ratio" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_quality" type="img:onboard_compression_quality" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="deferred_flag" type="img:deferred_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ICER_Parameters" type="img:ICER_Parameters"> </xs:element>
+        <xs:element name="JPEG_Parameters" type="img:JPEG_Parameters"> </xs:element>
+        <xs:element name="JPEG_Progressive_Parameters" type="img:JPEG_Progressive_Parameters"> </xs:element>
+        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:onboard_compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_type = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
   <xs:complexType name="Onboard_Responsivity">
@@ -1131,92 +1131,6 @@
         by hardware, for example inside the camera. 'Software' -
         companding was done by flight software. 'None' - data was not
         companded</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_class">
-    <xs:annotation>
-      <xs:documentation> The compression_class attribute identifies the
-        type of on-board compression used for data storage and
-        transmission. Note that the compression_type identifies the
-        specific compression algorithm used (for example, ICER), whereas
-        the compression_class gives a simple indicator of the type of
-        compression mode. Valid values: 'Lossless', 'Lossy',
-        'Uncompressed'</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_mode">
-    <xs:annotation>
-      <xs:documentation> The compression_mode attribute identifies the
-        method used for on-board compression of data. The value for this
-        attributes represents the raw integer value for compression,
-        which is then translated to the full name captured by the
-        compression_type attribute.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_quality">
-    <xs:annotation>
-      <xs:documentation> The compression_quality attribute is an
-        indication of compression quality, in the range of 0.0 to 1.0.
-        Losslessly compressed or uncompressed data have a value of 1.0.
-        Other values are assigned in a manner specific to the
-        compression mode, but with the property that a higher value
-        means better quality. Although the values are not directly
-        comparable across compression types, this facilitates comparison
-        of compression quality across images independent of compression
-        mode.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="1.0"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_rate">
-    <xs:annotation>
-      <xs:documentation> The compression_rate attribute provides the
-        average number of bits needed to represent a pixel for an
-        on-board compressed image. </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_ratio">
-    <xs:annotation>
-      <xs:documentation> The compression_ratio attribute provides the
-        ratio of the size, in bytes, of the original uncompressed data
-        object to its compressed form (original size / compressed size).
-        </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="0.0"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="compression_type">
-    <xs:annotation>
-      <xs:documentation> The compression_type attribute identifies the
-        type of on-board compression used for data storage and
-        transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG
-        Progressive', 'MSSS Lossless', 'None'.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -2140,6 +2054,92 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="onboard_compression_class">
+    <xs:annotation>
+      <xs:documentation>The onboard_compression_class attribute
+        identifies the type of on-board compression used for data
+        storage and transmission. Note that the onboard_compression_type
+        identifies the specific compression algorithm used (for example,
+        ICER), whereas the onboard_compression_class gives a simple
+        indicator of the type of compression mode. Valid values:
+        'Lossless', 'Lossy', 'Uncompressed'</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_mode">
+    <xs:annotation>
+      <xs:documentation>The onboard_compression_mode attribute
+        identifies the method used for on-board compression of data. The
+        value for this attributes represents the raw integer value for
+        compression, which is then translated to the full name captured
+        by the onboard_compression_type attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_quality">
+    <xs:annotation>
+      <xs:documentation> The onboard_compression_quality attribute is an
+        indication of compression quality, in the range of 0.0 to 1.0.
+        Losslessly compressed or uncompressed data have a value of 1.0.
+        Other values are assigned in a manner specific to the
+        compression mode, but with the property that a higher value
+        means better quality. Although the values are not directly
+        comparable across compression types, this facilitates comparison
+        of compression quality across images independent of compression
+        mode.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="1.0"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_rate">
+    <xs:annotation>
+      <xs:documentation> The onboard_compression_rate attribute provides
+        the average number of bits needed to represent a pixel for an
+        on-board compressed image. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_ratio">
+    <xs:annotation>
+      <xs:documentation>The onboard_compression_ratio attribute provides
+        the ratio of the size, in bytes, of the original uncompressed
+        data object to its compressed form (original size / compressed
+        size). </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="0.0"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_type">
+    <xs:annotation>
+      <xs:documentation> The onboard_compression_type attribute
+        identifies the type of on-board compression used for data
+        storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG',
+        'JPEG Progressive', 'MSSS Lossless', 'None'.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="progressive_stage">
     <xs:annotation>
       <xs:documentation> The progressive_stage attribute specifies
@@ -2612,7 +2612,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.11.0.0" ,
-      "Date": "Thu Apr 18 13:51:40 PDT 2019" ,
+      "Date": "Thu Apr 18 15:57:44 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

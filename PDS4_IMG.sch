@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 13:51:40 PDT 2019 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 15:57:44 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -227,24 +227,6 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Compression_Parameters">
-      <sch:assert test="if (img:deferred_flag) then img:deferred_flag = ('true', 'false') else true()">
-        The attribute img:deferred_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Compression_Parameters/img:compression_class">
-      <sch:assert test=". = ('Lossless', 'Lossy', 'Uncompressed')">
-        The attribute img:compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'Uncompressed'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Compression_Parameters/img:compression_type">
-      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
-        The attribute img:compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
     <sch:rule context="img:Data_Correction">
       <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
         The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
@@ -380,6 +362,24 @@
     <sch:rule context="img:JPEG_Progressive_Parameters/img:color_subsampling_mode">
       <sch:assert test=". = ('4:2:2', '4:4:4', 'Grayscale')">
         The attribute img:color_subsampling_mode must be equal to one of the following values '4:2:2', '4:4:4', 'Grayscale'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Onboard_Compression_Parameters">
+      <sch:assert test="if (img:deferred_flag) then img:deferred_flag = ('true', 'false') else true()">
+        The attribute img:deferred_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Onboard_Compression_Parameters/img:onboard_compression_class">
+      <sch:assert test=". = ('Lossless', 'Lossy', 'Uncompressed')">
+        The attribute img:onboard_compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'Uncompressed'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Onboard_Compression_Parameters/img:onboard_compression_type">
+      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
+        The attribute img:onboard_compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

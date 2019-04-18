@@ -601,16 +601,16 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_class</name>
+    <name>onboard_compression_class</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_class</local_identifier>
+    <local_identifier>onboard_compression_class</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The compression_class attribute
+    <definition>The onboard_compression_class attribute
       identifies the type of on-board compression used for data
-      storage and transmission. Note that the compression_type 
+      storage and transmission. Note that the onboard_compression_type 
       identifies the specific compression algorithm used (for example, ICER), 
-      whereas the compression_class gives a simple indicator of the type of 
+      whereas the onboard_compression_class gives a simple indicator of the type of 
       compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
@@ -632,14 +632,14 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_mode</name>
+    <name>onboard_compression_mode</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_mode</local_identifier>
+    <local_identifier>onboard_compression_mode</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The compression_mode attribute identifies the method used for on-board
+    <definition>The onboard_compression_mode attribute identifies the method used for on-board
       compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to 
-      the full name captured by the compression_type attribute.</definition>
+      the full name captured by the onboard_compression_type attribute.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
@@ -648,12 +648,12 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_quality</name>
+    <name>onboard_compression_quality</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_quality</local_identifier>
+    <local_identifier>onboard_compression_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The compression_quality attribute is an indication of compression quality, in the range of 0.0 to
+    <definition> The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to
       1.0. Losslessly compressed or uncompressed data have a value of 1.0. 
       Other values are assigned in a manner specific to the compression mode,
       but with the property that a higher value means better quality.
@@ -670,12 +670,12 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_rate</name>
+    <name>onboard_compression_rate</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_rate</local_identifier>
+    <local_identifier>onboard_compression_rate</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The compression_rate attribute provides the average number of bits needed
+    <definition> The onboard_compression_rate attribute provides the average number of bits needed
       to represent a pixel for an on-board compressed image. </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -686,12 +686,12 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_ratio</name>
+    <name>onboard_compression_ratio</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_ratio</local_identifier>
+    <local_identifier>onboard_compression_ratio</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The compression_ratio attribute provides the ratio of the size, in bytes, of the
+    <definition>The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the
       original uncompressed data object to its compressed form (original size / compressed size). </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -702,12 +702,12 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>compression_type</name>
+    <name>onboard_compression_type</name>
     <version_id>1.0</version_id>
-    <local_identifier>compression_type</local_identifier>
+    <local_identifier>onboard_compression_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The compression_type attribute identifies the type of on-board
+    <definition> The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'ICER', 
       'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.</definition>
     <DD_Value_Domain>

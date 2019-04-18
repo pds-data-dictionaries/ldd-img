@@ -2,7 +2,7 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        0.2.1.5b
-   Time                   Thu Apr 18 13:51:40 PDT 2019
+   Time                   Thu Apr 18 15:57:44 PDT 2019
    Core Schemas           [PDS4_PDS_1B00.xsd]
    Core Schematrons       [PDS4_PDS_1B00.sch]
    Common Model Version   1.11.0.0
@@ -38,12 +38,12 @@ Detailed validation messages
    WARNING  Attribute: <responsivity_pan_b> - This local attribute was not used in an Association.
    WARNING  Attribute: <responsivity_pan_g> - This local attribute was not used in an Association.
    WARNING  Attribute: <responsivity_pan_r> - This local attribute was not used in an Association.
-   INFO     Attribute: <compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
-   INFO     Attribute: <compression_rate> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <compression_ratio> - The default minimum value provided by the attribute's data type is being overridden with 0.0
-   INFO     Attribute: <compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
-   INFO     Attribute: <compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
+   INFO     Attribute: <onboard_compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <onboard_compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
+   INFO     Attribute: <onboard_compression_rate> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <onboard_compression_ratio> - The default minimum value provided by the attribute's data type is being overridden with 0.0
+   INFO     Attribute: <onboard_compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <onboard_compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -280,43 +280,43 @@ Parsed Input - Attributes:
       Software - companding was done by flight software.
       None - data was not companded
 
-   name                   compression_class
+   name                   onboard_compression_class
    version                1.11
    value data type        ASCII_Short_String_Collapsed
-   description             The compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the compression_type identifies the specific compression algorithm used (for example, ICER), whereas the compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'
+   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'
    permissible value - value meaning
       Lossless - TBD
       Lossy - TBD
       Uncompressed - TBD
 
-   name                   compression_mode
+   name                   onboard_compression_mode
    version                1.11
    value data type        ASCII_Integer
-   description             The compression_mode attribute identifies the method used for on-board compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to the full name captured by the compression_type attribute.
+   description            The onboard_compression_mode attribute identifies the method used for on-board compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to the full name captured by the onboard_compression_type attribute.
 
-   name                   compression_quality
+   name                   onboard_compression_quality
    version                1.11
    value data type        ASCII_Real
-   description             The compression_quality attribute is an indication of compression quality, in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. Other values are assigned in a manner specific to the compression mode, but with the property that a higher value means better quality. Although the values are not directly comparable across compression types, this facilitates comparison of compression quality across images independent of compression mode.
+   description             The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. Other values are assigned in a manner specific to the compression mode, but with the property that a higher value means better quality. Although the values are not directly comparable across compression types, this facilitates comparison of compression quality across images independent of compression mode.
    minimum value          0
    maximum value          1.0
 
-   name                   compression_rate
+   name                   onboard_compression_rate
    version                1.11
    value data type        ASCII_Real
-   description             The compression_rate attribute provides the average number of bits needed to represent a pixel for an on-board compressed image. 
+   description             The onboard_compression_rate attribute provides the average number of bits needed to represent a pixel for an on-board compressed image. 
    minimum value          0
 
-   name                   compression_ratio
+   name                   onboard_compression_ratio
    version                1.11
    value data type        ASCII_Real
-   description             The compression_ratio attribute provides the ratio of the size, in bytes, of the original uncompressed data object to its compressed form (original size / compressed size). 
+   description            The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the original uncompressed data object to its compressed form (original size / compressed size). 
    minimum value          0.0
 
-   name                   compression_type
+   name                   onboard_compression_type
    version                1.11
    value data type        ASCII_Short_String_Collapsed
-   description             The compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
+   description             The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
    minimum characters     1
    maximum characters     255
    permissible value - value meaning
@@ -957,7 +957,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Compression_Parameters
+      local identifier      Onboard_Compression_Parameters
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -1152,7 +1152,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Compression_Parameters
+      local identifier      Onboard_Compression_Parameters
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -1230,40 +1230,40 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-   name                   Compression_Parameters
-   description             The Compression_Parameters class contains attributes describing onboard compression parameters used for data storage and transmission.
+   name                   Onboard_Compression_Parameters
+   description             The Onboard_Compression_Parameters class contains attributes describing onboard compression parameters used for data storage and transmission.
    is abstract            false
    is choice              true
    subclass of            USER
 
    Associations
 
-      local identifier      compression_class
+      local identifier      onboard_compression_class
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      compression_mode
+      local identifier      onboard_compression_mode
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      compression_type
+      local identifier      onboard_compression_type
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      compression_rate
+      local identifier      onboard_compression_rate
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      compression_ratio
+      local identifier      onboard_compression_ratio
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      compression_quality
+      local identifier      onboard_compression_quality
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
