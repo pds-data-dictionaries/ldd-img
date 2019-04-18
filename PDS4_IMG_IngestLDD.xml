@@ -2533,7 +2533,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Compression_Parameters</identifier_reference>
+          <identifier_reference>Onboard_Compression_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2778,7 +2778,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Compression_Parameters</identifier_reference>
+          <identifier_reference>Onboard_Compression_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2875,46 +2875,46 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Compression_Parameters class definition -->
+  <!-- Class: Onboard_Compression_Parameters class definition -->
   <DD_Class>
-      <name>Compression_Parameters</name>
+      <name>Onboard_Compression_Parameters</name>
       <version_id>1.0</version_id>
-      <local_identifier>Compression_Parameters</local_identifier>
+      <local_identifier>Onboard_Compression_Parameters</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition> The Compression_Parameters class contains attributes describing onboard
+      <definition> The Onboard_Compression_Parameters class contains attributes describing onboard
           compression parameters used for data storage and transmission.</definition>
       <DD_Association>
-          <identifier_reference>compression_class</identifier_reference>
+          <identifier_reference>onboard_compression_class</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>compression_mode</identifier_reference>
+          <identifier_reference>onboard_compression_mode</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>compression_type</identifier_reference>
+          <identifier_reference>onboard_compression_type</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>compression_rate</identifier_reference>
+          <identifier_reference>onboard_compression_rate</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>compression_ratio</identifier_reference>
+          <identifier_reference>onboard_compression_ratio</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>compression_quality</identifier_reference>
+          <identifier_reference>onboard_compression_quality</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
