@@ -364,14 +364,12 @@
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Decoded</value>
-        <!-- TODO maybe re-word this value_meaning -->
         <value_meaning>Indicates the image has been processed such that it no longer contains
           the CFA pattern. This generally means the image is color, but it
           could also mean that processing has been applied to remove the effects
           of the CFA pattern and still be a single band, or that the result is a
           multispectral image. The algorithm used to decode the pattern is
-          indicated by the xxx_algorithm attribute, where "xxx" depends on the CFA
-          type (e.g. bayer_algorithm).</value_meaning>
+          indicated by the processing_algorithm attribute in the Color_Filter_Array class.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>No CFA</value>
@@ -1397,7 +1395,6 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
-  <!-- TODO check data type & units -->
   <DD_Attribute>
     <name>focus_position</name>
     <version_id>1.0</version_id>
@@ -1410,7 +1407,7 @@
       count.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1474,19 +1471,17 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
-  <!-- TODO definition -->
-  <!-- TODO data type -->
   <DD_Attribute>
     <name>frame_interval</name>
     <version_id>1.0</version_id>
     <local_identifier>frame_interval</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina M. De Cesare</submitter_name>
-    <definition>The frame_interval attribute</definition>
+    <definition>The frame_interval attribute defines the time between the start of successive frames in a video product.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1645,26 +1640,12 @@
     <local_identifier>illuminant</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Defines the illuminant that was used in order to process 
-      this image. The valid values are open-ended but currently used values 
-      include: None, 5000K.</definition>
+    <definition>Defines the illuminant that was used in order to process this image. 
+      The valid values are open-ended but examples of valid values include: None, D65, 3000K, 5000K.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>NONE</value>
-        <value_meaning>No illuminant assumed or used.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>5000K</value>
-        <value_meaning>Standard sRGB 5000K color temperature</value_meaning>
-      </DD_Permissible_Value>
-      <!-- TODO update this with real value -->
-      <DD_Permissible_Value>
-        <value>TBD</value>
-        <value_meaning>Value used for Mars surface processing</value_meaning>
-      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1674,7 +1655,8 @@
     <local_identifier>interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The interframe_delay attribute provides the time between successive frames of an image, in seconds.</definition>
+    <definition> The interframe_delay attribute provides the time between the end of one frame and the 
+      beginning of the next frame in a video product.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1794,7 +1776,6 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
-  <!-- TODO definition -->
   <DD_Attribute>
     <name>motor_count</name>
     <version_id>1.0</version_id>
@@ -2106,16 +2087,15 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
-  <!-- TODO add definitions for responsivity_pan_* -->
+
   <DD_Attribute>
-    <name>responsivity_pan_b</name>
+    <name>responsivity_b</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_pan_b</local_identifier>
+    <local_identifier>responsivity_b</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
-      to the B cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+      to the blue channel of an image.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2124,13 +2104,13 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>responsivity_pan_g</name>
+    <name>responsivity_g</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_pan_g</local_identifier>
+    <local_identifier>responsivity_g</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
-      to the G cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+      to the green channel of an image.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2139,13 +2119,28 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>responsivity_pan_r</name>
+    <name>responsivity_pan</name>
     <version_id>1.0</version_id>
-    <local_identifier>responsivity_pan_r</local_identifier>
+    <local_identifier>responsivity_pan</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
-      to the R cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.</definition>
+      to a panchromatic image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>responsivity_r</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_r</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the conversion factor between DN and radiance units that has been applied 
+      to the red channel of an image.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2369,7 +2364,6 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
-  <!-- TODO data type -->
   <DD_Attribute>
     <name>temperature_status</name>
     <version_id>1.0</version_id>
@@ -2757,8 +2751,8 @@
       <submitter_name>Cristina De Cesare</submitter_name>
       <definition>The Command_Parameters class contains attributes used to identify or describe the
           commands sent to a spacecraft to perform one or more actions resulting in the acquisition of
-          the current data product.</definition>
-      <!-- TODO is this description needed? -->
+          the current data product. These are distinct from similar values in the root Imaging class
+          which indicate the state of the image as acquired.</definition>
       <DD_Association>
           <identifier_reference>pds.description</identifier_reference>
           <reference_type>attribute_of</reference_type>
