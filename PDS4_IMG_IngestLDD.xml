@@ -58,8 +58,15 @@
     <local_identifier>active_flag</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The active_flag attribute indicates whether or not the data correction described
-      by the parent class is active.</definition>
+    <definition> The active_flag attribute indicates whether or not the data processing described
+      by the parent class is active. In general this should be true (and should be assumed to be 
+      true if active_flag is not present), with the corresponding class simply being omitted if 
+      the correction does not apply. However, it may be useful in some cases to record a correction 
+      that was previously done to the data which may no longer apply (for example, a radiometric 
+      correction done before a stereo correlation operation; radiometric correction is no longer 
+      an attribute of stereo correlation results, but the fact that corrected data were used in 
+      the correlation may be of interest).
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
@@ -154,93 +161,6 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>bayer_algorithm</name>
-    <version_id>1.0</version_id>
-    <local_identifier>bayer_algorithm</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The bayer_algorithm specifies the algorithm used to remove the Bayer pattern
-      in order to create color.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>None</value>
-        <value_meaning>Imager is not a Bayer-pattern imager. This is the default if the keyword is missing.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Raw Bayer</value>
-        <value_meaning> Image has the raw Bayer pattern; no de-Bayering has been done.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Malvar</value>
-        <value_meaning>Image has been converted to RGB using the Malvar algorithm.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Zhang-Wu</value>
-        <value_meaning>Image has been converted to RGB using the Zhang-Wu algorithm.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Red Averaged</value>
-        <value_meaning>Pixels are created by averaging (1 or more) pixels from the red band exclusively. 
-          Could be part of a color image or used standalone. Averaging implies the resolution is less than 
-          the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Green Averaged</value>
-        <value_meaning>Pixels are created by averaging (1 or more) pixels from the green band exclusively. 
-          Could be part of a color image or used standalone. Averaging implies the resolution is less than 
-          the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Blue Averaged</value>
-        <value_meaning>Pixels are created by averaging (1 or more) pixels from the blue band exclusively. 
-          Could be part of a color image or used standalone. Averaging implies the resolution is less than 
-          the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Red Bilinear</value>
-        <value_meaning>Pixels are created by bilinear interpolation of surrounding pixels taken exclusively 
-          from the red band. Could be part of a color image or used standalone. Interpolation implies the 
-          resolution is the same as or higher than the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Green Bilinear</value>
-        <value_meaning>Pixels are created by bilinear interpolation of surrounding pixels taken exclusively 
-          from the green band. Could be part of a color image or used standalone. Interpolation implies the 
-          resolution is the same as or higher than the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Blue Bilinear</value>
-        <value_meaning>Pixels are created by bilinear interpolation of surrounding pixels taken exclusively 
-          from the blue band. Could be part of a color image or used standalone. Interpolation implies the 
-          resolution is the same as or higher than the raw Bayer image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Averaged</value>
-        <value_meaning>RGB image created by averaging individual cells (generally a simple composite of 
-          Red|Green|Blue_Averaged elements). This is necessarily at least half resolution compared to the 
-          original Bayer pattern.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Bilinear</value>
-        <value_meaning>Bilinear interpolation of each color treated independently. Can be a simple composite 
-          of Red|Green|Blue_Bilinear elements.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Panchromatic</value>
-        <value_meaning>Pixels are created by averaging one or more complete Bayer cells, creating a panchromatic image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Identity</value>
-        <value_meaning>Sensor has a Bayer pattern but the image can be used as-is due to the presence of other filters. 
-          (e.g. On MSL Mastcam, the R,G,B filters have equal responsivities when using an infrared filter.)</value_meaning>
-      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -376,7 +296,7 @@
       <DD_Permissible_Value>
         <value>No CFA</value>
         <value_meaning>Indicates the image is not and has never been CFA encoded. In
-          this case, Color_Filter_Array_Parameters would simply not be present in
+          this case, Color_Filter_Array would simply not be present in
           the label. This value is present in case it needs to be explicitly
           stated that there is no CFA.</value_meaning>
       </DD_Permissible_Value>
@@ -404,36 +324,6 @@
           in each 2x2 square of pixels. The RGGB type indicates the phasing of
           the colors, in the order upper left, upper right, lower left, and lower
           right. RGGB is the most common phasing but others are possible</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>color_filter_array_venue</name>
-    <version_id>1.0</version_id>
-    <local_identifier>color_filter_array_venue</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>For instruments using a Color Filter Array (CFA) (such as the Bayer
-      pattern), this attribute defines where the CFA pattern was removed from
-      the data. It is optional if there is no CFA. Valid values: 'Onboard', 'Ground', 'None'.
-      In the case of instruments using the Bayer pattern, use the bayer_algorithm to 
-      specify the algorithm used to remove the pattern.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Onboard</value>
-        <value_meaning>Color Filter Array pattern was removed onboard.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Ground</value>
-        <value_meaning>Color Filter Array pattern was removed by ground software.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>None</value>
-        <value_meaning>Color Filter Array pattern was not removed.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -515,33 +405,6 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>companding_method</name>
-    <version_id>1.0</version_id>
-    <local_identifier>companding_method</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The companding_method attribute specifies how data was companded.  Generally this
-      will either be via a lookup table (such as a square root encoding), or
-      by shifting bits to preserve the high order bits and discard the low
-      order bits.  The value of this keyword is mission specific but there are
-      recommended values that should apply across missions when possible: NONE - no scaling.
-      LUTn - use the numbered lookup table.  Lookup tables are defined in the
-      mission SIS.  It is preferred for "n" to be a number but it could be a
-      name, for example LUT_MMM_3 to indicate LUT 3 for the MMM instruments
-      (on MSL). MSB_BITn - Shift to make bit "n" the most significant.  Bits start
-      numbering at 0 so MSB_BIT7 means no shift for a 12->8 bit companding,
-      while MSB_BIT11 means to shift right 4 bits for a 12->8 bit companding.
-      AUTOSHIFT - Data should be shifted to preserve the highest value.  This
-      value should only appear in a command echo; one of the MSB_BITn values
-      should be used in downlinked data to specify what the actual shift was.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
     <name>companding_state</name>
     <version_id>1.0</version_id>
     <local_identifier>companding_state</local_identifier>
@@ -566,36 +429,6 @@
       <DD_Permissible_Value>
         <value>Expanded</value>
         <value_meaning>values have been companded but are now expanded back to original size</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>companding_venue</name>
-    <version_id>1.0</version_id>
-    <local_identifier>companding_venue</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The companding_venue attribute specifies where companding or expanding of the data was completed either 
-      onboard or on the ground.
-      Valid values: 'Hardware' - companding was done by hardware, for example inside the camera.
-      'Software' - companding was done by flight software.
-      'None' - data was not companded</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Hardware</value>
-        <value_meaning>companding was done by hardware, for example inside the camera.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Software</value>
-        <value_meaning>companding was done by flight software.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>None</value>
-        <value_meaning>data was not companded</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -778,93 +611,6 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>data_correction_type</name>
-    <version_id>1.0</version_id>
-    <local_identifier>data_correction_type</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The data_correction_type attribute specifies the type of data correction to be
-      applied using the accompanying file or constants. Valid values: 'Antiblooming', 'Bad Pixel',
-      'Blemish Protection', 'Brightness', 'Dark Current', 'Flat Field', 'Inverse LUT', 'Light Flood',
-      'Responsivity', 'Shutter'</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Antiblooming</value>
-        <value_meaning>Blooming occurs when photons from an individual cell in a CCD array overflow into surrounding cells. Antiblooming measures are used to either prevent or correct for this effect.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Bad Pixel</value>
-        <value_meaning>certain pixels in the image were replaced based on a bad pixel table.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Blemish Protection</value>
-        <value_meaning>corrections for blemishes (reseaus, dust spots, etc.) that affect the response of the sensor at specific locations</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Brightness</value>
-        <value_meaning> as a mosaic radiometric seam matching process that is done on top of ordinary radiometric correction. Its intent is to reduce visual seams at the expense of radiometric accuracy.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Dark Current</value>
-        <value_meaning>a dark current image file(s) (image taken without opening the camera shutter) will be used to perform radiometric calibration of the image. </value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Flat Field</value>
-        <value_meaning>a flat field image(s) file (an image taken in an optical laboratory of a white background or an image taken in the dawn with the intention to have an equally illuminated background for the whole image) which should be used to perform radiometric calibration of the image.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Inverse LUT</value>
-        <value_meaning>inverse-look-table was used in generating this derived product</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Light Flood</value>
-        <value_meaning>instrument light flooding as applied to the image</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Radiometric</value>
-        <value_meaning>radiometric correction was performed on this image</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Responsivity</value>
-        <value_meaning>responsitivity constants were used in generating this derived product</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Shutter Subtraction</value>
-        <value_meaning>Involves the removal from the image of the shutter, or fixed-pattern.</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  
-  <DD_Attribute>
-    <name>data_correction_venue</name>
-    <version_id>1.0</version_id>
-    <local_identifier>data_correction_venue</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The data_correction_venue attribute specifies where data correction was performed.
-      Valid values: 'Onboard' - data correction was performed onboard the spacecraft.
-      'Ground' - data correction was performed by software on the ground.
-    </definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Onboard</value>
-        <value_meaning>data correction was performed onboard the spacecraft.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Ground</value>
-        <value_meaning>data correction was performed by software on the ground.</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
     <name>decomposition_stages</name>
     <version_id>1.0</version_id>
     <local_identifier>decomposition_stages</local_identifier>
@@ -1014,65 +760,6 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>downsampling_flag</name>
-    <version_id>1.0</version_id>
-    <local_identifier>downsampling_flag</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The downsampling_flag attribute specifies whether or not downsampling has been applied to the image(s).</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Boolean</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>downsampling_method</name>
-    <version_id>1.0</version_id>
-    <local_identifier>downsampling_method</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The downsampling_method attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include:
-      'Mean' - Downsampling done in software by calculation of the mean.,
-      'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>downsampling_venue</name>
-    <version_id>1.0</version_id>
-    <local_identifier>downsampling_venue</local_identifier>
-    <nillable_flag>true</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The downsampling_venue attribute specifies where downsampling was done onboard.
-      Valid values: 'Hardware' - downsampling was done by hardware, for example inside the camera.
-      'Software' - downsampling was done by flight software.
-      'Both' - data was not companded.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Hardware</value>
-        <value_meaning>downsampling was done by hardware, for example inside the camera.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Software</value>
-        <value_meaning>downsampling was done by flight software.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Both</value>
-        <value_meaning>downsampling occurred in both hardware and software</value_meaning>
-      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1315,20 +1002,6 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <minimum_value>1</minimum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>flat_field_algorithm</name>
-    <version_id>1.0</version_id>
-    <local_identifier>flat_field_algorithm</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The flat_field_algorithm specifies the algorithm used to remove the flat field signature.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1956,6 +1629,48 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>processing_algorithm</name>
+    <version_id>1.0</version_id>
+    <local_identifier>processing_algorithm</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The processing_algorithm attribute specifies the name of the algorithm 
+      used to perform the processing specified by the enclosing class. Algorithm 
+      names should be defined in the project documentation, and/or in the enclosing 
+      class definition.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>processing_venue</name>
+    <version_id>1.0</version_id>
+    <local_identifier>processing_venue</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The processing_venue attribute specifies where the processing described by the 
+      parent class was performed. Value values: "Onboard Hardware" - processing was done by 
+      hardware onboard the spacecraft, such as inside the camera. "Onboard Software" - processing 
+      was done by flight software onboard the spacecraft. "Onboard Both" - processing was done 
+      onboard by both hardware and software. "Onboard" - processing was done onboard 
+      (hardware or software is unspecified). "Ground" - processing was done on the ground. 
+      "Ground Refined" - onboard processing was reversed and new ground processing was applied 
+      (for example, removing a synthetic flat field from onboard processing and replacing it with 
+      a true flat field). "None" - processing has not been done.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <!-- TODO definition -->
+  <DD_Attribute>
     <name>progressive_stage</name>
     <version_id>1.0</version_id>
     <local_identifier>progressive_stage</local_identifier>
@@ -1971,21 +1686,70 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>radiance_offset</name>
+    <name>r0</name>
     <version_id>1.0</version_id>
-    <local_identifier>radiance_offset</local_identifier>
+    <local_identifier>r0</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The radiance_offset attribute specifies the constant value by which a stored
-      radiance is added. Expressed as an equation as follows: true_radiance_value = radiance_offset
-      + radiance_scaling_factor * stored_radiance value There are 3 types of radiometric
-      corrections: Radiance-calibrated - These products have been scaled to
-      absolute radiance units using either pre-flight radiometric calibration coefficients or
-      calibration coefficients derived from in-flight observations of the calibration target. The
-      units on these files are (W/m^2/sr/nm). Radiance factor-calibrated - products are unitless but have 
-      values in the range of 0.0 to 1.0 (for example, average bright Mars soils exhibit I/F ~ 0.35 at 750 nm 
-      and I/F ~ 0.05 at 410 nm). Instrumentally-calibrated - These products have had no radiance scaling
-      applied, so the units on these files are "corrected" DN.</definition>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The r0 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>r1</name>
+    <version_id>1.0</version_id>
+    <local_identifier>r1</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The r1 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>r2</name>
+    <version_id>1.0</version_id>
+    <local_identifier>r2</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The r2 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>r3</name>
+    <version_id>1.0</version_id>
+    <local_identifier>r3</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The r3 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>radiance_zenith_scaling_factor</name>
+    <version_id>1.0</version_id>
+    <local_identifier>radiance_zenith_scaling_factor</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Defines the scaling factor used for Scaled Radiance or Scaled Spectral Radiance.
+      Scaled radiance is created by dividing radiance by this factor, which scales the radiance to what 
+      it would be if the sun were at the zenith with a clear atmosphere.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1994,36 +1758,16 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>radiance_scaling_factor</name>
+    <name>radiance_type</name>
     <version_id>1.0</version_id>
-    <local_identifier>radiance_scaling_factor</local_identifier>
+    <local_identifier>radiance_type</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The radiance_scaling_factor specifies the constant value by which a stored radiance
-      is multiplied. NOTE: Expressed as an equation: true_radiance_value = radiance_offset +
-      radiance_scaling_factor * stored_radiance value There are 3 types of radiometric corrections:
-      Radiance-calibrated - These products have been scaled to
-      absolute radiance units using either pre-flight radiometric calibration coefficients or
-      calibration coefficients derived from in-flight observations of the calibration target. The
-      units on these files are (W/m^2/sr/nm). Radiance factor-calibrated - products are unitless but have 
-      values in the range of 0.0 to 1.0 (for example, average bright Mars soils exhibit I/F ~ 0.35 at 750 nm 
-      and I/F ~ 0.05 at 410 nm). Instrumentally-calibrated - These products have had no radiance scaling
-      applied, so the units on these files are "corrected" DN.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Spectral_Radiance</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>radiometric_correction_type_name</name>
-    <version_id>1.0</version_id>
-    <local_identifier>radiometric_correction_type_name</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The radiometric_correction_type_name identifies the method used for radiometric
-      correction.</definition>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The radiance_type defines the specific type of radiance measurement. 
+      Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance".
+      Note: There are many more possible values, and this definition can be updated to include
+      more examples over time.
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2490,6 +2234,34 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
+  <DD_Attribute>
+    <name>x_center</name>
+    <version_id>1.0</version_id>
+    <local_identifier>x_center</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The x_center attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>y_center</name>
+    <version_id>1.0</version_id>
+    <local_identifier>y_center</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The y_center attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
 
   <!--                   -->
   <!-- Attributes: END   -->
@@ -2521,13 +2293,13 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color_Filter_Array_Parameters</identifier_reference>
+          <identifier_reference>Color_Filter_Array</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color_Parameters</identifier_reference>
+          <identifier_reference>Color</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2539,19 +2311,13 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Data_Correction_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>Detector_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Downsampling_Parameters</identifier_reference>
+          <identifier_reference>Downsampling</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2567,6 +2333,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Flat_Field_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Focus_Parameters</identifier_reference>
@@ -2587,10 +2359,22 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Radiometric_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
           <identifier_reference>Sampling_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Shutter_Subtraction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Subframe_Parameters</identifier_reference>
@@ -2662,13 +2446,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Color_Filter_Array_Parameters -->
+  <!-- Class: Color_Filter_Array -->
   <DD_Class>
-      <name>Color_Filter_Array_Parameters</name>
+      <name>Color_Filter_Array</name>
       <version_id>1.0</version_id>
-      <local_identifier>Color_Filter_Array_Parameters</local_identifier>
+      <local_identifier>Color_Filter_Array</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Color_Filter_Array_Parameters class describes whether or not an
+      <definition>The Color_Filter_Array class describes whether or not an
           image was acquired using a Color Filter Array (CFA) and if so, whether
           and how the CFA pattern was removed. A CFA is a method for making color
           images using one exposure on a single sensor plane, where microfilters
@@ -2678,39 +2462,63 @@
           generally used for RGB color, CFA filters can be of any number and
           wavelength (see color_filter_array_type).</definition>
       <DD_Association>
-          <identifier_reference>color_filter_array_type</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+        <identifier_reference>active_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>color_filter_array_state</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>color_filter_array_venue</identifier_reference>
+          <identifier_reference>processing_venue</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>bayer_algorithm</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+        <identifier_reference>processing_algorithm</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>color_filter_array_type</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>color_filter_array_state</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Color_Parameters -->
+  <!-- Class: Color -->
   <DD_Class>
-    <name>Color_Parameters</name>
+    <name>Color</name>
     <version_id>1.0</version_id>
-    <local_identifier>Color_Parameters</local_identifier>
+    <local_identifier>Color</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Color_Parameters class contains parameters describing color correction 
+    <definition>The Color class contains parameters describing color correction 
       or processing and how the image is represented in color.</definition>
+    <DD_Association>
+      <identifier_reference>processing_venue</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>processing_algorithm</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>color_space</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -2747,6 +2555,12 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Commanded_Parameters -->
@@ -2766,13 +2580,13 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color_Filter_Array_Parameters</identifier_reference>
+          <identifier_reference>Color_Filter_Array</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color_Parameters</identifier_reference>
+          <identifier_reference>Color</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2784,19 +2598,13 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Data_Correction_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>Detector_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Downsampling_Parameters</identifier_reference>
+          <identifier_reference>Downsampling</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2845,16 +2653,29 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Companding_Parameters -->
+  <!-- Class: Companding -->
   <DD_Class>
-      <name>Companding_Parameters</name>
+      <name>Companding</name>
       <version_id>1.0</version_id>
       <local_identifier>Companding_Parameters</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Companding_Parameters class describes whether or not data is or has had its bit
+      <definition> The Companding class describes whether or not data is or has had its bit
           depth reduced (for example conversion from 12 to 8 bits via a lookup
           table or bit scaling), the venue where it occurred (Software or Hardware),
-          and the method used to complete the companding.</definition>
+          and the method used to complete the companding. The processing_algorithm attribute 
+          specifies how data was companded.  Generally this will either be via a lookup table 
+          (such as a square root encoding), or by shifting bits to preserve the high order bits 
+          and discard the low order bits.  The value of this keyword is mission specific but there 
+          are recommended values that should apply across missions when possible: NONE - no scaling.
+          LUTn - use the numbered lookup table.  Lookup tables are defined in the
+          mission SIS.  It is preferred for "n" to be a number but it could be a
+          name, for example LUT_MMM_3 to indicate LUT 3 for the MMM instruments
+          (on MSL). MSB_BITn - Shift to make bit "n" the most significant.  Bits start
+          numbering at 0 so MSB_BIT7 means no shift for a 12->8 bit companding,
+          while MSB_BIT11 means to shift right 4 bits for a 12->8 bit companding.
+          AUTOSHIFT - Data should be shifted to preserve the highest value.  This
+          value should only appear in a command echo; one of the MSB_BITn values
+          should be used in downlinked data to specify what the actual shift was.</definition>
       <DD_Association>
           <identifier_reference>companding_state</identifier_reference>
           <reference_type>attribute_of</reference_type>
@@ -2862,16 +2683,22 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>companding_venue</identifier_reference>
+          <identifier_reference>processing_venue</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>companding_method</identifier_reference>
+          <identifier_reference>processing_algorithm</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -2958,31 +2785,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Data_Correction_Parameters  -->
+  <!-- Class: Data_Processing  -->
   <DD_Class>
-      <name>Data_Correction_Parameters</name>
+      <name>Data_Processing</name>
       <version_id>1.0</version_id>
-      <local_identifier>Data_Correction_Parameters</local_identifier>
-      <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition> The Data_Correction_Parameters class describes data processing steps applied to
-          data, either on-board a spacecraft or after receipt of the data on the ground, to remove
-          artifacts introduced into the data by the instrument. As a child of the Command_Parameters class, these attribute values
-          are those that were commanded to the spacecraft.</definition>
-      <DD_Association>
-          <identifier_reference>Data_Correction</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-  </DD_Class>
-  
-  <!-- Class: Data_Correction  -->
-  <DD_Class>
-      <name>Data_Correction</name>
-      <version_id>1.0</version_id>
-      <local_identifier>Data_Correction</local_identifier>
+      <local_identifier>Data_Processing</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Data_Correction class specifies describes details regarding
+      <definition>The Data_Processing class specifies describes details regarding
           the calibration and/or processing performed on the data product. This class can be used to describe various 
           data corrections, such as antiblooming, bad pixel replacement, blemish protection, dark current correction, or
           shutter correction. This can be specified multiple times in order to detail numerous corrections, and should be used
@@ -2995,59 +2804,29 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>data_correction_type</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>data_correction_venue</identifier_reference>
+          <identifier_reference>processing_venue</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Data_Correction_File</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>Flat_Field_Correction_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>Radiometric_Correction_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>Shutter_Subtraction_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-  </DD_Class>
-  
-  <!-- Class: Data_Correction_File  -->
-  <DD_Class>
-      <name>Data_Correction_File</name>
-      <version_id>1.0</version_id>
-      <local_identifier>Data_Correction_File</local_identifier>
-      <submitter_name>Jordan Padams</submitter_name>
-    <definition>The Data_Correction_File class specifies a file containing calibration
-      data that was applied to the science data as part of a Data Correction.
-      If more than one file applies to a given Data_Correction, the
-      name/id/sequence_number identifies the type of file.</definition>
-      <DD_Association>
-        <identifier_reference>pds.name</identifier_reference>
+        <identifier_reference>processing_algorithm</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Data_Processing_File  -->
+  <DD_Class>
+      <name>Data_Processing_File</name>
+      <version_id>1.0</version_id>
+      <local_identifier>Data_Processing_File</local_identifier>
+      <submitter_name>Jordan Padams</submitter_name>
+    <definition>The Data_Processing_File class specifies a file containing calibration
+      data that was applied to the science data as part of a Data Correction.
+      If more than one file applies to a given Data_Correction, the
+      name/id/sequence_number identifies the type of file.</definition>
     <DD_Association>
           <identifier_reference>pds.description</identifier_reference>
           <reference_type>attribute_of</reference_type>
@@ -3061,6 +2840,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>pds.name</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3383,30 +3168,32 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Downsampling_Parameters  -->
+  <!-- Class: Downsampling  -->
   <DD_Class>
-      <name>Downsampling_Parameters</name>
+      <name>Downsampling</name>
       <version_id>1.0</version_id>
-      <local_identifier>Downsampling_Parameters</local_identifier>
+      <local_identifier>Downsampling</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Downsampling_Parameters class describes whether or not downsampling occurred, the venue where 
+      <definition> The Downsampling class describes whether or not downsampling occurred, the venue where 
           it occurrected (Software or Hardware), the method used to downsample, and the pixel averaging dimensions.
           A downsampled image is a smaller version of the image, resulting in reduced resolution of the
-          same coverage area</definition>
+          same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. 
+          This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean.,
+          'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.</definition>
       <DD_Association>
-          <identifier_reference>downsampling_flag</identifier_reference>
+          <identifier_reference>active_flag</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>downsampling_venue</identifier_reference>
+          <identifier_reference>processing_venue</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>downsampling_method</identifier_reference>
+          <identifier_reference>processing_algorithm</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -3416,6 +3203,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3508,25 +3301,55 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Flat_Field_Correction_Parameters -->
+  <!-- Class: Flat_Field_Correction -->
   <DD_Class>
-      <name>Flat_Field_Correction_Parameters</name>
+      <name>Flat_Field_Correction</name>
       <version_id>1.0</version_id>
-      <local_identifier>Flat_Field_Correction_Parameters</local_identifier>
+      <local_identifier>Flat_Field_Correction</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Flat_Field_Correction_Parameters class specifies the onboard flat-field coefficients/parameters used in the algorithm to remove the flat field signature.</definition>
+      <definition> The Flat_Field_Correction class specifies the onboard flat-field coefficients/parameters used in the algorithm to remove the flat field signature.</definition>
       <DD_Association>
-          <identifier_reference>flat_field_algorithm</identifier_reference>
+          <identifier_reference>processing_algorithm</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Correction_Parameter</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
+        <identifier_reference>Radial_Flat_Field_Function</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+      <DD_Association>
+        <identifier_reference>Flat_Field_File</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Flat_Field_File -->
+  <DD_Class>
+    <name>Flat_Field_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Flat_Field_File</local_identifier>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The Flat_Field_File class specifies the image used for flat field correction. 
+      The image is divided by this flat field image in order to apply the flat 
+      field correction (which is the opposite of Radial_Flat_Field_Function).
+    </definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Focus_Parameters  -->
@@ -3547,6 +3370,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>focus_position</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>focus_position_count</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -4009,31 +3838,89 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Radiometric_Correction_Parameters -->
+  <!-- Class: Radial_Flat_Field_Function -->
   <DD_Class>
-      <name>Radiometric_Correction_Parameters</name>
+    <name>Radial_Flat_Field_Function</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Radial_Flat_Field_Function</local_identifier>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The Radial_Flat_Field_Function class pecifies parameters used 
+      to generate a synthetic flat field using a simple radial function of the 
+      form: r = (x-x_center)^2 + (y-y_center)^2 ;  
+      flat_field(x,y) = 1 + r0 + r1*r + r2*r^2 + r3*r^3 . Note that x is in the 
+      sample direction of the image, and y is in the line direction. The image 
+      is multiplied by this function in order to perform a flat field correction 
+      (which is the opposite of Flat_Field_File).
+    </definition>
+    <DD_Association>
+      <identifier_reference>x_center</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>y_center</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>r0</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>r1</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>r2</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>r3</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Flat_Field_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Radiometric_Correction -->
+  <DD_Class>
+      <name>Radiometric_Correction</name>
       <version_id>1.0</version_id>
-      <local_identifier>Radiometric_Correction_Parameters</local_identifier>
+      <local_identifier>Radiometric_Correction</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Radiometric_Correction_Parameters class is a container for the type and details
+      <definition> The Radiometric_Correction class is a container for the type and details
           of the radiometric calibration performed on the product. </definition>
       <DD_Association>
-          <identifier_reference>radiometric_correction_type_name</identifier_reference>
+          <identifier_reference>radiance_type</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>radiance_scaling_factor</identifier_reference>
+          <identifier_reference>radiance_zenith_scaling_factor</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>radiance_offset</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -4083,13 +3970,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Shutter_Subtraction_Parameters -->
+  <!-- Class: Shutter_Subtraction -->
   <DD_Class>
-      <name>Shutter_Subtraction_Parameters</name>
+      <name>Shutter_Subtraction</name>
       <version_id>1.0</version_id>
-      <local_identifier>Shutter_Subtraction_Parameters</local_identifier>
+      <local_identifier>Shutter_Subtraction</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Shutter_Subtraction_Parameters class specifies attributes describing the removal from the image of the shutter, or fixed-pattern.</definition>
+      <definition> The Shutter_Subtraction class specifies attributes describing the removal from the image of the shutter, or fixed-pattern.</definition>
       <DD_Association>
           <identifier_reference>shutter_subtraction_mode</identifier_reference>
           <reference_type>attribute_of</reference_type>
@@ -4101,6 +3988,12 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Data_Processing</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -4246,11 +4139,11 @@
   
   <DD_Rule>
     <local_identifier>internal_reference_type_check_data_correction</local_identifier>
-    <rule_context>//img:Data_Correction_File/pds:Internal_Reference</rule_context>
+    <rule_context>//img:Data_Processing_File/pds:Internal_Reference</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>pds:reference_type = 'data_to_data_correction_file'</rule_test>
-      <rule_message>IMG:error:internal_reference_type_check_data_correction: In img:Data_Correction_File, the Internal_Reference.reference_type must be equal to 'data_to_data_correction_file'.</rule_message>
+      <rule_test>pds:reference_type = 'data_to_data_processing_file'</rule_test>
+      <rule_message>IMG:error:internal_reference_type_check_data_correction: In img:Data_Processing_File, the Internal_Reference.reference_type must be equal to 'data_to_data_processing_file'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4306,21 +4199,21 @@
   
   <DD_Rule>
     <local_identifier>color_params_child_check</local_identifier>
-    <rule_context>//img:Color_Parameters</rule_context>
+    <rule_context>//img:Color</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:color_params_child_check: img:Color_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:color_params_child_check: img:color must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>downsampling_params_child_check</local_identifier>
-    <rule_context>//img:Downsampling_Parameters</rule_context>
+    <rule_context>//img:Downsampling</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:downsampling_params_child_check: img:Downsampling_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:downsampling_params_child_check: img:Downsampling must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4491,17 +4384,17 @@
   
   <DD_Rule>
     <local_identifier>radiometric_corr_check</local_identifier>
-    <rule_context>//img:Radiometric_Correction_Parameters</rule_context>
+    <rule_context>//img:Radiometric_Correction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>(count(img:radiance_offset) = 1 and count(img:radiance_scaling_factor) = 1) or (count(img:radiance_offset) = 0 and count(img:radiance_scaling_factor) = 0)</rule_test>
-      <rule_message>IMG:error:radiometric_corr_check: Both img:radiance_offset and img:radiance_scaling_factor must exist together.</rule_message>
+      <rule_test>(count(img:radiance_offset) = 1 and count(img:radiance_zenith_scaling_factor) = 1) or (count(img:radiance_offset) = 0 and count(img:radiance_zenith_scaling_factor) = 0)</rule_test>
+      <rule_message>IMG:error:radiometric_corr_check: Both img:radiance_offset and img:radiance_zenith_scaling_factor must exist together.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>shutter_subtraction_check</local_identifier>
-    <rule_context>//img:Shutter_Subtraction_Parameters</rule_context>
+    <rule_context>//img:Shutter_Subtraction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))</rule_test>
@@ -4612,11 +4505,11 @@
   <!-- TODO check these -->
   <DD_Rule>
     <local_identifier>local_reference_type_check_data_correction</local_identifier>
-    <rule_context>//img:Data_Correction_File/pds:Internal_Reference</rule_context>
+    <rule_context>//img:Data_Processing_File/pds:Internal_Reference</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>pds:reference_type = 'data_to_data_correction_file'</rule_test>
-      <rule_message>In img:Data_Correction_File, the Internal_Reference.reference_type must be equal to 'data_to_data_correction_file'.</rule_message>
+      <rule_test>pds:reference_type = 'data_to_data_processing_file'</rule_test>
+      <rule_message>In img:Data_Processing_File, the Internal_Reference.reference_type must be equal to 'data_to_data_processing_file'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4684,7 +4577,7 @@
   <!-- TODO check validity of this rule -->
   <DD_Rule>
     <local_identifier>color_filter_array_state_check</local_identifier>
-    <rule_context>//img:Color_Filter_Array_Parameters</rule_context>
+    <rule_context>//img:Color_Filter_Array</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(img:color_filter_array_state = 'Decoded' and img:color_filter_array_type = 'Bayer RGGB' and exists(img:bayer_algorithm)) or img:color_filter_array_state = 'No CFA' or img:color_filter_array_state = 'Encoded' </rule_test>
@@ -4706,17 +4599,17 @@
   
   <DD_Rule>
     <local_identifier>radiometric_corr_check</local_identifier>
-    <rule_context>//img:Radiometric_Correction_Parameters</rule_context>
+    <rule_context>//img:Radiometric_Correction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>(count(img:radiance_offset) = 1 and count(img:radiance_scaling_factor) = 1) or (count(img:radiance_offset) = 0 and count(img:radiance_scaling_factor) = 0)</rule_test>
-      <rule_message>IMG:error:radiometric_corr_check: Both img:radiance_offset and img:radiance_scaling_factor must exist together.</rule_message>
+      <rule_test>(count(img:radiance_offset) = 1 and count(img:radiance_zenith_scaling_factor) = 1) or (count(img:radiance_offset) = 0 and count(img:radiance_zenith_scaling_factor) = 0)</rule_test>
+      <rule_message>IMG:error:radiometric_corr_check: Both img:radiance_offset and img:radiance_zenith_scaling_factor must exist together.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>shutter_subtraction_check</local_identifier>
-    <rule_context>//img:Shutter_Subtraction_Parameters</rule_context>
+    <rule_context>//img:Shutter_Subtraction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))</rule_test>
@@ -4784,19 +4677,6 @@
       <rule_test>img:exposure_type = ('MANUAL', 'AUTO', 'TEST')</rule_test>
       <rule_message>insight:error:exp_params_1: The attribute img:exposure_type must be equal to one of the following
         values: 'MANUAL', 'AUTO', 'TEST'.</rule_message>
-    </DD_Rule_Statement>
-  </DD_Rule>
-  
-  
-  <!-- img:Data_Correction_Parameters -->
-  <DD_Rule>
-    <local_identifier>data_corr_params_0</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Image_Product_Information/img:Data_Correction_Parameters</rule_context>
-    <DD_Rule_Statement>
-      <rule_type>Report</rule_type>
-      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Image_Product_Information/img:Data_Correction_Parameters)</rule_test>
-      <rule_message>insight:log:data_corr_params_0: Validating img:Data_Correction_Parameters
-        class</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
