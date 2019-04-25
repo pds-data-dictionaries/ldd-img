@@ -429,153 +429,6 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>onboard_compression_class</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_class</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The onboard_compression_class attribute
-      identifies the type of on-board compression used for data
-      storage and transmission. Note that the onboard_compression_type 
-      identifies the specific compression algorithm used (for example, ICER), 
-      whereas the onboard_compression_class gives a simple indicator of the type of 
-      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Lossless</value>
-        <value_meaning>TBD</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Lossy</value>
-        <value_meaning>TBD</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Uncompressed</value>
-        <value_meaning>TBD</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_compression_mode</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_mode</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The onboard_compression_mode attribute identifies the method used for on-board
-      compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to 
-      the full name captured by the onboard_compression_type attribute.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Integer</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_compression_quality</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_quality</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition> The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to
-      1.0. Losslessly compressed or uncompressed data have a value of 1.0. 
-      Other values are assigned in a manner specific to the compression mode,
-      but with the property that a higher value means better quality.
-      Although the values are not directly comparable across compression
-      types, this facilitates comparison of compression quality across images
-      independent of compression mode.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <minimum_value>0</minimum_value>
-      <maximum_value>1.0</maximum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_compression_rate</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_rate</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The onboard_compression_rate attribute provides the average number of bits needed
-      to represent a pixel for an on-board compressed image. </definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <minimum_value>0</minimum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_compression_ratio</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_ratio</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the
-      original uncompressed data object to its compressed form (original size / compressed size). </definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <minimum_value>0.0</minimum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_compression_type</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_compression_type</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The onboard_compression_type attribute identifies the type of on-board
-      compression used for data storage and transmission. Valid Values: 'ICER', 
-      'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
-      <minimum_characters>1</minimum_characters>
-      <maximum_characters>255</maximum_characters>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>ICER</value>
-        <value_meaning>ICER Adaptive Variable-Length Coding (ICER)</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>ICT</value>
-        <value_meaning>Integer Cosine Transform</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>LOCO</value>
-        <value_meaning>Low-Complexity Lossless Compression</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>JPEG</value>
-        <value_meaning>Joint Photographic Experts Group, an industry standard lossy compression algorithm.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>JPEG Progressive</value>
-        <value_meaning>interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>MSSS Lossless</value>
-        <value_meaning>Lossless compression algorithm developed by Malin Space Science Systems.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>None</value>
-        <value_meaning>No on-board compression was used.</value_meaning>
-      </DD_Permissible_Value>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
     <name>crosstrack_summing</name>
     <version_id>1.0</version_id>
     <local_identifier>crosstrack_summing</local_identifier>
@@ -802,14 +655,16 @@
     <local_identifier>exposure_duration_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The exposure_duration_count attribute specifies the value, in raw counts, for the amount of time the
-      instrument sensor was gathering light from the scene, such as between
-      opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken 
-      directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts versus time,
-      and the translation of exposure_duration_count to exposure_duration will differ by mission. The attribute can be specified in the context of both 
-      Imaging_Instrument_State (actual value) and Commanded_Parameters (commanded value). Both commanded and actual because it's possible for
-      the actual to not match the commanded. For example the exposure might fault out early, or there might be a
-      deadband (for example, pointing backlash) where changes in the input do not actually affect the output.</definition>
+    <definition>The exposure_duration_count attribute specifies
+      the value, in raw counts, for the amount of time the instrument
+      sensor was gathering light from the scene, such as between
+      opening and closing of a shutter, or between flushing and
+      readout of a CCD. This is the raw count either commanded or
+      taken directly from telemetry as reported by the spacecraft.
+      This attribute is the same as the exposure_duration but in DN
+      counts instead of time, and the translation of
+      exposure_duration_count to exposure_duration will differ by
+      mission.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -882,9 +737,8 @@
     <local_identifier>filter_name</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The filter_name attribute provides the name, described in the mission documentation, of the instrument filter
-      through which an image or measurement was acquired or which is associated with a given
-      instrument mode.</definition>
+    <definition>The filter_name attribute provides the name, described in the mission documentation, 
+      of the instrument filter through which an image or measurement was acquired.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -1403,110 +1257,161 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>onboard_B_b</name>
+    <name>onboard_compression_class</name>
     <version_id>1.0</version_id>
-    <local_identifier>onboard_B_b</local_identifier>
+    <local_identifier>onboard_compression_class</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the B pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied R and G pixel values to produce the output Blue value.</definition>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The onboard_compression_class attribute
+      identifies the type of on-board compression used for data
+      storage and transmission. Note that the onboard_compression_type 
+      identifies the specific compression algorithm used (for example, ICER), 
+      whereas the onboard_compression_class gives a simple indicator of the type of 
+      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Lossless</value>
+        <value_meaning>TBD</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Lossy</value>
+        <value_meaning>TBD</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Uncompressed</value>
+        <value_meaning>TBD</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_compression_mode</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_compression_mode</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The onboard_compression_mode attribute identifies the method used for on-board
+      compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to 
+      the full name captured by the onboard_compression_type attribute.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>onboard_B_g</name>
+    <name>onboard_compression_quality</name>
     <version_id>1.0</version_id>
-    <local_identifier>onboard_B_g</local_identifier>
+    <local_identifier>onboard_compression_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the G pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied R and B pixel values to produce the output Blue value.</definition>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition> The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to
+      1.0. Losslessly compressed or uncompressed data have a value of 1.0. 
+      Other values are assigned in a manner specific to the compression mode,
+      but with the property that a higher value means better quality.
+      Although the values are not directly comparable across compression
+      types, this facilitates comparison of compression quality across images
+      independent of compression mode.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <maximum_value>1.0</maximum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>onboard_B_r</name>
+    <name>onboard_compression_rate</name>
     <version_id>1.0</version_id>
-    <local_identifier>onboard_B_r</local_identifier>
+    <local_identifier>onboard_compression_rate</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition> The onboard_compression_rate attribute provides the average number of bits needed
+      to represent a pixel for an on-board compressed image. </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_compression_ratio</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_compression_ratio</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the
+      original uncompressed data object to its compressed form (original size / compressed size). </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0.0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_compression_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_compression_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition> The onboard_compression_type attribute identifies the type of on-board
+      compression used for data storage and transmission. Valid Values: 'ICER', 
+      'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <minimum_characters>1</minimum_characters>
+      <maximum_characters>255</maximum_characters>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>ICER</value>
+        <value_meaning>ICER Adaptive Variable-Length Coding (ICER)</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>ICT</value>
+        <value_meaning>Integer Cosine Transform</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>LOCO</value>
+        <value_meaning>Low-Complexity Lossless Compression</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>JPEG</value>
+        <value_meaning>Joint Photographic Experts Group, an industry standard lossy compression algorithm.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>JPEG Progressive</value>
+        <value_meaning>interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>MSSS Lossless</value>
+        <value_meaning>Lossless compression algorithm developed by Malin Space Science Systems.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>No on-board compression was used.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_R_r</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_R_r</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the factor that has been multiplied by the R pixel value  
       after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied G and B pixel values to produce the output Blue value.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_G_b</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_G_b</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the B pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied R and G pixel values to produce the output Green value.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_G_g</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_G_g</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the G pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied R and B pixel values to produce the output Green value.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_G_r</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_G_r</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the R pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied G and B pixel values to produce the output Green value.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>onboard_R_b</name>
-    <version_id>1.0</version_id>
-    <local_identifier>onboard_R_b</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>Specifies the factor that has been multiplied by the B pixel value  
-      after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied R and G pixel values to produce the output Red value.</definition>
+      multiplied G and B pixel values to produce the output Red value.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1531,14 +1436,110 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>onboard_R_r</name>
+    <name>onboard_R_b</name>
     <version_id>1.0</version_id>
-    <local_identifier>onboard_R_r</local_identifier>
+    <local_identifier>onboard_R_b</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the B pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied R and G pixel values to produce the output Red value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_B_r</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_B_r</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the factor that has been multiplied by the R pixel value  
       after de-Bayering (demosaicking) takes place. This value is summed with the 
-      multiplied G and B pixel values to produce the output Red value.</definition>
+      multiplied G and B pixel values to produce the output Blue value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_B_g</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_B_g</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the G pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied R and B pixel values to produce the output Blue value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>  
+  
+  <DD_Attribute>
+    <name>onboard_B_b</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_B_b</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the B pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied R and G pixel values to produce the output Blue value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_G_r</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_G_r</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the R pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied G and B pixel values to produce the output Green value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>onboard_G_g</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_G_g</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the G pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied R and B pixel values to produce the output Green value.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>onboard_G_b</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_G_b</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>Specifies the factor that has been multiplied by the B pixel value  
+      after de-Bayering (demosaicking) takes place. This value is summed with the 
+      multiplied R and G pixel values to produce the output Green value.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2263,16 +2264,10 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color</identifier_reference>
+          <identifier_reference>Color_Processing</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>Onboard_Compression</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Detector</identifier_reference>
@@ -2321,6 +2316,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Radiometric_Correction</identifier_reference>
@@ -2447,11 +2448,11 @@
   
   <!-- Class: Color -->
   <DD_Class>
-    <name>Color</name>
+    <name>Color_Processing</name>
     <version_id>1.0</version_id>
-    <local_identifier>Color</local_identifier>
+    <local_identifier>Color_Processing</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Color class contains parameters describing color correction 
+    <definition>The Color_Processing class contains parameters describing color correction 
       or processing and how the image is represented in color.</definition>
     <DD_Association>
       <identifier_reference>color_space</identifier_reference>
@@ -2520,16 +2521,10 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Color</identifier_reference>
+          <identifier_reference>Color_Processing</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>Onboard_Compression</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Detector</identifier_reference>
@@ -2578,6 +2573,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Radiometric_Correction</identifier_reference>
@@ -2731,11 +2732,11 @@
       <version_id>1.0</version_id>
       <local_identifier>Data_Processing</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Data_Processing class specifies describes details regarding
-          the calibration and/or processing performed on the data product. This class can be used to describe various 
-          data corrections, such as antiblooming, bad pixel replacement, blemish protection, dark current correction, or
-          shutter correction. This can be specified multiple times in order to detail numerous corrections, and should be used
-          to designate PDS3-like flag attributes, such as dark_current_correction_flag and flat_field_correction_flag.
+      <definition>The Data_Processing class contains attributes describing how processing and/or calibration
+          was performed on a data product. It is not intended to be used on its own; rather it is intended 
+          to be extended by classes specific to a particular type of processing, such as Shutter_Subtraction, 
+          Flat_Field_Correction, Companding, etc. The attributes of this class thus become attributes of
+          the extension class.
       </definition>
       <DD_Association>
           <identifier_reference>active_flag</identifier_reference>
@@ -2763,11 +2764,15 @@
       <version_id>1.0</version_id>
       <local_identifier>Data_Processing_File</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-    <definition>The Data_Processing_File class specifies a file containing calibration
-      data that was applied to the science data as part of a Data Correction.
-      If more than one file applies to a given Data_Correction, the
-      name/id/sequence_number identifies the type of file.</definition>
-    <DD_Association>
+      <definition>The Data_Processing_File class contain attributes which identify a file
+        containing calibration data that was applied to the science data. It is not 
+        intended to be used on its own; rather it is intended to be extended by classes 
+        specific to a particular type of file, such as Flat_Field_File. Note that the "name" 
+        attribute is the name of the file; this attribute should only be used if the file 
+        is either not included in an archive, or if the  delivery status is unknown by 
+        the data provider. The External_Reference or Internal_Reference class should be used 
+        instead of name if at all possible.</definition>
+      <DD_Association>
           <identifier_reference>pds.description</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2991,7 +2996,7 @@
       <submitter_name>Cristina De Cesare</submitter_name>
       <definition>The Device_Parameters class identifies where a measurement was made. It may refer
       to an individual imaging instrument, imaging instrument device, or some defined point on the 
-      instrument or device.  The class is intended to be extended (for example, by Device_Temperature) 
+      instrument or device. The class is intended to be extended (for example, by Device_Temperature) 
       to add the associated measurement rather than being used directly.</definition>
       <DD_Association>
           <identifier_reference>device_name</identifier_reference>
