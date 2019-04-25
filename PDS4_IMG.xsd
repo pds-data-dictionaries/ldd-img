@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Thu Apr 18 15:57:44 PDT 2019 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Thu Apr 25 08:51:46 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -71,15 +71,14 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Autoexposure_Parameters">
+  <xs:complexType name="Autoexposure">
     <xs:annotation>
-      <xs:documentation>The Autoexposure_Parameters class contains
-        attributes used to identify or describe the histogram
-        thresholding algorithm and applicable attributes required for
-        those algorithms. The input parameters for the algorithm can be
-        specified using the Algorithm_Parameter class or via a
-        Local_Internal_Reference to a mission-specific parameter
-        definition.</xs:documentation>
+      <xs:documentation>The Autoexposure class contains attributes used
+        to identify or describe the histogram thresholding algorithm and
+        applicable attributes required for those algorithms. The input
+        parameters for the algorithm can be specified using the
+        Algorithm_Parameter class or via a Local_Internal_Reference to a
+        mission-specific parameter definition.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="autoexposure_algorithm_name" type="img:autoexposure_algorithm_name" minOccurs="1" maxOccurs="1"> </xs:element>
@@ -87,93 +86,117 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Color_Filter_Array_Parameters">
+  <xs:complexType name="Color">
     <xs:annotation>
-      <xs:documentation>The Color_Filter_Array_Parameters class
-        describes whether or not an image was acquired using a Color
-        Filter Array (CFA) and if so, whether and how the CFA pattern
-        was removed. A CFA is a method for making color images using one
-        exposure on a single sensor plane, where microfilters of
-        different wavelengths are put in front of pixels in a specific
-        pattern. The most common pattern is the Bayer pattern, which has
-        a red, blue, and two green pixels in every 2x2 pixel square.
-        Although generally used for RGB color, CFA filters can be of any
-        number and wavelength (see
-        color_filter_array_type).</xs:documentation>
+      <xs:documentation>The Color class contains parameters describing
+        color correction or processing and how the image is represented
+        in color.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="color_filter_array_type" type="img:color_filter_array_type" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="color_filter_array_state" type="img:color_filter_array_state" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="color_filter_array_venue" type="img:color_filter_array_venue" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="bayer_algorithm" type="img:bayer_algorithm" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:color_filter_array_type = ('Bayer RGGB')"/> -->
-    <!-- <xs:assert test="img:color_filter_array_state = ('Decoded', 'Encoded', 'No CFA')"/> -->
-    <!-- <xs:assert test="img:color_filter_array_venue = ('Ground', 'None', 'Onboard')"/> -->
-    <!-- <xs:assert test="img:bayer_algorithm = ('Averaged', 'Bilinear', 'Blue Averaged', 'Blue Bilinear', 'Green Averaged', 'Green Bilinear', 'Identity', 'Malvar', 'None', 'Panchromatic', 'Raw Bayer', 'Red Averaged', 'Red Bilinear', 'Zhang-Wu')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="color_space" type="img:color_space" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="color_component" type="img:color_component" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="illuminant" type="img:illuminant" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="encoded_display_gamma" type="img:encoded_display_gamma" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="Onboard_Responsivity" type="img:Onboard_Responsivity" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="Onboard_Color_Matrix" type="img:Onboard_Color_Matrix" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="Color_Parameters">
+  <xs:complexType name="Color_Filter_Array">
     <xs:annotation>
-      <xs:documentation>The Color_Parameters class contains parameters
-        describing color correction or processing and how the image is
-        represented in color.</xs:documentation>
+      <xs:documentation>The Color_Filter_Array class describes whether
+        or not an image was acquired using a Color Filter Array (CFA)
+        and if so, whether and how the CFA pattern was removed. A CFA is
+        a method for making color images using one exposure on a single
+        sensor plane, where microfilters of different wavelengths are
+        put in front of pixels in a specific pattern. The most common
+        pattern is the Bayer pattern, which has a red, blue, and two
+        green pixels in every 2x2 pixel square. Although generally used
+        for RGB color, CFA filters can be of any number and wavelength
+        (see color_filter_array_type).</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="color_space" type="img:color_space" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="color_component" type="img:color_component" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="illuminant" type="img:illuminant" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="encoded_display_gamma" type="img:encoded_display_gamma" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Onboard_Responsivity" type="img:Onboard_Responsivity" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Onboard_Color_Matrix" type="img:Onboard_Color_Matrix" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="color_filter_array_type" type="img:color_filter_array_type" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="color_filter_array_state" type="img:color_filter_array_state" minOccurs="1" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+        <!-- Begin assert statements for schematron - Enumerated Values -->
+        <!-- <xs:assert test="img:color_filter_array_type = ('Bayer RGGB')"/> -->
+        <!-- <xs:assert test="img:color_filter_array_state = ('Decoded', 'Encoded', 'No CFA')"/> -->
+        <!-- End assert statements for schematron - Enumerated Values -->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Commanded_Parameters">
     <xs:annotation>
-      <xs:documentation>The Command_Parameters class contains attributes
-        used to identify or describe the commands sent to a spacecraft
-        to perform one or more actions resulting in the acquisition of
-        the current data product.</xs:documentation>
+      <xs:documentation>The Commanded_Parameters class contains
+        attributes used to identify or describe the commands sent to a
+        spacecraft to perform one or more actions resulting in the
+        acquisition of the current data product. These are distinct from
+        similar values in the root Imaging class which indicate the
+        state of the image as acquired.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Onboard_Compression_Parameters" type="img:Onboard_Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Focus_Parameters" type="img:Focus_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Focus_Stack_Parameters" type="img:Focus_Stack_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color" type="img:Color" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Exposure" type="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Filter" type="img:Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Flat_Field_Correction" type="img:Flat_Field_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Focus" type="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Subframe" type="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Companding_Parameters">
+  <xs:complexType name="Companding">
     <xs:annotation>
-      <xs:documentation> The Companding_Parameters class describes
-        whether or not data is or has had its bit depth reduced (for
-        example conversion from 12 to 8 bits via a lookup table or bit
-        scaling), the venue where it occurred (Software or Hardware),
-        and the method used to complete the
-        companding.</xs:documentation>
+      <xs:documentation> The Companding class describes whether or not
+        data is or has had its bit depth reduced (for example conversion
+        from 12 to 8 bits via a lookup table or bit scaling), the venue
+        where it occurred (Software or Hardware), and the method used to
+        complete the companding. The processing_algorithm attribute
+        specifies how data was companded. Generally this will either be
+        via a lookup table (such as a square root encoding), or by
+        shifting bits to preserve the high order bits and discard the
+        low order bits. The value of this keyword is mission specific
+        but there are recommended values that should apply across
+        missions when possible: NONE - no scaling. LUTn - use the
+        numbered lookup table. Lookup tables are defined in the mission
+        SIS. It is preferred for "n" to be a number but it could be a
+        name, for example LUT_MMM_3 to indicate LUT 3 for the MMM
+        instruments (on MSL). MSB_BITn - Shift to make bit "n" the most
+        significant. Bits start numbering at 0 so MSB_BIT7 means no
+        shift for a 12->8 bit companding, while MSB_BIT11 means to shift
+        right 4 bits for a 12->8 bit companding. AUTOSHIFT - Data should
+        be shifted to preserve the highest value. This value should only
+        appear in a command echo; one of the MSB_BITn values should be
+        used in downlinked data to specify what the actual shift
+        was.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="companding_state" type="img:companding_state" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="companding_venue" type="img:companding_venue" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="companding_method" type="img:companding_method" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:companding_state = ('Companded', 'Expanded', 'None')"/> -->
-    <!-- <xs:assert test="img:companding_venue = ('Hardware', 'None', 'Software')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="companding_state" type="img:companding_state" minOccurs="1" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+        <!-- Begin assert statements for schematron - Enumerated Values -->
+        <!-- <xs:assert test="img:companding_state = ('Companded', 'Expanded', 'None')"/> -->
+        <!-- End assert statements for schematron - Enumerated Values -->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Correction_Parameter">
@@ -199,9 +222,9 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="Data_Correction">
+  <xs:complexType name="Data_Processing">
     <xs:annotation>
-      <xs:documentation>The Data_Correction class specifies describes
+      <xs:documentation>The Data_Processing class specifies describes
         details regarding the calibration and/or processing performed on
         the data product. This class can be used to describe various
         data corrections, such as antiblooming, bad pixel replacement,
@@ -212,57 +235,41 @@
         and flat_field_correction_flag. </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="active_flag" type="img:active_flag" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="data_correction_type" type="img:data_correction_type" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="data_correction_venue" type="img:data_correction_venue" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Data_Correction_File" type="img:Data_Correction_File" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Flat_Field_Correction_Parameters" type="img:Flat_Field_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Radiometric_Correction_Parameters" type="img:Radiometric_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Shutter_Subtraction_Parameters" type="img:Shutter_Subtraction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="active_flag" type="img:active_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="processing_venue" type="img:processing_venue" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="processing_algorithm" type="img:processing_algorithm" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:data_correction_type = ('Antiblooming', 'Bad Pixel', 'Blemish Protection', 'Brightness', 'Dark Current', 'Flat Field', 'Inverse LUT', 'Light Flood', 'Radiometric', 'Responsivity', 'Shutter Subtraction')"/> -->
-    <!-- <xs:assert test="img:data_correction_venue = ('Ground', 'Onboard')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
-  <xs:complexType name="Data_Correction_File">
+  <xs:complexType name="Data_Processing_File">
     <xs:annotation>
-      <xs:documentation>The Data_Correction_File class specifies a file
+      <xs:documentation>The Data_Processing_File class specifies a file
         containing calibration data that was applied to the science data
         as part of a Data Correction. If more than one file applies to a
         given Data_Correction, the name/id/sequence_number identifies
         the type of file.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="1" maxOccurs="1">
         <xs:element ref="pds:External_Reference"> </xs:element>
         <xs:element ref="pds:Internal_Reference"> </xs:element>
       </xs:choice>
+      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Data_Correction_Parameters">
+  <xs:complexType name="Detector">
     <xs:annotation>
-      <xs:documentation> The Data_Correction_Parameters class describes
-        data processing steps applied to data, either on-board a
-        spacecraft or after receipt of the data on the ground, to remove
-        artifacts introduced into the data by the instrument. As a child
-        of the Command_Parameters class, these attribute values are
-        those that were commanded to the spacecraft.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Data_Correction" type="img:Data_Correction" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Detector_Parameters">
-    <xs:annotation>
-      <xs:documentation>The Detector_Parameters class contains
-        attributes describing the state of the instrument
-        detector.</xs:documentation>
+      <xs:documentation>The Detectorclass contains attributes describing
+        the state of the instrument detector. These are values directly
+        read from the detector and do not necessarily reflect the state
+        of the image after onboard processing. For example, the entire
+        image may be read into memory and then subframed in software, in
+        which case the subframe attributes in this class reflect the
+        entire image (as read from the detector), whereas those in the
+        Subframe class represent the final subframe
+        results.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="first_line" type="img:first_line" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -275,8 +282,6 @@
       <xs:element name="gain_mode_id" type="img:gain_mode_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="gain_number" type="img:gain_number" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="analog_offset" type="img:analog_offset" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="line_fov" type="img:line_fov" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -321,8 +326,8 @@
         imaging device (such as a filter wheel, focus motor, or zoom
         motor). This information should typically be reported in a more
         specific and useable form in other classes, such as a filter
-        number or wavelength in the Filter_Parameters class or a focus
-        distnace in the Focus_Parameters class.</xs:documentation>
+        number or wavelength in the Filter class or a focus distnace in
+        the Focus class.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
@@ -392,35 +397,37 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Downsampling_Parameters">
+  <xs:complexType name="Downsampling">
     <xs:annotation>
-      <xs:documentation> The Downsampling_Parameters class describes
-        whether or not downsampling occurred, the venue where it
-        occurrected (Software or Hardware), the method used to
-        downsample, and the pixel averaging dimensions. A downsampled
-        image is a smaller version of the image, resulting in reduced
-        resolution of the same coverage area</xs:documentation>
+      <xs:documentation> The Downsampling class describes whether or not
+        downsampling occurred, the venue where it occurrected (Software
+        or Hardware), the method used to downsample, and the pixel
+        averaging dimensions. A downsampled image is a smaller version
+        of the image, resulting in reduced resolution of the same
+        coverage area. The processing_algorithm attribute specifies the
+        pixel resolution downsample method used. This varies by mission,
+        but examples from MSL include: 'Mean' - Downsampling done in
+        software by calculation of the mean., 'Conditional' - Use
+        hardware binning if downsampling (by mean calculation) and
+        subframe arguments are consistent.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="downsampling_flag" type="img:downsampling_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="downsampling_venue" nillable="true" type="img:downsampling_venue" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="downsampling_method" type="img:downsampling_method" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Pixel_Averaging_Dimensions" type="img:Pixel_Averaging_Dimensions" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test=")"/> -->
-    <!-- <xs:assert test="img:downsampling_venue = ('Both', 'Hardware', 'Software')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="Pixel_Averaging_Dimensions" type="img:Pixel_Averaging_Dimensions" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="Exposure_Parameters">
+  <xs:complexType name="Exposure">
     <xs:annotation>
-      <xs:documentation>The Exposure_Parameters class contains
-        attributes identifying the image instrument exposure
-        configuration and image exposure values. As a child of the
+      <xs:documentation>The Exposure class contains attributes
+        identifying the image instrument exposure configuration and
+        image exposure values. As a child of the
         Image_Product_Information class, these attribute values identify
         the actual exposure values when the image was taken. As a child
-        of the Command_Parameters class, these attribute values are
+        of the Commanded_Parameters class, these attribute values are
         those that were commanded to the spacecraft at the time the
         image was taken.</xs:documentation>
     </xs:annotation>
@@ -429,18 +436,18 @@
       <xs:element name="exposure_duration" type="img:exposure_duration" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="exposure_duration_count" type="img:exposure_duration_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="exposure_type" type="img:exposure_type" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Autoexposure_Parameters" type="img:Autoexposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Autoexposure" type="img:Autoexposure" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:exposure_type = ('Auto', 'Manual', 'Test')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
-  <xs:complexType name="Filter_Parameters">
+  <xs:complexType name="Filter">
     <xs:annotation>
-      <xs:documentation>The Filter_Parameters class describes the filter
-        associated with a particular observation. The filter may be
-        identified by name, identifier, number or some combination of
+      <xs:documentation>The Filter class describes the filter associated
+        with a particular observation. The filter may be identified by
+        name, identifier, number or some combination of
         these.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -453,31 +460,57 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Flat_Field_Correction_Parameters">
+  <xs:complexType name="Flat_Field_Correction">
     <xs:annotation>
-      <xs:documentation> The Flat_Field_Correction_Parameters class
-        specifies the onboard flat-field coefficients/parameters used in
-        the algorithm to remove the flat field
-        signature.</xs:documentation>
+      <xs:documentation> The Flat_Field_Correction class specifies the
+        onboard flat-field coefficients/parameters used in the algorithm
+        to remove the flat field signature.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="flat_field_algorithm" type="img:flat_field_algorithm" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Correction_Parameter" type="img:Correction_Parameter" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="Radial_Flat_Field_Function" type="img:Radial_Flat_Field_Function" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="Flat_Field_File" type="img:Flat_Field_File" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="Focus_Parameters">
+  <xs:complexType name="Flat_Field_File">
     <xs:annotation>
-      <xs:documentation>The Focus_Parameters class contains attributes
-        that describe the focus or autofocus parameters for an
-        observation. As a child of Commanded_Parameters, these indicate
-        the focus settings used to command the instrument. Otherwise,
-        they indicate the actual focus used by the
+      <xs:documentation>The Flat_Field_File class specifies the image
+        used for flat field correction. The image is divided by this
+        flat field image in order to apply the flat field correction
+        (which is the opposite of Radial_Flat_Field_Function).
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:restriction base="img:Data_Processing_File">
+        <xs:sequence>
+          <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element ref="pds:External_Reference"> </xs:element>
+            <xs:element ref="pds:Internal_Reference"> </xs:element>
+          </xs:choice>
+          <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Focus">
+    <xs:annotation>
+      <xs:documentation>The Focus class contains attributes that
+        describe the focus or autofocus parameters for an observation.
+        As a child of Commanded_Parameters, these indicate the focus
+        settings used to command the instrument. Otherwise, they
+        indicate the actual focus used by the
         observation.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="focus_mode" nillable="true" type="img:focus_mode" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="focus_position" type="img:focus_position" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_position_count" nillable="true" type="img:focus_position_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="autofocus_step_size" nillable="true" type="img:autofocus_step_size" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="autofocus_step_count" nillable="true" type="img:autofocus_step_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="minimum_focus_distance" nillable="true" type="img:minimum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -489,13 +522,13 @@
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
-  <xs:complexType name="Focus_Stack_Parameters">
+  <xs:complexType name="Focus_Stack">
     <xs:annotation>
-      <xs:documentation>The Focus_Stack_Parameters class contains
-        attributes that describe a set of images taken at different
-        focus settings, which are often merged to create a best-focus
-        image or combined to extract range information. Focus stacks are
-        also sometimes called ZStacks.</xs:documentation>
+      <xs:documentation>The Focus_Stack class contains attributes that
+        describe a set of images taken at different focus settings,
+        which are often merged to create a best-focus image or combined
+        to extract range information. Focus stacks are also sometimes
+        called ZStacks.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="video_flag" nillable="true" type="img:video_flag" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -506,13 +539,13 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Frame_Parameters">
+  <xs:complexType name="Frame">
     <xs:annotation>
-      <xs:documentation>The Frame_Parameters class contains attributes
-        providing information specific to an image frame. A frame
-        consists of a sequence of measurements made over a specified
-        time interval, and may include measurements from different
-        instrument modes.</xs:documentation>
+      <xs:documentation>The Frame class contains attributes providing
+        information specific to an image frame. A frame consists of a
+        sequence of measurements made over a specified time interval,
+        and may include measurements from different instrument
+        modes.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="frame_id" type="img:frame_id" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -574,31 +607,32 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Color_Filter_Array_Parameters" type="img:Color_Filter_Array_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Color_Parameters" type="img:Color_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Onboard_Compression_Parameters" type="img:Onboard_Compression_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Data_Correction_Parameters" type="img:Data_Correction_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Detector_Parameters" type="img:Detector_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Downsampling_Parameters" type="img:Downsampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Exposure_Parameters" type="img:Exposure_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Filter_Parameters" type="img:Filter_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Focus_Parameters" type="img:Focus_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Focus_Stack_Parameters" type="img:Focus_Stack_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Frame_Parameters" type="img:Frame_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Sampling_Parameters" type="img:Sampling_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Subframe_Parameters" type="img:Subframe_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Video_Parameters" type="img:Video_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Instrument_State_Parameters" type="img:Instrument_State_Parameters" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Color" type="img:Color" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Exposure" type="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Filter" type="img:Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Flat_Field_Correction" type="img:Flat_Field_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Focus" type="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Subframe" type="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Instrument_State" type="img:Instrument_State" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Commanded_Parameters" type="img:Commanded_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Instrument_State_Parameters">
+  <xs:complexType name="Instrument_State">
     <xs:annotation>
-      <xs:documentation>The Instrument_State_Parameters class contains
-        classes providing the values of any dynamic physical or
-        operating characteristics of the imaging
-        instruments.</xs:documentation>
+      <xs:documentation>The Instrument_State class contains classes
+        providing the values of any dynamic physical or operating
+        characteristics of the imaging instruments.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="Device_Component_States" type="img:Device_Component_States" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -639,7 +673,7 @@
     <xs:complexContent>
       <xs:extension base="img:JPEG_Parameters">
         <xs:sequence>
-          <xs:element name="progressive_stage" type="img:progressive_stage" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="progressive_stage" type="img:progressive_stage" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
         <!-- <xs:assert test="img:color_subsampling_mode = ('4:2:2', '4:4:4', 'Grayscale')"/> -->
@@ -703,11 +737,11 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Onboard_Compression_Parameters">
+  <xs:complexType name="Onboard_Compression">
     <xs:annotation>
-      <xs:documentation> The Onboard_Compression_Parameters class
-        contains attributes describing onboard compression parameters
-        used for data storage and transmission.</xs:documentation>
+      <xs:documentation> The Onboard_Compression class contains
+        attributes describing onboard compression parameters used for
+        data storage and transmission.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="onboard_compression_class" type="img:onboard_compression_class" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -761,24 +795,53 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Radiometric_Correction_Parameters">
+  <xs:complexType name="Radial_Flat_Field_Function">
     <xs:annotation>
-      <xs:documentation> The Radiometric_Correction_Parameters class is
-        a container for the type and details of the radiometric
-        calibration performed on the product. </xs:documentation>
+      <xs:documentation>The Radial_Flat_Field_Function class pecifies
+        parameters used to generate a synthetic flat field using a
+        simple radial function of the form: r = (x-x_center)^2 +
+        (y-y_center)^2 ; flat_field(x,y) = 1 + r0 + r1*r + r2*r^2 +
+        r3*r^3 . Note that x is in the sample direction of the image,
+        and y is in the line direction. The image is multiplied by this
+        function in order to perform a flat field correction (which is
+        the opposite of Flat_Field_File). </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="radiometric_correction_type_name" type="img:radiometric_correction_type_name" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="radiance_scaling_factor" type="img:radiance_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="radiance_offset" type="img:radiance_offset" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="x_center" type="img:x_center" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="y_center" type="img:y_center" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="r0" type="img:r0" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="r1" type="img:r1" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="r2" type="img:r2" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="r3" type="img:r3" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Flat_Field_File" type="img:Flat_Field_File" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Sampling_Parameters">
+  <xs:complexType name="Radiometric_Correction">
     <xs:annotation>
-      <xs:documentation> The Sampling_Parameters class contains
-        attributes and classes related to the sampling, scaling,
-        companding, and compression or reduction in resolution of
+      <xs:documentation> The Radiometric_Correction class is a container
+        for the type and details of the radiometric calibration
+        performed on the product. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="radiance_type" type="img:radiance_type" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="radiance_zenith_scaling_factor" type="img:radiance_zenith_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_b" type="img:responsivity_b" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_pan" type="img:responsivity_pan" minOccurs="1" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Sampling">
+    <xs:annotation>
+      <xs:documentation> The Sampling class contains attributes and
+        classes related to the sampling, scaling, companding, and
+        compression or reduction in resolution of
         data.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -787,48 +850,54 @@
       <xs:element name="sample_bits" type="img:sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bit_mask" type="img:sample_bit_mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sampling_factor" type="img:sampling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Companding_Parameters" type="img:Companding_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Companding" type="img:Companding" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Shutter_Subtraction_Parameters">
+  <xs:complexType name="Shutter_Subtraction">
     <xs:annotation>
-      <xs:documentation> The Shutter_Subtraction_Parameters class
-        specifies attributes describing the removal from the image of
-        the shutter, or fixed-pattern.</xs:documentation>
+      <xs:documentation> The Shutter_Subtraction class specifies
+        attributes describing the removal from the image of the shutter,
+        or fixed-pattern.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="shutter_subtraction_mode" type="img:shutter_subtraction_mode" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="exposure_duration_threshold_count" type="img:exposure_duration_threshold_count" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:shutter_subtraction_mode = ('Conditional', 'True')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="shutter_subtraction_mode" type="img:shutter_subtraction_mode" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="exposure_duration_threshold_count" type="img:exposure_duration_threshold_count" minOccurs="1" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+        <!-- Begin assert statements for schematron - Enumerated Values -->
+        <!-- <xs:assert test="img:shutter_subtraction_mode = ('Conditional', 'True')"/> -->
+        <!-- End assert statements for schematron - Enumerated Values -->
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="Subframe_Parameters">
+  <xs:complexType name="Subframe">
     <xs:annotation>
-      <xs:documentation> The Subframe_Parameters class describes the
-        position and other optional characteristics of an image
-        subframe, relative to the original image. </xs:documentation>
+      <xs:documentation> The Subframe class describes the position and
+        other optional characteristics of an image subframe, relative to
+        the original image. </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="first_line" type="img:first_line" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="first_sample" type="img:first_sample" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="lines" type="img:lines" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="samples" type="img:samples" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="line_fov" type="img:line_fov" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="subframe_type" type="img:subframe_type" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="Video_Parameters">
+  <xs:complexType name="Video">
     <xs:annotation>
-      <xs:documentation>The Video_Parameters class contains attributes
-        related to video observations, defined as a regular time series
-        of frames. The class can be used to describe a single frame
-        within the video, or the video as a whole.</xs:documentation>
+      <xs:documentation>The Video class contains attributes related to
+        video observations, defined as a regular time series of frames.
+        The class can be used to describe a single frame within the
+        video, or the video as a whole.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="frame_count" nillable="true" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -854,9 +923,15 @@
 
   <xs:simpleType name="active_flag">
     <xs:annotation>
-      <xs:documentation> The active_flag attribute indicates whether or
-        not the data correction described by the parent class is
-        active.</xs:documentation>
+      <xs:documentation>The active_flag attribute indicates whether or
+        not the data processing described by the parent class is active.
+        In general, the presence of the parent class implies it is
+        active and thus active_flag is optional. The primary purpose for
+        active_flag is to either explicitly indicate a correction is not
+        active (for example, if it normally is but was explicitly turned
+        off), or to be able to provide parameters for historical reasons
+        that may no longer be relevant to a current correction.
+        </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
@@ -942,18 +1017,6 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:simpleType name="bayer_algorithm">
-    <xs:annotation>
-      <xs:documentation>The bayer_algorithm specifies the algorithm used
-        to remove the Bayer pattern in order to create
-        color.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="best_focus_distance_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -1035,22 +1098,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="color_filter_array_venue">
-    <xs:annotation>
-      <xs:documentation>For instruments using a Color Filter Array (CFA)
-        (such as the Bayer pattern), this attribute defines where the
-        CFA pattern was removed from the data. It is optional if there
-        is no CFA. Valid values: 'Onboard', 'Ground', 'None'. In the
-        case of instruments using the Bayer pattern, use the
-        bayer_algorithm to specify the algorithm used to remove the
-        pattern.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="color_space">
     <xs:annotation>
       <xs:documentation>Defines the color space in which this product is
@@ -1080,33 +1127,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="companding_method">
-    <xs:annotation>
-      <xs:documentation>The companding_method attribute specifies how
-        data was companded. Generally this will either be via a lookup
-        table (such as a square root encoding), or by shifting bits to
-        preserve the high order bits and discard the low order bits. The
-        value of this keyword is mission specific but there are
-        recommended values that should apply across missions when
-        possible: NONE - no scaling. LUTn - use the numbered lookup
-        table. Lookup tables are defined in the mission SIS. It is
-        preferred for "n" to be a number but it could be a name, for
-        example LUT_MMM_3 to indicate LUT 3 for the MMM instruments (on
-        MSL). MSB_BITn - Shift to make bit "n" the most significant.
-        Bits start numbering at 0 so MSB_BIT7 means no shift for a 12->8
-        bit companding, while MSB_BIT11 means to shift right 4 bits for
-        a 12->8 bit companding. AUTOSHIFT - Data should be shifted to
-        preserve the highest value. This value should only appear in a
-        command echo; one of the MSB_BITn values should be used in
-        downlinked data to specify what the actual shift
-        was.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="companding_state">
     <xs:annotation>
       <xs:documentation>The companding_state attribute specifies whether
@@ -1116,21 +1136,6 @@
         values are currently companded. Expanded - values have been
         companded but are now expanded back to original
         size.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="companding_venue">
-    <xs:annotation>
-      <xs:documentation>The companding_venue attribute specifies where
-        companding or expanding of the data was completed either onboard
-        or on the ground. Valid values: 'Hardware' - companding was done
-        by hardware, for example inside the camera. 'Software' -
-        companding was done by flight software. 'None' - data was not
-        companded</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -1172,35 +1177,6 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-
-  <xs:simpleType name="data_correction_type">
-    <xs:annotation>
-      <xs:documentation>The data_correction_type attribute specifies the
-        type of data correction to be applied using the accompanying
-        file or constants. Valid values: 'Antiblooming', 'Bad Pixel',
-        'Blemish Protection', 'Brightness', 'Dark Current', 'Flat
-        Field', 'Inverse LUT', 'Light Flood', 'Responsivity',
-        'Shutter'</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="data_correction_venue">
-    <xs:annotation>
-      <xs:documentation>The data_correction_venue attribute specifies
-        where data correction was performed. Valid values: 'Onboard' -
-        data correction was performed onboard the spacecraft. 'Ground' -
-        data correction was performed by software on the ground.
-        </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
 
   <xs:simpleType name="decomposition_stages">
     <xs:annotation>
@@ -1264,46 +1240,6 @@
       <xs:documentation>The device_name attribute supplies the formal
         name for an imaging instrument, an imaging instrument device, or
         some point on the instrument or device.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="pds:ASCII_Short_String_Collapsed">
-        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="downsampling_flag">
-    <xs:annotation>
-      <xs:documentation>The downsampling_flag attribute specifies
-        whether or not downsampling has been applied to the
-        image(s).</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Boolean">
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="downsampling_method">
-    <xs:annotation>
-      <xs:documentation>The downsampling_method attribute specifies the
-        pixel resolution downsample method used. This varies by mission,
-        but examples from MSL include: 'Mean' - Downsampling done in
-        software by calculation of the mean., 'Conditional' - Use
-        hardware binning if downsampling (by mean calculation) and
-        subframe arguments are consistent.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="downsampling_venue">
-    <xs:annotation>
-      <xs:documentation>The downsampling_venue attribute specifies where
-        downsampling was done onboard. Valid values: 'Hardware' -
-        downsampling was done by hardware, for example inside the
-        camera. 'Software' - downsampling was done by flight software.
-        'Both' - data was not companded.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="pds:ASCII_Short_String_Collapsed">
@@ -1418,12 +1354,12 @@
         counts versus time, and the translation of
         exposure_duration_count to exposure_duration will differ by
         mission. The attribute can be specified in the context of both
-        Imaging_Instrument_State_Parameters (actual value) and
-        Command_Parameters (commanded value). Both commanded and actual
-        because it's possible for the actual to not match the commanded.
-        For example the exposure might fault out early, or there might
-        be a deadband (for example, pointing backlash) where changes in
-        the input do not actually affect the output.</xs:documentation>
+        Imaging_Instrument_State (actual value) and Commanded_Parameters
+        (commanded value). Both commanded and actual because it's
+        possible for the actual to not match the commanded. For example
+        the exposure might fault out early, or there might be a deadband
+        (for example, pointing backlash) where changes in the input do
+        not actually affect the output.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -1524,17 +1460,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="flat_field_algorithm">
-    <xs:annotation>
-      <xs:documentation>The flat_field_algorithm specifies the algorithm
-        used to remove the flat field signature.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="focus_merge_blending_flag">
     <xs:annotation>
       <xs:documentation>The focus_merge_blending_flag attribute
@@ -1587,11 +1512,24 @@
         models). This will often be the focus motor
         count.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="focus_position_count">
+    <xs:annotation>
+      <xs:documentation>The focus_position_count attribute specifies a
+        commanded focus, or the initial focus position used by the
+        autofocus algorithm.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Integer">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:complexType name="focus_stack_flag">
     <xs:annotation>
@@ -1634,15 +1572,25 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="frame_interval">
-    <xs:annotation>
-<xs:documentation>The frame_interval attribute</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
+  <xs:simpleType name="frame_interval_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="frame_interval">
+    <xs:annotation>
+      <xs:documentation>The frame_interval attribute defines the time
+        between the start of successive frames in a video
+        product.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:frame_interval_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Time" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="frame_rate_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -1780,8 +1728,9 @@
   <xs:simpleType name="illuminant">
     <xs:annotation>
       <xs:documentation>Defines the illuminant that was used in order to
-        process this image. The valid values are open-ended but
-        currently used values include: None, 5000K.</xs:documentation>
+        process this image. The valid values are open-ended but examples
+        of valid values include: None, D65, 3000K,
+        5000K.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -1799,8 +1748,8 @@
   <xs:complexType name="interframe_delay">
     <xs:annotation>
       <xs:documentation> The interframe_delay attribute provides the
-        time between successive frames of an image, in
-        seconds.</xs:documentation>
+        time between the end of one frame and the beginning of the next
+        frame in a video product.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="img:interframe_delay_WO_Units">
@@ -2140,92 +2089,133 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="progressive_stage">
+  <xs:simpleType name="processing_algorithm">
     <xs:annotation>
-      <xs:documentation> The progressive_stage attribute specifies
-        TBD</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="1"/>
-     <xs:maxInclusive value="18446744073709551615"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="radiance_offset_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="radiance_offset">
-    <xs:annotation>
-      <xs:documentation>The radiance_offset attribute specifies the
-        constant value by which a stored radiance is added. Expressed as
-        an equation as follows: true_radiance_value = radiance_offset +
-        radiance_scaling_factor * stored_radiance value There are 3
-        types of radiometric corrections: Radiance-calibrated - These
-        products have been scaled to absolute radiance units using
-        either pre-flight radiometric calibration coefficients or
-        calibration coefficients derived from in-flight observations of
-        the calibration target. The units on these files are
-        (W/m^2/sr/nm). Radiance factor-calibrated - products are
-        unitless but have values in the range of 0.0 to 1.0 (for
-        example, average bright Mars soils exhibit I/F ~ 0.35 at 750 nm
-        and I/F ~ 0.05 at 410 nm). Instrumentally-calibrated - These
-        products have had no radiance scaling applied, so the units on
-        these files are "corrected" DN.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:radiance_offset_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="radiance_scaling_factor_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="radiance_scaling_factor">
-    <xs:annotation>
-      <xs:documentation>The radiance_scaling_factor specifies the
-        constant value by which a stored radiance is multiplied. NOTE:
-        Expressed as an equation: true_radiance_value = radiance_offset
-        + radiance_scaling_factor * stored_radiance value There are 3
-        types of radiometric corrections: Radiance-calibrated - These
-        products have been scaled to absolute radiance units using
-        either pre-flight radiometric calibration coefficients or
-        calibration coefficients derived from in-flight observations of
-        the calibration target. The units on these files are
-        (W/m^2/sr/nm). Radiance factor-calibrated - products are
-        unitless but have values in the range of 0.0 to 1.0 (for
-        example, average bright Mars soils exhibit I/F ~ 0.35 at 750 nm
-        and I/F ~ 0.05 at 410 nm). Instrumentally-calibrated - These
-        products have had no radiance scaling applied, so the units on
-        these files are "corrected" DN.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:radiance_scaling_factor_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="radiometric_correction_type_name">
-    <xs:annotation>
-      <xs:documentation>The radiometric_correction_type_name identifies
-        the method used for radiometric correction.</xs:documentation>
+      <xs:documentation>The processing_algorithm attribute specifies the
+        name of the algorithm used to perform the processing specified
+        by the enclosing class. Algorithm names should be defined in the
+        project documentation, and/or in the enclosing class definition.
+        </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="processing_venue">
+    <xs:annotation>
+      <xs:documentation>The processing_venue attribute specifies where
+        the processing described by the parent class was performed.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="progressive_stage">
+    <xs:annotation>
+      <xs:documentation>In cases where each pass of a progressive JPEG
+        is downlinked separately, the progressive_stage attribute
+        indicates the highest pass number contained in this image, which
+        indicates the available level of detail.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="r0">
+    <xs:annotation>
+      <xs:documentation>The r0 attribute specifies the 0th-order
+        polynomial coefficient of the function used to describe an
+        algorithmic flat field. See Radial_Flat_Field_Function for the
+        formula.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="r1">
+    <xs:annotation>
+      <xs:documentation>The r1 attribute specifies the 1st-order
+        polynomial coefficient of the function used to describe an
+        algorithmic flat field. See Radial_Flat_Field_Function for the
+        formula.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="r2">
+    <xs:annotation>
+      <xs:documentation>The r2 attribute specifies the 2nd-order
+        polynomial coefficient of the function used to describe an
+        algorithmic flat field. See Radial_Flat_Field_Function for the
+        formula.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="r3">
+    <xs:annotation>
+      <xs:documentation>The r3 attribute specifies specifies the
+        3rd-order polynomial coefficient of the function used to
+        describe an algorithmic flat field. See
+        Radial_Flat_Field_Function for the formula.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="radiance_type">
+    <xs:annotation>
+      <xs:documentation>The radiance_type defines the specific type of
+        radiance measurement. Possible values include "Radiance",
+        "Spectral Radiance", "Scaled Spectral Radiance". Note: There are
+        many more possible values, and this definition can be updated to
+        include more examples over time. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="radiance_zenith_scaling_factor_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="radiance_zenith_scaling_factor">
+    <xs:annotation>
+      <xs:documentation>Defines the scaling factor used for Scaled
+        Radiance or Scaled Spectral Radiance. Scaled radiance is created
+        by dividing radiance by this factor, which scales the radiance
+        to what it would be if the sun were at the zenith with a clear
+        atmosphere.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:radiance_zenith_scaling_factor_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="readout_rate_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -2246,6 +2236,18 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="responsivity_b">
+    <xs:annotation>
+      <xs:documentation>Specifies the conversion factor between DN and
+        radiance units that has been applied to the blue channel of an
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="responsivity_factor_b">
     <xs:annotation>
@@ -2276,6 +2278,42 @@
       <xs:documentation>Specifies the factor that has been applied to
         the R cell of the Bayer pattern, before de-Bayering
         (demosaicking) takes place.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="responsivity_g">
+    <xs:annotation>
+      <xs:documentation>Specifies the conversion factor between DN and
+        radiance units that has been applied to the green channel of an
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="responsivity_pan">
+    <xs:annotation>
+      <xs:documentation>Specifies the conversion factor between DN and
+        radiance units that has been applied to a panchromatic
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="responsivity_r">
+    <xs:annotation>
+      <xs:documentation>Specifies the conversion factor between DN and
+        radiance units that has been applied to the red channel of an
+        image.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -2604,6 +2642,48 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="x_center_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="x_center">
+    <xs:annotation>
+      <xs:documentation>The x_center attribute specifies the sample
+        coordinate of the center of the function used to describe an
+        algorithmic flat field. See Radial_Flat_Field_Function for the
+        formula.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:x_center_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="y_center_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="y_center">
+    <xs:annotation>
+      <xs:documentation>The y_center attribute specifies specifies the
+        line coordinate of the center of the function used to describe
+        an algorithmic flat field. See Radial_Flat_Field_Function for
+        the formula.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:y_center_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
  
   <xs:annotation>
     <xs:documentation>
@@ -2612,7 +2692,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.11.0.0" ,
-      "Date": "Thu Apr 18 15:57:44 PDT 2019" ,
+      "Date": "Thu Apr 25 08:51:46 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

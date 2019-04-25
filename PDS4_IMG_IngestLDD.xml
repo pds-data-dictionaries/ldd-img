@@ -807,7 +807,7 @@
       opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken 
       directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts versus time,
       and the translation of exposure_duration_count to exposure_duration will differ by mission. The attribute can be specified in the context of both 
-      Imaging_Instrument_State_Parameters (actual value) and Command_Parameters (commanded value). Both commanded and actual because it's possible for
+      Imaging_Instrument_State (actual value) and Commanded_Parameters (commanded value). Both commanded and actual because it's possible for
       the actual to not match the commanded. For example the exposure might fault out early, or there might be a
       deadband (for example, pointing backlash) where changes in the input do not actually affect the output.</definition>
     <DD_Value_Domain>
@@ -2269,13 +2269,13 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Onboard_Compression_Parameters</identifier_reference>
+          <identifier_reference>Onboard_Compression</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Detector_Parameters</identifier_reference>
+          <identifier_reference>Detector</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2287,13 +2287,13 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Exposure_Parameters</identifier_reference>
+          <identifier_reference>Exposure</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Filter_Parameters</identifier_reference>
+          <identifier_reference>Filter</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2305,19 +2305,19 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Focus_Parameters</identifier_reference>
+          <identifier_reference>Focus</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Focus_Stack_Parameters</identifier_reference>
+          <identifier_reference>Focus_Stack</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Frame_Parameters</identifier_reference>
+          <identifier_reference>Frame</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2329,7 +2329,7 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Sampling_Parameters</identifier_reference>
+          <identifier_reference>Sampling</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2341,19 +2341,19 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Subframe_Parameters</identifier_reference>
+          <identifier_reference>Subframe</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Video_Parameters</identifier_reference>
+          <identifier_reference>Video</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Instrument_State_Parameters</identifier_reference>
+          <identifier_reference>Instrument_State</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2387,13 +2387,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Autoexposure_Parameters -->
+  <!-- Class: Autoexposure -->
   <DD_Class>
-      <name>Autoexposure_Parameters</name>
+      <name>Autoexposure</name>
       <version_id>1.0</version_id>
-      <local_identifier>Autoexposure_Parameters</local_identifier>
+      <local_identifier>Autoexposure</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Autoexposure_Parameters class contains attributes used to identify or describe the histogram
+      <definition>The Autoexposure class contains attributes used to identify or describe the histogram
           thresholding algorithm and applicable attributes required for those algorithms. The input parameters for the algorithm can be specified 
           using the Algorithm_Parameter class or via a Local_Internal_Reference to a mission-specific parameter definition.</definition>
       <DD_Association>
@@ -2503,7 +2503,7 @@
       <version_id>1.0</version_id>
       <local_identifier>Commanded_Parameters</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
-      <definition>The Command_Parameters class contains attributes used to identify or describe the
+      <definition>The Commanded_Parameters class contains attributes used to identify or describe the
           commands sent to a spacecraft to perform one or more actions resulting in the acquisition of
           the current data product. These are distinct from similar values in the root Imaging class
           which indicate the state of the image as acquired.</definition>
@@ -2526,13 +2526,13 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Onboard_Compression_Parameters</identifier_reference>
+          <identifier_reference>Onboard_Compression</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Detector_Parameters</identifier_reference>
+          <identifier_reference>Detector</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2544,13 +2544,13 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Exposure_Parameters</identifier_reference>
+          <identifier_reference>Exposure</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Filter_Parameters</identifier_reference>
+          <identifier_reference>Filter</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2562,19 +2562,19 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Focus_Parameters</identifier_reference>
+          <identifier_reference>Focus</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Focus_Stack_Parameters</identifier_reference>
+          <identifier_reference>Focus_Stack</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Frame_Parameters</identifier_reference>
+          <identifier_reference>Frame</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2586,7 +2586,7 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Sampling_Parameters</identifier_reference>
+          <identifier_reference>Sampling</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2598,7 +2598,7 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Subframe_Parameters</identifier_reference>
+          <identifier_reference>Subframe</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -2609,7 +2609,7 @@
   <DD_Class>
       <name>Companding</name>
       <version_id>1.0</version_id>
-      <local_identifier>Companding_Parameters</local_identifier>
+      <local_identifier>Companding</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition> The Companding class describes whether or not data is or has had its bit
           depth reduced (for example conversion from 12 to 8 bits via a lookup
@@ -2642,13 +2642,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Onboard_Compression_Parameters class definition -->
+  <!-- Class: Onboard_Compression class definition -->
   <DD_Class>
-      <name>Onboard_Compression_Parameters</name>
+      <name>Onboard_Compression</name>
       <version_id>1.0</version_id>
-      <local_identifier>Onboard_Compression_Parameters</local_identifier>
+      <local_identifier>Onboard_Compression</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition> The Onboard_Compression_Parameters class contains attributes describing onboard
+      <definition> The Onboard_Compression class contains attributes describing onboard
           compression parameters used for data storage and transmission.</definition>
       <DD_Association>
           <identifier_reference>onboard_compression_class</identifier_reference>
@@ -2789,11 +2789,11 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Detector_Parameters -->
+  <!-- Class: Detector -->
   <DD_Class>
-      <name>Detector_Parameters</name>
+      <name>Detector</name>
       <version_id>1.0</version_id>
-      <local_identifier>Detector_Parameters</local_identifier>
+      <local_identifier>Detector</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
       <definition>The Detectorclass contains attributes describing the state of the
         instrument detector. These are values directly read from the detector
@@ -2968,7 +2968,7 @@
         actuator on an imaging instrument or other imaging device (such as a filter wheel, 
         focus motor, or zoom motor). This information should typically be reported in
         a more specific and useable form in other classes, such as a filter number or wavelength
-        in the Filter_Parameters class or a focus distnace in the Focus_Parameters class.</definition>
+        in the Filter class or a focus distnace in the Focus class.</definition>
       <DD_Association>
           <identifier_reference>Device_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -3127,15 +3127,15 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Exposure_Parameters -->
+  <!-- Class: Exposure -->
   <DD_Class>
-      <name>Exposure_Parameters</name>
+      <name>Exposure</name>
       <version_id>1.0</version_id>
-      <local_identifier>Exposure_Parameters</local_identifier>
+      <local_identifier>Exposure</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Exposure_Parameters class contains attributes identifying the image instrument
+      <definition>The Exposure class contains attributes identifying the image instrument
           exposure configuration and image exposure values. As a child of the Image_Product_Information class, these attribute values
-          identify the actual exposure values when the image was taken. As a child of the Command_Parameters class, these attribute values
+          identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values
           are those that were commanded to the spacecraft at the time the image was taken.</definition>
       <DD_Association>
           <identifier_reference>exposure_count</identifier_reference>
@@ -3162,20 +3162,20 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-        <identifier_reference>Autoexposure_Parameters</identifier_reference>
+        <identifier_reference>Autoexposure</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Filter_Parameters  -->
+  <!-- Class: Filter  -->
   <DD_Class>
-      <name>Filter_Parameters</name>
+      <name>Filter</name>
       <version_id>1.0</version_id>
-      <local_identifier>Filter_Parameters</local_identifier>
+      <local_identifier>Filter</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition>The Filter_Parameters class describes the filter associated with a particular observation. The
+      <definition>The Filter class describes the filter associated with a particular observation. The
           filter may be identified by name, identifier, number or some combination of
           these.</definition>
       <DD_Association>
@@ -3261,13 +3261,13 @@
     </DD_Association>
   </DD_Class>
   
-  <!-- Class: Focus_Parameters  -->
+  <!-- Class: Focus  -->
   <DD_Class>
-      <name>Focus_Parameters</name>
+      <name>Focus</name>
       <version_id>1.0</version_id>
-      <local_identifier>Focus_Parameters</local_identifier>
+      <local_identifier>Focus</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Focus_Parameters class contains attributes that describe the focus or
+    <definition>The Focus class contains attributes that describe the focus or
       autofocus parameters for an observation. As a child of Commanded_Parameters, these 
       indicate the focus settings used to command the instrument. Otherwise, they indicate 
       the actual focus used by the observation.</definition>
@@ -3321,13 +3321,13 @@
     </DD_Association>
   </DD_Class>
   
-  <!-- Class: Focus_Stack_Parameters  -->
+  <!-- Class: Focus_Stack  -->
   <DD_Class>
-      <name>Focus_Stack_Parameters</name>
+      <name>Focus_Stack</name>
       <version_id>1.0</version_id>
-      <local_identifier>Focus_Stack_Parameters</local_identifier>
+      <local_identifier>Focus_Stack</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Focus_Stack_Parameters class contains attributes that describe a set of images
+    <definition>The Focus_Stack class contains attributes that describe a set of images
       taken at different focus settings, which are often merged to create a best-focus image or 
       combined to extract range information. Focus stacks are also sometimes called ZStacks.</definition>
     <DD_Association>
@@ -3362,13 +3362,13 @@
     </DD_Association>
   </DD_Class>
   
-  <!-- Class: Frame_Parameters -->
+  <!-- Class: Frame -->
   <DD_Class>
-      <name>Frame_Parameters</name>
+      <name>Frame</name>
       <version_id>1.0</version_id>
-      <local_identifier>Frame_Parameters</local_identifier>
+      <local_identifier>Frame</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Frame_Parameters class contains attributes providing information specific to 
+      <definition>The Frame class contains attributes providing information specific to 
           an image frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different 
           instrument modes.</definition>
       <DD_Association>
@@ -3486,13 +3486,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Instrument_State_Parameters -->
+  <!-- Class: Instrument_State -->
   <DD_Class>
-      <name>Instrument_State_Parameters</name>
+      <name>Instrument_State</name>
       <version_id>1.0</version_id>
-      <local_identifier>Instrument_State_Parameters</local_identifier>
+      <local_identifier>Instrument_State</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition>The Instrument_State_Parameters class contains classes providing the values of
+      <definition>The Instrument_State class contains classes providing the values of
           any dynamic physical or operating characteristics of the imaging instruments.</definition>
       <DD_Association>
           <identifier_reference>Device_Component_States</identifier_reference>
@@ -3857,13 +3857,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Sampling_Parameters  -->
+  <!-- Class: Sampling  -->
   <DD_Class>
-      <name>Sampling_Parameters</name>
+      <name>Sampling</name>
       <version_id>1.0</version_id>
-      <local_identifier>Sampling_Parameters</local_identifier>
+      <local_identifier>Sampling</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Sampling_Parameters class contains attributes and classes related to the sampling, scaling, companding, and 
+      <definition> The Sampling class contains attributes and classes related to the sampling, scaling, companding, and 
           compression or reduction in resolution of data.</definition>
       <DD_Association>
           <identifier_reference>crosstrack_summing</identifier_reference>
@@ -3896,7 +3896,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Companding_Parameters</identifier_reference>
+          <identifier_reference>Companding</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -3930,13 +3930,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Subframe_Parameters  -->
+  <!-- Class: Subframe  -->
   <DD_Class>
-      <name>Subframe_Parameters</name>
+      <name>Subframe</name>
       <version_id>1.0</version_id>
-      <local_identifier>Subframe_Parameters</local_identifier>
+      <local_identifier>Subframe</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition> The Subframe_Parameters class describes the position and other optional
+      <definition> The Subframe class describes the position and other optional
           characteristics of an image subframe, relative to the original image. </definition>
       <DD_Association>
           <identifier_reference>first_line</identifier_reference>
@@ -3994,13 +3994,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Video_Parameters -->
+  <!-- Class: Video -->
   <DD_Class>
-      <name>Video_Parameters</name>
+      <name>Video</name>
       <version_id>1.0</version_id>
-      <local_identifier>Video_Parameters</local_identifier>
+      <local_identifier>Video</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
-      <definition>The Video_Parameters class contains attributes related to video 
+      <definition>The Video class contains attributes related to video 
         observations, defined as a regular time series of frames. The class can be used
         to describe a single frame within the video, or the video as a whole.</definition>
       <DD_Association>
@@ -4074,11 +4074,11 @@
   
   <DD_Rule>
     <local_identifier>internal_reference_type_check_autoexposure</local_identifier>
-    <rule_context>//img:Autoexposure_Parameters/pds:Internal_Reference</rule_context>
+    <rule_context>//img:Autoexposure/pds:Internal_Reference</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>pds:internal_reference_type = 'data_to_document'</rule_test>
-      <rule_message>IMG:error:internal_reference_type_check_autoexposure: In img:Autoexposure_Parameters, Internal_Reference.reference_type must be equal to 'data_to_document'.</rule_message>
+      <rule_message>IMG:error:internal_reference_type_check_autoexposure: In img:Autoexposure, Internal_Reference.reference_type must be equal to 'data_to_document'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4093,52 +4093,52 @@
   </DD_Rule>
   
   <DD_Rule>
-    <local_identifier>detector_params_child_check</local_identifier>
-    <rule_context>//img:Detector_Parameters</rule_context>
+    <local_identifier>detector_child_check</local_identifier>
+    <rule_context>//img:Detector</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:detector_params_child_check: img:Detector_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:detector_params_child_check: img:Detector must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>command_params_child_check</local_identifier>
-    <rule_context>//img:Command_Parameters</rule_context>
+    <rule_context>//img:Commanded_Parameters</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:command_params_child_check: img:Command_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:command_params_child_check: img:Commanded_Parameters must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>sampling_params_child_check</local_identifier>
-    <rule_context>//img:Sampling_Parameters</rule_context>
+    <rule_context>//img:Sampling</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:sampling_params_child_check: img:Sampling_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:sampling_params_child_check: img:Sampling must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>frame_params_child_check</local_identifier>
-    <rule_context>//img:Frame_Parameters</rule_context>
+    <rule_context>//img:Frame</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:frame_params_child_check: img:Frame_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:frame_params_child_check: img:Frame must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>subframe_params_child_check</local_identifier>
-    <rule_context>//img:Subframe_Parameters</rule_context>
+    <rule_context>//img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:subframe_params_child_check: img:Subframe_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:subframe_params_child_check: img:Subframe must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4164,51 +4164,41 @@
   
   <DD_Rule>
     <local_identifier>exposure_params_child_check</local_identifier>
-    <rule_context>//img:Exposure_Parameters</rule_context>
+    <rule_context>//img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:exposure_params_child_check: img:Exposure_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:exposure_params_child_check: img:Exposure must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>focus_params_child_check</local_identifier>
-    <rule_context>//img:Focus_Parameters</rule_context>
+    <rule_context>//img:Focus</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:focus_params_child_check: img:Focus_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:focus_params_child_check: img:Focus must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>focus_stack_params_child_check</local_identifier>
-    <rule_context>//img:Focus_Stack_Parameters</rule_context>
+    <rule_context>//img:Focus_Stack</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:focus_stack_params_child_check: img:Focus_Stack_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:focus_stack_params_child_check: img:Focus_Stack must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>video_params_child_check</local_identifier>
-    <rule_context>//img:Video_Parameters</rule_context>
+    <rule_context>//img:Video</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:video_params_child_check: img:Video_Parameters must have at least 1 attribute or class specified.</rule_message>
-    </DD_Rule_Statement>
-  </DD_Rule>
-  
-  <DD_Rule>
-    <local_identifier>packet_params_child_check</local_identifier>
-    <rule_context>//img:Packet_Parameters</rule_context>
-    <DD_Rule_Statement>
-      <rule_type>Assert</rule_type>
-      <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:packet_params_child_check: img:Packet_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:video_params_child_check: img:Video must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4224,21 +4214,21 @@
   
   <DD_Rule>
     <local_identifier>filter_params_child_check</local_identifier>
-    <rule_context>//img:Filter_Parameters</rule_context>
+    <rule_context>//img:Filter</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:filter_params_child_check: img:Filter_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:filter_params_child_check: img:Filter must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>cmprs_params_child_check</local_identifier>
-    <rule_context>//img:Compression_Parameters</rule_context>
+    <rule_context>//img:Compression</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:cmprs_params_child_check: img:Compression_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:cmprs_params_child_check: img:Compression must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4274,49 +4264,16 @@
   
   <DD_Rule>
     <local_identifier>inst_state_params_child_check</local_identifier>
-    <rule_context>//img:Instrument_State_Parameters</rule_context>
+    <rule_context>//img:Instrument_State</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:inst_state_params_child_check: img:Instrument_State_Parameters must have at least 1 attribute or class specified.</rule_message>
-    </DD_Rule_Statement>
-  </DD_Rule>
-  
-  <DD_Rule>
-    <local_identifier>image_data_params_child_check</local_identifier>
-    <rule_context>//img:Image_Product_Parameters</rule_context>
-    <DD_Rule_Statement>
-      <rule_type>Assert</rule_type>
-      <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:image_data_params_child_check: img:Image_Product_Parameters must have at least 1 attribute or class specified.</rule_message>
-    </DD_Rule_Statement>
-  </DD_Rule>
-  
-  <DD_Rule>
-    <local_identifier>derived_params_child_check</local_identifier>
-    <rule_context>//img:Derived_Parameters</rule_context>
-    <DD_Rule_Statement>
-      <rule_type>Assert</rule_type>
-      <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:derived_params_child_check: img:Derived_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:inst_state_params_child_check: img:Instrument_State must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
 
   <!-- END child checks -->
   
-  <!-- TODO check validity of this rule -->
-  <DD_Rule>
-    <local_identifier>color_filter_array_state_check</local_identifier>
-    <rule_context>//img:Demosaicing_Parameters</rule_context>
-    <DD_Rule_Statement>
-      <rule_type>Assert</rule_type>
-      <rule_test>(img:color_filter_array_state = 'Decoded') and exists(img:demosaicing_algorithm)</rule_test>
-      <rule_message>IMG:error:img:color_filter_array_state_check: img:demosaicing_algorithm attribute must be specified when 
-        img:color_filter_array_state = 'Decoded'.
-      </rule_message>
-    </DD_Rule_Statement>
-  </DD_Rule>
-
   <DD_Rule>
     <local_identifier>icer_comprs_segment_check</local_identifier>
     <rule_context>//img:ICER_Parameters</rule_context>
@@ -4349,101 +4306,101 @@
   
   <DD_Rule>
     <local_identifier>exposure_duration_check</local_identifier>
-    <rule_context>//img:Instrument_State_Parameters/img:Exposure_Parameters</rule_context>
+    <rule_context>//img:Instrument_State/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(count(img:exposure_duration) = 1)</rule_test>
-      <rule_message>IMG:error:exposure_duration_check: img:exposure_duration must be specified in the img:Instrument_State_Parameters/img:Exposure_Parameters class.</rule_message>
+      <rule_message>IMG:error:exposure_duration_check: img:exposure_duration must be specified in the img:Instrument_State/img:Exposure class.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>focus_command_check</local_identifier>
-    <rule_context>//img:Command_Parameters/img:Focus_Parameters</rule_context>
+    <rule_context>//img:Commanded_Parameters/img:Focus</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:minimum_focus_distance) and not(img:best_focus_distance) and not(img:maximum_focus_distance)</rule_test>
-      <rule_message>IMG:error:focus_command_check: *_focus_distance keywords should be in img:Derived_Parameters/img:Focus_Parameters.</rule_message>
+      <rule_message>IMG:error:focus_command_check: *_focus_distance keywords should be in img:Focus.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>focus_derived_check</local_identifier>
-    <rule_context>//img:Derived_Parameters/img:Focus_Parameters</rule_context>
+    <rule_context>//img:Derived/img:Focus</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>not(img:focus_mode) and not(img:focus_position_count) and not(img:autofocus_step_size) and not(img:autofocus_step_count) and not(img:focus_stack_flag) and not(img:Focus_Stack_Parameters)</rule_test>
-      <rule_message>IMG:error:focus_derived_check: commanding focus parameters should be in img:Command_Parameters/img:Focus_Parameters.</rule_message>
+      <rule_test>not(img:focus_mode) and not(img:focus_position_count) and not(img:autofocus_step_size) and not(img:autofocus_step_count) and not(img:focus_stack_flag) and not(img:Focus_Stack)</rule_test>
+      <rule_message>IMG:error:focus_derived_check: commanding focus parameters should be in img:Commanded_Parameters/img:Focus.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>autoexposure_inst_state_check</local_identifier>
-    <rule_context>//img:Instrument_State_Parameters/img:Exposure_Parameters</rule_context>
+    <rule_context>//img:Instrument_State/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>not(img:Autoexposure_Parameters)</rule_test>
-      <rule_message>IMG:error:autoexposure_inst_state_check: Autoexposure_Parameters should be in img:Command_Parameters/img:Exposure_Parameters.</rule_message>
+      <rule_test>not(img:Autoexposure)</rule_test>
+      <rule_message>IMG:error:autoexposure_inst_state_check: Autoexposure should be in img:Commanded_Parameters/img:Exposure.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>subframe_command_check1</local_identifier>
-    <rule_context>//img:Command_Parameters/img:Subframe_Parameters</rule_context>
+    <rule_context>//img:Commanded_Parameters/img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
-      <rule_message>IMG:error:subframe_command_check1: derived subframe parameters should be in img:Derived_Parameters/img:Subframe_Parameters.</rule_message>
+      <rule_message>IMG:error:subframe_command_check1: derived subframe parameters should be in img:Derived/img:Subframe.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>subframe_command_check2</local_identifier>
-    <rule_context>//img:Command_Parameters/img:Subframe_Parameters</rule_context>
+    <rule_context>//img:Commanded_Parameters/img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(img:first_line) and (img:first_sample) and (img:lines) and (img:samples)</rule_test>
-      <rule_message>IMG:error:subframe_command_check2: img:Command_Parameters/img:Subframe_Parameters must include all of img:first_line, img:first_sample, img:lines, img:samples</rule_message>
+      <rule_message>IMG:error:subframe_command_check2: img:Commanded_Parameters/img:Subframe must include all of img:first_line, img:first_sample, img:lines, img:samples</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>subframe_derived_check</local_identifier>
-    <rule_context>//img:Derived_Parameters/img:Subframe_Parameters</rule_context>
+    <rule_context>//img:Derived/img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:first_line) and not(img:first_sample) and not(img:lines) and not(img:samples) and not(pds:name) and not(pds:description) and not(img:subframe_type)</rule_test>
-      <rule_message>IMG:error:subframe_derived_check: commanding subframe parameters should be in img:Command_Parameters/img:Subframe_Parameters.</rule_message>
+      <rule_message>IMG:error:subframe_derived_check: commanding subframe parameters should be in img:Commanded_Parameters/img:Subframe.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>detector_inst_state_check</local_identifier>
-    <rule_context>//img:Instrument_State_Parameters/img:Detector_Parameters</rule_context>
+    <rule_context>//img:Instrument_State/img:Detector</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
-      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived_Parameters/img:Detector_Parameters.</rule_message>
+      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived/img:Detector.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>detector_derived_check</local_identifier>
-    <rule_context>//img:Derived_Parameters/img:Detector_Parameters</rule_context>
+    <rule_context>//img:Derived/img:Detector</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:first_line) and not(img:first_sample) and not(img:lines) and not(img:samples) and not(img:detector_to_image_rotation) and not(img:erase_count) and not(img:readout_rate) and not(img:gain_mode_id) and not(img:gain_number) and not(img:analog_offset)</rule_test>
-      <rule_message>IMG:error:detector_derived_check: detector state parameters should be in img:Instrument_State_Parameters/img:Detector_Parameters.</rule_message>
+      <rule_message>IMG:error:detector_derived_check: detector state parameters should be in img:Instrument_State/img:Detector.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
     <local_identifier>local_reference_type_check_autoexposure</local_identifier>
-    <rule_context>//img:Imaging/img:Autoexposure_Parameters/pds:Local_Internal_Reference</rule_context>
+    <rule_context>//img:Imaging/img:Autoexposure/pds:Local_Internal_Reference</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>pds:local_reference_type = 'to_mission_autoexposure_parameters'</rule_test>
-      <rule_message>In img:Autoexposure_Parameters, Local_Internal_Reference.local_reference_type must be equal to 'to_mission_autoexposure_parameters'.</rule_message>
+      <rule_test>pds:local_reference_type = 'to_mission_autoexposure'</rule_test>
+      <rule_message>In img:Autoexposure, Local_Internal_Reference.local_reference_type must be equal to 'to_mission_autoexposure'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4470,11 +4427,11 @@
   
   <DD_Rule>
     <local_identifier>img_inst_state_params_child_check</local_identifier>
-    <rule_context>//img:Imaging_Instrument_State_Parameters</rule_context>
+    <rule_context>//img:Imaging_Instrument_State</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:img_inst_state_params_child_check: img:Imaging_Instrument_State_Parameters class must contain at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:img_inst_state_params_child_check: img:Imaging_Instrument_State class must contain at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
@@ -4510,11 +4467,11 @@
   
   <DD_Rule>
     <local_identifier>img_inst_state_child_check</local_identifier>
-    <rule_context>//img:Imaging_Instrument_State_Parameters</rule_context>
+    <rule_context>//img:Imaging_Instrument_State</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:img_inst_state_child_check: img:Imaging_Instrument_State_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:img_inst_state_child_check: img:Imaging_Instrument_State must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   <!-- END child checks -->
@@ -4564,50 +4521,50 @@
   
   <DD_Rule>
     <local_identifier>exposure_duration_check</local_identifier>
-    <rule_context>//img:Image_Product_Information/img:Exposure_Parameters</rule_context>
+    <rule_context>//img:Image_Product_Information/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(count(img:exposure_duration) = 1)</rule_test>
-      <rule_message>IMG:error:exposure_duration_check: img:exposure_duration must be specified in img:Exposure_Parameters class</rule_message>
+      <rule_message>IMG:error:exposure_duration_check: img:exposure_duration must be specified in img:Exposure class</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
-    <local_identifier>commanded_exposure_parameters_check</local_identifier>
-    <rule_context>//img:Command_Parameters/img:Exposure_Parameters</rule_context>
+    <local_identifier>commanded_exposure_check</local_identifier>
+    <rule_context>//img:Commanded_Parameters/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:commanded_exposure_parameters_check: img:Exposure_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:commanded_exposure_check: img:Exposure must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
   <DD_Rule>
-    <local_identifier>frame_parameters_check</local_identifier>
-    <rule_context>//img:Frame_Parameters</rule_context>
+    <local_identifier>frame_check</local_identifier>
+    <rule_context>//img:Frame</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:frame_parameters_check: img:Frame_Parameters must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:frame_check: img:Frame must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
-  <!-- img:Command_Parameters -->
+  <!-- img:Commanded_Parameters -->
   <DD_Rule>
     <local_identifier>cmd_params_0</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Commanded_Parameters</rule_context>
     <DD_Rule_Statement>
       <rule_type>Report</rule_type>
-      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters)</rule_test>
-      <rule_message>insight:log:cmd_params_0: Validating img:Command_Parameters
+      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Commanded_Parameters)</rule_test>
+      <rule_message>insight:log:cmd_params_0: Validating img:Commanded_Parameters
         class</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
-  <!-- img:Exposure_Parameters -->
+  <!-- img:Exposure -->
   <DD_Rule>
     <local_identifier>exp_params_0</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters/img:Exposure_Parameters</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Commanded_Parameters/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>img:exposure_duration_count &amp;gt;= 0 and img:exposure_duration_count &amp;lt;= 65535</rule_test>
@@ -4616,7 +4573,7 @@
   </DD_Rule>
   <DD_Rule>
     <local_identifier>exp_params_1</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Command_Parameters/img:Exposure_Parameters</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Commanded_Parameters/img:Exposure</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>img:exposure_type = ('MANUAL', 'AUTO', 'TEST')</rule_test>
@@ -4628,17 +4585,17 @@
   <!-- img:Instrument_Device_Temperature -->
   <DD_Rule>
     <local_identifier>inst_device_temp_0</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State/img:Instrument_Device_Temperature</rule_context>
     <DD_Rule_Statement>
       <rule_type>Report</rule_type>
-      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature)</rule_test>
+      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State/img:Instrument_Device_Temperature)</rule_test>
       <rule_message>insight:log:inst_device_temp_0: Validating img:Instrument_Device_Temperature
         class</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   <DD_Rule>
     <local_identifier>inst_device_temp_1</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State/img:Instrument_Device_Temperature</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(img:Instrument_Device_Temperature_Index) = 2</rule_test>
@@ -4647,7 +4604,7 @@
   </DD_Rule>
   <DD_Rule>
     <local_identifier>inst_device_temp_2</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State_Parameters/img:Instrument_Device_Temperature</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging_Instrument_State/img:Instrument_Device_Temperature</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>(img:Instrument_Device_Temperature_Index[1]/img:name = 'IDC_CCD' and img:Instrument_Device_Temperature_Index[2]/img:name = 'IDC_ELECTRONICS') or (img:Instrument_Device_Temperature_Index[1]/img:name = 'ICC_CCD' and img:Instrument_Device_Temperature_Index[2]/img:name = 'ICC_ELECTRONICS')</rule_test>
@@ -4656,20 +4613,20 @@
   </DD_Rule>
   <!-- TODO check rules above -->
   
-  <!-- img:Subframe_Parameters -->
+  <!-- img:Subframe -->
   <DD_Rule>
     <local_identifier>subframe_params_0</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe_Parameters</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Report</rule_type>
-      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe_Parameters)</rule_test>
-      <rule_message>img:log:subframe_params_0: Validating img:Subframe_Parameters
+      <rule_test>exists(/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe)</rule_test>
+      <rule_message>img:log:subframe_params_0: Validating img:Subframe
         class</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   <DD_Rule>
     <local_identifier>subframe_params_1</local_identifier>
-    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe_Parameters</rule_context>
+    <rule_context>/pds:Product_Observational/pds:Observation_Area/pds:Discipline_Area/img:Imaging/img:Subframe</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>img:first_line = '1' and img:first_sample = '1'</rule_test>
@@ -4679,11 +4636,11 @@
   
   <DD_Rule>
     <local_identifier>detector_inst_state_check</local_identifier>
-    <rule_context>//img:Instrument_State_Parameters/img:Detector_Parameters</rule_context>
+    <rule_context>//img:Instrument_State/img:Detector</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>not(img:line_fov) and not(img:sample_fov)</rule_test>
-      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived_Parameters/img:Detector_Parameters.</rule_message>
+      <rule_message>IMG:error:detector_inst_state_check: derived parameters should be in img:Derived/img:Detector.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
