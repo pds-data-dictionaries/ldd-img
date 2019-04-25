@@ -58,14 +58,11 @@
     <local_identifier>active_flag</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The active_flag attribute indicates whether or not the data processing described
-      by the parent class is active. In general this should be true (and should be assumed to be 
-      true if active_flag is not present), with the corresponding class simply being omitted if 
-      the correction does not apply. However, it may be useful in some cases to record a correction 
-      that was previously done to the data which may no longer apply (for example, a radiometric 
-      correction done before a stereo correlation operation; radiometric correction is no longer 
-      an attribute of stereo correlation results, but the fact that corrected data were used in 
-      the correlation may be of interest).
+    <definition>The active_flag attribute indicates whether or not the data processing described by the parent class 
+      is active. In general, the presence of the parent class implies it is active and thus active_flag is optional. 
+      The primary purpose for active_flag is to either explicitly indicate a correction is not active (for example, 
+      if it normally is but was explicitly turned off), or to be able to provide parameters for historical reasons 
+      that may no longer be relevant to a current correction.
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -633,66 +630,6 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>detector_erase_count</name>
-    <version_id>1.0</version_id>
-    <local_identifier>detector_erase_count</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition>The detector_erase_count specifies the number of times a detector has been or will be flushed
-      of data in raw counts, dependent on the parent class for the attribute.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>detector_first_line</name>
-    <version_id>1.0</version_id>
-    <local_identifier>detector_first_line</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition> The detector_first_line attribute specifies the starting row from the hardware, 
-      such as a charge-coupled device (CCD), that contains data.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Integer</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>detector_first_sample</name>
-    <version_id>1.0</version_id>
-    <local_identifier>detector_first_sample</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition> The detector_first_sample attribute specifies the starting column from the hardware, 
-      such as a charge-coupled device (CCD), that contains data.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Integer</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>detector_lines</name>
-    <version_id>1.0</version_id>
-    <local_identifier>detector_lines</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Jordan Padams</submitter_name>
-    <definition> The detector_lines attribute specifies the number of rows extracted from the hardware, 
-      such as a charge-coupled device (CCD), that contain data.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1634,34 +1571,59 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The processing_venue attribute specifies where the processing described by the 
-      parent class was performed. Value values: "Onboard Hardware" - processing was done by 
-      hardware onboard the spacecraft, such as inside the camera. "Onboard Software" - processing 
-      was done by flight software onboard the spacecraft. "Onboard Both" - processing was done 
-      onboard by both hardware and software. "Onboard" - processing was done onboard 
-      (hardware or software is unspecified). "Ground" - processing was done on the ground. 
-      "Ground Refined" - onboard processing was reversed and new ground processing was applied 
-      (for example, removing a synthetic flat field from onboard processing and replacing it with 
-      a true flat field). "None" - processing has not been done.
+      parent class was performed.
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Onboard Hardware</value>
+        <value_meaning>Processing was done by hardware onboard the spacecraft, 
+          such as inside the camera.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Onboard Software</value>
+        <value_meaning>processing was done by flight software onboard the spacecraft.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Onboard Both</value>
+        <value_meaning>Processing was done onboard by both hardware and software.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Onboard</value>
+        <value_meaning>Processing was done onboard (hardware or software is unspecified).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Ground</value>
+        <value_meaning>Processing was done on the ground. </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Ground Refined</value>
+        <value_meaning>Onboard processing was reversed and new ground processing was applied. 
+          For example, removing a synthetic flat field from onboard processing and replacing it with 
+          a true flat field.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>Processing has not been done.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
-  <!-- TODO definition -->
   <DD_Attribute>
     <name>progressive_stage</name>
     <version_id>1.0</version_id>
     <local_identifier>progressive_stage</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The progressive_stage attribute specifies TBD</definition>
+    <definition>In cases where each pass of a progressive JPEG is downlinked separately,
+      the progressive_stage attribute indicates the highest pass number contained in
+      this image, which indicates the available level of detail.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <minimum_value>1</minimum_value>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1672,7 +1634,8 @@
     <local_identifier>r0</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The r0 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The r0 attribute specifies the 0th-order polynomial coefficient of the function
+      used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1686,7 +1649,8 @@
     <local_identifier>r1</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The r1 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The r1 attribute specifies the 1st-order polynomial coefficient of the function
+      used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1700,7 +1664,8 @@
     <local_identifier>r2</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The r2 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The r2 attribute specifies the 2nd-order polynomial coefficient of the function
+      used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1714,7 +1679,8 @@
     <local_identifier>r3</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The r3 attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The r3 attribute specifies specifies the 3rd-order polynomial coefficient of the function
+      used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2234,11 +2200,13 @@
     <local_identifier>x_center</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The x_center attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The x_center attribute specifies the sample coordinate of the center
+      of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function 
+      for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2248,11 +2216,13 @@
     <local_identifier>y_center</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The y_center attribute specifies a parameter for Radial_Flat_Field_Function.</definition>
+    <definition>The y_center attribute specifies specifies the line coordinate of the center
+      of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function 
+      for the formula.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2456,24 +2426,6 @@
           generally used for RGB color, CFA filters can be of any number and
           wavelength (see color_filter_array_type).</definition>
       <DD_Association>
-        <identifier_reference>active_flag</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>processing_venue</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-        <identifier_reference>processing_algorithm</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
         <identifier_reference>color_filter_array_type</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
@@ -2501,18 +2453,6 @@
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The Color class contains parameters describing color correction 
       or processing and how the image is represented in color.</definition>
-    <DD_Association>
-      <identifier_reference>processing_venue</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_algorithm</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
     <DD_Association>
       <identifier_reference>color_space</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -2616,6 +2556,12 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Flat_Field_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
           <identifier_reference>Focus_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2634,10 +2580,22 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Radiometric_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
           <identifier_reference>Sampling_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Shutter_Subtraction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Subframe_Parameters</identifier_reference>
@@ -2671,22 +2629,10 @@
           value should only appear in a command echo; one of the MSB_BITn values
           should be used in downlinked data to specify what the actual shift was.</definition>
       <DD_Association>
-          <identifier_reference>companding_state</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>processing_venue</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>processing_algorithm</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+        <identifier_reference>companding_state</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
@@ -2794,7 +2740,7 @@
       <DD_Association>
           <identifier_reference>active_flag</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
@@ -2849,9 +2795,14 @@
       <version_id>1.0</version_id>
       <local_identifier>Detector_Parameters</local_identifier>
       <submitter_name>Cristina De Cesare</submitter_name>
-      <definition>The Detector_Parameters class contains attributes describing the state
-      of the instrument detector.</definition>
-      <DD_Association>
+      <definition>The Detectorclass contains attributes describing the state of the
+        instrument detector. These are values directly read from the detector
+        and do not necessarily reflect the state of the image after onboard
+        processing. For example, the entire image may be read into memory and
+        then subframed in software, in which case the subframe attributes in
+        this class reflect the entire image (as read from the detector), whereas
+        those in the Subframe class represent the final subframe results.</definition>
+        <DD_Association>
         <identifier_reference>first_line</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -2907,18 +2858,6 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>analog_offset</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-        <identifier_reference>line_fov</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-        <identifier_reference>sample_fov</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
@@ -3175,24 +3114,6 @@
           This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean.,
           'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.</definition>
       <DD_Association>
-          <identifier_reference>active_flag</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>processing_venue</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>processing_algorithm</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>Pixel_Averaging_Dimensions</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -3303,12 +3224,6 @@
       <submitter_name>Jordan Padams</submitter_name>
       <definition> The Flat_Field_Correction class specifies the onboard flat-field coefficients/parameters used in the algorithm to remove the flat field signature.</definition>
       <DD_Association>
-          <identifier_reference>processing_algorithm</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
         <identifier_reference>Radial_Flat_Field_Function</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -3318,7 +3233,7 @@
         <identifier_reference>Flat_Field_File</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>*</maximum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
@@ -3657,7 +3572,7 @@
       <DD_Association>
           <identifier_reference>progressive_stage</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
@@ -3808,30 +3723,6 @@
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
-    <DD_Association>
-      <identifier_reference>responsivity_r</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>responsivity_g</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>responsivity_b</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>responsivity_pan</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
   </DD_Class>
   
   <!-- Class: Pixel_Averaging_Dimensions -->
@@ -3873,37 +3764,37 @@
     <DD_Association>
       <identifier_reference>x_center</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>y_center</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>r0</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>r1</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>r2</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>r3</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
@@ -3933,6 +3824,30 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>responsivity_r</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>responsivity_g</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>responsivity_b</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>responsivity_pan</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
@@ -4046,6 +3961,18 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>line_fov</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>sample_fov</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>pds.name</identifier_reference>
