@@ -1274,15 +1274,18 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
         <value>Lossless</value>
-        <value_meaning>TBD</value_meaning>
+        <value_meaning>Lossless compression means that after compression and decompression, 
+          the data is the same (bit-for-bit) as the original.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Lossy</value>
-        <value_meaning>TBD</value_meaning>
+        <value_meaning>Lossy compression means that the data after decompression differs in some way 
+          from the data before compression.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Uncompressed</value>
-        <value_meaning>TBD</value_meaning>
+        <value_meaning>Uncompressed data is also lossless, but use of the "Uncompressed" value indicates 
+          that data was not compressed.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1293,9 +1296,9 @@
     <local_identifier>onboard_compression_mode</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The onboard_compression_mode attribute identifies the method used for on-board
-      compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to 
-      the full name captured by the onboard_compression_type attribute.</definition>
+    <definition>The onboard_compression_mode attribute identifies the method used for on-board compression, performed
+      for the purpose of data storage and transmission. The value for this attributes represents the raw integer 
+      value for compression, which is then translated to the full name captured by the onboard_compression_type attribute.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
@@ -1309,8 +1312,8 @@
     <local_identifier>onboard_compression_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to
-      1.0. Losslessly compressed or uncompressed data have a value of 1.0. 
+    <definition> The onboard_compression_quality attribute is an indication of compression quality, 
+      in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. 
       Other values are assigned in a manner specific to the compression mode,
       but with the property that a higher value means better quality.
       Although the values are not directly comparable across compression
@@ -1331,8 +1334,8 @@
     <local_identifier>onboard_compression_rate</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The onboard_compression_rate attribute provides the average number of bits needed
-      to represent a pixel for an on-board compressed image. </definition>
+    <definition>The onboard_compression_rate attribute provides the average number of bits needed
+      to represent a pixel for image that was compressed on-board for data storage and transmission.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1348,7 +1351,8 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the
-      original uncompressed data object to its compressed form (original size / compressed size). </definition>
+      original uncompressed data object to its compressed form (original size / compressed size). 
+      Onboard compression is performed for data storage and transmission.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1363,7 +1367,7 @@
     <local_identifier>onboard_compression_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The onboard_compression_type attribute identifies the type of on-board
+    <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'ICER', 
       'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.</definition>
     <DD_Value_Domain>
@@ -2649,8 +2653,8 @@
       <version_id>1.0</version_id>
       <local_identifier>Onboard_Compression</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition> The Onboard_Compression class contains attributes describing onboard
-          compression parameters used for data storage and transmission.</definition>
+      <definition>The Onboard_Compression class contains attributes describing the compression 
+      performed onboard a spacecraft or instrument for data storage and transmission.</definition>
       <DD_Association>
           <identifier_reference>onboard_compression_class</identifier_reference>
           <reference_type>attribute_of</reference_type>
