@@ -741,7 +741,7 @@
       of the instrument filter through which an image or measurement was acquired.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <value_data_type>UTF8_Short_String_Preserved</value_data_type>
       <minimum_characters>1</minimum_characters>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -2137,7 +2137,7 @@
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2292,7 +2292,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Filter</identifier_reference>
+          <identifier_reference>Optical_Filter</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2549,7 +2549,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Filter</identifier_reference>
+          <identifier_reference>Optical_Filter</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
@@ -2756,6 +2756,12 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>processing_algorithm</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>sequence_number</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
@@ -2977,7 +2983,7 @@
         actuator on an imaging instrument or other imaging device (such as a filter wheel, 
         focus motor, or zoom motor). This information should typically be reported in
         a more specific and useable form in other classes, such as a filter number or wavelength
-        in the Filter class or a focus distnace in the Focus class.</definition>
+        in the Optical_Filter class or a focus distnace in the Focus class.</definition>
       <DD_Association>
           <identifier_reference>Device_Parameters</identifier_reference>
           <reference_type>component_of</reference_type>
@@ -3178,13 +3184,13 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Filter  -->
+  <!-- Class: Optical_Filter  -->
   <DD_Class>
-      <name>Filter</name>
+      <name>Optical_Filter</name>
       <version_id>1.0</version_id>
-      <local_identifier>Filter</local_identifier>
+      <local_identifier>Optical_Filter</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition>The Filter class describes the filter associated with a particular observation. The
+      <definition>The Optical_Filter class describes the filter associated with a particular observation. The
           filter may be identified by name, identifier, number or some combination of
           these.</definition>
       <DD_Association>
@@ -3222,6 +3228,12 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>pds.Local_Internal_Reference</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -4223,11 +4235,11 @@
   
   <DD_Rule>
     <local_identifier>filter_params_child_check</local_identifier>
-    <rule_context>//img:Filter</rule_context>
+    <rule_context>//img:Optical_Filter</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
       <rule_test>count(child::*) > 0</rule_test>
-      <rule_message>IMG:error:filter_params_child_check: img:Filter must have at least 1 attribute or class specified.</rule_message>
+      <rule_message>IMG:error:filter_params_child_check: img:Optical_Filter must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
