@@ -774,7 +774,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The filter_name attribute provides the name, described in the mission documentation, 
-      of the instrument filter through which an image or measurement was acquired.</definition>
+      of the optical filter through which an image or measurement was acquired.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>UTF8_Short_String_Preserved</value_data_type>
@@ -3249,9 +3249,9 @@
       <version_id>1.0</version_id>
       <local_identifier>Optical_Filter</local_identifier>
       <submitter_name>Elizabeth D. Rye</submitter_name>
-      <definition>The Optical_Filter class describes the filter associated with a particular observation. The
-          filter may be identified by name, identifier, number or some combination of
-          these.</definition>
+      <definition>The Optical_Filter class defines the filters used by the camera optics
+        (not to be confused with image processing software filters). The filter may be 
+        identified by name, identifier, number, or some combination of these.</definition>
       <DD_Association>
           <identifier_reference>filter_name</identifier_reference>
           <reference_type>attribute_of</reference_type>
@@ -3302,7 +3302,9 @@
       <version_id>1.0</version_id>
       <local_identifier>Flat_Field_Correction</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Flat_Field_Correction class specifies the onboard flat-field coefficients/parameters used in the algorithm to remove the flat field signature.</definition>
+      <definition> The Flat_Field_Correction class specifies how flat-field correction 
+        was performed on this image. This can be done either algorithmically, using a 
+        Radial_Flat_Field_Correction, or using a Flat_Field_File.</definition>
       <DD_Association>
         <identifier_reference>Radial_Flat_Field_Function</identifier_reference>
         <reference_type>component_of</reference_type>
