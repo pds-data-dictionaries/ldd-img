@@ -2,7 +2,7 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        0.2.1.5b
-   Time                   Thu Apr 25 08:51:46 PDT 2019
+   Time                   Fri Apr 26 20:25:02 PDT 2019
    Core Schemas           [PDS4_PDS_1B00.xsd]
    Core Schematrons       [PDS4_PDS_1B00.sch]
    Common Model Version   1.11.0.0
@@ -23,19 +23,13 @@ Parameters:
 
 Summary:
    Classes                49
-   Attributes             119
-   Associations           219
+   Attributes             122
+   Associations           224
    Error messages         0
    Warning messages       0
    Information messages   40
 
 Detailed validation messages
-   INFO     Attribute: <onboard_compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <onboard_compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
-   INFO     Attribute: <onboard_compression_rate> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <onboard_compression_ratio> - The default minimum value provided by the attribute's data type is being overridden with 0.0
-   INFO     Attribute: <onboard_compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
-   INFO     Attribute: <onboard_compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -59,6 +53,12 @@ Detailed validation messages
    INFO     Attribute: <lines> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <line_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
    INFO     Attribute: <line_fov> - The default maximum value provided by the attribute's data type is being overridden with 360.0
+   INFO     Attribute: <onboard_compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <onboard_compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
+   INFO     Attribute: <onboard_compression_rate> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <onboard_compression_ratio> - The default minimum value provided by the attribute's data type is being overridden with 0.0
+   INFO     Attribute: <onboard_compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <onboard_compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
    INFO     Attribute: <progressive_stage> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <samples> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <sample_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -127,22 +127,36 @@ Parsed Input - Attributes:
    value data type        ASCII_Integer
    description            The analog_offset attribute identifies the analog value that is subtracted from the signal prior to the analog/digital conversion.
 
-   name                   autoexposure_algorithm_name
+   name                   auto_exposure_data_cut
    version                1.11
-   value data type        ASCII_Short_String_Collapsed
-   description             The autoexposure_algorithm_name attribute provides the algorithm used for histogram thresholding or autoexposure of the image. Some example algorithms from past missions are, 'Maki 2003' used on MER cameras, MSL ECAMs, M2020 EECAMs; 'Maurice 2012' used on MSL ChemCam; 'Smith 1997' used on Mars Pathfinder Imager.
+   value data type        ASCII_Integer
+   description            The auto_exposure_data_cut attribute specifies the DN value which a specified fraction of pixels is permitted to exceed. The fraction is specified using the auto_exposure_data_fraction attribute.
+   unit of measure type   Units_of_Misc
+
+   name                   max_auto_exposure_iteration_count
+   version                1.11
+   value data type        ASCII_Integer
+   description            The max_auto_exposure_iteration_count attribute specifies the maximum number of exposure iterations the instrument will perform in order to obtain the requested exposure.
+
+   name                   auto_exposure_percent
+   version                1.11
+   value data type        ASCII_Real
+   description            The auto_exposure_percent attribute specifies the auto-exposure early-termination percent. If the desired DN (auto_exposure_data_cut) is within this percentage of the measured DN (the DN at which the percentage of pixels above that DN equals or exceeds the auto_exposure_pixel_fraction), then the auto exposure algorithm is terminated and the calculated time is accepted.
+
+   name                   auto_exposure_pixel_fraction
+   version                1.11
+   value data type        ASCII_Real
+   description            The auto_exposure_pixel_fraction attribute specifies the percentage of pixels whose DN values may exceed the auto_expsoure_data_cut.
 
    name                   autofocus_step_count
    version                1.11
    value data type        ASCII_NonNegative_Integer
    description             The autofocus_step_count attribute specifies the number of steps (images) to be taken by an autofocus algorithm.
-   nillable               true
 
    name                   autofocus_step_size
    version                1.11
    value data type        ASCII_NonNegative_Integer
    description             The autofocus_step_size attribute specifies the size in motor counts of each (or the initial) step taken by the focus adjustment mechanism in an autofocus algorithm.
-   nillable               true
 
    name                   bandwidth
    version                1.11
@@ -154,7 +168,6 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Real
    description            The best_focus_distance attribute specifies the estimated distance to best focus.
-   nillable               true
    unit of measure type   Units_of_Length
 
    name                   center_filter_wavelength
@@ -229,54 +242,6 @@ Parsed Input - Attributes:
       Companded - values are currently companded
       Expanded - values have been companded but are now expanded back to original size
 
-   name                   onboard_compression_class
-   version                1.11
-   value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'
-   permissible value - value meaning
-      Lossless - TBD
-      Lossy - TBD
-      Uncompressed - TBD
-
-   name                   onboard_compression_mode
-   version                1.11
-   value data type        ASCII_Integer
-   description            The onboard_compression_mode attribute identifies the method used for on-board compression of data. The value for this attributes represents the raw integer value for compression, which is then translated to the full name captured by the onboard_compression_type attribute.
-
-   name                   onboard_compression_quality
-   version                1.11
-   value data type        ASCII_Real
-   description             The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. Other values are assigned in a manner specific to the compression mode, but with the property that a higher value means better quality. Although the values are not directly comparable across compression types, this facilitates comparison of compression quality across images independent of compression mode.
-   minimum value          0
-   maximum value          1.0
-
-   name                   onboard_compression_rate
-   version                1.11
-   value data type        ASCII_Real
-   description             The onboard_compression_rate attribute provides the average number of bits needed to represent a pixel for an on-board compressed image. 
-   minimum value          0
-
-   name                   onboard_compression_ratio
-   version                1.11
-   value data type        ASCII_Real
-   description            The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the original uncompressed data object to its compressed form (original size / compressed size). 
-   minimum value          0.0
-
-   name                   onboard_compression_type
-   version                1.11
-   value data type        ASCII_Short_String_Collapsed
-   description             The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
-   minimum characters     1
-   maximum characters     255
-   permissible value - value meaning
-      ICER - ICER Adaptive Variable-Length Coding (ICER)
-      ICT - Integer Cosine Transform
-      LOCO - Low-Complexity Lossless Compression
-      JPEG - Joint Photographic Experts Group, an industry standard lossy compression algorithm.
-      JPEG Progressive - interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail.
-      MSSS Lossless - Lossless compression algorithm developed by Malin Space Science Systems.
-      None - No on-board compression was used.
-
    name                   crosstrack_summing
    version                1.11
    value data type        ASCII_NonNegative_Integer
@@ -313,7 +278,6 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Short_String_Collapsed
    description            The device_id attribute supplies the identifier of an imaging instrument, an imaging instrument device, or some point on the instrument or device.
-   nillable               true
 
    name                   device_name
    version                1.11
@@ -364,7 +328,7 @@ Parsed Input - Attributes:
    name                   exposure_duration_count
    version                1.11
    value data type        ASCII_NonNegative_Integer
-   description            The exposure_duration_count attribute specifies the value, in raw counts, for the amount of time the instrument sensor was gathering light from the scene, such as between opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts versus time, and the translation of exposure_duration_count to exposure_duration will differ by mission. The attribute can be specified in the context of both Imaging_Instrument_State (actual value) and Commanded_Parameters (commanded value). Both commanded and actual because it's possible for the actual to not match the commanded. For example the exposure might fault out early, or there might be a deadband (for example, pointing backlash) where changes in the input do not actually affect the output.
+   description            The exposure_duration_count attribute specifies the value, in raw counts, for the amount of time the instrument sensor was gathering light from the scene, such as between opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts instead of time, and the translation of exposure_duration_count to exposure_duration will differ by mission.
 
    name                   exposure_duration_threshold_count
    version                1.11
@@ -389,8 +353,8 @@ Parsed Input - Attributes:
 
    name                   filter_name
    version                1.11
-   value data type        ASCII_Short_String_Collapsed
-   description            The filter_name attribute provides the name, described in the mission documentation, of the instrument filter through which an image or measurement was acquired or which is associated with a given instrument mode.
+   value data type        UTF8_Short_String_Preserved
+   description            The filter_name attribute provides the name, described in the mission documentation, of the optical filter through which an image or measurement was acquired.
    minimum characters     1
 
    name                   filter_number
@@ -414,19 +378,16 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Boolean
    description            The focus_merge_blending_flag attribute indicates whether intra-stack image blending has been performed during a focus merge operation. A value of 'false' means images were merged without blending.
-   nillable               true
 
    name                   focus_merge_registration_flag
    version                1.11
    value data type        ASCII_Boolean
    description            The focus_merge_registration_flag attribute indicates whether intra-stack image registration has been performed during a focus merge operation. A value of 'true' indicates that intra-stack image registration has been performed during the focus merge operation, while 'false' indicates that images have been merged without translation.
-   nillable               true
 
    name                   focus_mode
    version                1.11
    value data type        ASCII_Short_String_Collapsed
    description            The focus_mode attribute specifies the type of focus command, for example: Autofocus, Manual, ZStack, or Relative (focus adjustment based on a previous autofocus).
-   nillable               true
    permissible value - value meaning
       Autofocus - The focus was commanded by the autofocus algorithm.
       Manual - The exact focus position was set manually.
@@ -442,19 +403,16 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Integer
    description            The focus_position_count attribute specifies a commanded focus, or the initial focus position used by the autofocus algorithm.
-   nillable               true
 
    name                   focus_stack_flag
    version                1.11
    value data type        ASCII_Boolean
    description             The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.
-   nillable               true
 
    name                   frame_count
    version                1.11
    value data type        ASCII_NonNegative_Integer
    description             The frame_count attribute indicates the total number of image frames acquired, such as for a video or focus stack observation.
-   nillable               true
 
    name                   frame_id
    version                1.11
@@ -471,7 +429,6 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Real
    description             The frame_rate attribute specifies the calculated frame rate for video products.
-   nillable               true
    unit of measure type   Units_of_Frame_Rate
 
    name                   frame_type_name
@@ -493,13 +450,11 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_NonNegative_Integer
    description             The gop_frame_count attribute indicates, for video products compressed into a group of images (Group Of Pictures or GOP), the number of images in a GOP. This is not necessarily the total number of frames in the observation (see frame_count), as the observation may consist of a number of GOPs.
-   nillable               true
 
    name                   gop_frame_index
    version                1.11
    value data type        ASCII_NonNegative_Integer
    description             The gop_frame_index attribute specifies the frame index within a Group Of Pictures (GOP).
-   nillable               true
 
    name                   height_pixels
    version                1.11
@@ -562,14 +517,12 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Real
    description            The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.
-   nillable               true
    unit of measure type   Units_of_Length
 
    name                   minimum_focus_distance
    version                1.11
    value data type        ASCII_Real
    description            The minimum_focus_distance attribute specifies the estimated distance to the nearest pixel with less than 1 pixel of gaussian blur.
-   nillable               true
    unit of measure type   Units_of_Length
 
    name                   missing_pixel_count
@@ -582,50 +535,98 @@ Parsed Input - Attributes:
    value data type        ASCII_NonNegative_Integer
    description            The motor_count attribute specifies the raw motor counts for the specified device, which indicates the position of the associated mechanism in a device-specific way.
 
-   name                   onboard_B_b
+   name                   onboard_compression_class
    version                1.11
-   value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Blue value.
+   value data type        ASCII_Short_String_Collapsed
+   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'
+   permissible value - value meaning
+      Lossless - Lossless compression means that after compression and decompression, the data is the same (bit-for-bit) as the original.
+      Lossy - Lossy compression means that the data after decompression differs in some way from the data before compression.
+      Uncompressed - Uncompressed data is also lossless, but use of the "Uncompressed" value indicates that data was not compressed.
 
-   name                   onboard_B_g
+   name                   onboard_compression_mode
    version                1.11
-   value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Blue value.
+   value data type        ASCII_Integer
+   description            The onboard_compression_mode attribute identifies the method used for on-board compression, performed for the purpose of data storage and transmission. The value for this attributes represents the raw integer value for compression, which is then translated to the full name captured by the onboard_compression_type attribute.
 
-   name                   onboard_B_r
+   name                   onboard_compression_quality
    version                1.11
    value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Blue value.
+   description             The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. Other values are assigned in a manner specific to the compression mode, but with the property that a higher value means better quality. Although the values are not directly comparable across compression types, this facilitates comparison of compression quality across images independent of compression mode.
+   minimum value          0
+   maximum value          1.0
 
-   name                   onboard_G_b
+   name                   onboard_compression_rate
    version                1.11
    value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
+   description            The onboard_compression_rate attribute provides the average number of bits needed to represent a pixel for image that was compressed on-board for data storage and transmission.
+   minimum value          0
 
-   name                   onboard_G_g
+   name                   onboard_compression_ratio
    version                1.11
    value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Green value.
+   description            The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the original uncompressed data object to its compressed form (original size / compressed size). Onboard compression is performed for data storage and transmission.
+   minimum value          0.0
 
-   name                   onboard_G_r
+   name                   onboard_compression_type
    version                1.11
-   value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Green value.
+   value data type        ASCII_Short_String_Collapsed
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
+   minimum characters     1
+   maximum characters     255
+   permissible value - value meaning
+      ICER - ICER Adaptive Variable-Length Coding (ICER)
+      ICT - Integer Cosine Transform
+      LOCO - Low-Complexity Lossless Compression
+      JPEG - Joint Photographic Experts Group, an industry standard lossy compression algorithm.
+      JPEG Progressive - interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail.
+      MSSS Lossless - Lossless compression algorithm developed by Malin Space Science Systems.
+      None - No on-board compression was used.
 
-   name                   onboard_R_b
+   name                   onboard_R_r
    version                1.11
    value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Red value.
+   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Red value.
 
    name                   onboard_R_g
    version                1.11
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Red value.
 
-   name                   onboard_R_r
+   name                   onboard_R_b
    version                1.11
    value data type        ASCII_Real
-   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Red value.
+   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Red value.
+
+   name                   onboard_B_r
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Blue value.
+
+   name                   onboard_B_g
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Blue value.
+
+   name                   onboard_B_b
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Blue value.
+
+   name                   onboard_G_r
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Green value.
+
+   name                   onboard_G_g
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Green value.
+
+   name                   onboard_G_b
+   version                1.11
+   value data type        ASCII_Real
+   description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
 
    name                   processing_algorithm
    version                1.11
@@ -691,7 +692,6 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Real
    description            The readout_rate attribute specifies the clock rate at which values are read from the sensor.
-   nillable               true
    unit of measure type   Units_of_Frequency
 
    name                   responsivity_factor_b
@@ -817,14 +817,13 @@ Parsed Input - Attributes:
 
    name                   value_string
    version                1.11
-   value data type        ASCII_Real
+   value data type        ASCII_Short_String_Collapsed
    description            The value_string attribute provides the value with no applicable units as named by the associated id, name, or sequence_number. 
 
    name                   video_flag
    version                1.11
    value data type        ASCII_Boolean
    description             The video_flag attribute indicates whether or not video products were commanded. 
-   nillable               true
 
    name                   voltage_value
    version                1.11
@@ -877,14 +876,9 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Color
+      local identifier      Color_Processing
       minimum occurrences   0
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Onboard_Compression
-      minimum occurrences   0
-      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
@@ -902,7 +896,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Filter
+      local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -925,6 +919,11 @@ Parsed Input - Classes:
       local identifier      Frame
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Radiometric_Correction
@@ -962,41 +961,38 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-   name                   Algorithm_Parameter
-   description            The Algorithm_Parameter class provides a name and value(s) use for input into the autoexposure algorithm.
-   is abstract            false
-   is choice              false
-   subclass of            USER
-
-   Associations
-
-      local identifier      pds.name
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        attribute_of
-
-      local identifier      pds.value
-      minimum occurrences   1
-      maximum occurrences   *
-      reference type        attribute_of
-
    name                   Autoexposure
-   description            The Autoexposure class contains attributes used to identify or describe the histogram thresholding algorithm and applicable attributes required for those algorithms. The input parameters for the algorithm can be specified using the Algorithm_Parameter class or via a Local_Internal_Reference to a mission-specific parameter definition.
+   description            The Autoexposure class contains attributes used to identify or describe the algorithm used to automatically calculate the proper exposure time. This is generally based on some kind of histogram analysis. The specific autoexposure algorithm used is defined in the processing_algorithm attribute, and the specific set of attributes needed to describe it will vary based on the algorithm. Examples of autoexposure algorithms include "Maki 2003" used on MER, MSL ECAMs, M2020 ECAMS; "Maurice 2012" used on MSL ChemCam; "Smith 1997" used on Mars Pathfinder Imager.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Data_Processing
 
    Associations
 
-      local identifier      autoexposure_algorithm_name
-      minimum occurrences   1
+      local identifier      auto_exposure_data_cut
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      Algorithm_Parameter
+      local identifier      auto_exposure_percent
+      minimum occurrences   0
+      maximum occurrences   100
+      reference type        attribute_of
+
+      local identifier      auto_exposure_pixel_fraction
+      minimum occurrences   0
+      maximum occurrences   100
+      reference type        attribute_of
+
+      local identifier      max_auto_exposure_iteration_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Data_Processing
       minimum occurrences   0
       maximum occurrences   *
-      reference type        component_of
+      reference type        parent_of
 
    name                   Color_Filter_Array
    description            The Color_Filter_Array class describes whether or not an image was acquired using a Color Filter Array (CFA) and if so, whether and how the CFA pattern was removed. A CFA is a method for making color images using one exposure on a single sensor plane, where microfilters of different wavelengths are put in front of pixels in a specific pattern. The most common pattern is the Bayer pattern, which has a red, blue, and two green pixels in every 2x2 pixel square. Although generally used for RGB color, CFA filters can be of any number and wavelength (see color_filter_array_type).
@@ -1021,8 +1017,8 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        parent_of
 
-   name                   Color
-   description            The Color class contains parameters describing color correction or processing and how the image is represented in color.
+   name                   Color_Processing
+   description            The Color_Processing class contains parameters describing color correction or processing and how the image is represented in color.
    is abstract            false
    is choice              false
    subclass of            Data_Processing
@@ -1082,14 +1078,9 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Color
+      local identifier      Color_Processing
       minimum occurrences   0
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Onboard_Compression
-      minimum occurrences   0
-      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
@@ -1107,7 +1098,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Filter
+      local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -1130,6 +1121,11 @@ Parsed Input - Classes:
       local identifier      Frame
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Radiometric_Correction
@@ -1165,13 +1161,31 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      Companding_File
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Data_Processing
       minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
 
+   name                   Companding_File
+   description            The Companding _File class specifies the file containing the decompanding (inverse LUT) table used to process the data.
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing_File
+
+   Associations
+
+      local identifier      Data_Processing_File
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
    name                   Onboard_Compression
-   description             The Onboard_Compression class contains attributes describing onboard compression parameters used for data storage and transmission.
+   description            The Onboard_Compression class contains attributes describing the compression performed onboard a spacecraft or instrument for data storage and transmission.
    is abstract            false
    is choice              true
    subclass of            USER
@@ -1265,7 +1279,7 @@ Parsed Input - Classes:
       reference type        parent_of
 
    name                   Data_Processing
-   description            The Data_Processing class specifies describes details regarding the calibration and/or processing performed on the data product. This class can be used to describe various data corrections, such as antiblooming, bad pixel replacement, blemish protection, dark current correction, or shutter correction. This can be specified multiple times in order to detail numerous corrections, and should be used to designate PDS3-like flag attributes, such as dark_current_correction_flag and flat_field_correction_flag. 
+   description            The Data_Processing class contains attributes describing how processing and/or calibration was performed on a data product. It is not intended to be used on its own; rather it is intended to be extended by classes specific to a particular type of processing, such as Shutter_Subtraction, Flat_Field_Correction, Companding, etc. The attributes of this class thus become attributes of the extension class. 
    is abstract            false
    is choice              false
    subclass of            USER
@@ -1287,8 +1301,13 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      sequence_number
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
    name                   Data_Processing_File
-   description            The Data_Processing_File class specifies a file containing calibration data that was applied to the science data as part of a Data Correction. If more than one file applies to a given Data_Correction, the name/id/sequence_number identifies the type of file.
+   description            The Data_Processing_File class contain attributes which identify a file containing calibration data that was applied to the science data. It is not intended to be used on its own; rather it is intended to be extended by classes specific to a particular type of file, such as Flat_Field_File. Note that the "name" attribute is the name of the file; this attribute should only be used if the file is either not included in an archive, or if the delivery status is unknown by the data provider. The External_Reference or Internal_Reference class should be used instead of name if at all possible.
    is abstract            false
    is choice              true
    subclass of            USER
@@ -1462,7 +1481,7 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Device_Motor_Count
-   description            The Device_Motor_Count class describes the raw motor count of one actuator on an imaging instrument or other imaging device (such as a filter wheel, focus motor, or zoom motor). This information should typically be reported in a more specific and useable form in other classes, such as a filter number or wavelength in the Filter class or a focus distnace in the Focus class.
+   description            The Device_Motor_Count class describes the raw motor count of one actuator on an imaging instrument or other imaging device (such as a filter wheel, focus motor, or zoom motor). This information should typically be reported in a more specific and useable form in other classes, such as a filter number or wavelength in the Optical_Filter class or a focus distnace in the Focus class.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -1625,8 +1644,8 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-   name                   Filter
-   description            The Filter class describes the filter associated with a particular observation. The filter may be identified by name, identifier, number or some combination of these.
+   name                   Optical_Filter
+   description            The Optical_Filter class defines the filters used by the camera optics (not to be confused with image processing software filters). The filter may be identified by name, identifier, number, or some combination of these.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -1663,8 +1682,13 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      pds.Local_Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
    name                   Flat_Field_Correction
-   description             The Flat_Field_Correction class specifies the onboard flat-field coefficients/parameters used in the algorithm to remove the flat field signature.
+   description             The Flat_Field_Correction class specifies how flat-field correction was performed on this image. This can be done either algorithmically, using a Radial_Flat_Field_Correction, or using a Flat_Field_File.
    is abstract            false
    is choice              false
    subclass of            Data_Processing

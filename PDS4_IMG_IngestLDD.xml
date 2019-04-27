@@ -155,7 +155,7 @@
     <name>autofocus_step_count</name>
     <version_id>1.0</version_id>
     <local_identifier>autofocus_step_count</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The autofocus_step_count attribute specifies the number of steps (images) to be taken by an autofocus algorithm.</definition>
     <DD_Value_Domain>
@@ -169,7 +169,7 @@
     <name>autofocus_step_size</name>
     <version_id>1.0</version_id>
     <local_identifier>autofocus_step_size</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The autofocus_step_size attribute specifies the size in motor counts of each (or the initial) step taken by the focus adjustment mechanism in an autofocus algorithm.</definition>
     <DD_Value_Domain>
@@ -201,7 +201,7 @@
     <name>best_focus_distance</name>
     <version_id>1.0</version_id>
     <local_identifier>best_focus_distance</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The best_focus_distance attribute specifies the estimated distance to best focus.</definition>
     <DD_Value_Domain>
@@ -546,7 +546,7 @@
     <name>device_id</name>
     <version_id>1.0</version_id>
     <local_identifier>device_id</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The device_id attribute supplies the identifier of an imaging instrument, 
       an imaging instrument device, or some point on the instrument or device.</definition>
@@ -835,7 +835,7 @@
     <name>focus_merge_blending_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>focus_merge_blending_flag</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The focus_merge_blending_flag attribute indicates whether intra-stack image 
       blending has been performed during a focus merge operation. A value of 'false' means images 
@@ -851,7 +851,7 @@
     <name>focus_merge_registration_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>focus_merge_registration_flag</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The focus_merge_registration_flag attribute indicates whether intra-stack image 
       registration has been performed during a focus merge operation. A value of 'true' indicates 
@@ -868,7 +868,7 @@
     <name>focus_mode</name>
     <version_id>1.0</version_id>
     <local_identifier>focus_mode</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The focus_mode attribute specifies the type of focus command, for example:
       Autofocus, Manual, ZStack, or Relative (focus adjustment based on a previous autofocus).</definition>
@@ -916,7 +916,7 @@
     <name>focus_position_count</name>
     <version_id>1.0</version_id>
     <local_identifier>focus_position_count</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The focus_position_count attribute specifies a commanded focus, or the initial focus position used by the autofocus algorithm.</definition>
     <DD_Value_Domain>
@@ -930,7 +930,7 @@
     <name>focus_stack_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>focus_stack_flag</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.</definition>
     <DD_Value_Domain>
@@ -944,7 +944,7 @@
     <name>frame_count</name>
     <version_id>1.0</version_id>
     <local_identifier>frame_count</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The frame_count attribute indicates the total number of image frames acquired,
       such as for a video or focus stack observation.</definition>
@@ -989,7 +989,7 @@
     <name>frame_rate</name>
     <version_id>1.0</version_id>
     <local_identifier>frame_rate</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The frame_rate attribute specifies the calculated frame rate for video products.</definition>
     <DD_Value_Domain>
@@ -1061,7 +1061,7 @@
     <name>gop_frame_count</name>
     <version_id>1.0</version_id>
     <local_identifier>gop_frame_count</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The gop_frame_count attribute indicates, for video products compressed into a 
       group of images (Group Of Pictures or GOP), the number of images in a GOP. This is not necessarily
@@ -1078,7 +1078,7 @@
     <name>gop_frame_index</name>
     <version_id>1.0</version_id>
     <local_identifier>gop_frame_index</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The gop_frame_index attribute specifies the frame index within a Group Of Pictures (GOP).</definition>
     <DD_Value_Domain>
@@ -1237,7 +1237,7 @@
     <name>maximum_focus_distance</name>
     <version_id>1.0</version_id>
     <local_identifier>maximum_focus_distance</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.</definition>
     <DD_Value_Domain>
@@ -1251,7 +1251,7 @@
     <name>minimum_focus_distance</name>
     <version_id>1.0</version_id>
     <local_identifier>minimum_focus_distance</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The minimum_focus_distance attribute specifies the estimated distance to the nearest pixel with less than 1 pixel of gaussian blur.</definition>
     <DD_Value_Domain>
@@ -1784,7 +1784,7 @@
     <name>readout_rate</name>
     <version_id>1.0</version_id>
     <local_identifier>readout_rate</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The readout_rate attribute specifies the clock rate at which values are read from the sensor.</definition>
     <DD_Value_Domain>
@@ -2182,7 +2182,7 @@
     <name>video_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>video_flag</local_identifier>
-    <nillable_flag>true</nillable_flag>
+    <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition> The video_flag attribute indicates whether or not video products were commanded. </definition>
     <DD_Value_Domain>
