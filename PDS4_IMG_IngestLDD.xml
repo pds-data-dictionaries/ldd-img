@@ -97,8 +97,8 @@
       auto_exposure_data_fraction attribute.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2423,25 +2423,25 @@
       <DD_Association>
           <identifier_reference>auto_exposure_data_cut</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>auto_exposure_percent</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>100</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>auto_exposure_pixel_fraction</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>100</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>max_auto_exposure_iteration_count</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
