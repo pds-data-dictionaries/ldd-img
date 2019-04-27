@@ -87,31 +87,67 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>autoexposure_algorithm_name</name>
+    <name>auto_exposure_data_cut</name>
     <version_id>1.0</version_id>
-    <local_identifier>autoexposure_algorithm_name</local_identifier>
+    <local_identifier>auto_exposure_data_cut</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The autoexposure_algorithm_name attribute provides the algorithm used for histogram thresholding or autoexposure of the image.
-      Some example algorithms from past missions are, 'Maki 2003' used on MER cameras, MSL ECAMs, M2020 EECAMs; 'Maurice 2012' used on MSL ChemCam; 'Smith 1997' used on Mars Pathfinder Imager.</definition>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The auto_exposure_data_cut attribute specifies the DN value which a specified
+      fraction of pixels is permitted to exceed. The fraction is specified using the 
+      auto_exposure_data_fraction attribute.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <!--  
-      <DD_Permissible_Value>
-        <value>Maki 2003</value>
-        <value_meaning>Autoexposure algorithm initially used on MER cameras, MSL ECAMs, M2020 EECAMs. Justin Maki et al., "Mars Exploration Rover Engineering Cameras", Journal of Geophysical Research, 108(E12), 2003.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Smith 1997</value>
-        <value_meaning>Autoexposure is performed using histogramming in a manner similar to that used on Mars Pathfinder Rover images. Smith, P. H., et al., "The Imager for Mars Pathfinder experiment",  Journal of Geophysical Research, 102(E2), 1997.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Maurice 2012</value>
-        <value_meaning>Autoexposure is performed using histogramming in a manner similar to that described in  "The ChemCam Instrument Suite on the Mars Science Laboratory (MSL) Rover: Science Objectives and Mast Unit Description",  Smith, P. H., et al.,  Journal of Geophysical Research, 102(E2), 1997.</value_meaning>
-      </DD_Permissible_Value>
-      -->
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>max_auto_exposure_iteration_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_auto_exposure_iteration_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The max_auto_exposure_iteration_count attribute specifies the maximum 
+      number of exposure iterations the instrument will perform in order to obtain 
+      the requested exposure.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>auto_exposure_percent</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_exposure_percent</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The auto_exposure_percent attribute specifies the auto-exposure early-termination
+      percent. If the desired DN (auto_exposure_data_cut) is within this percentage of the 
+      measured DN (the DN at which the percentage of pixels above that DN equals or exceeds 
+      the auto_exposure_pixel_fraction), then the auto exposure algorithm is terminated and 
+      the calculated time is accepted.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>auto_exposure_pixel_fraction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_exposure_pixel_fraction</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The auto_exposure_pixel_fraction attribute specifies the percentage 
+      of pixels whose DN values may exceed the auto_expsoure_data_cut.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2371,45 +2407,46 @@
       </DD_Association>
   </DD_Class>
   
-  <!-- Class: Algorithm_Parameter -->  
-  <DD_Class>
-      <name>Algorithm_Parameter</name>
-      <version_id>1.0</version_id>
-      <local_identifier>Algorithm_Parameter</local_identifier>
-      <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Algorithm_Parameter class provides a name and value(s) use for input into the autoexposure algorithm.</definition>
-      <DD_Association>
-          <identifier_reference>pds.name</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
-          <identifier_reference>pds.value</identifier_reference>
-          <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-  </DD_Class>
-  
   <!-- Class: Autoexposure -->
   <DD_Class>
       <name>Autoexposure</name>
       <version_id>1.0</version_id>
       <local_identifier>Autoexposure</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition>The Autoexposure class contains attributes used to identify or describe the histogram
-          thresholding algorithm and applicable attributes required for those algorithms. The input parameters for the algorithm can be specified 
-          using the Algorithm_Parameter class or via a Local_Internal_Reference to a mission-specific parameter definition.</definition>
+      <definition>The Autoexposure class contains attributes used to identify or describe
+        the algorithm used to automatically calculate the proper exposure time. This is 
+        generally based on some kind of histogram analysis. The specific autoexposure 
+        algorithm used is defined in the processing_algorithm attribute, and the specific 
+        set of attributes needed to describe it will vary based on the algorithm. Examples 
+        of autoexposure algorithms include "Maki 2003" used on MER, MSL ECAMs, M2020 ECAMS; 
+        "Maurice 2012" used on MSL ChemCam; "Smith 1997" used on Mars Pathfinder Imager.</definition>
       <DD_Association>
-          <identifier_reference>autoexposure_algorithm_name</identifier_reference>
+          <identifier_reference>auto_exposure_data_cut</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Algorithm_Parameter</identifier_reference>
-          <reference_type>component_of</reference_type>
+        <identifier_reference>auto_exposure_percent</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>auto_exposure_pixel_fraction</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>max_auto_exposure_iteration_count</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+          <identifier_reference>Data_Processing</identifier_reference>
+          <reference_type>parent_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
@@ -2640,11 +2677,33 @@
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Companding_File</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+    <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Companding_File class definition -->
+  <DD_Class>
+    <name>Companding_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Companding_File</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Companding _File class specifies the file containing the 
+      decompanding (inverse LUT) table used to process the data.</definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Onboard_Compression class definition -->
