@@ -98,7 +98,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1769,7 +1769,7 @@
     <local_identifier>raw_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The raw_count attribute provides the value of some parameter measured by a
+    <definition>The raw_count attribute provides the value of some parameter measured by a
       spacecraft or instrument sensor in the raw units reported by that sensor. A separate attribute
       should be included alongside the raw_count that translates this value into the appropriate
       engineering units. i.e. temperature_value in degrees C or voltage_value in Volts</definition>
@@ -2328,12 +2328,6 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Optical_Filter</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
         <identifier_reference>Flat_Field_Correction</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -2359,6 +2353,12 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Optical_Filter</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
@@ -2447,8 +2447,8 @@
       <DD_Association>
           <identifier_reference>Data_Processing</identifier_reference>
           <reference_type>parent_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
+          <minimum_occurrences>1</minimum_occurrences>
+          <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -2470,13 +2470,13 @@
       <DD_Association>
         <identifier_reference>color_filter_array_type</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>color_filter_array_state</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
@@ -2586,12 +2586,6 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Optical_Filter</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>*</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
         <identifier_reference>Flat_Field_Correction</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -2617,6 +2611,12 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Optical_Filter</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
@@ -2673,7 +2673,7 @@
       <DD_Association>
         <identifier_reference>companding_state</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
@@ -2964,16 +2964,16 @@
         of an imaging instrument or other imaging device. The meaning of "state" is 
         device-specific.</definition>
       <DD_Association>
-          <identifier_reference>Device_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>device_state</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Device_Parameters</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3002,16 +3002,16 @@
       <definition>The Device_Current class provides the current of some point
           on an imaging instrument or other imaging device.</definition>
       <DD_Association>
-          <identifier_reference>Device_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>current_value</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Device_Parameters</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3044,16 +3044,16 @@
         a more specific and useable form in other classes, such as a filter number or wavelength
         in the Optical_Filter class or a focus distnace in the Focus class.</definition>
       <DD_Association>
-          <identifier_reference>Device_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>motor_count</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Device_Parameters</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3112,12 +3112,6 @@
       <definition>The Device_Temperature class provides a container for the
           temperature of some point on an imaging instrument or other imaging device.</definition>
       <DD_Association>
-          <identifier_reference>Device_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>raw_count</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
@@ -3134,6 +3128,12 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Device_Parameters</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3162,16 +3162,16 @@
       <definition>The Device_Voltage class provides the voltage of some point
           on an imaging instrument or other imaging device.</definition>
       <DD_Association>
-          <identifier_reference>Device_Parameters</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
-      </DD_Association>
-      <DD_Association>
           <identifier_reference>voltage_value</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Device_Parameters</identifier_reference>
+        <reference_type>parent_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3196,7 +3196,7 @@
       <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
+        <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
@@ -3321,7 +3321,7 @@
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
-        <maximum_occurrences>*</maximum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3339,7 +3339,7 @@
       <identifier_reference>Data_Processing_File</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
-      <maximum_occurrences>*</maximum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
   
@@ -3898,7 +3898,7 @@
       <DD_Association>
           <identifier_reference>radiance_type</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
@@ -3910,31 +3910,31 @@
       <DD_Association>
         <identifier_reference>responsivity_r</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>responsivity_g</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>responsivity_b</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>responsivity_pan</identifier_reference>
         <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>1</minimum_occurrences>
+        <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
+        <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
@@ -3995,13 +3995,13 @@
       <DD_Association>
           <identifier_reference>shutter_subtraction_mode</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>exposure_duration_threshold_count</identifier_reference>
           <reference_type>attribute_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
