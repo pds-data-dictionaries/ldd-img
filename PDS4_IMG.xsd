@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.11.0.0 - Fri Apr 26 20:25:02 PDT 2019 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.6.0.0 - Fri May 03 14:49:53 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.11.0.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.11.0.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                        -->
+  <!-- 1.6.0.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -13,7 +13,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.11.0.0">
+    version="1.6.0.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd"/>
  
@@ -41,17 +41,25 @@
     - added new enumerations for compression_class and compression_type
     - added new Instrument_Device_Currents class
     
-    
     1.5.0.0
     - upgraded to v1A10 of the IM
     - removed old blocks of commented out XML
-    
     
     1.5.1.0
     - changed unit of bandwidth attribute from Units_of_Frequency to Units_of_Length
     
     1.6.0.0
-    - 
+    - Upgraded to v1B00 of the IM.
+    - Re-organized attributes into alphabetical order.
+    - Re-organized classes to make most commonly used parts of label easier to find.
+    - Created new classes for housekeeping data (Instrument_State_Parameters, Commanded_Parameters) and placed them at the bottom.
+    - Re-wrote numerous class and attribute definitions, to make dictionary easier for users to understand.
+    - Renamed some classes and attributes to remove redundant words.
+    - Re-designed data correction classes (such as Flat_Field_Correction, Radiometric_Correction, etc.) and 
+      other data processing classes such as Companding, Downsampling, etc. to share a common base class.
+    - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it clear 
+      that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
+    - Renamed Filter_Parameters to Optical_Filter
     
   
     </xs:documentation>
@@ -76,8 +84,8 @@
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
           <xs:element name="auto_exposure_data_cut" type="img:auto_exposure_data_cut" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="auto_exposure_percent" type="img:auto_exposure_percent" minOccurs="0" maxOccurs="100"> </xs:element>
-          <xs:element name="auto_exposure_pixel_fraction" type="img:auto_exposure_pixel_fraction" minOccurs="0" maxOccurs="100"> </xs:element>
+          <xs:element name="auto_exposure_percent" type="img:auto_exposure_percent" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_pixel_fraction" type="img:auto_exposure_pixel_fraction" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="max_auto_exposure_iteration_count" type="img:max_auto_exposure_iteration_count" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
@@ -100,8 +108,8 @@
     <xs:complexContent>
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
-          <xs:element name="color_filter_array_type" type="img:color_filter_array_type" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="color_filter_array_state" type="img:color_filter_array_state" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="color_filter_array_type" type="img:color_filter_array_type" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="color_filter_array_state" type="img:color_filter_array_state" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
         <!-- <xs:assert test="img:color_filter_array_type = ('Bayer RGGB')"/> -->
@@ -147,12 +155,12 @@
       <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Exposure" type="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Flat_Field_Correction" type="img:Flat_Field_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Focus" type="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -188,7 +196,7 @@
     <xs:complexContent>
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
-          <xs:element name="companding_state" type="img:companding_state" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="companding_state" type="img:companding_state" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="Companding_File" type="img:Companding_File" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
@@ -310,6 +318,22 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Device_Component_State">
+    <xs:annotation>
+      <xs:documentation>The Device_Component_State class describes the
+        state of one component of an imaging instrument or other imaging
+        device. The meaning of "state" is
+        device-specific.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Device_Parameters">
+        <xs:sequence>
+          <xs:element name="device_state" type="img:device_state" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
   <xs:complexType name="Device_Component_States">
     <xs:annotation>
       <xs:documentation>The Device_Component_States class provides a
@@ -317,7 +341,7 @@
         instrument or other imaging device.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="Device_Component_State" type="geom:Device_Component_State" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Device_Component_State" type="img:Device_Component_State" minOccurs="1" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -327,10 +351,13 @@
         some point on an imaging instrument or other imaging
         device.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="current_value" nillable="true" type="img:current_value" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Device_Parameters">
+        <xs:sequence>
+          <xs:element name="current_value" nillable="true" type="img:current_value" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Device_Currents">
@@ -354,10 +381,13 @@
         number or wavelength in the Optical_Filter class or a focus
         distnace in the Focus class.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="motor_count" type="img:motor_count" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Device_Parameters">
+        <xs:sequence>
+          <xs:element name="motor_count" type="img:motor_count" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Device_Motor_Counts">
@@ -382,10 +412,29 @@
         measurement rather than being used directly.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="device_name" nillable="true" type="img:device_name" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="device_id" type="img:device_id" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="sequence_number" type="img:sequence_number" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="1" maxOccurs="3">
+        <xs:element name="device_name" nillable="true" type="img:device_name"> </xs:element>
+        <xs:element name="device_id" type="img:device_id"> </xs:element>
+        <xs:element name="sequence_number" type="img:sequence_number"> </xs:element>
+    </xs:choice>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Device_Temperature">
+    <xs:annotation>
+      <xs:documentation>The Device_Temperature class provides a
+        container for the temperature of some point on an imaging
+        instrument or other imaging device.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Device_Parameters">
+        <xs:sequence>
+          <xs:element name="raw_count" type="img:raw_count" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="temperature_value" type="img:temperature_value" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="temperature_status" type="img:temperature_status" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Device_Temperatures">
@@ -395,7 +444,7 @@
         or other imaging device.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="Device_Temperature" type="geom:Device_Temperature" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Device_Temperature" type="img:Device_Temperature" minOccurs="1" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -405,10 +454,13 @@
         some point on an imaging instrument or other imaging
         device.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Device_Parameters" type="img:Device_Parameters" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="voltage_value" nillable="true" type="img:voltage_value" minOccurs="1" maxOccurs="1"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Device_Parameters">
+        <xs:sequence>
+          <xs:element name="voltage_value" nillable="true" type="img:voltage_value" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Device_Voltages">
@@ -540,13 +592,16 @@
         to extract range information. Focus stacks are also sometimes
         called ZStacks.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="video_flag" type="img:video_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="focus_stack_flag" type="img:focus_stack_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="frame_count" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="focus_merge_blending_flag" type="img:focus_merge_blending_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="focus_merge_registration_flag" type="img:focus_merge_registration_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="focus_stack_flag" type="img:focus_stack_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="frame_count" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="focus_merge_blending_flag" type="img:focus_merge_blending_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="focus_merge_registration_flag" type="img:focus_merge_registration_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="Frame">
@@ -622,12 +677,12 @@
       <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Exposure" type="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Flat_Field_Correction" type="img:Flat_Field_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Focus" type="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -856,12 +911,13 @@
     <xs:complexContent>
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
-          <xs:element name="radiance_type" type="img:radiance_type" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="radiance_zenith_scaling_factor" type="img:radiance_zenith_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_b" type="img:responsivity_b" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_pan" type="img:responsivity_pan" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="radiometric_type" type="img:radiometric_type" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="radiometric_zenith_scaling_factor" type="img:radiometric_zenith_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_b" type="img:responsivity_b" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_pan" type="img:responsivity_pan" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -893,8 +949,8 @@
     <xs:complexContent>
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
-          <xs:element name="shutter_subtraction_mode" type="img:shutter_subtraction_mode" minOccurs="1" maxOccurs="1"> </xs:element>
-          <xs:element name="exposure_duration_threshold_count" type="img:exposure_duration_threshold_count" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="shutter_subtraction_mode" type="img:shutter_subtraction_mode" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="exposure_duration_threshold_count" type="img:exposure_duration_threshold_count" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
         <!-- <xs:assert test="img:shutter_subtraction_mode = ('Conditional', 'True')"/> -->
@@ -979,26 +1035,18 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="auto_exposure_data_cut_WO_Units">
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="auto_exposure_data_cut">
+  <xs:simpleType name="auto_exposure_data_cut">
     <xs:annotation>
       <xs:documentation>The auto_exposure_data_cut attribute specifies
         the DN value which a specified fraction of pixels is permitted
         to exceed. The fraction is specified using the
         auto_exposure_data_fraction attribute.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:auto_exposure_data_cut_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="auto_exposure_percent">
     <xs:annotation>
@@ -1309,6 +1357,19 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="device_state">
+    <xs:annotation>
+      <xs:documentation>The device_state attribute indicates the state
+        of a sensor or other device associated with the imaging
+        instrument. These states are interpreted in an
+        instrument-specific way.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="downtrack_summing">
     <xs:annotation>
@@ -2239,10 +2300,10 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="radiance_type">
+  <xs:simpleType name="radiometric_type">
     <xs:annotation>
-      <xs:documentation>The radiance_type defines the specific type of
-        radiance measurement. Possible values include "Radiance",
+      <xs:documentation>The radiometric_type defines the specific type
+        of radiance measurement. Possible values include "Radiance",
         "Spectral Radiance", "Scaled Spectral Radiance". Note: There are
         many more possible values, and this definition can be updated to
         include more examples over time. </xs:documentation>
@@ -2253,14 +2314,7 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="radiance_zenith_scaling_factor_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="radiance_zenith_scaling_factor">
+  <xs:simpleType name="radiometric_zenith_scaling_factor">
     <xs:annotation>
       <xs:documentation>Defines the scaling factor used for Scaled
         Radiance or Scaled Spectral Radiance. Scaled radiance is created
@@ -2268,12 +2322,28 @@
         to what it would be if the sun were at the zenith with a clear
         atmosphere.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:radiance_zenith_scaling_factor_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="raw_count">
+    <xs:annotation>
+      <xs:documentation>The raw_count attribute provides the value of
+        some parameter measured by a spacecraft or instrument sensor in
+        the raw units reported by that sensor. A separate attribute
+        should be included alongside the raw_count that translates this
+        value into the appropriate engineering units. i.e.
+        temperature_value in degrees C or voltage_value in
+        Volts</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="readout_rate_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -2611,6 +2681,39 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="temperature_status">
+    <xs:annotation>
+      <xs:documentation>The temperature_status attribute defines the
+        status of the associated temperature measurement. The status is
+        interpreted in a device-specific way, but generally 0 indicates
+        a successful measurement.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="temperature_value_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="temperature_value">
+    <xs:annotation>
+      <xs:documentation>The temperature_value attribute provides the
+        temperature, in the specified units, of some point on an imaging
+        instrument or other imaging instrument device.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:temperature_value_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Temperature" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="value_number">
     <xs:annotation>
       <xs:documentation>The value_number attribute provides the value
@@ -2632,15 +2735,6 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="video_flag">
-    <xs:annotation>
-      <xs:documentation> The video_flag attribute indicates whether or
-        not video products were commanded. </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -2746,7 +2840,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.11.0.0" ,
-      "Date": "Fri Apr 26 20:25:02 PDT 2019" ,
+      "Date": "Fri May 03 14:49:53 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

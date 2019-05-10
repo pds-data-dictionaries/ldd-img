@@ -1,16 +1,23 @@
 PDS4 Local Data Dictionary Processing Report
 
 Configuration:
-   LDDTool Version        0.2.1.5b
-   Time                   Fri Apr 26 20:25:02 PDT 2019
-   Core Schemas           [PDS4_PDS_1B00.xsd]
-   Core Schematrons       [PDS4_PDS_1B00.sch]
-   Common Model Version   1.11.0.0
-   Object Model           [UpperModel.pont]
-   Data Dictionary        [dd11179.pins]
-   Configuration File     [MDPTNConfigClassDisp.xml]
-   Glossary               [Glossary.pins]
-   Document Spec          [DMDocument.pins]
+   LDDTool Version        0.2.2.3
+   LDD Version Id:        1.6.0.0
+   LDD Label Version Id:  1.0
+   LDD Discipline (T/F):  true
+   LDD Namespace URL:     http://pds.nasa.gov/pds4/
+   LDD URN Prefix:        TBD_urnPrefix
+   Time                   Fri May 03 14:49:53 PDT 2019
+   Common Schema          [PDS4_PDS_1B00.xsd]
+   Common Schematron      [PDS4_PDS_1B00.sch]
+   IM Version Id:         1.11.0.0
+   IM Namespace Id:       pds
+   IM Label Version Id:   1.17
+   IM Object Model        [UpperModel.pont]
+   IM Data Dictionary     [dd11179.pins]
+   IM Configuration File  [MDPTNConfigClassDisp.xml]
+   IM Glossary            [Glossary.pins]
+   IM Document Spec       [DMDocument.pins]
 
 Parameters:
    Input File             [PDS4_IMG_IngestLDD.xml]
@@ -24,12 +31,13 @@ Parameters:
 Summary:
    Classes                49
    Attributes             122
-   Associations           224
+   Associations           226
    Error messages         0
-   Warning messages       0
+   Warning messages       1
    Information messages   40
 
 Detailed validation messages
+   WARNING  Attribute: <video_flag> - This local attribute was not used in an Association.
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -99,20 +107,28 @@ Parsed Input - Header:
     - added new enumerations for compression_class and compression_type
     - added new Instrument_Device_Currents class
     
-    
     1.5.0.0
     - upgraded to v1A10 of the IM
     - removed old blocks of commented out XML
-    
     
     1.5.1.0
     - changed unit of bandwidth attribute from Units_of_Frequency to Units_of_Length
     
     1.6.0.0
-    - 
+    - Upgraded to v1B00 of the IM.
+    - Re-organized attributes into alphabetical order.
+    - Re-organized classes to make most commonly used parts of label easier to find.
+    - Created new classes for housekeeping data (Instrument_State_Parameters, Commanded_Parameters) and placed them at the bottom.
+    - Re-wrote numerous class and attribute definitions, to make dictionary easier for users to understand.
+    - Renamed some classes and attributes to remove redundant words.
+    - Re-designed data correction classes (such as Flat_Field_Correction, Radiometric_Correction, etc.) and 
+      other data processing classes such as Companding, Downsampling, etc. to share a common base class.
+    - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it clear 
+      that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
+    - Renamed Filter_Parameters to Optical_Filter
     
   
-   Last Modification Time 2019-03-27T19:23:00Z
+   Last Modification Time 2019-05-02T14:00:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -131,7 +147,6 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Integer
    description            The auto_exposure_data_cut attribute specifies the DN value which a specified fraction of pixels is permitted to exceed. The fraction is specified using the auto_exposure_data_fraction attribute.
-   unit of measure type   Units_of_Misc
 
    name                   max_auto_exposure_iteration_count
    version                1.11
@@ -672,21 +687,20 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            The r3 attribute specifies specifies the 3rd-order polynomial coefficient of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
 
-   name                   radiance_zenith_scaling_factor
+   name                   radiometric_zenith_scaling_factor
    version                1.11
    value data type        ASCII_Real
    description            Defines the scaling factor used for Scaled Radiance or Scaled Spectral Radiance. Scaled radiance is created by dividing radiance by this factor, which scales the radiance to what it would be if the sun were at the zenith with a clear atmosphere.
-   unit of measure type   Units_of_Spectral_Radiance
 
-   name                   radiance_type
+   name                   radiometric_type
    version                1.11
    value data type        ASCII_Short_String_Collapsed
-   description            The radiance_type defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
+   description            The radiometric_type defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
 
    name                   raw_count
    version                1.11
    value data type        ASCII_NonNegative_Integer
-   description             The raw_count attribute provides the value of some parameter measured by a spacecraft or instrument sensor in the raw units reported by that sensor. A separate attribute should be included alongside the raw_count that translates this value into the appropriate engineering units. i.e. temperature_value in degrees C or voltage_value in Volts
+   description            The raw_count attribute provides the value of some parameter measured by a spacecraft or instrument sensor in the raw units reported by that sensor. A separate attribute should be included alongside the raw_count that translates this value into the appropriate engineering units. i.e. temperature_value in degrees C or voltage_value in Volts
 
    name                   readout_rate
    version                1.11
@@ -821,7 +835,7 @@ Parsed Input - Attributes:
    description            The value_string attribute provides the value with no applicable units as named by the associated id, name, or sequence_number. 
 
    name                   video_flag
-   version                1.11
+   version                1.0
    value data type        ASCII_Boolean
    description             The video_flag attribute indicates whether or not video products were commanded. 
 
@@ -896,11 +910,6 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Optical_Filter
-      minimum occurrences   0
-      maximum occurrences   *
-      reference type        component_of
-
       local identifier      Flat_Field_Correction
       minimum occurrences   0
       maximum occurrences   1
@@ -922,6 +931,11 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -976,12 +990,12 @@ Parsed Input - Classes:
 
       local identifier      auto_exposure_percent
       minimum occurrences   0
-      maximum occurrences   100
+      maximum occurrences   1
       reference type        attribute_of
 
       local identifier      auto_exposure_pixel_fraction
       minimum occurrences   0
-      maximum occurrences   100
+      maximum occurrences   1
       reference type        attribute_of
 
       local identifier      max_auto_exposure_iteration_count
@@ -990,8 +1004,8 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      Data_Processing
-      minimum occurrences   0
-      maximum occurrences   *
+      minimum occurrences   1
+      maximum occurrences   1
       reference type        parent_of
 
    name                   Color_Filter_Array
@@ -1003,12 +1017,12 @@ Parsed Input - Classes:
    Associations
 
       local identifier      color_filter_array_type
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      color_filter_array_state
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
@@ -1098,11 +1112,6 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Optical_Filter
-      minimum occurrences   0
-      maximum occurrences   *
-      reference type        component_of
-
       local identifier      Flat_Field_Correction
       minimum occurrences   0
       maximum occurrences   1
@@ -1124,6 +1133,11 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -1157,7 +1171,7 @@ Parsed Input - Classes:
    Associations
 
       local identifier      companding_state
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
@@ -1422,19 +1436,19 @@ Parsed Input - Classes:
    description            The Device_Component_State class describes the state of one component of an imaging instrument or other imaging device. The meaning of "state" is device-specific.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Device_Parameters
 
    Associations
+
+      local identifier      device_state
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
       local identifier      Device_Parameters
       minimum occurrences   1
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      device_state
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        attribute_of
+      reference type        parent_of
 
    name                   Device_Currents
    description            The Device_Currents class provides a container for the set of currents of an imaging instrument or other imaging device.
@@ -1453,19 +1467,19 @@ Parsed Input - Classes:
    description            The Device_Current class provides the current of some point on an imaging instrument or other imaging device.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Device_Parameters
 
    Associations
+
+      local identifier      current_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
       local identifier      Device_Parameters
       minimum occurrences   1
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      current_value
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        attribute_of
+      reference type        parent_of
 
    name                   Device_Motor_Counts
    description            The Device_Motor_Counts class provides a container for the set of raw motor counts of actuators on an imaging instrument or other imaging device (such as a filter wheel, focus motor, or zoom motor).
@@ -1484,19 +1498,19 @@ Parsed Input - Classes:
    description            The Device_Motor_Count class describes the raw motor count of one actuator on an imaging instrument or other imaging device (such as a filter wheel, focus motor, or zoom motor). This information should typically be reported in a more specific and useable form in other classes, such as a filter number or wavelength in the Optical_Filter class or a focus distnace in the Focus class.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Device_Parameters
 
    Associations
+
+      local identifier      motor_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
       local identifier      Device_Parameters
       minimum occurrences   1
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      motor_count
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        attribute_of
+      reference type        parent_of
 
    name                   Device_Parameters
    description            The Device_Parameters class identifies where a measurement was made. It may refer to an individual imaging instrument, imaging instrument device, or some defined point on the instrument or device. The class is intended to be extended (for example, by Device_Temperature) to add the associated measurement rather than being used directly.
@@ -1506,19 +1520,24 @@ Parsed Input - Classes:
 
    Associations
 
+      local identifier      XSChoice#
+      minimum occurrences   1
+      maximum occurrences   3
+      reference type        attribute_of
+
       local identifier      device_name
       minimum occurrences   1
-      maximum occurrences   1
+      maximum occurrences   3
       reference type        attribute_of
 
       local identifier      device_id
       minimum occurrences   1
-      maximum occurrences   1
+      maximum occurrences   3
       reference type        attribute_of
 
       local identifier      sequence_number
       minimum occurrences   1
-      maximum occurrences   1
+      maximum occurrences   3
       reference type        attribute_of
 
    name                   Device_Temperatures
@@ -1538,29 +1557,29 @@ Parsed Input - Classes:
    description            The Device_Temperature class provides a container for the temperature of some point on an imaging instrument or other imaging device.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Device_Parameters
 
    Associations
 
-      local identifier      Device_Parameters
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        component_of
-
       local identifier      raw_count
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      temperature_value
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      temperature_status
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      Device_Parameters
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
 
    name                   Device_Voltages
    description            The Device_Voltage class provides a container for the set of voltages of an imaging instrument or other imaging device.
@@ -1579,19 +1598,19 @@ Parsed Input - Classes:
    description            The Device_Voltage class provides the voltage of some point on an imaging instrument or other imaging device.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Device_Parameters
 
    Associations
+
+      local identifier      voltage_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
       local identifier      Device_Parameters
       minimum occurrences   1
       maximum occurrences   1
-      reference type        component_of
-
-      local identifier      voltage_value
-      minimum occurrences   1
-      maximum occurrences   1
-      reference type        attribute_of
+      reference type        parent_of
 
    name                   Downsampling
    description             The Downsampling class describes whether or not downsampling occurred, the venue where it occurrected (Software or Hardware), the method used to downsample, and the pixel averaging dimensions. A downsampled image is a smaller version of the image, resulting in reduced resolution of the same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean., 'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.
@@ -1607,7 +1626,7 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Data_Processing
-      minimum occurrences   0
+      minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
 
@@ -1707,7 +1726,7 @@ Parsed Input - Classes:
 
       local identifier      Data_Processing
       minimum occurrences   1
-      maximum occurrences   *
+      maximum occurrences   1
       reference type        parent_of
 
    name                   Flat_Field_File
@@ -1720,7 +1739,7 @@ Parsed Input - Classes:
 
       local identifier      Data_Processing_File
       minimum occurrences   1
-      maximum occurrences   *
+      maximum occurrences   1
       reference type        parent_of
 
    name                   Focus
@@ -1775,14 +1794,9 @@ Parsed Input - Classes:
    description            The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks.
    is abstract            false
    is choice              false
-   subclass of            USER
+   subclass of            Data_Processing
 
    Associations
-
-      local identifier      video_flag
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        attribute_of
 
       local identifier      focus_stack_flag
       minimum occurrences   0
@@ -1803,6 +1817,11 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      Data_Processing
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
 
    name                   Frame
    description            The Frame class contains attributes providing information specific to an image frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different instrument modes.
@@ -2183,38 +2202,43 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      radiance_type
-      minimum occurrences   1
+      local identifier      radiometric_type
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      radiance_zenith_scaling_factor
+      local identifier      radiometric_zenith_scaling_factor
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      responsivity_r
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      responsivity_g
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      responsivity_b
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      responsivity_pan
-      minimum occurrences   1
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.comment
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      Data_Processing
-      minimum occurrences   0
+      minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
 
@@ -2265,12 +2289,12 @@ Parsed Input - Classes:
    Associations
 
       local identifier      shutter_subtraction_mode
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      exposure_duration_threshold_count
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
