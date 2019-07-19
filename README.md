@@ -12,9 +12,10 @@ The build process ensures compatibility of the LDD with the core information mod
 
 This LDD has been released for the following versions of the PDS4 information model:
 
-- [PDS4 IM v1.11.0.0 (IMG LDD v1.6.0.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.11.0.0)
-- [PDS4 IM v1.10.1.0 (IMG LDD v1.5.1.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.10.1.0)
-- [PDS4 IM v1.9.0.0 (IMG LDD v1.3.0.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.9.0.0)
+- [PDS4 IM v1.11.0.0 (IMG LDD v1.6.1.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.6.1.0)
+- [PDS4 IM v1.11.0.0 (IMG LDD v1.6.0.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.6.0.0)
+- [PDS4 IM v1.10.1.0 (IMG LDD v1.5.1.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.5.1.0)
+- [PDS4 IM v1.9.0.0 (IMG LDD v1.3.0.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.3.0.0)
 - [PDS4 IM v1.1.0.0 (IMG LDD v1.1.0.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.1.0.0)
 
 
