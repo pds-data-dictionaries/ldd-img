@@ -7,7 +7,7 @@
 <Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.6.0.0</ldd_version_id>
+  <ldd_version_id>1.6.1.0</ldd_version_id>
   <full_name>R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
@@ -52,6 +52,12 @@
     - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it clear 
       that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
     - Renamed Filter_Parameters to Optical_Filter
+    
+    1.6.1.0
+    - Added Brightness_Correction class and associated subclasses/attributes
+    - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE LDD)
+    - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
+    - Corrected typo in local_reference_type_check_optical_filter rule
     
   </comment>
   <last_modification_date_time>2019-05-02T14:00:00Z</last_modification_date_time>
@@ -220,6 +226,36 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>brightness_scale</name>
+    <version_id>1.0</version_id>
+    <local_identifier>brightness_scale</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The brightness_scale attribute defines the multiplicative factor used
+      for a linear brightness correction.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>brightness_offset</name>
+    <version_id>1.0</version_id>
+    <local_identifier>brightness_offset</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The brightness_offset attribute defines the additive factor used for a
+      linear brightness correction.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>center_filter_wavelength</name>
     <version_id>1.0</version_id>
     <local_identifier>center_filter_wavelength</local_identifier>
@@ -301,6 +337,37 @@
         <value>Intensity</value>
         <value_meaning>Intensity component of HSI</value_meaning>
       </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>color_dn_scaling_factor</name>
+    <version_id>1.0</version_id>
+    <local_identifier>color_dn_scaling_factor</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The color_dn_scaling_factor attribute specifies the actual value used to scale 
+      the color values. This value is determined using the color_dn_scaling_method.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>color_dn_scaling_method</name>
+    <version_id>1.0</version_id>
+    <local_identifier>color_dn_scaling_method</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The color_dn_scaling_method attribute defines how the color values are scaled. 
+      EXPOSURE_NORMALIZED_COLOR means that the color values have been normalized based on exposure 
+      time, so neighboring images in a mosaic will have the same color values. DN_COLOR means that 
+      the color values are based on the raw DNs, so images take full advantage of the available
+      dynamic range but may not match with neighbors in a mosaic.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1163,7 +1230,7 @@
     <local_identifier>interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The interframe_delay attribute provides the time between the end of one frame and the 
+    <definition>The interframe_delay attribute provides the time between the end of one frame and the 
       beginning of the next frame in a video product.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
@@ -1179,7 +1246,7 @@
     <local_identifier>jpeg_parameter</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The jpeg_parameter attribute is a JPEG specific variable which
+    <definition>The jpeg_parameter attribute is a JPEG specific variable which
       specifies on-board compression determination by image quality or by compression factor, based
       on a selected on-board compression mode. </definition>
     <DD_Value_Domain>
@@ -1195,7 +1262,7 @@
     <local_identifier>jpeg_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The jpeg_quality attribute is a JPEG specific variable which
+    <definition>The jpeg_quality attribute is a JPEG specific variable which
       identifies the resultant or targeted image quality index for on-board data compression.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -1591,6 +1658,50 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>pointing_model_name</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pointing_model_name</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The pointing_model_name attribute specifies which of several "pointing models" were
+      used to transform the camera model based on updated pointing information. These updates are
+      typically derived from mosaic seam corrections. This attribute and the associated
+      Pointing_Model_Index classes define what the updated pointing information is, providing enough
+      information to re-create the camera model from calibration data. If present, this attribute
+      overrides the default pointing based on telemetry. The special value "NONE" shall be
+      interpreted the same as if the attribute is absent (i.e. the default pointing model should be
+      used). New model names can be created at any time; the models themselves should be described
+      in a mission-specific ancillary file. See also the geom:solution_id attribute within the
+      geom:Camera_Model_Parameters class.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>pointing_model_solution_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pointing_model_solution_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The pointing_model_solution_id attribute specifies the identifier of the pointing
+      correction solution used to derive the model specified via the enclosing
+      Pointing_Correction class. This identifier should also appear in the pointing
+      correction file referenced by the Data_Correction_File. If there is only one identifier in the
+      correction file, then pointing_model_solution_id may be omitted. The
+      pointing_model_solution_id attribute may be reused in the context of pointing corrections,
+      although uniqueness is recommended. The pointing correction solution ID namespace is separate
+      from the coordinate system namespace.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2305,6 +2416,12 @@
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Brightness_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
           <identifier_reference>Color_Filter_Array</identifier_reference>
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -2369,6 +2486,12 @@
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Pointing_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Radiometric_Correction</identifier_reference>
@@ -2459,6 +2582,134 @@
       </DD_Association>
   </DD_Class>
   
+  <!-- Class: Brightness_Correction -->
+  <DD_Class>
+    <name>Brightness_Correction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Brightness_Correction</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Brightness_Correction class describes brightness corrections that
+      were applied to an image or mosaic. Brightness correction is the process of adjusting 
+      the DN values of adjacent frames in a mosaic so they match visually. It may also involve 
+      contrast or vignetting adjustments. The result may no longer be radiometrically calibrated due
+      to the adjustments. The processing_algorithm child of Brightness_Correction describes the type 
+      of brightness correction, and should correspond to the classes within Brightness_Correction_Image. 
+      If the algorithm is "MIXED", multiple algorithms were used, in which case the specific information 
+      in each Brightness_Correction_Image must be used.</definition>
+    <DD_Association>
+      <identifier_reference>Brightness_Correction_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Brightness_Correction_Image</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Brightness_Correction_File -->
+  <DD_Class>
+    <name>Brightness_Correction_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Brightness_Correction_File</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Brightness_Correction_File identifies a file containing brightness
+      correction information. The project SIS should define the format of this file. 
+      Correction information may appear in the file, in instances of the Brightness_Correction_Image 
+      class, or both (if both, they should be consistent).</definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
+  <!-- Class: Brightness_Correction_Image -->
+  <DD_Class>
+    <name>Brightness_Correction_Image</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Brightness_Correction_Image</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Brighness_Correction_Image class describes the brightness correction
+      that was applied to a single image, whether alone or part of a mosaic. The image this 
+      correction applies to may be identified via the enclosed Internal_Reference, or via the 
+      order in which the Brightness_Correction_Image objects appear (which matches the order 
+      given in Input_Product_List).</definition>
+    <DD_Association>
+      <identifier_reference>pds.Internal_Reference</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Brightness_Correction_Linear</identifier_reference>
+      <identifier_reference>Brightness_Correction_HSI_Linear</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Brightness_Correction_HSI_Linear -->
+  <DD_Class>
+    <name>Brightness_Correction_HSI_Linear</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Brightness_Correction_HSI_Linear</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Brightness_Correction_HSI_Linear class works just like
+      Brightness_Correction_Linear, except that the color image is first
+      converted to HSI (Hue, Saturation, Intensity) space, the correction is
+      applied only to Intensity, and then the result is converted back to RGB space.</definition>
+    <DD_Association>
+      <identifier_reference>brightness_scale</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>brightness_offset</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Brightness_Correction_Linear -->
+  <DD_Class>
+    <name>Brightness_Correction_Linear</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Brightness_Correction_Linear</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Brightness_Correction_Linear class describes a simple linear
+      brightness correction, with an additive (brightness_offset) and
+      multiplicative (brightness_scale) factor applied. The result is: 
+      output = input * brightness_scale + brightness_offset. If there are multiple
+      bands, the same correction is applied to each band.</definition>
+    <DD_Association>
+      <identifier_reference>brightness_scale</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>brightness_offset</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
   <!-- Class: Color_Filter_Array -->
   <DD_Class>
       <name>Color_Filter_Array</name>
@@ -2527,6 +2778,18 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>color_dn_scaling_method</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>color_dn_scaling_factor</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Onboard_Responsivity</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -2561,6 +2824,12 @@
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Brightness_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Color_Filter_Array</identifier_reference>
@@ -2627,6 +2896,12 @@
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Pointing_Correction</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Radiometric_Correction</identifier_reference>
@@ -3180,7 +3455,7 @@
       <local_identifier>Downsampling</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition> The Downsampling class describes whether or not downsampling occurred, the venue where 
-          it occurrected (Software or Hardware), the method used to downsample, and the pixel averaging dimensions.
+          it occurred (Software or Hardware), the method used to downsample, and the pixel averaging dimensions.
           A downsampled image is a smaller version of the image, resulting in reduced resolution of the
           same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. 
           This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean.,
@@ -3206,7 +3481,7 @@
       <local_identifier>Exposure</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition>The Exposure class contains attributes identifying the image instrument
-          exposure configuration and image exposure values. As a child of the Image_Product_Information class, these attribute values
+          exposure configuration and image exposure values. As a child of the Imaging class, these attribute values
           identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values
           are those that were commanded to the spacecraft at the time the image was taken.</definition>
       <DD_Association>
@@ -3809,7 +4084,7 @@
       <version_id>1.0</version_id>
       <local_identifier>Pixel_Averaging_Dimensions</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Pixel_Averaging class provides the height and width, in pixels, of
+      <definition>The Pixel_Averaging_Dimensions class provides the height and width, in pixels, of
           the area over which pixels were averaged prior to image compression.</definition>
       <DD_Association>
           <identifier_reference>height_pixels</identifier_reference>
@@ -3823,6 +4098,98 @@
           <minimum_occurrences>1</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Pointing_Correction -->
+  <DD_Class>
+    <name>Pointing_Correction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Pointing_Correction</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Pointing_Correction class contains attributes used to identify and
+      describe the camera model transformations completed in order to update pointing information
+      of an image or mosaic.</definition>
+    <DD_Association>
+      <identifier_reference>Pointing_Correction_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Pointing_Correction_Image</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Pointing_Correction_File -->
+  <DD_Class>
+    <name>Pointing_Correction_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Pointing_Correction_File</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The Pointing_Correction_File class identifies a file containing pointing
+      correction information.</definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
+  <!-- Class: Pointing_Correction_Image -->
+  <DD_Class>
+    <name>Pointing_Correction_Image</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Pointing_Correction_Image</local_identifier>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The Pointing_Correction_Image class contains attributes used to identify and
+      describe the camera model transformations completed in order to update pointing information
+      of a single image, whether alone or part of a mosaic.</definition>
+    <DD_Association>
+      <identifier_reference>pointing_model_name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pointing_model_solution_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Pointing_Model_Parameter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Pointing_Model_Parameter    -->
+  <DD_Class>
+    <name>Pointing_Model_Parameter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Pointing_Model_Parameter</local_identifier>
+    <submitter_name>Jordan Padams</submitter_name>
+    <definition>The Pointing_Model_Parameter class specifies the name and value (numeric) parameters
+      needed by the pointing model identified by the pointing_model_name attribute in the
+      Pointing_Correction parent class. The meaning of any given parameter is defined by
+      the pointing model. </definition>
+    <DD_Association>
+      <identifier_reference>pds.name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Radial_Flat_Field_Function -->
@@ -4087,6 +4454,12 @@
       <definition>The Video class contains attributes related to video 
         observations, defined as a regular time series of frames. The class can be used
         to describe a single frame within the video, or the video as a whole.</definition>
+      <DD_Association>
+        <identifier_reference>video_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>  
       <DD_Association>
         <identifier_reference>frame_count</identifier_reference>
         <reference_type>attribute_of</reference_type>
@@ -4389,8 +4762,18 @@
     <rule_context>//img:Optical_Filter/pds:Local_Internal_Reference</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>pds:local_reference_type = 'data_to'</rule_test>
+      <rule_test>pds:local_reference_type = 'data_to_optical_filter'</rule_test>
       <rule_message>In img:Optical_Filter, Local_Internal_Reference.local_reference_type must be equal to 'data_to_optical_filter'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>reference_type_check_brightness_correction_image</local_identifier>
+    <rule_context>img:Brightness_Correction_Image/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_brightness_correction'</rule_test>
+      <rule_message>In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   

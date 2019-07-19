@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.6.0.0 - Fri May 03 14:49:53 PDT 2019 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.6.1.0 - Thu Jun 06 15:42:29 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -292,6 +292,12 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Video">
+      <sch:assert test="if (img:video_flag) then img:video_flag = ('true', 'false') else true()">
+        The attribute img:video_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Video/img:frame_interval">
       <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
@@ -329,7 +335,7 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Optical_Filter/pds:Local_Internal_Reference">
-      <sch:assert test="pds:local_reference_type = 'data_to'">
+      <sch:assert test="pds:local_reference_type = 'data_to_optical_filter'">
         In img:Optical_Filter, Local_Internal_Reference.local_reference_type must be equal to 'data_to_optical_filter'.</sch:assert>
     </sch:rule>
   </sch:pattern>
@@ -349,6 +355,12 @@
     <sch:rule context="//img:Optical_Filter">
       <sch:assert test="count(child::*) > 0">
         IMG:error:optical_filter_child_check: img:Optical_Filter must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Brightness_Correction_Image/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_brightness_correction'">
+        In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

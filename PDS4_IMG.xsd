@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.6.0.0 - Fri May 03 14:49:53 PDT 2019 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.6.1.0 - Thu Jun 06 15:42:29 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.11.0.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.6.0.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
+  <!-- 1.6.1.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -13,7 +13,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.6.0.0">
+    version="1.6.1.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd"/>
  
@@ -61,6 +61,12 @@
       that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
     - Renamed Filter_Parameters to Optical_Filter
     
+    1.6.1.0
+    - Added Brightness_Correction class and associated subclasses/attributes
+    - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE LDD)
+    - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
+    - Corrected typo in local_reference_type_check_optical_filter rule
+    
   
     </xs:documentation>
   </xs:annotation>
@@ -90,6 +96,102 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Brightness_Correction">
+    <xs:annotation>
+      <xs:documentation>The Brightness_Correction class describes
+        brightness corrections that were applied to an image or mosaic.
+        Brightness correction is the process of adjusting the DN values
+        of adjacent frames in a mosaic so they match visually. It may
+        also involve contrast or vignetting adjustments. The result may
+        no longer be radiometrically calibrated due to the adjustments.
+        The processing_algorithm child of Brightness_Correction
+        describes the type of brightness correction, and should
+        correspond to the classes within Brightness_Correction_Image. If
+        the algorithm is "MIXED", multiple algorithms were used, in
+        which case the specific information in each
+        Brightness_Correction_Image must be used.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="Brightness_Correction_File" type="img:Brightness_Correction_File" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="Brightness_Correction_Image" type="img:Brightness_Correction_Image" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Brightness_Correction_File">
+    <xs:annotation>
+      <xs:documentation>The Brightness_Correction_File identifies a file
+        containing brightness correction information. The project SIS
+        should define the format of this file. Correction information
+        may appear in the file, in instances of the
+        Brightness_Correction_Image class, or both (if both, they should
+        be consistent).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:restriction base="img:Data_Processing_File">
+        <xs:sequence>
+          <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element ref="pds:External_Reference"> </xs:element>
+            <xs:element ref="pds:Internal_Reference"> </xs:element>
+          </xs:choice>
+          <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Brightness_Correction_HSI_Linear">
+    <xs:annotation>
+      <xs:documentation>The Brightness_Correction_HSI_Linear class works
+        just like Brightness_Correction_Linear, except that the color
+        image is first converted to HSI (Hue, Saturation, Intensity)
+        space, the correction is applied only to Intensity, and then the
+        result is converted back to RGB space.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="brightness_scale" type="img:brightness_scale" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="brightness_offset" type="img:brightness_offset" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Brightness_Correction_Image">
+    <xs:annotation>
+      <xs:documentation>The Brighness_Correction_Image class describes
+        the brightness correction that was applied to a single image,
+        whether alone or part of a mosaic. The image this correction
+        applies to may be identified via the enclosed
+        Internal_Reference, or via the order in which the
+        Brightness_Correction_Image objects appear (which matches the
+        order given in Input_Product_List).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="pds:Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element name="Brightness_Correction_HSI_Linear" type="img:Brightness_Correction_HSI_Linear"> </xs:element>
+        <xs:element name="Brightness_Correction_Linear" type="img:Brightness_Correction_Linear"> </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Brightness_Correction_Linear">
+    <xs:annotation>
+      <xs:documentation>The Brightness_Correction_Linear class describes
+        a simple linear brightness correction, with an additive
+        (brightness_offset) and multiplicative (brightness_scale) factor
+        applied. The result is: output = input * brightness_scale +
+        brightness_offset. If there are multiple bands, the same
+        correction is applied to each band.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="brightness_scale" type="img:brightness_scale" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="brightness_offset" type="img:brightness_offset" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Color_Filter_Array">
@@ -132,6 +234,8 @@
           <xs:element name="color_component" type="img:color_component" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="illuminant" type="img:illuminant" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="encoded_display_gamma" type="img:encoded_display_gamma" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="color_dn_scaling_method" type="img:color_dn_scaling_method" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="color_dn_scaling_factor" type="img:color_dn_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="Onboard_Responsivity" type="img:Onboard_Responsivity" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="Onboard_Color_Matrix" type="img:Onboard_Color_Matrix" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
@@ -150,6 +254,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Brightness_Correction" type="img:Brightness_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -161,6 +266,7 @@
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Pointing_Correction" type="img:Pointing_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -477,8 +583,8 @@
   <xs:complexType name="Downsampling">
     <xs:annotation>
       <xs:documentation> The Downsampling class describes whether or not
-        downsampling occurred, the venue where it occurrected (Software
-        or Hardware), the method used to downsample, and the pixel
+        downsampling occurred, the venue where it occurred (Software or
+        Hardware), the method used to downsample, and the pixel
         averaging dimensions. A downsampled image is a smaller version
         of the image, resulting in reduced resolution of the same
         coverage area. The processing_algorithm attribute specifies the
@@ -501,12 +607,11 @@
     <xs:annotation>
       <xs:documentation>The Exposure class contains attributes
         identifying the image instrument exposure configuration and
-        image exposure values. As a child of the
-        Image_Product_Information class, these attribute values identify
-        the actual exposure values when the image was taken. As a child
-        of the Commanded_Parameters class, these attribute values are
-        those that were commanded to the spacecraft at the time the
-        image was taken.</xs:documentation>
+        image exposure values. As a child of the Imaging class, these
+        attribute values identify the actual exposure values when the
+        image was taken. As a child of the Commanded_Parameters class,
+        these attribute values are those that were commanded to the
+        spacecraft at the time the image was taken.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="exposure_count" type="img:exposure_count" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -672,6 +777,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Brightness_Correction" type="img:Brightness_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Detector" type="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -683,6 +789,7 @@
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Pointing_Correction" type="img:Pointing_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -870,13 +977,75 @@
 
   <xs:complexType name="Pixel_Averaging_Dimensions">
     <xs:annotation>
-      <xs:documentation> The Pixel_Averaging class provides the height
-        and width, in pixels, of the area over which pixels were
-        averaged prior to image compression.</xs:documentation>
+      <xs:documentation>The Pixel_Averaging_Dimensions class provides
+        the height and width, in pixels, of the area over which pixels
+        were averaged prior to image compression.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="height_pixels" type="img:height_pixels" minOccurs="1" maxOccurs="1"> </xs:element>
       <xs:element name="width_pixels" type="img:width_pixels" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Pointing_Correction">
+    <xs:annotation>
+      <xs:documentation>The Pointing_Correction class contains
+        attributes used to identify and describe the camera model
+        transformations completed in order to update pointing
+        information of an image or mosaic.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Pointing_Correction_File" type="img:Pointing_Correction_File" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Pointing_Correction_Image" type="img:Pointing_Correction_Image" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Pointing_Correction_File">
+    <xs:annotation>
+      <xs:documentation>The Pointing_Correction_File class identifies a
+        file containing pointing correction
+        information.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:restriction base="img:Data_Processing_File">
+        <xs:sequence>
+          <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element ref="pds:External_Reference"> </xs:element>
+            <xs:element ref="pds:Internal_Reference"> </xs:element>
+          </xs:choice>
+          <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Pointing_Correction_Image">
+    <xs:annotation>
+      <xs:documentation>The Pointing_Correction_Image class contains
+        attributes used to identify and describe the camera model
+        transformations completed in order to update pointing
+        information of a single image, whether alone or part of a
+        mosaic.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="pointing_model_name" type="img:pointing_model_name" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="pointing_model_solution_id" type="img:pointing_model_solution_id" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Pointing_Model_Parameter" type="img:Pointing_Model_Parameter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Pointing_Model_Parameter">
+    <xs:annotation>
+      <xs:documentation>The Pointing_Model_Parameter class specifies the
+        name and value (numeric) parameters needed by the pointing model
+        identified by the pointing_model_name attribute in the
+        Pointing_Correction parent class. The meaning of any given
+        parameter is defined by the pointing model. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="pds:name" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="value" type="pds:value" minOccurs="1" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -986,6 +1155,7 @@
         video, or the video as a whole.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name="video_flag" type="img:video_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_count" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="interframe_delay" type="img:interframe_delay" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_rate" type="img:frame_rate" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1148,6 +1318,30 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:simpleType name="brightness_offset">
+    <xs:annotation>
+      <xs:documentation>The brightness_offset attribute defines the
+        additive factor used for a linear brightness
+        correction.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="brightness_scale">
+    <xs:annotation>
+      <xs:documentation>The brightness_scale attribute defines the
+        multiplicative factor used for a linear brightness
+        correction.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="center_filter_wavelength_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -1174,6 +1368,35 @@
         component of the color space is represented by this band. This
         keyword is not needed for 3-band images, as all bands are
         represented.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="color_dn_scaling_factor">
+    <xs:annotation>
+      <xs:documentation>The color_dn_scaling_factor attribute specifies
+        the actual value used to scale the color values. This value is
+        determined using the color_dn_scaling_method.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="color_dn_scaling_method">
+    <xs:annotation>
+      <xs:documentation>The color_dn_scaling_method attribute defines
+        how the color values are scaled. EXPOSURE_NORMALIZED_COLOR means
+        that the color values have been normalized based on exposure
+        time, so neighboring images in a mosaic will have the same color
+        values. DN_COLOR means that the color values are based on the
+        raw DNs, so images take full advantage of the available dynamic
+        range but may not match with neighbors in a
+        mosaic.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -1852,9 +2075,9 @@
 
   <xs:complexType name="interframe_delay">
     <xs:annotation>
-      <xs:documentation> The interframe_delay attribute provides the
-        time between the end of one frame and the beginning of the next
-        frame in a video product.</xs:documentation>
+      <xs:documentation>The interframe_delay attribute provides the time
+        between the end of one frame and the beginning of the next frame
+        in a video product.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="img:interframe_delay_WO_Units">
@@ -1865,7 +2088,7 @@
 
   <xs:simpleType name="jpeg_parameter">
     <xs:annotation>
-      <xs:documentation> The jpeg_parameter attribute is a JPEG specific
+      <xs:documentation>The jpeg_parameter attribute is a JPEG specific
         variable which specifies on-board compression determination by
         image quality or by compression factor, based on a selected
         on-board compression mode. </xs:documentation>
@@ -1878,7 +2101,7 @@
 
   <xs:simpleType name="jpeg_quality">
     <xs:annotation>
-      <xs:documentation> The jpeg_quality attribute is a JPEG specific
+      <xs:documentation>The jpeg_quality attribute is a JPEG specific
         variable which identifies the resultant or targeted image
         quality index for on-board data compression.</xs:documentation>
     </xs:annotation>
@@ -2201,6 +2424,50 @@
         identifies the type of on-board compression used for data
         storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG',
         'JPEG Progressive', 'MSSS Lossless', 'None'.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pointing_model_name">
+    <xs:annotation>
+      <xs:documentation>The pointing_model_name attribute specifies
+        which of several "pointing models" were used to transform the
+        camera model based on updated pointing information. These
+        updates are typically derived from mosaic seam corrections. This
+        attribute and the associated Pointing_Model_Index classes define
+        what the updated pointing information is, providing enough
+        information to re-create the camera model from calibration data.
+        If present, this attribute overrides the default pointing based
+        on telemetry. The special value "NONE" shall be interpreted the
+        same as if the attribute is absent (i.e. the default pointing
+        model should be used). New model names can be created at any
+        time; the models themselves should be described in a
+        mission-specific ancillary file. See also the geom:solution_id
+        attribute within the geom:Camera_Model_Parameters
+        class.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pointing_model_solution_id">
+    <xs:annotation>
+      <xs:documentation>The pointing_model_solution_id attribute
+        specifies the identifier of the pointing correction solution
+        used to derive the model specified via the enclosing
+        Pointing_Correction class. This identifier should also appear in
+        the pointing correction file referenced by the
+        Data_Correction_File. If there is only one identifier in the
+        correction file, then pointing_model_solution_id may be omitted.
+        The pointing_model_solution_id attribute may be reused in the
+        context of pointing corrections, although uniqueness is
+        recommended. The pointing correction solution ID namespace is
+        separate from the coordinate system namespace.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -2738,6 +3005,15 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="video_flag">
+    <xs:annotation>
+      <xs:documentation> The video_flag attribute indicates whether or
+        not video products were commanded. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="voltage_value_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -2840,7 +3116,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.11.0.0" ,
-      "Date": "Fri May 03 14:49:53 PDT 2019" ,
+      "Date": "Thu Jun 06 15:42:29 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.11.0.0" ,
-      "Date": "Fri May 03 14:49:53 PDT 2019" ,
+      "Date": "Thu Jun 06 15:42:29 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -148,6 +148,328 @@
                 "classOrder": "1010" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Data_Processing"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction" ,
+            "title": "Brightness_Correction" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Brightness_Correction class describes brightness corrections that were applied to an image or mosaic. Brightness correction is the process of adjusting the DN values of adjacent frames in a mosaic so they match visually. It may also involve contrast or vignetting adjustments. The result may no longer be radiometrically calibrated due to the adjustments. The processing_algorithm child of Brightness_Correction describes the type of brightness correction, and should correspond to the classes within Brightness_Correction_Image. If the algorithm is \"MIXED\", multiple algorithms were used, in which case the specific information in each Brightness_Correction_Image must be used."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing.img.active_flag" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing.img.active_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing.img.processing_venue" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing.img.processing_venue"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing.img.processing_algorithm" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing.img.processing_algorithm"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing.img.sequence_number" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1040" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing.img.sequence_number"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing" ,
+                "title": "Data_Processing" ,
+                "assocType": "parent_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction.img.Brightness_Correction_File" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Brightness_Correction_File"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction.img.Brightness_Correction_Image" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Brightness_Correction_Image"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_File" ,
+            "title": "Brightness_Correction_File" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Brightness_Correction_File identifies a file containing brightness correction information. The project SIS should define the format of this file. Correction information may appear in the file, in instances of the Brightness_Correction_Image class, or both (if both, they should be consistent)."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.pds.description" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File.pds.description"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.pds.name" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File.pds.name"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File" ,
+                "title": "Data_Processing_File" ,
+                "assocType": "parent_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#13" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "true" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.pds.External_Reference",
+                   "0001_NASA_PDS_1.pds.Internal_Reference"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear" ,
+            "title": "Brightness_Correction_HSI_Linear" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Brightness_Correction_HSI_Linear class works just like Brightness_Correction_Linear, except that the color image is first converted to HSI (Hue, Saturation, Intensity) space, the correction is applied only to Intensity, and then the result is converted back to RGB space."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_scale" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_scale"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_offset" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_offset"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Image" ,
+            "title": "Brightness_Correction_Image" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Brighness_Correction_Image class describes the brightness correction that was applied to a single image, whether alone or part of a mosaic. The image this correction applies to may be identified via the enclosed Internal_Reference, or via the order in which the Brightness_Correction_Image objects appear (which matches the order given in Input_Product_List)."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Image.pds.pds.Internal_Reference" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "classId": [
+                   "0001_NASA_PDS_1.pds.Internal_Reference"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Image.img.XSChoice#11" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "true" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear",
+                   "0001_NASA_PDS_1.img.Brightness_Correction_Linear"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Linear" ,
+            "title": "Brightness_Correction_Linear" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Brightness_Correction_Linear class describes a simple linear brightness correction, with an additive (brightness_offset) and multiplicative (brightness_scale) factor applied. The result is: output = input * brightness_scale + brightness_offset. If there are multiple bands, the same correction is applied to each band."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_scale" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_scale"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_offset" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_offset"
                  ]
               }
             }
@@ -403,6 +725,36 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_method" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_method"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_factor" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1060" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_factor"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Data_Processing" ,
                 "title": "Data_Processing" ,
                 "assocType": "parent_of" ,
@@ -426,7 +778,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1050" ,
+                "classOrder": "1070" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Onboard_Responsivity"
                  ]
@@ -441,7 +793,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1060" ,
+                "classOrder": "1080" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Onboard_Color_Matrix"
                  ]
@@ -476,7 +828,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Color_Filter_Array" ,
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Brightness_Correction" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -485,6 +837,21 @@
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Brightness_Correction"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Color_Filter_Array" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Color_Filter_Array"
                  ]
@@ -499,7 +866,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Color_Processing"
                  ]
@@ -514,7 +881,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1040" ,
+                "classOrder": "1050" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Detector"
                  ]
@@ -529,7 +896,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1050" ,
+                "classOrder": "1060" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Downsampling"
                  ]
@@ -544,7 +911,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1060" ,
+                "classOrder": "1070" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Exposure"
                  ]
@@ -559,7 +926,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Flat_Field_Correction"
                  ]
@@ -574,7 +941,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Focus"
                  ]
@@ -589,7 +956,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1090" ,
+                "classOrder": "1100" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Focus_Stack"
                  ]
@@ -604,7 +971,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1100" ,
+                "classOrder": "1110" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Frame"
                  ]
@@ -619,7 +986,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1110" ,
+                "classOrder": "1120" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -634,9 +1001,24 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1120" ,
+                "classOrder": "1130" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Optical_Filter"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Pointing_Correction" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1140" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
               }
             }
@@ -649,7 +1031,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1130" ,
+                "classOrder": "1150" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -664,7 +1046,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1140" ,
+                "classOrder": "1160" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -679,7 +1061,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1150" ,
+                "classOrder": "1170" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Shutter_Subtraction"
                  ]
@@ -694,7 +1076,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1160" ,
+                "classOrder": "1180" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -877,7 +1259,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#12" ,
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#13" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -1055,7 +1437,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#12" ,
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#13" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -1744,7 +2126,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.0.0.0" ,
-            "description": " The Downsampling class describes whether or not downsampling occurred, the venue where it occurrected (Software or Hardware), the method used to downsample, and the pixel averaging dimensions. A downsampled image is a smaller version of the image, resulting in reduced resolution of the same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean., 'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent."
+            "description": " The Downsampling class describes whether or not downsampling occurred, the venue where it occurred (Software or Hardware), the method used to downsample, and the pixel averaging dimensions. A downsampled image is a smaller version of the image, resulting in reduced resolution of the same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean., 'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent."
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Data_Processing.img.active_flag" ,
@@ -1847,7 +2229,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.0.0.0" ,
-            "description": "The Exposure class contains attributes identifying the image instrument exposure configuration and image exposure values. As a child of the Image_Product_Information class, these attribute values identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values are those that were commanded to the spacecraft at the time the image was taken."
+            "description": "The Exposure class contains attributes identifying the image instrument exposure configuration and image exposure values. As a child of the Imaging class, these attribute values identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values are those that were commanded to the spacecraft at the time the image was taken."
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Exposure.img.exposure_count" ,
@@ -2101,7 +2483,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#12" ,
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#13" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -2690,7 +3072,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Color_Filter_Array" ,
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Brightness_Correction" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -2699,6 +3081,21 @@
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Brightness_Correction"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Color_Filter_Array" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Color_Filter_Array"
                  ]
@@ -2713,7 +3110,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Color_Processing"
                  ]
@@ -2728,7 +3125,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1040" ,
+                "classOrder": "1050" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Detector"
                  ]
@@ -2743,7 +3140,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1050" ,
+                "classOrder": "1060" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Downsampling"
                  ]
@@ -2758,7 +3155,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1060" ,
+                "classOrder": "1070" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Exposure"
                  ]
@@ -2773,7 +3170,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Flat_Field_Correction"
                  ]
@@ -2788,7 +3185,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Focus"
                  ]
@@ -2803,7 +3200,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1090" ,
+                "classOrder": "1100" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Focus_Stack"
                  ]
@@ -2818,7 +3215,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1100" ,
+                "classOrder": "1110" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Frame"
                  ]
@@ -2833,7 +3230,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1110" ,
+                "classOrder": "1120" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -2848,9 +3245,24 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1120" ,
+                "classOrder": "1130" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Optical_Filter"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Pointing_Correction" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1140" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
               }
             }
@@ -2863,7 +3275,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1130" ,
+                "classOrder": "1150" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -2878,7 +3290,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1140" ,
+                "classOrder": "1160" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -2893,7 +3305,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1150" ,
+                "classOrder": "1170" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Shutter_Subtraction"
                  ]
@@ -2908,7 +3320,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1160" ,
+                "classOrder": "1180" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -2923,7 +3335,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1170" ,
+                "classOrder": "1190" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Video"
                  ]
@@ -2938,7 +3350,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1180" ,
+                "classOrder": "1200" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Instrument_State"
                  ]
@@ -2953,7 +3365,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1190" ,
+                "classOrder": "1210" ,
                 "classId": [
                    "0001_NASA_PDS_1.img.Commanded_Parameters"
                  ]
@@ -3564,7 +3976,7 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Onboard_Compression.img.XSChoice#11" ,
+                "identifier": "0001_NASA_PDS_1.img.Onboard_Compression.img.XSChoice#12" ,
                 "title": "null" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
@@ -3768,7 +4180,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.0.0.0" ,
-            "description": " The Pixel_Averaging class provides the height and width, in pixels, of the area over which pixels were averaged prior to image compression."
+            "description": "The Pixel_Averaging_Dimensions class provides the height and width, in pixels, of the area over which pixels were averaged prior to image compression."
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Pixel_Averaging_Dimensions.img.height_pixels" ,
@@ -3797,6 +4209,224 @@
                 "classOrder": "1020" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Pixel_Averaging_Dimensions.img.width_pixels"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Correction" ,
+            "title": "Pointing_Correction" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Pointing_Correction class contains attributes used to identify and describe the camera model transformations completed in order to update pointing information of an image or mosaic."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Correction.img.Pointing_Correction_File" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Pointing_Correction_File"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Correction.img.Pointing_Correction_Image" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Pointing_Correction_Image"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_File" ,
+            "title": "Pointing_Correction_File" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Pointing_Correction_File class identifies a file containing pointing correction information."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.pds.description" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File.pds.description"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.pds.name" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File.pds.name"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File" ,
+                "title": "Data_Processing_File" ,
+                "assocType": "parent_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Processing_File"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Processing_File.img.XSChoice#13" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "true" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "classId": [
+                   "0001_NASA_PDS_1.pds.External_Reference",
+                   "0001_NASA_PDS_1.pds.Internal_Reference"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image" ,
+            "title": "Pointing_Correction_Image" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Pointing_Correction_Image class contains attributes used to identify and describe the camera model transformations completed in order to update pointing information of a single image, whether alone or part of a mosaic."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_name" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_name"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_solution_id" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_solution_id"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.Pointing_Model_Parameter" ,
+                "title": "null" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1030" ,
+                "classId": [
+                   "0001_NASA_PDS_1.img.Pointing_Model_Parameter"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Model_Parameter" ,
+            "title": "Pointing_Model_Parameter" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "description": "The Pointing_Model_Parameter class specifies the name and value (numeric) parameters needed by the pointing model identified by the pointing_model_name attribute in the Pointing_Correction parent class. The meaning of any given parameter is defined by the pointing model. "
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Model_Parameter.pds.name" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Pointing_Model_Parameter.pds.name"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Pointing_Model_Parameter.pds.value" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Pointing_Model_Parameter.pds.value"
                  ]
               }
             }
@@ -4687,7 +5317,7 @@
             "description": "The Video class contains attributes related to video observations, defined as a regular time series of frames. The class can be used to describe a single frame within the video, or the video as a whole."
               , "associationList": [
              {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Video.img.frame_count" ,
+                "identifier": "0001_NASA_PDS_1.img.Video.img.video_flag" ,
                 "title": "null" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
@@ -4696,6 +5326,21 @@
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Video.img.video_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Video.img.frame_count" ,
+                "title": "null" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.frame_count"
                  ]
@@ -4710,7 +5355,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1020" ,
+                "classOrder": "1030" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.interframe_delay"
                  ]
@@ -4725,7 +5370,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.frame_rate"
                  ]
@@ -4740,7 +5385,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1040" ,
+                "classOrder": "1050" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.frame_interval"
                  ]
@@ -4755,7 +5400,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1050" ,
+                "classOrder": "1060" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.gop_frame_index"
                  ]
@@ -4770,7 +5415,7 @@
                 "isAny": "false" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1060" ,
+                "classOrder": "1070" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.gop_frame_count"
                  ]
@@ -4794,6 +5439,17 @@
           "class": {
             "identifier": "0001_NASA_PDS_1.img.XSChoice#12" ,
             "title": "XSChoice#12" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "null" ,
+            "versionId": "1.0.0.0" ,
+            "description": "null"
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.XSChoice#13" ,
+            "title": "XSChoice#13" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "null" ,
@@ -4892,6 +5548,102 @@
             "maximumCharacters": "Unbounded" ,
             "minimumValue": "-9223372036854775808" ,
             "maximumValue": "9223372036854775807" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_offset" ,
+            "title": "brightness_offset" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The brightness_offset attribute defines the additive factor used for a linear brightness correction." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_HSI_Linear.img.brightness_scale" ,
+            "title": "brightness_scale" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The brightness_scale attribute defines the multiplicative factor used for a linear brightness correction." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_offset" ,
+            "title": "brightness_offset" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The brightness_offset attribute defines the additive factor used for a linear brightness correction." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Brightness_Correction_Linear.img.brightness_scale" ,
+            "title": "brightness_scale" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The brightness_scale attribute defines the multiplicative factor used for a linear brightness correction." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
@@ -5060,6 +5812,54 @@
                 }
              }
            ]
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_factor" ,
+            "title": "color_dn_scaling_factor" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The color_dn_scaling_factor attribute specifies the actual value used to scale the color values. This value is determined using the color_dn_scaling_method." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Color_Processing.img.color_dn_scaling_method" ,
+            "title": "color_dn_scaling_method" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The color_dn_scaling_method attribute defines how the color values are scaled. EXPOSURE_NORMALIZED_COLOR means that the color values have been normalized based on exposure time, so neighboring images in a mosaic will have the same color values. DN_COLOR means that the color values are based on the raw DNs, so images take full advantage of the available dynamic range but may not match with neighbors in a mosaic." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
           }
         }
       , {
@@ -6633,7 +7433,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.11" ,
-            "description": " The jpeg_parameter attribute is a JPEG specific variable which specifies on-board compression determination by image quality or by compression factor, based on a selected on-board compression mode. " ,
+            "description": "The jpeg_parameter attribute is a JPEG specific variable which specifies on-board compression determination by image quality or by compression factor, based on a selected on-board compression mode. " ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "dataType": "ASCII_Integer" ,
@@ -6657,7 +7457,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.11" ,
-            "description": " The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression." ,
+            "description": "The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "dataType": "ASCII_NonNegative_Integer" ,
@@ -7540,6 +8340,54 @@
             "unitOfMeasure": "Units_of_Misc" ,
             "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
             "unitId": "DN, electron\/DN, pixel" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_name" ,
+            "title": "pointing_model_name" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The pointing_model_name attribute specifies which of several \"pointing models\" were used to transform the camera model based on updated pointing information. These updates are typically derived from mosaic seam corrections. This attribute and the associated Pointing_Model_Index classes define what the updated pointing information is, providing enough information to re-create the camera model from calibration data. If present, this attribute overrides the default pointing based on telemetry. The special value \"NONE\" shall be interpreted the same as if the attribute is absent (i.e. the default pointing model should be used). New model names can be created at any time; the models themselves should be described in a mission-specific ancillary file. See also the geom:solution_id attribute within the geom:Camera_Model_Parameters class." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Pointing_Correction_Image.img.pointing_model_solution_id" ,
+            "title": "pointing_model_solution_id" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": "The pointing_model_solution_id attribute specifies the identifier of the pointing correction solution used to derive the model specified via the enclosing Pointing_Correction class. This identifier should also appear in the pointing correction file referenced by the Data_Correction_File. If there is only one identifier in the correction file, then pointing_model_solution_id may be omitted. The pointing_model_solution_id attribute may be reused in the context of pointing corrections, although uniqueness is recommended. The pointing correction solution ID namespace is separate from the coordinate system namespace." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -8607,7 +9455,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.11" ,
-            "description": " The interframe_delay attribute provides the time between the end of one frame and the beginning of the next frame in a video product." ,
+            "description": "The interframe_delay attribute provides the time between the end of one frame and the beginning of the next frame in a video product." ,
             "isNillable": "false" ,
             "isEnumerated": "true" ,
             "dataType": "ASCII_Real" ,
@@ -8620,6 +9468,30 @@
             "unitOfMeasure": "Units_of_Time" ,
             "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Time" ,
             "unitId": "day, hr, julian day, microseconds, min, ms, s, yr" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Video.img.video_flag" ,
+            "title": "video_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.11" ,
+            "description": " The video_flag attribute indicates whether or not video products were commanded. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
