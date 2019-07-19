@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        0.2.2.3
-   LDD Version Id:        1.6.0.0
+   LDD Version Id:        1.6.1.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        TBD_urnPrefix
-   Time                   Fri May 03 14:49:53 PDT 2019
+   Time                   Thu Jun 06 15:42:29 PDT 2019
    Common Schema          [PDS4_PDS_1B00.xsd]
    Common Schematron      [PDS4_PDS_1B00.sch]
    IM Version Id:         1.11.0.0
@@ -29,15 +29,14 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                49
-   Attributes             122
-   Associations           226
+   Classes                59
+   Attributes             128
+   Associations           253
    Error messages         0
-   Warning messages       1
+   Warning messages       0
    Information messages   40
 
 Detailed validation messages
-   WARNING  Attribute: <video_flag> - This local attribute was not used in an Association.
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -81,7 +80,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.6.0.0
+   LDD Version            1.6.1.0
    Full Name              R. Joyner, Jordan Padams, E. Rye, C. De Cesare
    Steward                img
    Namespace Id           img
@@ -126,6 +125,12 @@ Parsed Input - Header:
     - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it clear 
       that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
     - Renamed Filter_Parameters to Optical_Filter
+    
+    1.6.1.0
+    - Added Brightness_Correction class and associated subclasses/attributes
+    - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE LDD)
+    - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
+    - Corrected typo in local_reference_type_check_optical_filter rule
     
   
    Last Modification Time 2019-05-02T14:00:00Z
@@ -185,6 +190,16 @@ Parsed Input - Attributes:
    description            The best_focus_distance attribute specifies the estimated distance to best focus.
    unit of measure type   Units_of_Length
 
+   name                   brightness_scale
+   version                1.11
+   value data type        ASCII_Real
+   description            The brightness_scale attribute defines the multiplicative factor used for a linear brightness correction.
+
+   name                   brightness_offset
+   version                1.11
+   value data type        ASCII_Real
+   description            The brightness_offset attribute defines the additive factor used for a linear brightness correction.
+
    name                   center_filter_wavelength
    version                1.11
    value data type        ASCII_Real
@@ -209,6 +224,16 @@ Parsed Input - Attributes:
       Hue - Hue component of HSI
       Saturation - Saturation component of HSI
       Intensity - Intensity component of HSI
+
+   name                   color_dn_scaling_factor
+   version                1.11
+   value data type        ASCII_Real
+   description            The color_dn_scaling_factor attribute specifies the actual value used to scale the color values. This value is determined using the color_dn_scaling_method.
+
+   name                   color_dn_scaling_method
+   version                1.11
+   value data type        ASCII_Short_String_Collapsed
+   description            The color_dn_scaling_method attribute defines how the color values are scaled. EXPOSURE_NORMALIZED_COLOR means that the color values have been normalized based on exposure time, so neighboring images in a mosaic will have the same color values. DN_COLOR means that the color values are based on the raw DNs, so images take full advantage of the available dynamic range but may not match with neighbors in a mosaic.
 
    name                   color_filter_array_state
    version                1.11
@@ -498,19 +523,19 @@ Parsed Input - Attributes:
    name                   interframe_delay
    version                1.11
    value data type        ASCII_Real
-   description             The interframe_delay attribute provides the time between the end of one frame and the beginning of the next frame in a video product.
+   description            The interframe_delay attribute provides the time between the end of one frame and the beginning of the next frame in a video product.
    minimum value          0
    unit of measure type   Units_of_Time
 
    name                   jpeg_parameter
    version                1.11
    value data type        ASCII_Integer
-   description             The jpeg_parameter attribute is a JPEG specific variable which specifies on-board compression determination by image quality or by compression factor, based on a selected on-board compression mode. 
+   description            The jpeg_parameter attribute is a JPEG specific variable which specifies on-board compression determination by image quality or by compression factor, based on a selected on-board compression mode. 
 
    name                   jpeg_quality
    version                1.11
    value data type        ASCII_NonNegative_Integer
-   description             The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression.
+   description            The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression.
    minimum value          1
    maximum value          100
 
@@ -642,6 +667,16 @@ Parsed Input - Attributes:
    version                1.11
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
+
+   name                   pointing_model_name
+   version                1.11
+   value data type        ASCII_Short_String_Collapsed
+   description            The pointing_model_name attribute specifies which of several "pointing models" were used to transform the camera model based on updated pointing information. These updates are typically derived from mosaic seam corrections. This attribute and the associated Pointing_Model_Index classes define what the updated pointing information is, providing enough information to re-create the camera model from calibration data. If present, this attribute overrides the default pointing based on telemetry. The special value "NONE" shall be interpreted the same as if the attribute is absent (i.e. the default pointing model should be used). New model names can be created at any time; the models themselves should be described in a mission-specific ancillary file. See also the geom:solution_id attribute within the geom:Camera_Model_Parameters class.
+
+   name                   pointing_model_solution_id
+   version                1.11
+   value data type        ASCII_Short_String_Collapsed
+   description            The pointing_model_solution_id attribute specifies the identifier of the pointing correction solution used to derive the model specified via the enclosing Pointing_Correction class. This identifier should also appear in the pointing correction file referenced by the Data_Correction_File. If there is only one identifier in the correction file, then pointing_model_solution_id may be omitted. The pointing_model_solution_id attribute may be reused in the context of pointing corrections, although uniqueness is recommended. The pointing correction solution ID namespace is separate from the coordinate system namespace.
 
    name                   processing_algorithm
    version                1.11
@@ -835,7 +870,7 @@ Parsed Input - Attributes:
    description            The value_string attribute provides the value with no applicable units as named by the associated id, name, or sequence_number. 
 
    name                   video_flag
-   version                1.0
+   version                1.11
    value data type        ASCII_Boolean
    description             The video_flag attribute indicates whether or not video products were commanded. 
 
@@ -883,6 +918,11 @@ Parsed Input - Classes:
       local identifier      pds.Local_Internal_Reference
       minimum occurrences   1
       maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Brightness_Correction
+      minimum occurrences   0
+      maximum occurrences   1
       reference type        component_of
 
       local identifier      Color_Filter_Array
@@ -938,6 +978,11 @@ Parsed Input - Classes:
       local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Pointing_Correction
+      minimum occurrences   0
+      maximum occurrences   1
       reference type        component_of
 
       local identifier      Radiometric_Correction
@@ -1008,6 +1053,114 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        parent_of
 
+   name                   Brightness_Correction
+   description            The Brightness_Correction class describes brightness corrections that were applied to an image or mosaic. Brightness correction is the process of adjusting the DN values of adjacent frames in a mosaic so they match visually. It may also involve contrast or vignetting adjustments. The result may no longer be radiometrically calibrated due to the adjustments. The processing_algorithm child of Brightness_Correction describes the type of brightness correction, and should correspond to the classes within Brightness_Correction_Image. If the algorithm is "MIXED", multiple algorithms were used, in which case the specific information in each Brightness_Correction_Image must be used.
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing
+
+   Associations
+
+      local identifier      Brightness_Correction_File
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Brightness_Correction_Image
+      minimum occurrences   1
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Data_Processing
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
+   name                   Brightness_Correction_File
+   description            The Brightness_Correction_File identifies a file containing brightness correction information. The project SIS should define the format of this file. Correction information may appear in the file, in instances of the Brightness_Correction_Image class, or both (if both, they should be consistent).
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing_File
+
+   Associations
+
+      local identifier      Data_Processing_File
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
+   name                   Brightness_Correction_Image
+   description            The Brighness_Correction_Image class describes the brightness correction that was applied to a single image, whether alone or part of a mosaic. The image this correction applies to may be identified via the enclosed Internal_Reference, or via the order in which the Brightness_Correction_Image objects appear (which matches the order given in Input_Product_List).
+   is abstract            false
+   is choice              true
+   subclass of            USER
+
+   Associations
+
+      local identifier      pds.Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      XSChoice#11
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Brightness_Correction_Linear
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Brightness_Correction_HSI_Linear
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   XSChoice#11
+   description            TBD_description
+   is abstract            true
+   is choice              true
+   subclass of            TBD_subClassOfTitle
+
+   Associations
+
+   name                   Brightness_Correction_HSI_Linear
+   description            The Brightness_Correction_HSI_Linear class works just like Brightness_Correction_Linear, except that the color image is first converted to HSI (Hue, Saturation, Intensity) space, the correction is applied only to Intensity, and then the result is converted back to RGB space.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      brightness_scale
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      brightness_offset
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Brightness_Correction_Linear
+   description            The Brightness_Correction_Linear class describes a simple linear brightness correction, with an additive (brightness_offset) and multiplicative (brightness_scale) factor applied. The result is: output = input * brightness_scale + brightness_offset. If there are multiple bands, the same correction is applied to each band.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      brightness_scale
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      brightness_offset
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
    name                   Color_Filter_Array
    description            The Color_Filter_Array class describes whether or not an image was acquired using a Color Filter Array (CFA) and if so, whether and how the CFA pattern was removed. A CFA is a method for making color images using one exposure on a single sensor plane, where microfilters of different wavelengths are put in front of pixels in a specific pattern. The most common pattern is the Bayer pattern, which has a red, blue, and two green pixels in every 2x2 pixel square. Although generally used for RGB color, CFA filters can be of any number and wavelength (see color_filter_array_type).
    is abstract            false
@@ -1059,6 +1212,16 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      color_dn_scaling_method
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      color_dn_scaling_factor
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      Onboard_Responsivity
       minimum occurrences   0
       maximum occurrences   1
@@ -1086,6 +1249,11 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      Brightness_Correction
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
 
       local identifier      Color_Filter_Array
       minimum occurrences   0
@@ -1140,6 +1308,11 @@ Parsed Input - Classes:
       local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Pointing_Correction
+      minimum occurrences   0
+      maximum occurrences   1
       reference type        component_of
 
       local identifier      Radiometric_Correction
@@ -1246,7 +1419,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      XSChoice#11
+      local identifier      XSChoice#12
       minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
@@ -1271,7 +1444,7 @@ Parsed Input - Classes:
       maximum occurrences   *
       reference type        component_of
 
-   name                   XSChoice#11
+   name                   XSChoice#12
    description            TBD_description
    is abstract            true
    is choice              true
@@ -1333,7 +1506,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      XSChoice#12
+      local identifier      XSChoice#13
       minimum occurrences   1
       maximum occurrences   1
       reference type        component_of
@@ -1353,7 +1526,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-   name                   XSChoice#12
+   name                   XSChoice#13
    description            TBD_description
    is abstract            true
    is choice              true
@@ -1613,7 +1786,7 @@ Parsed Input - Classes:
       reference type        parent_of
 
    name                   Downsampling
-   description             The Downsampling class describes whether or not downsampling occurred, the venue where it occurrected (Software or Hardware), the method used to downsample, and the pixel averaging dimensions. A downsampled image is a smaller version of the image, resulting in reduced resolution of the same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean., 'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.
+   description             The Downsampling class describes whether or not downsampling occurred, the venue where it occurred (Software or Hardware), the method used to downsample, and the pixel averaging dimensions. A downsampled image is a smaller version of the image, resulting in reduced resolution of the same coverage area. The processing_algorithm attribute specifies the pixel resolution downsample method used. This varies by mission, but examples from MSL include: 'Mean' - Downsampling done in software by calculation of the mean., 'Conditional' - Use hardware binning if downsampling (by mean calculation) and subframe arguments are consistent.
    is abstract            false
    is choice              false
    subclass of            Data_Processing
@@ -1631,7 +1804,7 @@ Parsed Input - Classes:
       reference type        parent_of
 
    name                   Exposure
-   description            The Exposure class contains attributes identifying the image instrument exposure configuration and image exposure values. As a child of the Image_Product_Information class, these attribute values identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values are those that were commanded to the spacecraft at the time the image was taken.
+   description            The Exposure class contains attributes identifying the image instrument exposure configuration and image exposure values. As a child of the Imaging class, these attribute values identify the actual exposure values when the image was taken. As a child of the Commanded_Parameters class, these attribute values are those that were commanded to the spacecraft at the time the image was taken.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -2134,7 +2307,7 @@ Parsed Input - Classes:
       reference type        attribute_of
 
    name                   Pixel_Averaging_Dimensions
-   description             The Pixel_Averaging class provides the height and width, in pixels, of the area over which pixels were averaged prior to image compression.
+   description            The Pixel_Averaging_Dimensions class provides the height and width, in pixels, of the area over which pixels were averaged prior to image compression.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -2147,6 +2320,78 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      width_pixels
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Pointing_Correction
+   description            The Pointing_Correction class contains attributes used to identify and describe the camera model transformations completed in order to update pointing information of an image or mosaic.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      Pointing_Correction_File
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Pointing_Correction_Image
+      minimum occurrences   1
+      maximum occurrences   *
+      reference type        component_of
+
+   name                   Pointing_Correction_File
+   description            The Pointing_Correction_File class identifies a file containing pointing correction information.
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing_File
+
+   Associations
+
+      local identifier      Data_Processing_File
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
+   name                   Pointing_Correction_Image
+   description            The Pointing_Correction_Image class contains attributes used to identify and describe the camera model transformations completed in order to update pointing information of a single image, whether alone or part of a mosaic.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pointing_model_name
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pointing_model_solution_id
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Pointing_Model_Parameter
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+   name                   Pointing_Model_Parameter
+   description            The Pointing_Model_Parameter class specifies the name and value (numeric) parameters needed by the pointing model identified by the pointing_model_name attribute in the Pointing_Correction parent class. The meaning of any given parameter is defined by the pointing model. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pds.name
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.value
       minimum occurrences   1
       maximum occurrences   1
       reference type        attribute_of
@@ -2363,6 +2608,11 @@ Parsed Input - Classes:
    subclass of            USER
 
    Associations
+
+      local identifier      video_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
       local identifier      frame_count
       minimum occurrences   0
