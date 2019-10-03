@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model
-    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.sch"
+    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.sch"
     schematypens="http://purl.oclc.org/dsdl/schematron"?>
 
 <!-- PDS4 Local Data Dictionary Extended Ingest File for Imaging Node            -->
-<Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd">
+<Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.6.1.0</ldd_version_id>
+  <ldd_version_id>1.7.0.0</ldd_version_id>
   <full_name>R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
@@ -59,8 +59,11 @@
     - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
     - Corrected typo in local_reference_type_check_optical_filter rule
     
+    1.7.0.0
+    - Upgraded to v1D00 of core IM.
+    
   </comment>
-  <last_modification_date_time>2019-05-02T14:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
 
 
   <!--                     -->
