@@ -61,6 +61,7 @@
     
     1.7.0.0
     - Upgraded to v1D00 of core IM.
+    - Added Illumination class and associated subclasses/attributes.
     
   </comment>
   <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
@@ -1220,6 +1221,20 @@
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Defines the illuminant that was used in order to process this image. 
       The valid values are open-ended but examples of valid values include: None, D65, 3000K, 5000K.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>illumination_wavelength</name>
+    <version_id>1.0</version_id>
+    <local_identifier>illumination_wavelength</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The illumination_wavelength attribute provides the wavelength of an LED that was used to illuminate this image.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2477,6 +2492,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Illumination</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>Onboard_Compression</identifier_reference>
@@ -3782,6 +3803,49 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Illumination -->
+  <DD_Class>
+    <name>Illumination</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Illumination</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition> The Illumination class provides attributes describing the illumination sources used to illuminate the imaging target.
+    </definition>
+    <DD_Association>
+      <identifier_reference>LED_Illumination_Source</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Illumination_Source -->
+  <DD_Class>
+    <name>LED_Illumination_Source</name>
+    <version_id>1.0</version_id>
+    <local_identifier>LED_Illumination_Source</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The LED_Illumination_Source class provides attributes describing an individual LED used to illuminate an imaging target.</definition>
+    <DD_Association>
+      <identifier_reference>pds.name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>illumination_wavelength</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Image_Compression_Segment -->

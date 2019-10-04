@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.6.1.0 - Thu Jun 06 15:42:29 PDT 2019 -->
-  <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.0.0 - Thu Oct 03 19:37:30 PDT 2019 -->
+  <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
   <sch:title>Schematron using XPath 2.0</sch:title>
 
+  <sch:ns uri="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
   <sch:ns uri="http://pds.nasa.gov/pds4/pds/v1" prefix="pds"/>
   <sch:ns uri="http://pds.nasa.gov/pds4/img/v1" prefix="img"/>
 
@@ -283,12 +284,6 @@
     <sch:rule context="img:Subframe/img:sample_fov">
       <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
         The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Telemetry_Parameters/img:telemetry_source_type">
-      <sch:assert test=". = ('DATA_PRODUCT', 'SFDU')">
-        The attribute img:telemetry_source_type must be equal to one of the following values 'DATA_PRODUCT', 'SFDU'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
