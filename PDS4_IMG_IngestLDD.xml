@@ -62,6 +62,7 @@
     1.7.0.0
     - Upgraded to v1D00 of core IM.
     - Added Illumination class and associated subclasses/attributes.
+    - Added Video class to Commanded_Parameters. (bugfix)
     
   </comment>
   <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
@@ -2950,6 +2951,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Video</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   

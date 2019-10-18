@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Oct 03 19:37:30 PDT 2019
+   Time                   Thu Oct 17 17:18:01 PDT 2019
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                58
    Attributes             129
-   Associations           252
+   Associations           253
    Error messages         0
    Warning messages       1
    Information messages   39
@@ -135,6 +135,7 @@ Parsed Input - Header:
     1.7.0.0
     - Upgraded to v1D00 of core IM.
     - Added Illumination class and associated subclasses/attributes.
+    - Added Video class to Commanded_Parameters. (bugfix)
     
   
    Last Modification Time 2019-10-03T14:00:00Z
@@ -1264,6 +1265,11 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Subframe
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Video
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
