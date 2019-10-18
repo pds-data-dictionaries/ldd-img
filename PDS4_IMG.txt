@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Oct 17 17:18:01 PDT 2019
+   Time                   Thu Oct 17 17:25:17 PDT 2019
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -482,8 +482,9 @@ Parsed Input - Attributes:
 
    name                   illumination_wavelength
    version                1.13
-   value data type        ASCII_Short_String_Collapsed
+   value data type        ASCII_Real
    description            The illumination_wavelength attribute provides the wavelength of an LED that was used to illuminate this image.
+   unit of measure type   Units_of_Length
 
    name                   interframe_delay
    version                1.13

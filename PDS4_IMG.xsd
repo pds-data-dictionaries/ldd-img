@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.0.0 - Thu Oct 17 17:18:01 PDT 2019 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.0.0 - Thu Oct 17 17:25:17 PDT 2019 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -2097,17 +2097,25 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="illumination_wavelength">
+  <xs:simpleType name="illumination_wavelength_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="illumination_wavelength">
     <xs:annotation>
       <xs:documentation>The illumination_wavelength attribute provides
         the wavelength of an LED that was used to illuminate this
         image.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleContent>
+      <xs:extension base="img:illumination_wavelength_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="interframe_delay_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -3159,7 +3167,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Thu Oct 17 17:18:01 PDT 2019" ,
+      "Date": "Thu Oct 17 17:25:17 PDT 2019" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
