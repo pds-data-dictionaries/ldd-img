@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model
-    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.sch"
+    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.sch"
     schematypens="http://purl.oclc.org/dsdl/schematron"?>
 
 <!-- PDS4 Local Data Dictionary Extended Ingest File for Imaging Node            -->
-<Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd">
+<Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.6.1.0</ldd_version_id>
+  <ldd_version_id>1.7.0.0</ldd_version_id>
   <full_name>R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
@@ -59,8 +59,13 @@
     - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
     - Corrected typo in local_reference_type_check_optical_filter rule
     
+    1.7.0.0
+    - Upgraded to v1D00 of core IM.
+    - Added Illumination class and associated subclasses/attributes.
+    - Added Video class to Commanded_Parameters. (bugfix)
+    
   </comment>
-  <last_modification_date_time>2019-05-02T14:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1221,6 +1226,20 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>illumination_wavelength</name>
+    <version_id>1.0</version_id>
+    <local_identifier>illumination_wavelength</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Cristina De Cesare</submitter_name>
+    <definition>The illumination_wavelength attribute provides the wavelength of an LED that was used to illuminate this image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2476,6 +2495,12 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+        <identifier_reference>Illumination</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
         <identifier_reference>Onboard_Compression</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -2926,6 +2951,12 @@
           <reference_type>component_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>Video</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
   </DD_Class>
   
@@ -3779,6 +3810,49 @@
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Illumination -->
+  <DD_Class>
+    <name>Illumination</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Illumination</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition> The Illumination class provides attributes describing the illumination sources used to illuminate the imaging target.
+    </definition>
+    <DD_Association>
+      <identifier_reference>LED_Illumination_Source</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Illumination_Source -->
+  <DD_Class>
+    <name>LED_Illumination_Source</name>
+    <version_id>1.0</version_id>
+    <local_identifier>LED_Illumination_Source</local_identifier>
+    <submitter_name>Cristina M. De Cesare</submitter_name>
+    <definition>The LED_Illumination_Source class provides attributes describing an individual LED used to illuminate an imaging target.</definition>
+    <DD_Association>
+      <identifier_reference>pds.name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>illumination_wavelength</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Image_Compression_Segment -->

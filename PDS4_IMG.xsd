@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.6.1.0 - Thu Jun 06 15:42:29 PDT 2019 -->
-  <!-- Generated from the PDS4 Information Model Version 1.11.0.0 - System Build 9a -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.0.0 - Wed Jan 08 16:41:34 PST 2020 -->
+  <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.11.0.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.6.1.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
+  <!-- 1.13.0.0 - pds: - Common Dictionary - N/A                                 -->
+  <!-- 1.7.0.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -13,9 +13,9 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.6.1.0">
+    version="1.7.0.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1B00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -66,6 +66,11 @@
     - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE LDD)
     - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
     - Corrected typo in local_reference_type_check_optical_filter rule
+    
+    1.7.0.0
+    - Upgraded to v1D00 of core IM.
+    - Added Illumination class and associated subclasses/attributes.
+    - Added Video class to Commanded_Parameters. (bugfix)
     
   
     </xs:documentation>
@@ -137,8 +142,8 @@
         <xs:sequence>
           <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1">
-            <xs:element ref="pds:External_Reference"> </xs:element>
             <xs:element ref="pds:Internal_Reference"> </xs:element>
+            <xs:element ref="pds:External_Reference"> </xs:element>
           </xs:choice>
           <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
@@ -173,8 +178,8 @@
     <xs:sequence>
       <xs:element ref="pds:Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element name="Brightness_Correction_HSI_Linear" type="img:Brightness_Correction_HSI_Linear"> </xs:element>
         <xs:element name="Brightness_Correction_Linear" type="img:Brightness_Correction_Linear"> </xs:element>
+        <xs:element name="Brightness_Correction_HSI_Linear" type="img:Brightness_Correction_HSI_Linear"> </xs:element>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -271,6 +276,7 @@
       <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Subframe" type="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -323,8 +329,8 @@
         <xs:sequence>
           <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1">
-            <xs:element ref="pds:External_Reference"> </xs:element>
             <xs:element ref="pds:Internal_Reference"> </xs:element>
+            <xs:element ref="pds:External_Reference"> </xs:element>
           </xs:choice>
           <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
@@ -349,7 +355,7 @@
           <xs:choice minOccurs="1" maxOccurs="1">
             <xs:element name="value_number" type="img:value_number"> </xs:element>
             <xs:element name="value_string" type="img:value_string"> </xs:element>
-        </xs:choice>
+          </xs:choice>
         </xs:sequence>
       </xs:restriction>
     </xs:complexContent>
@@ -391,8 +397,8 @@
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element ref="pds:External_Reference"> </xs:element>
         <xs:element ref="pds:Internal_Reference"> </xs:element>
+        <xs:element ref="pds:External_Reference"> </xs:element>
       </xs:choice>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
@@ -416,7 +422,7 @@
       <xs:element name="lines" type="img:lines" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="samples" type="img:samples" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="detector_to_image_rotation" type="img:detector_to_image_rotation" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="erase_count" nillable="true" type="img:erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="erase_count" type="img:erase_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="readout_rate" type="img:readout_rate" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="gain_mode_id" type="img:gain_mode_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="gain_number" type="img:gain_number" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -460,7 +466,7 @@
     <xs:complexContent>
       <xs:extension base="img:Device_Parameters">
         <xs:sequence>
-          <xs:element name="current_value" nillable="true" type="img:current_value" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="current_value" type="img:current_value" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -519,10 +525,10 @@
     </xs:annotation>
     <xs:sequence>
       <xs:choice minOccurs="1" maxOccurs="3">
-        <xs:element name="device_name" nillable="true" type="img:device_name"> </xs:element>
+        <xs:element name="device_name" type="img:device_name"> </xs:element>
         <xs:element name="device_id" type="img:device_id"> </xs:element>
         <xs:element name="sequence_number" type="img:sequence_number"> </xs:element>
-    </xs:choice>
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
 
@@ -563,7 +569,7 @@
     <xs:complexContent>
       <xs:extension base="img:Device_Parameters">
         <xs:sequence>
-          <xs:element name="voltage_value" nillable="true" type="img:voltage_value" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="voltage_value" type="img:voltage_value" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -656,8 +662,8 @@
         <xs:sequence>
           <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1">
-            <xs:element ref="pds:External_Reference"> </xs:element>
             <xs:element ref="pds:Internal_Reference"> </xs:element>
+            <xs:element ref="pds:External_Reference"> </xs:element>
           </xs:choice>
           <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
@@ -745,6 +751,17 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Illumination">
+    <xs:annotation>
+      <xs:documentation> The Illumination class provides attributes
+        describing the illumination sources used to illuminate the
+        imaging target. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="LED_Illumination_Source" type="img:LED_Illumination_Source" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Image_Compression_Segment">
     <xs:annotation>
       <xs:documentation> The Image_Compression_Segment class provides
@@ -787,6 +804,7 @@
       <xs:element name="Focus" type="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Illumination" type="img:Illumination" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Onboard_Compression" type="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Optical_Filter" type="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Pointing_Correction" type="img:Pointing_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -854,6 +872,19 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="LED_Illumination_Source">
+    <xs:annotation>
+      <xs:documentation>The LED_Illumination_Source class provides
+        attributes describing an individual LED used to illuminate an
+        imaging target.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="illumination_wavelength" type="img:illumination_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="LOCO_Parameters">
     <xs:annotation>
       <xs:documentation> The LOCO_Parameters class contains attributes
@@ -881,7 +912,7 @@
       <xs:choice minOccurs="1" maxOccurs="1">
         <xs:element name="value_number" type="img:value_number"> </xs:element>
         <xs:element name="value_string" type="img:value_string"> </xs:element>
-    </xs:choice>
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
 
@@ -927,9 +958,9 @@
       <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="ICER_Parameters" type="img:ICER_Parameters"> </xs:element>
+        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
         <xs:element name="JPEG_Parameters" type="img:JPEG_Parameters"> </xs:element>
         <xs:element name="JPEG_Progressive_Parameters" type="img:JPEG_Progressive_Parameters"> </xs:element>
-        <xs:element name="LOCO_Parameters" type="img:LOCO_Parameters"> </xs:element>
       </xs:choice>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
@@ -1011,8 +1042,8 @@
         <xs:sequence>
           <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:choice minOccurs="1" maxOccurs="1">
-            <xs:element ref="pds:External_Reference"> </xs:element>
             <xs:element ref="pds:Internal_Reference"> </xs:element>
+            <xs:element ref="pds:External_Reference"> </xs:element>
           </xs:choice>
           <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
@@ -2066,6 +2097,26 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="illumination_wavelength_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="illumination_wavelength">
+    <xs:annotation>
+      <xs:documentation>The illumination_wavelength attribute provides
+        the wavelength of an LED that was used to illuminate this
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:illumination_wavelength_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="interframe_delay_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="0"/>
@@ -3115,8 +3166,8 @@
   {
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
-      "Version": "1.11.0.0" ,
-      "Date": "Thu Jun 06 15:42:29 PDT 2019" ,
+      "Version": "1.13.0.0" ,
+      "Date": "Wed Jan 08 16:41:34 PST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
