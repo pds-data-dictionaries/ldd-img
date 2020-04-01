@@ -68,6 +68,7 @@
     - Added filter_position_count, https://github.com/pds-data-dictionaries/ldd-img/issues/25
     - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
     - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
+    - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
 
   </comment>
   <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
@@ -616,7 +617,8 @@
     <submitter_name>Jordan Padams</submitter_name>
     <definition> The detector_to_image_rotation attribute specifies the clockwise rotation, in
       degrees, that was applied to an image along its optical path through an instrument, from
-      detector to final image orientation. </definition>
+      detector to final image orientation. Note that if both this attribute and detector_to_image_flip 
+      exist, the flip is assumed to have happened before the rotation.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -626,7 +628,37 @@
       <specified_unit_id>deg</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>detector_to_image_flip</name>
+    <version_id>1.0</version_id>
+    <local_identifier>detector_to_image_flip</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The detector_to_image_flip attribute indicates whether and how the image was 
+      flipped (mirror image) along its optical path through an instrument, from detector to 
+      final image orientation. "Horizontal" means a left-to-right flip, while "Vertical" 
+      means a top-to-bottom-flip. Note that if both this attribute and detector_to_image_rotation 
+      exist, the flip is assumed to have happened before the rotation.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Horizontal</value>
+        <value_meaning>Horizontal means a left-to-right flip</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Vertical</value>
+        <value_meaning>Vertical means a top-to-bottom-flip</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>None, meaning no flip applied, is optionally added for completeness. Otherwise this attribute can simply not be included.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>device_id</name>
     <version_id>1.0</version_id>
@@ -3266,7 +3298,13 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-      <DD_Association>
+    <DD_Association>
+      <identifier_reference>detector_to_image_flip</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>erase_count</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
