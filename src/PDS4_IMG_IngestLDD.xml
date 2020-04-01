@@ -7,8 +7,8 @@
 <Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.7.0.0</ldd_version_id>
-  <full_name>R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
+  <ldd_version_id>1.7.1.0</ldd_version_id>
+  <full_name>Trent M. Hare (active), R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
   <comment> This dictionary contains high level classes and attributes used in imaging and
@@ -64,6 +64,11 @@
     - Added Illumination class and associated subclasses/attributes.
     - Added Video class to Commanded_Parameters. (bugfix)
     
+    1.7.1.0
+    - Added filter_position_count, https://github.com/pds-data-dictionaries/ldd-img/issues/25
+    - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
+    - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
+
   </comment>
   <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
 
@@ -872,6 +877,20 @@
     <definition>The filter_number attribute provides the numeric identifier of an instrument filter
       through which an image or measurement was acquired or which is associated with a given
       instrument mode.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>filter_position_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>filter_position_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The filter position count is the position in motor counts of the filter wheel motor.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -2036,7 +2055,35 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>atmospheric_opacity</name>
+    <version_id>1.0</version_id>
+    <local_identifier>atmospheric_opacity</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The atmospheric opacity (tau) value used in radiometric correction.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
+  <DD_Attribute>
+    <name>atmospheric_opacity_reference</name>
+    <version_id>1.0</version_id>
+    <local_identifier>atmospheric_opacity_reference</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The atmospheric opacity (tau) target value to which the image was corrected.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>samples</name>
     <version_id>1.0</version_id>
@@ -3575,6 +3622,12 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
+          <identifier_reference>filter_position_count</identifier_reference>
+          <reference_type>attribute_of</reference_type>
+          <minimum_occurrences>0</minimum_occurrences>
+          <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
           <identifier_reference>bandwidth</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
@@ -4364,6 +4417,18 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>responsivity_pan</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>atmospheric_opacity</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>atmospheric_opacity_reference</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
