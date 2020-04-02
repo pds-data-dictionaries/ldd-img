@@ -70,9 +70,10 @@
     - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
     - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
     - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
+    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
     
   </comment>
-  <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -2468,16 +2469,32 @@
       <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
   <DD_Attribute>
-    <name>y_center</name>
+    <name>filter_window_line</name>
     <version_id>1.0</version_id>
-    <local_identifier>y_center</local_identifier>
+    <local_identifier>filter_window_line</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The y_center attribute specifies specifies the line coordinate of the center
-      of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function 
-      for the formula.</definition>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The size in pixels of the window used for filtering in the 
+      line dimension. If the window varies across the image, this could contain 
+      the average window or initial window, as needed by the specific algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The size in pixels of the window used for filtering in the 
+      sample dimension. If the window varies across the image, this could contain 
+      the average window or initial window, as needed by the specific algorithm.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2485,7 +2502,70 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
-
+  <DD_Attribute>
+    <name>max_filter_window_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_filter_window_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The maximum size in pixels of the window used for filtering in the 
+      line dimension. If the window is constant across the image, filter_window_line 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>max_filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The maximum size in pixels of the window used for filtering in the 
+      sample dimension. If the window is constant across the image, filter_window_sample 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>min_filter_window_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>min_filter_window_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The minimum size in pixels of the window used for filtering in the 
+      line dimension. If the window is constant across the image, filter_window_line 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>min_filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>min_filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The minimum size in pixels of the window used for filtering in the 
+      sample dimension. If the window is constant across the image, filter_window_sample 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <!--                   -->
   <!-- Attributes: END   -->
   <!--                   -->
@@ -4676,6 +4756,112 @@
       </DD_Association>
   </DD_Class>
 
+  <!-- Class: Spatial_Filter -->
+  <DD_Class>
+    <name>Spatial_Filter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Spatial_Filter</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The Spatial_Filter class specifies what kind of spatial 
+      filtering has been done on the image. Spatial filtering looks at 
+      the geometry of pixels (e.g. XYZ or range values) rather than their 
+      intensity (cf. Image_Filter).</definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>max_filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>max_filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>min_filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>min_filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Image_Filter -->
+  <DD_Class>
+    <name>Image_Filter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Image_Filter</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The Image_Filter class specifies what kind of image 
+      filtering has been done to the image. Image filtering looks at 
+      image intensity rather the geometry of pixels (cf. Spatial_Filter).</definition>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>max_filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>max_filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>min_filter_window_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>min_filter_window_sample</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>  
   <!--                   -->
   <!--   Classes: END    -->
   <!--                   -->
