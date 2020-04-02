@@ -71,6 +71,7 @@
     - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
     - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
     - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
+    - Under Video added frame_index and gop_start_index
     
   </comment>
   <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
@@ -1196,7 +1197,7 @@
     <local_identifier>gop_frame_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition> The gop_frame_count attribute indicates, for video products compressed into a 
+    <definition>The gop_frame_count attribute indicates, for video products compressed into a 
       group of images (Group Of Pictures or GOP), the number of images in a GOP. This is not necessarily
       the total number of frames in the observation (see frame_count), as the observation may
       consist of a number of GOPs.</definition>
@@ -1213,7 +1214,27 @@
     <local_identifier>gop_frame_index</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition> The gop_frame_index attribute specifies the frame index within a Group Of Pictures (GOP).</definition>
+    <definition>Videos can be broken into Groups of Pictures (GOP)s, which group a 
+      number of frames together. The gop_frame_index attribute specifies the frame index 
+      within a Group Of Pictures (GOP) starting at 1. This is distinct from frame_index, 
+      which is the index into the video as a whole.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>gop_start_index</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gop_start_index</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Videos can be broken into Groups of Pictures (GOP)s, which group a number 
+      of frames together. The gop_start_index attribute specifies the index of the first 
+      frame of the GOP (starting at 1). 
+      Thus, frame_index = gop_start_index + gop_frame_index - 1.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -1221,6 +1242,22 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
+  <DD_Attribute>
+    <name>frame_index</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_index</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The frame_index attribute specifies the sequence number of this frame in 
+      the context of the entire video, i.e. the first frame of the video would be 
+      index 1, up to frame_count.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>height_pixels</name>
     <version_id>1.0</version_id>
@@ -4706,9 +4743,9 @@
   <!-- Class: Video -->
   <DD_Class>
       <name>Video</name>
-      <version_id>1.0</version_id>
+      <version_id>2.0</version_id>
       <local_identifier>Video</local_identifier>
-      <submitter_name>Cristina De Cesare</submitter_name>
+      <submitter_name>Trent Hare</submitter_name>
       <definition>The Video class contains attributes related to video 
         observations, defined as a regular time series of frames. The class can be used
         to describe a single frame within the video, or the video as a whole.</definition>
@@ -4742,7 +4779,13 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
-      <DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_index</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>gop_frame_index</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -4754,6 +4797,12 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+    <DD_Association>
+      <identifier_reference>gop_start_index</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Spatial_Filter -->
