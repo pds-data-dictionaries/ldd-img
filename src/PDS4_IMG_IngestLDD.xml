@@ -64,12 +64,13 @@
     - Added Illumination class and associated subclasses/attributes.
     - Added Video class to Commanded_Parameters. (bugfix)
     
-    1.7.1.0
+    1.7.1.0, T.Hare
     - Added filter_position_count, https://github.com/pds-data-dictionaries/ldd-img/issues/25
     - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
     - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
     - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
-
+    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
+    
   </comment>
   <last_modification_date_time>2019-10-03T14:00:00Z</last_modification_date_time>
 
@@ -2553,7 +2554,7 @@
         <identifier_reference>Flat_Field_Correction</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Focus</identifier_reference>
@@ -2969,7 +2970,7 @@
         <identifier_reference>Flat_Field_Correction</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
       </DD_Association>
       <DD_Association>
           <identifier_reference>Focus</identifier_reference>
