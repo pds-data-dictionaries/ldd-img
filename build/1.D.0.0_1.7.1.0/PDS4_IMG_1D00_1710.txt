@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri Apr 03 16:17:46 MST 2020
+   Time                   Fri Apr 03 16:49:29 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -1570,7 +1570,7 @@ Parsed Input - Classes:
    description            The Image_Mask specifies how pixels were masked (removed) from an image. Masks are typically used to suppress results in areas where they don't belong, for example masking off spacecraft hardware or removing pixels that did not meet some processing threshold. 
    is abstract            false
    is choice              false
-   subclass of            Image_Mask_File
+   subclass of            USER
 
    Associations
 
@@ -1597,7 +1597,7 @@ Parsed Input - Classes:
       local identifier      Image_Mask_File
       minimum occurrences   0
       maximum occurrences   *
-      reference type        parent_of
+      reference type        component_of
 
    name                   Image_Mask_File
    description            This class identifies a file used for image masking. The mask_type defines the type of file; if mask_type is missing then "image" is assumed.

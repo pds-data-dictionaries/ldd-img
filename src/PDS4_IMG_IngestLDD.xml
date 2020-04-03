@@ -3525,7 +3525,7 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>Image_Mask_File</identifier_reference>
-      <reference_type>parent_of</reference_type>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
