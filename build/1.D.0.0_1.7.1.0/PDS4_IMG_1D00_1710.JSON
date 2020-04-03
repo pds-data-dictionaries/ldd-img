@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri Apr 03 16:17:46 MST 2020" ,
+      "Date": "Fri Apr 03 16:49:29 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -3570,22 +3570,6 @@
             "description": "The Image_Mask specifies how pixels were masked (removed) from an image. Masks are typically used to suppress results in areas where they don't belong, for example masking off spacecraft hardware or removing pixels that did not meet some processing threshold. "
               , "associationList": [
              {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask.Image_Mask_File.generalization" ,
-                "title": "Image_Mask_File" ,
-                "assocType": "parent_of" ,
-                "isAttribute": "false" ,
-                "isChoice": "false" ,
-                "isAny": "false" ,
-                "groupName": "null" ,
-                "minimumCardinality": "1" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "0000" ,
-                "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File"
-                 ]
-              }
-            } ,
-             {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Image_Mask.img.active_flag" ,
                 "title": "active_flag" ,
                 "assocType": "attribute_of" ,
@@ -3598,22 +3582,6 @@
                 "classOrder": "1010" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Image_Mask.img.active_flag"
-                 ]
-              }
-            }
-           , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.pds.description" ,
-                "title": "description" ,
-                "assocType": "attribute_of" ,
-                "isAttribute": "true" ,
-                "isChoice": "false" ,
-                "isAny": "false" ,
-                "groupName": "null" ,
-                "minimumCardinality": "0" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "1010" ,
-                "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File.pds.description"
                  ]
               }
             }
@@ -3666,67 +3634,18 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.pds.name" ,
-                "title": "name" ,
-                "assocType": "attribute_of" ,
-                "isAttribute": "true" ,
-                "isChoice": "false" ,
-                "isAny": "false" ,
-                "groupName": "null" ,
-                "minimumCardinality": "0" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "1050" ,
-                "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File.pds.name"
-                 ]
-              }
-            }
-           , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_type" ,
-                "title": "mask_type" ,
-                "assocType": "attribute_of" ,
-                "isAttribute": "true" ,
-                "isChoice": "false" ,
-                "isAny": "false" ,
-                "groupName": "null" ,
-                "minimumCardinality": "0" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "1060" ,
-                "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_type"
-                 ]
-              }
-            }
-           , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.horizon_mask_elevation" ,
-                "title": "horizon_mask_elevation" ,
-                "assocType": "attribute_of" ,
-                "isAttribute": "true" ,
-                "isChoice": "false" ,
-                "isAny": "false" ,
-                "groupName": "null" ,
-                "minimumCardinality": "0" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
-                "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File.img.horizon_mask_elevation"
-                 ]
-              }
-            }
-           , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.pds.Internal_Reference" ,
-                "title": "Internal_Reference" ,
+                "identifier": "0001_NASA_PDS_1.img.Image_Mask.img.Image_Mask_File" ,
+                "title": "Image_Mask_File" ,
                 "assocType": "component_of" ,
                 "isAttribute": "false" ,
-                "isChoice": "true" ,
+                "isChoice": "false" ,
                 "isAny": "false" ,
-                "groupName": "XSChoice#14" ,
-                "minimumCardinality": "1" ,
-                "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1050" ,
                 "classId": [
-                  "0001_NASA_PDS_1.pds.Internal_Reference",
-                  "0001_NASA_PDS_1.pds.External_Reference"
+                  "0001_NASA_PDS_1.img.Image_Mask_File"
                  ]
               }
             }
