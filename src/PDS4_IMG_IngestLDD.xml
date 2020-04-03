@@ -69,9 +69,12 @@
     - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
     - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
     - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
-    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
-    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
-    - Under Video added frame_index and gop_start_index
+    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded), https://github.com/pds-data-dictionaries/ldd-img/issues/30
+    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*), 
+        https://github.com/pds-data-dictionaries/ldd-img/issues/28
+    - Under Video added frame_index and gop_start_index, https://github.com/pds-data-dictionaries/ldd-img/issues/26
+    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes,
+        https://github.com/pds-data-dictionaries/ldd-img/issues/8
     
   </comment>
   <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
@@ -504,18 +507,25 @@
     <local_identifier>color_subsampling_mode</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The color_subsampling_mode attribute specifies the JPEG color subsampling mode used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 'Grayscale' - indicates a grayscale image</definition>
+    <definition> The color_subsampling_mode attribute specifies the JPEG color subsampling mode 
+      used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the 
+      typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 
+      'Grayscale' - indicates a grayscale image</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
         <value>4:4:4</value>
-        <value_meaning>Indicates 4:4:4 chroma sampling. Each of the three Y'CbCr components have the same sample rate, thus there is no chroma subsampling</value_meaning>
+        <value_meaning>Indicates 4:4:4 chroma sampling. Each of the three Y'CbCr components have 
+          the same sample rate, thus there is no chroma subsampling</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>4:2:2</value>
-        <value_meaning>indicates 4:2:2 chroma subsampling. The typical case. The two chroma components are sampled at half the sample rate of luma: the horizontal chroma resolution is halved. This reduces the bandwidth of an uncompressed video signal by one-third with little to no visual difference.</value_meaning>
+        <value_meaning>indicates 4:2:2 chroma subsampling. The typical case. The two chroma components 
+          are sampled at half the sample rate of luma: the horizontal chroma resolution is halved. 
+          This reduces the bandwidth of an uncompressed video signal by one-third with little to no 
+          visual difference.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Grayscale</value>
@@ -533,7 +543,8 @@
     <definition>The companding_state attribute specifies whether the data is or has had its bit
       depth reduced, for example conversion from 12 to 8 bits via a lookup
       table or bit scaling. Valid values: None - values have not been companded.
-      Companded - values are currently companded. Expanded - values have been companded but are now expanded back to original size.</definition>
+      Companded - values are currently companded. Expanded - values have been companded but are now 
+      expanded back to original size.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -575,7 +586,8 @@
     <local_identifier>current_value</local_identifier>
     <nillable_flag>true</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The current_value attribute provides provides the current, in the specified units, of an imaging instrument or some part of the imaging instrument.</definition>
+    <definition>The current_value attribute provides provides the current, in the specified units, of an 
+      imaging instrument or some part of the imaging instrument.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -604,7 +616,8 @@
     <local_identifier>deferred_flag</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The deferred_flag attribute specifies whether compression was done at the time of image acquisition, or was deferred until later (typically at downlink time). </definition>
+    <definition> The deferred_flag attribute specifies whether compression was done at the time of image 
+      acquisition, or was deferred until later (typically at downlink time). </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
@@ -657,7 +670,8 @@
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>None</value>
-        <value_meaning>None, meaning no flip applied, is optionally added for completeness. Otherwise this attribute can simply not be included.</value_meaning>
+        <value_meaning>None, meaning no flip applied, is optionally added for completeness. Otherwise this 
+          attribute can simply not be included.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -763,7 +777,8 @@
     <local_identifier>error_pixel_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition> The error_pixel_count attribute specifies the number of pixels that are outside a valid DN range, after all decompression and post decompression processing has been completed. </definition>
+    <definition> The error_pixel_count attribute specifies the number of pixels that are outside 
+      a valid DN range, after all decompression and post decompression processing has been completed. </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -778,8 +793,8 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The exposure count attribute provides the number of exposures taken during a certain interval,
-      such as the duration of one command.  For example, this may include the
-      number of exposures needed by an autoexpose algorithm.</definition>
+      such as the duration of one command.  For example, this may include the number of exposures 
+      needed by an autoexpose algorithm.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -834,7 +849,8 @@
     <local_identifier>exposure_duration_threshold_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The exposure_duration_threshold specifies the exposure time threshold in raw counts, when shutter_subtraction_mode = 'Conditional'.</definition>
+    <definition>The exposure_duration_threshold specifies the exposure time threshold in raw counts, 
+      when shutter_subtraction_mode = 'Conditional'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -849,7 +865,8 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The exposure_type attribute indicates the exposure setting on a camera. Valid values: 
-      'Manual' - manual exposure setting, 'Auto' - autoexposure is applied by the camera, 'Test' - test exposure setting telling the camera to return a fixed-pattern test image.</definition>
+      'Manual' - manual exposure setting, 'Auto' - autoexposure is applied by the camera, 'Test' - test 
+      exposure setting telling the camera to return a fixed-pattern test image.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -1052,7 +1069,8 @@
     <local_identifier>focus_position_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition>The focus_position_count attribute specifies a commanded focus, or the initial focus position used by the autofocus algorithm.</definition>
+    <definition>The focus_position_count attribute specifies a commanded focus, or the initial focus 
+      position used by the autofocus algorithm.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
@@ -1066,7 +1084,8 @@
     <local_identifier>focus_stack_flag</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition> The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.</definition>
+    <definition> The focus_stack_flag attribute indicates whether or not focus stack image products 
+      were created during the autofocus imaging step.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
@@ -1183,7 +1202,8 @@
     <local_identifier>gain_number</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The gain_number attribute specifies the gain value used in the analog to digital conversion. The gain value is a multiplicative factor used in the analog to digital conversion.</definition>
+    <definition>The gain_number attribute specifies the gain value used in the analog to digital 
+      conversion. The gain value is a multiplicative factor used in the analog to digital conversion.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1423,7 +1443,8 @@
     <local_identifier>maximum_focus_distance</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition>The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.</definition>
+    <definition>The maximum_focus_distance attribute specifies the estimated distance to the 
+      farthest pixel with less than 1 pixel of gaussian blur.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1437,7 +1458,8 @@
     <local_identifier>minimum_focus_distance</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Danika F. Wellington</submitter_name>
-    <definition>The minimum_focus_distance attribute specifies the estimated distance to the nearest pixel with less than 1 pixel of gaussian blur.</definition>
+    <definition>The minimum_focus_distance attribute specifies the estimated distance to the 
+      nearest pixel with less than 1 pixel of gaussian blur.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -1614,7 +1636,8 @@
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>JPEG Progressive</value>
-        <value_meaning>interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail.</value_meaning>
+        <value_meaning>interlaced progressive JPEG format, in which data is compressed in multiple 
+          passes of progressively higher detail.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>MSSS Lossless</value>
@@ -2199,7 +2222,14 @@
     <local_identifier>sample_bits</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The sample_bits attribute specifies the logical or active number of bits in the data, which is distinct from the physical number of bits (for example, encoding 12-bit data within 16-bit words). These logical bits are stored in the low order (least significant) bits, with unused bits filled with 0 (or 1 for negative integers to preserve a two's complement representation). This is distinct from the valid data range (specified by valid_minimum and valid_maximum in Special_Constants class) because all values, including missing/invalid flag values, must fit within the sample_bits. The intent is that the data should be able to be sent through a communication channel that passes only sample_bits with no loss in fidelity.</definition>
+    <definition>The sample_bits attribute specifies the logical or active number of bits in the data, 
+      which is distinct from the physical number of bits (for example, encoding 12-bit data within 
+      16-bit words). These logical bits are stored in the low order (least significant) bits, with 
+      unused bits filled with 0 (or 1 for negative integers to preserve a two's complement representation). 
+      This is distinct from the valid data range (specified by valid_minimum and valid_maximum in 
+      Special_Constants class) because all values, including missing/invalid flag values, must fit 
+      within the sample_bits. The intent is that the data should be able to be sent through a communication 
+      channel that passes only sample_bits with no loss in fidelity.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2232,7 +2262,9 @@
     <local_identifier>sampling_factor</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition> The sampling_factor attribute provides the value N, where every Nth data point was kept from the original data set by selection, averaging, or taking the median. When applied to an image object, the single value represented in sampling_factor applies to both the lines and the samples.</definition>
+    <definition> The sampling_factor attribute provides the value N, where every Nth data point was 
+      kept from the original data set by selection, averaging, or taking the median. When applied to 
+      an image object, the single value represented in sampling_factor applies to both the lines and the samples.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2240,6 +2272,37 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
+  <DD_Attribute>
+    <name>saturated_pixel_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>saturated_pixel_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The saturated_pixel_count attribute provides the number of pixels which were saturated. This can happen
+      when the sensor acquired a value too low or too high to be measured accurately or if post-processing cause the output 
+      pixel value to fall below or above the the output range of valid values for the data or data type.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>valid_pixel_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>valid_pixel_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The valid_pixel_count attribute provides the total number of pixels tagged as valid. This will 
+      generally not include pixels flagged as saturated_pixel_count or missing_pixel_count.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+    
   <DD_Attribute>
     <name>sequence_number</name>
     <version_id>1.0</version_id>
@@ -2316,7 +2379,8 @@
       decoding for the compression segment identified by segment_number. Upon return by the ICER decompress function, 
       the output quantity of segment_status contains a number indicating the decode status. The decode status may have one or more of the following flags set: 
       SHORTDATASEG FLAG (bit 0): If this flag is set, then the segment contained so little data that nothing could be reconstructed in the segment. 
-      INCONSISTENTDATA FLAG (bit 1): If this flag is set, then one or more pieces of information in the segment header (specifically, image width, image height, n segs, wavelet filter, n decomps) are inconsistent with the value(s) in the first (valid) segment. ICER will ignore the data in this segment.
+      INCONSISTENTDATA FLAG (bit 1): If this flag is set, then one or more pieces of information in the segment header (specifically, image width, image height, n segs, wavelet filter, n decomps)    
+                                     are inconsistent with the value(s) in the first (valid) segment. ICER will ignore the data in this segment.
       DUPLICATESEG FLAG (bit 2): If this flag is set, then the segment index given in the header equals that given by a previous segment. The decompressor will ignore the data in this segment. 
       BADBITPLANENUMBER FLAG (bit 3): If this flag is set, then an ICER internal parameter in the header for this segment has probably been corrupted. The decompressor will ignore the data in this segment. 
       BADBITPLANECOUNT FLAG (bit 4): If this flag is set, then an ICER internal parameter in the header for this segment has probably been corrupted. The decompressor will ignore the data in this segment. 
@@ -2454,7 +2518,8 @@
     <local_identifier>voltage_value</local_identifier>
     <nillable_flag>true</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The voltage_value attribute provides provides the voltage, in the specified units, of an imaging instrument or some part of the imaging instrument.</definition>
+    <definition>The voltage_value attribute provides provides the voltage, in the specified units, of an 
+      imaging instrument or some part of the imaging instrument.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -3290,7 +3355,8 @@
       <version_id>1.0</version_id>
       <local_identifier>Correction_Parameter</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
-      <definition> The Correction_Parameter class specifies identifier(s) and value for a data correction parameter applicable to the parent class.</definition>
+      <definition> The Correction_Parameter class specifies identifier(s) and value for a data correction 
+        parameter applicable to the parent class.</definition>
       <DD_Association>
           <identifier_reference>List_Index_No_Units_Imaging</identifier_reference>
           <reference_type>parent_of</reference_type>
@@ -3964,7 +4030,8 @@
       <local_identifier>Frame</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition>The Frame class contains attributes providing information specific to 
-          an image frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different 
+          an image frame. A frame consists of a sequence of measurements made over a specified time 
+          interval, and may include measurements from different 
           instrument modes.</definition>
       <DD_Association>
           <identifier_reference>frame_id</identifier_reference>
@@ -3988,7 +4055,9 @@
       <local_identifier>ICER_Parameters</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition> The ICER_Parameters class contains attributes describing onboard
-          compression parameters specific to Joint Photographic Experts Group (JPEG) image compression. ICER is a wavelet-based image compression file format used by the NASA Mars Rovers. ICER has both lossy and lossless compression modes.</definition>
+          compression parameters specific to Joint Photographic Experts Group (JPEG) image compression. 
+          ICER is a wavelet-based image compression file format used by the NASA Mars Rovers. ICER has 
+          both lossy and lossless compression modes.</definition>
       <DD_Association>
           <identifier_reference>wavelet_filter</identifier_reference>
           <reference_type>attribute_of</reference_type>
@@ -4027,8 +4096,8 @@
     <version_id>1.0</version_id>
     <local_identifier>Illumination</local_identifier>
     <submitter_name>Cristina M. De Cesare</submitter_name>
-    <definition> The Illumination class provides attributes describing the illumination sources used to illuminate the imaging target.
-    </definition>
+    <definition> The Illumination class provides attributes describing the illumination sources used 
+      to illuminate the imaging target.</definition>
     <DD_Association>
       <identifier_reference>LED_Illumination_Source</identifier_reference>
       <reference_type>component_of</reference_type>
@@ -4642,11 +4711,29 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>Companding</identifier_reference>
-          <reference_type>component_of</reference_type>
-          <minimum_occurrences>0</minimum_occurrences>
-          <maximum_occurrences>1</maximum_occurrences>
+        <identifier_reference>saturated_pixel_count</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+      <DD_Association>
+        <identifier_reference>missing_pixel_count</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>valid_pixel_count</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+    <DD_Association>
+      <identifier_reference>Companding</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Shutter_Subtraction -->
