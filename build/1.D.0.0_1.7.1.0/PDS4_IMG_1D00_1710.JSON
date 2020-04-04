@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri Apr 03 17:16:51 MST 2020" ,
+      "Date": "Fri Apr 03 18:37:35 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -360,7 +360,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#13" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -1394,7 +1394,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#13" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -1587,7 +1587,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#13" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -2736,7 +2736,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#13" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -3729,6 +3729,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_transparent_value" ,
+                "title": "mask_transparent_value" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1080" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_transparent_value"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.pds.Internal_Reference" ,
                 "title": "Internal_Reference" ,
                 "assocType": "component_of" ,
@@ -3736,7 +3752,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#14" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -5233,7 +5249,7 @@
                 "isChoice": "true" ,
                 "isAny": "false" ,
                 "groupName": "XSChoice#13" ,
-                "minimumCardinality": "1" ,
+                "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "classId": [
@@ -8601,6 +8617,31 @@
             "unitOfMeasure": "Units_of_Angle" ,
             "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Angle" ,
             "unitId": "arcmin, arcsec, deg, hr, mrad, rad" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_transparent_value" ,
+            "title": "mask_transparent_value" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.13" ,
+            "description": "Specifies the pixel value in the mask that will represent transparent (or NoData\/null) for the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value in the mask represents opaque (or valid) in the characterized image." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }

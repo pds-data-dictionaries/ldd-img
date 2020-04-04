@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML product label for PDS4 V1.13.0.0  Fri Apr 03 17:16:51 MST 2020 -->
+  <!-- PDS4 XML product label for PDS4 V1.13.0.0  Fri Apr 03 18:37:35 MST 2020 -->
   <!-- Generated from the PDS4 Information Model V1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 XML product label is an operational deliverable. *** -->
 <?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.sch"
@@ -26,9 +26,9 @@
     <File_Area_XML_Schema>
         <File>
             <file_name>PDS4_IMG_1D00_1710.xsd</file_name>
-            <creation_date_time>2020-04-03T17:16:51</creation_date_time>
-            <file_size unit="byte">166644</file_size>
-            <records>3506</records>
+            <creation_date_time>2020-04-03T18:37:35</creation_date_time>
+            <file_size unit="byte">167478</file_size>
+            <records>3522</records>
         </File>
         <XML_Schema>
             <name>PDS4_IMG_1D00_1710.xsd</name>
@@ -40,7 +40,7 @@
     <File_Area_XML_Schema>
         <File>
             <file_name>PDS4_IMG_1D00_1710.sch</file_name>
-            <creation_date_time>2020-04-03T17:16:51</creation_date_time>
+            <creation_date_time>2020-04-03T18:37:35</creation_date_time>
             <file_size unit="byte">24107</file_size>
             <records>469</records>
         </File>

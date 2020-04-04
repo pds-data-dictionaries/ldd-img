@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri Apr 03 17:16:51 MST 2020
+   Time                   Fri Apr 03 18:37:35 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -30,8 +30,8 @@ Parameters:
 
 Summary:
    Classes                62
-   Attributes             144
-   Associations           289
+   Attributes             145
+   Associations           290
    Error messages         8
    Warning messages       1
    Information messages   41
@@ -161,6 +161,7 @@ Parsed Input - Header:
     - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation attributes.
         anded new Image_Mask added under both Imaging and Commanded_Parameters classes,
         https://github.com/pds-data-dictionaries/ldd-img/issues/29
+    - Added mask_transparent_value attribute to Image_Mask_File class
     
   
    Last Modification Time 2030-04-10T18:00:00Z
@@ -705,6 +706,11 @@ Parsed Input - Attributes:
    minimum value          -90.0
    maximum value          90.0
    unit of measure type   Units_of_Angle
+
+   name                   mask_transparent_value
+   version                1.13
+   value data type        ASCII_Real
+   description            Specifies the pixel value in the mask that will represent transparent (or NoData/null) for the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value in the mask represents opaque (or valid) in the characterized image.
 
    name                   r0
    version                1.13
@@ -1557,12 +1563,12 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      pds.Internal_Reference
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      pds.External_Reference
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
@@ -1627,13 +1633,18 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      mask_transparent_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      pds.Internal_Reference
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      pds.External_Reference
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
