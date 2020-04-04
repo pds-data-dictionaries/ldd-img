@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri Apr 03 16:49:29 MST 2020" ,
+      "Date": "Fri Apr 03 17:16:51 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -8595,7 +8595,7 @@
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
             "minimumCharacters": "Unbounded" ,
             "maximumCharacters": "Unbounded" ,
-            "minimumValue": "0.0" ,
+            "minimumValue": "-90.0" ,
             "maximumValue": "90.0" ,
             "pattern": "null" ,
             "unitOfMeasure": "Units_of_Angle" ,
