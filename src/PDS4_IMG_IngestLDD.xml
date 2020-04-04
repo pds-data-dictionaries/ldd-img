@@ -78,6 +78,7 @@
     - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation attributes.
         anded new Image_Mask added under both Imaging and Commanded_Parameters classes,
         https://github.com/pds-data-dictionaries/ldd-img/issues/29
+    - Added mask_transparent_value attribute to Image_Mask_File class
     
   </comment>
   <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
@@ -1957,6 +1958,22 @@
       <specified_unit_id>deg</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>mask_transparent_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>mask_transparent_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the pixel value in the mask that will represent transparent (or NoData/null) for
+      the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value
+      in the mask represents opaque (or valid) in the characterized image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>r0</name>
@@ -3478,7 +3495,7 @@
           <identifier_reference>pds.Internal_Reference</identifier_reference>
           <identifier_reference>pds.External_Reference</identifier_reference>
           <reference_type>component_of</reference_type>
-          <minimum_occurrences>1</minimum_occurrences>
+          <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
@@ -3550,7 +3567,7 @@
       <identifier_reference>pds.Internal_Reference</identifier_reference>
       <identifier_reference>pds.External_Reference</identifier_reference>
       <reference_type>component_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
@@ -3567,6 +3584,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>horizon_mask_elevation</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>mask_transparent_value</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
