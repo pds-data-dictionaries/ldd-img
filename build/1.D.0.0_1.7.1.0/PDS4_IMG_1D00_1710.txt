@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri Apr 03 16:49:29 MST 2020
+   Time                   Fri Apr 03 17:16:51 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -75,7 +75,7 @@ Detailed validation messages
    INFO     Attribute: <onboard_compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <onboard_compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
    INFO     Attribute: <progressive_stage> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <horizon_mask_elevation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
+   INFO     Attribute: <horizon_mask_elevation> - The default minimum value provided by the attribute's data type is being overridden with -90.0
    INFO     Attribute: <horizon_mask_elevation> - The default maximum value provided by the attribute's data type is being overridden with 90.0
    INFO     Attribute: <samples> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <sample_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -702,7 +702,7 @@ Parsed Input - Attributes:
    version                1.13
    value data type        ASCII_Real
    description            Specifies the elevation above which the image is masked off.
-   minimum value          0.0
+   minimum value          -90.0
    maximum value          90.0
    unit of measure type   Units_of_Angle
 

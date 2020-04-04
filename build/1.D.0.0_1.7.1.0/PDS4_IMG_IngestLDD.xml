@@ -1951,7 +1951,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <minimum_value>0.0</minimum_value>
+      <minimum_value>-90.0</minimum_value>
       <maximum_value>90.0</maximum_value>
       <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
       <specified_unit_id>deg</specified_unit_id>
