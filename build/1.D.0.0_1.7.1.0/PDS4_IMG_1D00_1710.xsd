@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.1.0 - Fri Apr 03 18:37:35 MST 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.1.0 - Mon Apr 06 13:01:34 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -2452,8 +2452,9 @@
       <xs:documentation>Specifies the pixel value in the mask that will
         represent transparent (or NoData/null) for the characterized
         image. This is normally defined as 0 in the mask layer. Once
-        defined, any other value in the mask represents opaque (or
-        valid) in the characterized image.</xs:documentation>
+        defined, any other value in the mask represents opaque or
+        translucent (in other words, valid) in the characterized
+        image.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -3510,7 +3511,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri Apr 03 18:37:35 MST 2020" ,
+      "Date": "Mon Apr 06 13:01:34 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri Apr 03 18:37:35 MST 2020
+   Time                   Mon Apr 06 13:01:34 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -710,7 +710,7 @@ Parsed Input - Attributes:
    name                   mask_transparent_value
    version                1.13
    value data type        ASCII_Real
-   description            Specifies the pixel value in the mask that will represent transparent (or NoData/null) for the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value in the mask represents opaque (or valid) in the characterized image.
+   description            Specifies the pixel value in the mask that will represent transparent (or NoData/null) for the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value in the mask represents opaque or translucent (in other words, valid) in the characterized image.
 
    name                   r0
    version                1.13
