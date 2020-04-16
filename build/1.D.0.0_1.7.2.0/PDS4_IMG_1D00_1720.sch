@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.1.0 - Mon Apr 06 13:01:34 MST 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.2.0 - Thu Apr 16 15:52:47 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -306,6 +306,12 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:x_center">
+      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Radial_Flat_Field_Function/img:y_center">
       <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
         The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>

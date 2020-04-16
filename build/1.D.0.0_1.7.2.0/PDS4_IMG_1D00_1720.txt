@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        10.1.2
-   LDD Version Id:        1.7.1.0
+   LDD Version Id:        1.7.2.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Apr 06 13:01:34 MST 2020
+   Time                   Thu Apr 16 15:52:47 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -29,22 +29,14 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                62
-   Attributes             145
-   Associations           290
-   Error messages         8
+   Classes                64
+   Attributes             149
+   Associations           296
+   Error messages         0
    Warning messages       1
    Information messages   41
 
 Detailed validation messages
-   ERROR    Class:0001_NASA_PDS_1.img.Radial_Flat_Field_Function  Association:y_center  Attribute: y_center - Missing Attribute
-   ERROR    Association: y_center - Could not find referenced attribute - Reference Type: attribute_of
-   ERROR    Class:0001_NASA_PDS_1.img.Sampling  Association:saturated_pixel_count  Class:saturated_pixel_count - Missing Component Class
-   ERROR    Association: saturated_pixel_count - Missing Component - Reference Type: component_of
-   ERROR    Class:0001_NASA_PDS_1.img.Sampling  Association:missing_pixel_count  Class:missing_pixel_count - Missing Component Class
-   ERROR    Association: missing_pixel_count - Missing Component - Reference Type: component_of
-   ERROR    Class:0001_NASA_PDS_1.img.Sampling  Association:valid_pixel_count  Class:valid_pixel_count - Missing Component Class
-   ERROR    Association: valid_pixel_count - Missing Component - Reference Type: component_of
    WARNING  Header:  - New namespace id has been specified:img
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
@@ -90,8 +82,8 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.7.1.0
-   Full Name              Trent M. Hare (active), R. Joyner, Jordan Padams, E. Rye, C. De Cesare
+   LDD Version            1.7.2.0
+   Full Name              Trent M. Hare (active), P. Geissler, R. Joyner, Jordan Padams, E. Rye, C. De Cesare
    Steward                img
    Namespace Id           img
    Comment                 This dictionary contains high level classes and attributes used in imaging and
@@ -163,6 +155,11 @@ Parsed Input - Header:
         https://github.com/pds-data-dictionaries/ldd-img/issues/29
     - Added mask_transparent_value attribute to Image_Mask_File class
     
+    1.7.2.0 P.Geissler
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
+        companding_input_dn_max, and companding_output_dn
+    - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
+
   
    Last Modification Time 2030-04-10T18:00:00Z
    PDS4 Merge Flag        false
@@ -271,6 +268,21 @@ Parsed Input - Attributes:
    version                1.13
    value data type        ASCII_Short_String_Collapsed
    description             The color_subsampling_mode attribute specifies the JPEG color subsampling mode used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 'Grayscale' - indicates a grayscale image
+
+   name                   companding_input_dn_max
+   version                1.13
+   value data type        ASCII_Integer
+   description            The companding_input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding.
+
+   name                   companding_input_dn_min
+   version                1.13
+   value data type        ASCII_Integer
+   description            The companding_input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding.
+
+   name                   companding_output_dn
+   version                1.13
+   value data type        ASCII_Integer
+   description            The companding_output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding.
 
    name                   companding_state
    version                1.13
@@ -828,12 +840,12 @@ Parsed Input - Attributes:
    description             The sampling_factor attribute provides the value N, where every Nth data point was kept from the original data set by selection, averaging, or taking the median. When applied to an image object, the single value represented in sampling_factor applies to both the lines and the samples.
 
    name                   saturated_pixel_count
-   version                1.0
+   version                1.13
    value data type        ASCII_NonNegative_Integer
    description            The saturated_pixel_count attribute provides the number of pixels which were saturated. This can happen when the sensor acquired a value too low or too high to be measured accurately or if post-processing cause the output pixel value to fall below or above the the output range of valid values for the data or data type.
 
    name                   valid_pixel_count
-   version                1.0
+   version                1.13
    value data type        ASCII_NonNegative_Integer
    description            The valid_pixel_count attribute provides the total number of pixels tagged as valid. This will generally not include pixels flagged as saturated_pixel_count or missing_pixel_count.
 
@@ -924,6 +936,12 @@ Parsed Input - Attributes:
    version                1.13
    value data type        ASCII_Real
    description            The x_center attribute specifies the sample coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
+   unit of measure type   Units_of_Misc
+
+   name                   y_center
+   version                1.13
+   value data type        ASCII_Real
+   description            The y_center attribute specifies the sample coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
    unit of measure type   Units_of_Misc
 
    name                   filter_window_line
@@ -1417,6 +1435,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Companding_Table
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Data_Processing
       minimum occurrences   1
       maximum occurrences   1
@@ -1434,6 +1457,47 @@ Parsed Input - Classes:
       minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
+
+   name                   Companding_Table
+   description            The Companding_Table class specifies the look up table used to compand the data.
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing_File
+
+   Associations
+
+      local identifier      Companding_Table_Mapping
+      minimum occurrences   1
+      maximum occurrences   unbounded
+      reference type        component_of
+
+      local identifier      Data_Processing_File
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
+   name                   Companding_Table_Mapping
+   description            The Companding_Table_Mapping class specifies the mapping between the input DN range and the output DN as the data are companded.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      companding_input_dn_min
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      companding_input_dn_max
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      companding_output_dn
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
 
    name                   Onboard_Compression
    description            The Onboard_Compression class contains attributes describing the compression performed onboard a spacecraft or instrument for data storage and transmission.
@@ -2678,17 +2742,17 @@ Parsed Input - Classes:
       local identifier      saturated_pixel_count
       minimum occurrences   0
       maximum occurrences   1
-      reference type        component_of
+      reference type        attribute_of
 
       local identifier      missing_pixel_count
       minimum occurrences   0
       maximum occurrences   1
-      reference type        component_of
+      reference type        attribute_of
 
       local identifier      valid_pixel_count
       minimum occurrences   0
       maximum occurrences   1
-      reference type        component_of
+      reference type        attribute_of
 
       local identifier      Companding
       minimum occurrences   0
