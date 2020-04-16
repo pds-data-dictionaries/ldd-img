@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Apr 16 15:52:47 MST 2020
+   Time                   Thu Apr 16 16:48:34 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -941,7 +941,7 @@ Parsed Input - Attributes:
    name                   y_center
    version                1.13
    value data type        ASCII_Real
-   description            The y_center attribute specifies the sample coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
+   description            The y_center attribute specifies the line coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
    unit of measure type   Units_of_Misc
 
    name                   filter_window_line

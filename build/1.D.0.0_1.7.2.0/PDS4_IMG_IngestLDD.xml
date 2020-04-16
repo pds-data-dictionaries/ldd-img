@@ -2683,7 +2683,7 @@
     <local_identifier>y_center</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>The y_center attribute specifies the sample coordinate of the center
+    <definition>The y_center attribute specifies the line coordinate of the center
       of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function 
       for the formula.</definition>
     <DD_Value_Domain>
