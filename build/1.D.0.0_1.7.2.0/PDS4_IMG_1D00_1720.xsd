@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.1.0 - Mon Apr 06 13:01:34 MST 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.2.0 - Thu Apr 16 15:52:47 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.13.0.0 - pds: - Common Dictionary - N/A                                 -->
-  <!-- 1.7.1.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
+  <!-- 1.7.2.0 - img: - Imaging - PDS4_IMG_IngestLDD.xml                         -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="http://pds.nasa.gov/pds4/img/v1"
@@ -13,7 +13,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.7.1.0">
+    version="1.7.2.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd"/>
  
@@ -88,6 +88,11 @@
         https://github.com/pds-data-dictionaries/ldd-img/issues/29
     - Added mask_transparent_value attribute to Image_Mask_File class
     
+    1.7.2.0 P.Geissler
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
+        companding_input_dn_max, and companding_output_dn
+    - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
+
   
     </xs:documentation>
   </xs:annotation>
@@ -327,6 +332,7 @@
         <xs:sequence>
           <xs:element name="companding_state" type="img:companding_state" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="Companding_File" type="img:Companding_File" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="Companding_Table" type="img:Companding_Table" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
         <!-- <xs:assert test="img:companding_state = ('Companded', 'Expanded', 'None')"/> -->
@@ -353,6 +359,33 @@
         </xs:sequence>
       </xs:restriction>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Companding_Table">
+    <xs:annotation>
+      <xs:documentation>The Companding_Table class specifies the look up
+        table used to compand the data.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing_File">
+        <xs:sequence>
+          <xs:element name="Companding_Table_Mapping" type="img:Companding_Table_Mapping" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Companding_Table_Mapping">
+    <xs:annotation>
+      <xs:documentation>The Companding_Table_Mapping class specifies the
+        mapping between the input DN range and the output DN as the data
+        are companded.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="companding_input_dn_min" type="img:companding_input_dn_min" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="companding_input_dn_max" type="img:companding_input_dn_max" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="companding_output_dn" type="img:companding_output_dn" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Correction_Parameter">
@@ -1173,6 +1206,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="x_center" type="img:x_center" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="y_center" type="img:y_center" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="r0" type="img:r0" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="r1" type="img:r1" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="r2" type="img:r2" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1217,6 +1251,9 @@
       <xs:element name="sample_bits" type="img:sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bit_mask" type="img:sample_bit_mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sampling_factor" type="img:sampling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="saturated_pixel_count" type="img:saturated_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="valid_pixel_count" type="img:valid_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Companding" type="img:Companding" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
@@ -1616,6 +1653,45 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="companding_input_dn_max">
+    <xs:annotation>
+      <xs:documentation>The companding_input_dn_max attribute provides
+        the value of the maximum DN in the input image that is assigned
+        a specific DN in the output image during
+        companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="companding_input_dn_min">
+    <xs:annotation>
+      <xs:documentation>The companding_input_dn_min attribute provides
+        the value of the minimum DN in the input image that is assigned
+        a specific DN in the output image during
+        companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="companding_output_dn">
+    <xs:annotation>
+      <xs:documentation>The companding_output_dn attribute provides the
+        value of the DN in the output image that is assigned to a given
+        range of DN in the input image during
+        companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3228,6 +3304,22 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="saturated_pixel_count">
+    <xs:annotation>
+      <xs:documentation>The saturated_pixel_count attribute provides the
+        number of pixels which were saturated. This can happen when the
+        sensor acquired a value too low or too high to be measured
+        accurately or if post-processing cause the output pixel value to
+        fall below or above the the output range of valid values for the
+        data or data type.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="segment_count">
     <xs:annotation>
       <xs:documentation> The segment_count attribute identifies the
@@ -3397,6 +3489,20 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:simpleType name="valid_pixel_count">
+    <xs:annotation>
+      <xs:documentation>The valid_pixel_count attribute provides the
+        total number of pixels tagged as valid. This will generally not
+        include pixels flagged as saturated_pixel_count or
+        missing_pixel_count.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="value_number">
     <xs:annotation>
       <xs:documentation>The value_number attribute provides the value
@@ -3503,6 +3609,27 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="y_center_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="y_center">
+    <xs:annotation>
+      <xs:documentation>The y_center attribute specifies the sample
+        coordinate of the center of the function used to describe an
+        algorithmic flat field. See Radial_Flat_Field_Function for the
+        formula.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:y_center_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
  
   <xs:annotation>
     <xs:documentation>
@@ -3511,7 +3638,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Mon Apr 06 13:01:34 MST 2020" ,
+      "Date": "Thu Apr 16 15:52:47 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

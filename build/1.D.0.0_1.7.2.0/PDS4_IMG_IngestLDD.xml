@@ -7,8 +7,8 @@
 <Ingest_LDD xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1D00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.7.1.0</ldd_version_id>
-  <full_name>Trent M. Hare (active), R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
+  <ldd_version_id>1.7.2.0</ldd_version_id>
+  <full_name>Trent M. Hare (active), P. Geissler, R. Joyner, Jordan Padams, E. Rye, C. De Cesare</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
   <comment> This dictionary contains high level classes and attributes used in imaging and
@@ -80,6 +80,11 @@
         https://github.com/pds-data-dictionaries/ldd-img/issues/29
     - Added mask_transparent_value attribute to Image_Mask_File class
     
+    1.7.2.0 P.Geissler
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
+        companding_input_dn_max, and companding_output_dn
+    - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
+
   </comment>
   <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
 
@@ -535,6 +540,51 @@
         <value>Grayscale</value>
         <value_meaning>indicates a grayscale image</value_meaning>
       </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>companding_input_dn_max</name>
+    <version_id>1.0</version_id>
+    <local_identifier>companding_input_dn_max</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Paul Geissler</submitter_name>
+    <definition>The companding_input_dn_max attribute provides the value of the maximum DN in
+       the input image that is assigned a specific DN in the output image during companding.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>companding_input_dn_min</name>
+    <version_id>1.0</version_id>
+    <local_identifier>companding_input_dn_min</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Paul Geissler</submitter_name>
+    <definition>The companding_input_dn_min attribute provides the value of the minimum DN in
+       the input image that is assigned a specific DN in the output image during companding.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>companding_output_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>companding_output_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Paul Geissler</submitter_name>
+    <definition>The companding_output_dn attribute provides the value of the DN in the output image 
+       that is assigned to a given range of DN in the input image during companding.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2628,6 +2678,22 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>y_center</name>
+    <version_id>1.0</version_id>
+    <local_identifier>y_center</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The y_center attribute specifies the sample coordinate of the center
+      of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function 
+      for the formula.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>filter_window_line</name>
     <version_id>1.0</version_id>
     <local_identifier>filter_window_line</local_identifier>
@@ -3324,6 +3390,12 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
+      <DD_Association>
+        <identifier_reference>Companding_Table</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
     <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
@@ -3347,7 +3419,57 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
+  <!-- Class: Companding_Table class definition -->
+  <DD_Class>
+    <name>Companding_Table</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Companding_Table</local_identifier>
+    <submitter_name>Paul Geissler</submitter_name>
+    <definition>The Companding_Table class specifies the look up table 
+      used to compand the data.</definition>
+      <DD_Association>
+        <identifier_reference>Companding_Table_Mapping</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>unbounded</maximum_occurrences>
+      </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Companding_Table_Mapping class definition -->
+  <DD_Class>
+    <name>Companding_Table_Mapping</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Companding_Table_Mapping</local_identifier>
+    <submitter_name>Paul Geissler</submitter_name>
+    <definition>The Companding_Table_Mapping class specifies the mapping 
+      between the input DN range and the output DN as the data are companded.</definition>
+      <DD_Association>
+        <identifier_reference>companding_input_dn_min</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>companding_input_dn_max</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+      <DD_Association>
+        <identifier_reference>companding_output_dn</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+      </DD_Association>
+  </DD_Class>
+
   <!-- Class: Onboard_Compression class definition -->
   <DD_Class>
       <name>Onboard_Compression</name>
@@ -4869,19 +4991,19 @@
       </DD_Association>
       <DD_Association>
         <identifier_reference>saturated_pixel_count</identifier_reference>
-        <reference_type>component_of</reference_type>
+        <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>missing_pixel_count</identifier_reference>
-        <reference_type>component_of</reference_type>
+        <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
         <identifier_reference>valid_pixel_count</identifier_reference>
-        <reference_type>component_of</reference_type>
+        <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>

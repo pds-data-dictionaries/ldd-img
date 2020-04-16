@@ -18,7 +18,7 @@ The build process insures compatiblity of the LDD with the core information mode
 
 In testing:
 
-- [PDS4 IM v1.D.0.0 (IMG LDD v1.7.1.0)](build/1.D.0.0_1.7.1.0)
+- [PDS4 IM v1.D.0.0 (IMG LDD v1.7.2.0)](build/1.D.0.0_1.7.2.0)
 
 This LDD has been released for the following versions of the PDS4 information model:
 
