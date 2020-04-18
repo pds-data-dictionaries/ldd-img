@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Thu Apr 16 16:48:34 MST 2020" ,
+      "Date": "Fri Apr 17 17:35:58 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -1531,8 +1531,8 @@
             "description": "The Companding_Table_Mapping class specifies the mapping between the input DN range and the output DN as the data are companded."
               , "associationList": [
              {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_min" ,
-                "title": "companding_input_dn_min" ,
+                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_min" ,
+                "title": "input_dn_min" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -1542,13 +1542,13 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1010" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_min"
+                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_min"
                  ]
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_max" ,
-                "title": "companding_input_dn_max" ,
+                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_max" ,
+                "title": "input_dn_max" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -1558,13 +1558,13 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1020" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_max"
+                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_max"
                  ]
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_output_dn" ,
-                "title": "companding_output_dn" ,
+                "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.output_dn" ,
+                "title": "output_dn" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -1574,7 +1574,7 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1030" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_output_dn"
+                  "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.output_dn"
                  ]
               }
             }
@@ -7161,13 +7161,13 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_max" ,
-            "title": "companding_input_dn_max" ,
+            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_max" ,
+            "title": "input_dn_max" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.13" ,
-            "description": "The companding_input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding." ,
+            "description": "The input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
@@ -7186,13 +7186,13 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_input_dn_min" ,
-            "title": "companding_input_dn_min" ,
+            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.input_dn_min" ,
+            "title": "input_dn_min" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.13" ,
-            "description": "The companding_input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding." ,
+            "description": "The input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
@@ -7211,13 +7211,13 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.companding_output_dn" ,
-            "title": "companding_output_dn" ,
+            "identifier": "0001_NASA_PDS_1.img.Companding_Table_Mapping.img.output_dn" ,
+            "title": "output_dn" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.13" ,
-            "description": "The companding_output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding." ,
+            "description": "The output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,

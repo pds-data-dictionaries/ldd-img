@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.2.0 - Thu Apr 16 16:48:34 MST 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.2.0 - Fri Apr 17 17:35:58 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -89,8 +89,8 @@
     - Added mask_transparent_value attribute to Image_Mask_File class
     
     1.7.2.0 P.Geissler
-    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
-        companding_input_dn_max, and companding_output_dn
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes:
+        input_dn_min, input_dn_max, and output_dn
     - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
 
   
@@ -382,9 +382,9 @@
         are companded.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="companding_input_dn_min" type="img:companding_input_dn_min" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="companding_input_dn_max" type="img:companding_input_dn_max" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="companding_output_dn" type="img:companding_output_dn" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="input_dn_min" type="img:input_dn_min" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="input_dn_max" type="img:input_dn_max" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="output_dn" type="img:output_dn" minOccurs="1" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1656,45 +1656,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="companding_input_dn_max">
-    <xs:annotation>
-      <xs:documentation>The companding_input_dn_max attribute provides
-        the value of the maximum DN in the input image that is assigned
-        a specific DN in the output image during
-        companding.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="companding_input_dn_min">
-    <xs:annotation>
-      <xs:documentation>The companding_input_dn_min attribute provides
-        the value of the minimum DN in the input image that is assigned
-        a specific DN in the output image during
-        companding.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="companding_output_dn">
-    <xs:annotation>
-      <xs:documentation>The companding_output_dn attribute provides the
-        value of the DN in the output image that is assigned to a given
-        range of DN in the input image during
-        companding.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Integer">
-     <xs:minInclusive value="-9223372036854775808"/>
-     <xs:maxInclusive value="9223372036854775807"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="companding_state">
     <xs:annotation>
       <xs:documentation>The companding_state attribute specifies whether
@@ -2444,6 +2405,30 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:simpleType name="input_dn_max">
+    <xs:annotation>
+      <xs:documentation>The input_dn_max attribute provides the value of
+        the maximum DN in the input image that is assigned a specific DN
+        in the output image during companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="input_dn_min">
+    <xs:annotation>
+      <xs:documentation>The input_dn_min attribute provides the value of
+        the minimum DN in the input image that is assigned a specific DN
+        in the output image during companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="interframe_delay_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="0"/>
@@ -2920,6 +2905,18 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="output_dn">
+    <xs:annotation>
+      <xs:documentation>The output_dn attribute provides the value of
+        the DN in the output image that is assigned to a given range of
+        DN in the input image during companding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3638,7 +3635,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Thu Apr 16 16:48:34 MST 2020" ,
+      "Date": "Fri Apr 17 17:35:58 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Apr 16 16:48:34 MST 2020
+   Time                   Fri Apr 17 17:35:58 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -156,8 +156,8 @@ Parsed Input - Header:
     - Added mask_transparent_value attribute to Image_Mask_File class
     
     1.7.2.0 P.Geissler
-    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
-        companding_input_dn_max, and companding_output_dn
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes:
+        input_dn_min, input_dn_max, and output_dn
     - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
 
   
@@ -269,20 +269,20 @@ Parsed Input - Attributes:
    value data type        ASCII_Short_String_Collapsed
    description             The color_subsampling_mode attribute specifies the JPEG color subsampling mode used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 'Grayscale' - indicates a grayscale image
 
-   name                   companding_input_dn_max
+   name                   input_dn_max
    version                1.13
    value data type        ASCII_Integer
-   description            The companding_input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding.
+   description            The input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding.
 
-   name                   companding_input_dn_min
+   name                   input_dn_min
    version                1.13
    value data type        ASCII_Integer
-   description            The companding_input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding.
+   description            The input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding.
 
-   name                   companding_output_dn
+   name                   output_dn
    version                1.13
    value data type        ASCII_Integer
-   description            The companding_output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding.
+   description            The output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding.
 
    name                   companding_state
    version                1.13
@@ -1484,17 +1484,17 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      companding_input_dn_min
+      local identifier      input_dn_min
       minimum occurrences   1
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      companding_input_dn_max
+      local identifier      input_dn_max
       minimum occurrences   1
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      companding_output_dn
+      local identifier      output_dn
       minimum occurrences   1
       maximum occurrences   1
       reference type        attribute_of

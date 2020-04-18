@@ -81,8 +81,8 @@
     - Added mask_transparent_value attribute to Image_Mask_File class
     
     1.7.2.0 P.Geissler
-    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes companding_input_dn_min,
-        companding_input_dn_max, and companding_output_dn
+    - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes:
+        input_dn_min, input_dn_max, and output_dn
     - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
 
   </comment>
@@ -544,12 +544,12 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>companding_input_dn_max</name>
+    <name>input_dn_max</name>
     <version_id>1.0</version_id>
-    <local_identifier>companding_input_dn_max</local_identifier>
+    <local_identifier>input_dn_max</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Paul Geissler</submitter_name>
-    <definition>The companding_input_dn_max attribute provides the value of the maximum DN in
+    <definition>The input_dn_max attribute provides the value of the maximum DN in
        the input image that is assigned a specific DN in the output image during companding.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -559,12 +559,12 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>companding_input_dn_min</name>
+    <name>input_dn_min</name>
     <version_id>1.0</version_id>
-    <local_identifier>companding_input_dn_min</local_identifier>
+    <local_identifier>input_dn_min</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Paul Geissler</submitter_name>
-    <definition>The companding_input_dn_min attribute provides the value of the minimum DN in
+    <definition>The input_dn_min attribute provides the value of the minimum DN in
        the input image that is assigned a specific DN in the output image during companding.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -574,12 +574,12 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>companding_output_dn</name>
+    <name>output_dn</name>
     <version_id>1.0</version_id>
-    <local_identifier>companding_output_dn</local_identifier>
+    <local_identifier>output_dn</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Paul Geissler</submitter_name>
-    <definition>The companding_output_dn attribute provides the value of the DN in the output image 
+    <definition>The output_dn attribute provides the value of the DN in the output image 
        that is assigned to a given range of DN in the input image during companding.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -3451,19 +3451,19 @@
     <definition>The Companding_Table_Mapping class specifies the mapping 
       between the input DN range and the output DN as the data are companded.</definition>
       <DD_Association>
-        <identifier_reference>companding_input_dn_min</identifier_reference>
+        <identifier_reference>input_dn_min</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-        <identifier_reference>companding_input_dn_max</identifier_reference>
+        <identifier_reference>input_dn_max</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-        <identifier_reference>companding_output_dn</identifier_reference>
+        <identifier_reference>output_dn</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
