@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.3.0 - Fri May 01 15:46:15 MST 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.3.0 - Mon May 04 13:19:31 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -245,6 +245,12 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Image_Mask_File/img:mask_type">
+      <sch:assert test=". = ('description', 'image')">
+        The attribute img:mask_type must be equal to one of the following values 'description', 'image'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:JPEG_Parameters/img:color_subsampling_mode">
       <sch:assert test=". = ('4:2:2', '4:4:4', 'Grayscale')">
         The attribute img:color_subsampling_mode must be equal to one of the following values '4:2:2', '4:4:4', 'Grayscale'.</sch:assert>
@@ -317,6 +323,18 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction">
+      <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
+        The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction/img:radiometric_type">
+      <sch:assert test=". = ('No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance')">
+        The attribute img:radiometric_type must be equal to one of the following values 'No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Shutter_Subtraction">
       <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
         The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
@@ -374,6 +392,12 @@
     <sch:rule context="img:Subframe/img:sample_fov">
       <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
         The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Subframe/img:subframe_type">
+      <sch:assert test=". = ('Hardware Compatible', 'Hardware Else Software', 'Software Only', 'Subframe Around Sun')">
+        The attribute img:subframe_type must be equal to one of the following values 'Hardware Compatible', 'Hardware Else Software', 'Software Only', 'Subframe Around Sun'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

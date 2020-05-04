@@ -87,15 +87,13 @@
 
     1.7.3.0, T.Hare
     - Fixes for new enforced rules at LDDTool v11.2.2
-    - No longer can one use *_type as non enumerated so renaming
-      mask_type => mask_description
-      radiometric_type => radiometric_description
-      subframe_type => subframe_description
-    - If an optional attribute, don't set nilable to true, 
-      so setting current_value, erase_count and voltage_value to nilable=false
+      - No longer can one use *_type as non enumerated so changing: 
+        radiometric_type, mask_type, and subframe_type to have enumerations
+      - If an optional attribute, don't set nilable to true, 
+        so setting current_value, erase_count and voltage_value to nilable=false
 
   </comment>
-  <last_modification_date_time>2030-04-10T18:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2020-05-04T13:15:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1984,20 +1982,28 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>mask_description</name>
+    <name>mask_type</name>
     <version_id>1.1</version_id>
-    <local_identifier>mask_description</local_identifier>
+    <local_identifier>mask_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>This identifies the type of mask file. Most masks are of "image" type, 
-      this means it is an image of the same size as the current image containing mask 
-      information at each pixel. A mask_description listed as "description" indicates that
-      the file describes the mask in some other way depending on the processing_algorithm.
-    </definition>
+    <definition>This identifies the type of mask file. Two enumerations are given, but
+    these can be expanded if needed.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
+      <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>image</value>
+        <value_meaning>Most masks are of "image" type, this means it is an image of the same 
+        size as the current image containing mask information at each pixel.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>description</value>
+        <value_meaning>A mask_type listed as "description" indicates that the file, e.g., a
+        text or xml based file, describes the mask in some other way depending on the 
+        processing_algorithm.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2111,20 +2117,39 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>radiometric_description</name>
+    <name>radiometric_type</name>
     <version_id>1.1</version_id>
-    <local_identifier>radiometric_description</local_identifier>
+    <local_identifier>radiometric_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The radiometric_description defines the specific type of radiance measurement. 
+    <definition>The radiometric_type defines the specific type of radiance measurement. 
       Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance".
       Note: There are many more possible values, and this definition can be updated to include
       more examples over time.
     </definition>
     <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
+      <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Spectral Radiance</value>
+        <value_meaning>Radiometric correction results are expressed in units of Spectral 
+        Radiance (generally W/m^2/sr/nm).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Scaled Spectral Radiance</value>
+        <value_meaning>Radiometric correction results are expressed as Spectral Radiance, 
+        but have subsequently been scaled in some way to compensate for photometric effects 
+        (for example, adjusting the brightness as if the sun was at zenith or correcting for 
+        the impact of atmospheric opacity (tau)).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>No CFA</value>
+        <value_meaning>Indicates the image is not and has never been CFA encoded. In
+          this case, Color_Filter_Array would simply not be present in
+          the label. This value is present in case it needs to be explicitly
+          stated that there is no CFA.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2532,20 +2557,36 @@
   </DD_Attribute>
   
   <DD_Attribute>
-    <name>subframe_description</name>
+    <name>subframe_type</name>
     <version_id>1.1</version_id>
-    <local_identifier>subframe_description</local_identifier>
+    <local_identifier>subframe_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition> The subframe_description attribute specifies the method of subframing performed on the
-      image. These methods may vary by mission so the permissible values should be set 
-      by the mission dictionaries. Example values from MSL include a) 'Software Only' - Software processsing only.
-      b) 'Hardware Compatible' - Use hardware only if compatible. c) 'Hardware Else Software' - Use hardware then software.
-      d) 'Subframe Around Sun' - If the sun is found, send a subframed image of the sun. If sun is not found, send back no image.</definition>
+    <definition> The subframe_type attribute specifies the method of subframing performed on the
+      image. These methods may vary by mission so the permissible values should be set by the 
+      mission dictionaries. The current enumerations were added for the MSL mission and can be 
+      expanded if needed.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
+      <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Software Only</value>
+        <value_meaning>Software processsing only.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Hardware Compatible</value>
+        <value_meaning>Use hardware only if compatible.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Hardware Else Software</value>
+        <value_meaning>Use hardware then software.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Subframe Around Sun</value>
+        <value_meaning>If the sun is found, send a subframed image of the sun. If sun is not 
+        found, send back no image.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -3685,8 +3726,8 @@
     <version_id>1.0</version_id>
     <local_identifier>Image_Mask_File</local_identifier>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>This class identifies a file used for image masking. The mask_description 
-      defines the type of file; if mask_description is missing then "image" is assumed.</definition>
+    <definition>This class identifies a file used for image masking. The mask_type 
+      defines the type of file; if mask_type is missing then "image" is assumed.</definition>
     <DD_Association>
       <identifier_reference>pds.description</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -3708,7 +3749,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>mask_description</identifier_reference>
+      <identifier_reference>mask_type</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -4897,9 +4938,9 @@
       <local_identifier>Radiometric_Correction</local_identifier>
       <submitter_name>Jordan Padams</submitter_name>
       <definition> The Radiometric_Correction class is a container for the type and details
-          of the radiometric calibration performed on the product. </definition>
+          of the radiometric calibration performed on the product.</definition>
       <DD_Association>
-          <identifier_reference>radiometric_description</identifier_reference>
+          <identifier_reference>radiometric_type</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>
@@ -5108,7 +5149,7 @@
           <maximum_occurrences>1</maximum_occurrences>
       </DD_Association>
       <DD_Association>
-          <identifier_reference>subframe_description</identifier_reference>
+          <identifier_reference>subframe_type</identifier_reference>
           <reference_type>attribute_of</reference_type>
           <minimum_occurrences>0</minimum_occurrences>
           <maximum_occurrences>1</maximum_occurrences>

@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri May 01 15:46:15 MST 2020" ,
+      "Date": "Mon May 04 13:19:31 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -3837,7 +3837,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": "This class identifies a file used for image masking. The mask_description defines the type of file; if mask_description is missing then \"image\" is assumed."
+            "description": "This class identifies a file used for image masking. The mask_type defines the type of file; if mask_type is missing then \"image\" is assumed."
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.pds.description" ,
@@ -3872,8 +3872,8 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_description" ,
-                "title": "mask_description" ,
+                "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_type" ,
+                "title": "mask_type" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -3883,7 +3883,7 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1060" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_description"
+                  "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_type"
                  ]
               }
             }
@@ -5683,7 +5683,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": " The Radiometric_Correction class is a container for the type and details of the radiometric calibration performed on the product. "
+            "description": " The Radiometric_Correction class is a container for the type and details of the radiometric calibration performed on the product."
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.Data_Processing.generalization" ,
@@ -5718,8 +5718,8 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_description" ,
-                "title": "radiometric_description" ,
+                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_type" ,
+                "title": "radiometric_type" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -5729,7 +5729,7 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1010" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_description"
+                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_type"
                  ]
               }
             }
@@ -6530,8 +6530,8 @@
               }
             }
            , {"association": {
-                "identifier": "0001_NASA_PDS_1.img.Subframe.img.subframe_description" ,
-                "title": "subframe_description" ,
+                "identifier": "0001_NASA_PDS_1.img.Subframe.img.subframe_type" ,
+                "title": "subframe_type" ,
                 "assocType": "attribute_of" ,
                 "isAttribute": "true" ,
                 "isChoice": "false" ,
@@ -6541,7 +6541,7 @@
                 "maximumCardinality": "1" ,
                 "classOrder": "1090" ,
                 "attributeId": [
-                  "0001_NASA_PDS_1.img.Subframe.img.subframe_description"
+                  "0001_NASA_PDS_1.img.Subframe.img.subframe_type"
                  ]
               }
             }
@@ -8936,31 +8936,6 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_description" ,
-            "title": "mask_description" ,
-            "registrationAuthorityId": "0001_NASA_PDS_1" ,
-            "nameSpaceId": "img" ,
-            "steward": "img" ,
-            "versionId": "1.13" ,
-            "description": "This identifies the type of mask file. Most masks are of \"image\" type, this means it is an image of the same size as the current image containing mask information at each pixel. A mask_description listed as \"description\" indicates that the file describes the mask in some other way depending on the processing_algorithm. " ,
-            "isNillable": "false" ,
-            "isEnumerated": "false" ,
-            "isDeprecated": "false" ,
-            "dataType": "ASCII_Short_String_Collapsed" ,
-            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
-            "minimumCharacters": "1" ,
-            "maximumCharacters": "255" ,
-            "minimumValue": "Unbounded" ,
-            "maximumValue": "Unbounded" ,
-            "pattern": "null" ,
-            "unitOfMeasure": "null" ,
-            "unitOfMeasureId": "null" ,
-            "unitId": "null" ,
-            "defaultUnitId": "null"
-          }
-        }
-      , {
-          "attribute": {
             "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_transparent_value" ,
             "title": "mask_transparent_value" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
@@ -8977,6 +8952,31 @@
             "maximumCharacters": "Unbounded" ,
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Image_Mask_File.img.mask_type" ,
+            "title": "mask_type" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.13" ,
+            "description": "This identifies the type of mask file. Two enumerations are given, but these can be expanded if needed." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
             "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
@@ -10411,15 +10411,15 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_description" ,
-            "title": "radiometric_description" ,
+            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_type" ,
+            "title": "radiometric_type" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.13" ,
-            "description": "The radiometric_description defines the specific type of radiance measurement. Possible values include \"Radiance\", \"Spectral Radiance\", \"Scaled Spectral Radiance\". Note: There are many more possible values, and this definition can be updated to include more examples over time. " ,
+            "description": "The radiometric_type defines the specific type of radiance measurement. Possible values include \"Radiance\", \"Spectral Radiance\", \"Scaled Spectral Radiance\". Note: There are many more possible values, and this definition can be updated to include more examples over time. " ,
             "isNillable": "false" ,
-            "isEnumerated": "false" ,
+            "isEnumerated": "true" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Short_String_Collapsed" ,
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
@@ -11136,15 +11136,15 @@
         }
       , {
           "attribute": {
-            "identifier": "0001_NASA_PDS_1.img.Subframe.img.subframe_description" ,
-            "title": "subframe_description" ,
+            "identifier": "0001_NASA_PDS_1.img.Subframe.img.subframe_type" ,
+            "title": "subframe_type" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.13" ,
-            "description": " The subframe_description attribute specifies the method of subframing performed on the image. These methods may vary by mission so the permissible values should be set by the mission dictionaries. Example values from MSL include a) 'Software Only' - Software processsing only. b) 'Hardware Compatible' - Use hardware only if compatible. c) 'Hardware Else Software' - Use hardware then software. d) 'Subframe Around Sun' - If the sun is found, send a subframed image of the sun. If sun is not found, send back no image." ,
+            "description": " The subframe_type attribute specifies the method of subframing performed on the image. These methods may vary by mission so the permissible values should be set by the mission dictionaries. The current enumerations were added for the MSL mission and can be expanded if needed." ,
             "isNillable": "false" ,
-            "isEnumerated": "false" ,
+            "isEnumerated": "true" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Short_String_Collapsed" ,
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,

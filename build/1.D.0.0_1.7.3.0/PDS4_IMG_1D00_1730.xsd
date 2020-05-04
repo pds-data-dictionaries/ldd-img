@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.3.0 - Fri May 01 15:46:15 MST 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.3.0 - Mon May 04 13:19:31 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -95,12 +95,10 @@
 
     1.7.3.0, T.Hare
     - Fixes for new enforced rules at LDDTool v11.2.2
-    - No longer can one use *_type as non enumerated so renaming
-      mask_type => mask_description
-      radiometric_type => radiometric_description
-      subframe_type => subframe_description
-    - If an optional attribute, don't set nilable to true, 
-      so setting current_value, erase_count and voltage_value to nilable=false
+      - No longer can one use *_type as non enumerated so changing: 
+        radiometric_type, mask_type, and subframe_type to have enumerations
+      - If an optional attribute, don't set nilable to true, 
+        so setting current_value, erase_count and voltage_value to nilable=false
 
   
     </xs:documentation>
@@ -885,9 +883,8 @@
   <xs:complexType name="Image_Mask_File">
     <xs:annotation>
       <xs:documentation>This class identifies a file used for image
-        masking. The mask_description defines the type of file; if
-        mask_description is missing then "image" is
-        assumed.</xs:documentation>
+        masking. The mask_type defines the type of file; if mask_type is
+        missing then "image" is assumed.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -896,10 +893,13 @@
         <xs:element ref="pds:External_Reference"> </xs:element>
       </xs:choice>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="mask_description" type="img:mask_description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="mask_type" type="img:mask_type" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="horizon_mask_elevation" type="img:horizon_mask_elevation" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="mask_transparent_value" type="img:mask_transparent_value" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:mask_type = ('description', 'image')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
   <xs:complexType name="Imaging">
@@ -1229,12 +1229,12 @@
     <xs:annotation>
       <xs:documentation> The Radiometric_Correction class is a container
         for the type and details of the radiometric calibration
-        performed on the product. </xs:documentation>
+        performed on the product.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="img:Data_Processing">
         <xs:sequence>
-          <xs:element name="radiometric_description" type="img:radiometric_description" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="radiometric_type" type="img:radiometric_type" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="radiometric_zenith_scaling_factor" type="img:radiometric_zenith_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1244,6 +1244,9 @@
           <xs:element name="atmospheric_opacity_reference" type="img:atmospheric_opacity_reference" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
+        <!-- Begin assert statements for schematron - Enumerated Values -->
+        <!-- <xs:assert test="img:radiometric_type = ('No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance')"/> -->
+        <!-- End assert statements for schematron - Enumerated Values -->
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -1324,8 +1327,11 @@
       <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="subframe_description" type="img:subframe_description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="subframe_type" type="img:subframe_type" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:subframe_type = ('Hardware Compatible', 'Hardware Else Software', 'Software Only', 'Subframe Around Sun')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
   <xs:complexType name="Video">
@@ -2517,21 +2523,6 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="mask_description">
-    <xs:annotation>
-      <xs:documentation>This identifies the type of mask file. Most
-        masks are of "image" type, this means it is an image of the same
-        size as the current image containing mask information at each
-        pixel. A mask_description listed as "description" indicates that
-        the file describes the mask in some other way depending on the
-        processing_algorithm. </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
-     <xs:minLength value="1"/>
-     <xs:maxLength value="255"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="mask_transparent_value">
     <xs:annotation>
       <xs:documentation>Specifies the pixel value in the mask that will
@@ -2544,6 +2535,18 @@
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mask_type">
+    <xs:annotation>
+      <xs:documentation>This identifies the type of mask file. Two
+        enumerations are given, but these can be expanded if
+        needed.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3065,14 +3068,13 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="radiometric_description">
+  <xs:simpleType name="radiometric_type">
     <xs:annotation>
-      <xs:documentation>The radiometric_description defines the specific
-        type of radiance measurement. Possible values include
-        "Radiance", "Spectral Radiance", "Scaled Spectral Radiance".
-        Note: There are many more possible values, and this definition
-        can be updated to include more examples over time.
-        </xs:documentation>
+      <xs:documentation>The radiometric_type defines the specific type
+        of radiance measurement. Possible values include "Radiance",
+        "Spectral Radiance", "Scaled Spectral Radiance". Note: There are
+        many more possible values, and this definition can be updated to
+        include more examples over time. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -3445,17 +3447,13 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="subframe_description">
+  <xs:simpleType name="subframe_type">
     <xs:annotation>
-      <xs:documentation> The subframe_description attribute specifies
-        the method of subframing performed on the image. These methods
-        may vary by mission so the permissible values should be set by
-        the mission dictionaries. Example values from MSL include a)
-        'Software Only' - Software processsing only. b) 'Hardware
-        Compatible' - Use hardware only if compatible. c) 'Hardware Else
-        Software' - Use hardware then software. d) 'Subframe Around Sun'
-        - If the sun is found, send a subframed image of the sun. If sun
-        is not found, send back no image.</xs:documentation>
+      <xs:documentation> The subframe_type attribute specifies the
+        method of subframing performed on the image. These methods may
+        vary by mission so the permissible values should be set by the
+        mission dictionaries. The current enumerations were added for
+        the MSL mission and can be expanded if needed.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -3644,7 +3642,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Fri May 01 15:46:15 MST 2020" ,
+      "Date": "Mon May 04 13:19:31 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]

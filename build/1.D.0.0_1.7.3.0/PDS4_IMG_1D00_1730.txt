@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri May 01 15:46:15 MST 2020
+   Time                   Mon May 04 13:19:31 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -162,15 +162,13 @@ Parsed Input - Header:
 
     1.7.3.0, T.Hare
     - Fixes for new enforced rules at LDDTool v11.2.2
-    - No longer can one use *_type as non enumerated so renaming
-      mask_type => mask_description
-      radiometric_type => radiometric_description
-      subframe_type => subframe_description
-    - If an optional attribute, don't set nilable to true, 
-      so setting current_value, erase_count and voltage_value to nilable=false
+      - No longer can one use *_type as non enumerated so changing: 
+        radiometric_type, mask_type, and subframe_type to have enumerations
+      - If an optional attribute, don't set nilable to true, 
+        so setting current_value, erase_count and voltage_value to nilable=false
 
   
-   Last Modification Time 2030-04-10T18:00:00Z
+   Last Modification Time 2020-05-04T13:15:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -713,10 +711,10 @@ Parsed Input - Attributes:
    description            In cases where each pass of a progressive JPEG is downlinked separately, the progressive_stage attribute indicates the highest pass number contained in this image, which indicates the available level of detail.
    minimum value          0
 
-   name                   mask_description
+   name                   mask_type
    version                1.13
    value data type        ASCII_Short_String_Collapsed
-   description            This identifies the type of mask file. Most masks are of "image" type, this means it is an image of the same size as the current image containing mask information at each pixel. A mask_description listed as "description" indicates that the file describes the mask in some other way depending on the processing_algorithm. 
+   description            This identifies the type of mask file. Two enumerations are given, but these can be expanded if needed.
 
    name                   horizon_mask_elevation
    version                1.13
@@ -756,10 +754,10 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            Defines the scaling factor used for Scaled Radiance or Scaled Spectral Radiance. Scaled radiance is created by dividing radiance by this factor, which scales the radiance to what it would be if the sun were at the zenith with a clear atmosphere.
 
-   name                   radiometric_description
+   name                   radiometric_type
    version                1.13
    value data type        ASCII_Short_String_Collapsed
-   description            The radiometric_description defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
+   description            The radiometric_type defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
 
    name                   raw_count
    version                1.13
@@ -889,10 +887,10 @@ Parsed Input - Attributes:
    value data type        ASCII_Short_String_Collapsed
    description            The shutter_subtraction_mode specifies whether shutter subtraction will be performed, or if it is dependent on the exposure_duration_threshold_count.
 
-   name                   subframe_description
+   name                   subframe_type
    version                1.13
    value data type        ASCII_Short_String_Collapsed
-   description             The subframe_description attribute specifies the method of subframing performed on the image. These methods may vary by mission so the permissible values should be set by the mission dictionaries. Example values from MSL include a) 'Software Only' - Software processsing only. b) 'Hardware Compatible' - Use hardware only if compatible. c) 'Hardware Else Software' - Use hardware then software. d) 'Subframe Around Sun' - If the sun is found, send a subframed image of the sun. If sun is not found, send back no image.
+   description             The subframe_type attribute specifies the method of subframing performed on the image. These methods may vary by mission so the permissible values should be set by the mission dictionaries. The current enumerations were added for the MSL mission and can be expanded if needed.
 
    name                   temperature_status
    version                1.13
@@ -1676,7 +1674,7 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Image_Mask_File
-   description            This class identifies a file used for image masking. The mask_description defines the type of file; if mask_description is missing then "image" is assumed.
+   description            This class identifies a file used for image masking. The mask_type defines the type of file; if mask_type is missing then "image" is assumed.
    is abstract            false
    is choice              true
    subclass of            USER
@@ -1693,7 +1691,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      mask_description
+      local identifier      mask_type
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2655,14 +2653,14 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Radiometric_Correction
-   description             The Radiometric_Correction class is a container for the type and details of the radiometric calibration performed on the product. 
+   description             The Radiometric_Correction class is a container for the type and details of the radiometric calibration performed on the product.
    is abstract            false
    is choice              false
    subclass of            Data_Processing
 
    Associations
 
-      local identifier      radiometric_description
+      local identifier      radiometric_type
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2836,7 +2834,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      subframe_description
+      local identifier      subframe_type
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
