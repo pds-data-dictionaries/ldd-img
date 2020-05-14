@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon May 04 13:19:31 MST 2020
+   Time                   Wed May 13 18:00:07 MST 2020
    Common Schema          [PDS4_PDS_1D00.xsd]
    Common Schematron      [PDS4_PDS_1D00.sch]
    IM Version Id:         1.13.0.0
@@ -166,9 +166,14 @@ Parsed Input - Header:
         radiometric_type, mask_type, and subframe_type to have enumerations
       - If an optional attribute, don't set nilable to true, 
         so setting current_value, erase_count and voltage_value to nilable=false
+    - Added abstract_flag and element_flag for all Classes with defaults of false
+    - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter, 
+      Subframe, and Instrument_State to element_flag = true
+    - update lots of indentations in the classes to be more consistent
+    
 
   
-   Last Modification Time 2020-05-04T13:15:00Z
+   Last Modification Time 2020-05-13T17:30:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -1896,7 +1901,7 @@ Parsed Input - Classes:
       reference type        attribute_of
 
    name                   Device_Temperatures
-   description            The Device_Temperatures class provides a container for the set of temperatures of an imaging instrument or other imaging device.
+   description            The Device_Temperatures class provides a container for the set of temperatures of an imaging instrument or other imaging device. 
    is abstract            false
    is choice              false
    subclass of            USER
@@ -1909,7 +1914,7 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Device_Temperature
-   description            The Device_Temperature class provides a container for the temperature of some point on an imaging instrument or other imaging device.
+   description            The Device_Temperature class provides a container for the temperature of some point on an imaging instrument or other imaging device. 
    is abstract            false
    is choice              false
    subclass of            Device_Parameters
@@ -1950,7 +1955,7 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Device_Voltage
-   description            The Device_Voltage class provides the voltage of some point on an imaging instrument or other imaging device.
+   description            The Device_Voltage class provides the voltage of some point on an imaging instrument or other imaging device. 
    is abstract            false
    is choice              false
    subclass of            Device_Parameters
@@ -2151,7 +2156,7 @@ Parsed Input - Classes:
       reference type        attribute_of
 
    name                   Focus_Stack
-   description            The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks.
+   description            The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks. 
    is abstract            false
    is choice              false
    subclass of            Data_Processing
