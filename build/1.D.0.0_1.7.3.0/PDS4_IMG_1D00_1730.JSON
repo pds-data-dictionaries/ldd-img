@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.13.0.0" ,
-      "Date": "Mon May 04 13:19:31 MST 2020" ,
+      "Date": "Wed May 13 18:00:07 MST 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -2296,7 +2296,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": "The Device_Temperature class provides a container for the temperature of some point on an imaging instrument or other imaging device."
+            "description": "The Device_Temperature class provides a container for the temperature of some point on an imaging instrument or other imaging device. "
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Device_Temperature.Device_Parameters.generalization" ,
@@ -2393,7 +2393,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": "The Device_Temperatures class provides a container for the set of temperatures of an imaging instrument or other imaging device."
+            "description": "The Device_Temperatures class provides a container for the set of temperatures of an imaging instrument or other imaging device. "
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Device_Temperatures.img.Device_Temperature" ,
@@ -2424,7 +2424,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": "The Device_Voltage class provides the voltage of some point on an imaging instrument or other imaging device."
+            "description": "The Device_Voltage class provides the voltage of some point on an imaging instrument or other imaging device. "
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Device_Voltage.Device_Parameters.generalization" ,
@@ -3076,7 +3076,7 @@
             "versionId": "1.0.0.0" ,
             "isAbstract": "false" ,
             "isDeprecated": "false" ,
-            "description": "The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks."
+            "description": "The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks. "
               , "associationList": [
              {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Focus_Stack.Data_Processing.generalization" ,
