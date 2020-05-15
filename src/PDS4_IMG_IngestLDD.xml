@@ -3432,7 +3432,7 @@
   <!-- Class: Companding -->
   <DD_Class>
     <name>Companding</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Companding</local_identifier>
     <submitter_name>Jordan Padams</submitter_name>
     <definition> The Companding class describes whether or not data is or has had its bit
@@ -3555,7 +3555,7 @@
   <!-- Class: Onboard_Compression class definition -->
   <DD_Class>
     <name>Onboard_Compression</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Onboard_Compression</local_identifier>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The Onboard_Compression class contains attributes describing the compression 
@@ -3815,7 +3815,7 @@
   <!-- Class: Detector -->
   <DD_Class>
     <name>Detector</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Detector</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The Detectorclass contains attributes describing the state of the
@@ -4179,7 +4179,7 @@
   <!-- Class: Exposure -->
   <DD_Class>
     <name>Exposure</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Exposure</local_identifier>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The Exposure class contains attributes identifying the image instrument
@@ -4223,7 +4223,7 @@
   <!-- Class: Optical_Filter  -->
   <DD_Class>
     <name>Optical_Filter</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Optical_Filter</local_identifier>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The Optical_Filter class defines the filters used by the camera optics
@@ -4335,7 +4335,7 @@
   <!-- Class: Focus  -->
   <DD_Class>
     <name>Focus</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Focus</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The Focus class contains attributes that describe the focus or
@@ -5226,7 +5226,7 @@
   <!-- Class: Subframe  -->
   <DD_Class>
     <name>Subframe</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Subframe</local_identifier>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition> The Subframe class describes the position and other optional
