@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.3.0 - Fri May 15 16:17:15 MST 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.3.0 - Wed Jul 08 16:49:39 MST 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.13.0.0 - System Build 10a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -114,12 +114,22 @@
     <sch:rule context="img:Companding">
       <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
         The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+      <sch:assert test="if (img:early_scaling) then img:early_scaling = ('true', 'false') else true()">
+        The attribute img:early_scaling must be equal to one of the following values 'true', 'false'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Companding/img:companding_state">
       <sch:assert test=". = ('Companded', 'Expanded', 'None')">
         The attribute img:companding_state must be equal to one of the following values 'Companded', 'Expanded', 'None'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Detector">
+      <sch:assert test="if (img:bad_pixel_replacement_flag) then img:bad_pixel_replacement_flag = ('true', 'false') else true()">
+        The attribute img:bad_pixel_replacement_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+      <sch:assert test="if (img:early_image_return) then img:early_image_return = ('true', 'false') else true()">
+        The attribute img:early_image_return must be equal to one of the following values 'true', 'false'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -132,6 +142,12 @@
     <sch:rule context="img:Detector/img:detector_to_image_rotation">
       <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
         The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Detector/img:instrument_idle_timeout">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -166,12 +182,18 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Exposure/img:exposure_type">
-      <sch:assert test=". = ('Auto', 'Manual', 'Test')">
-        The attribute img:exposure_type must be equal to one of the following values 'Auto', 'Manual', 'Test'.</sch:assert>
+      <sch:assert test=". = ('Auto', 'Auto Last', 'Manual', 'Manual Last', 'None', 'Test')">
+        The attribute img:exposure_type must be equal to one of the following values 'Auto', 'Auto Last', 'Manual', 'Manual Last', 'None', 'Test'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Focus/img:best_focus_distance">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Focus/img:focus_distance">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
@@ -396,8 +418,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Subframe/img:subframe_type">
-      <sch:assert test=". = ('Hardware Compatible', 'Hardware Else Software', 'Software Only', 'Subframe Around Sun')">
-        The attribute img:subframe_type must be equal to one of the following values 'Hardware Compatible', 'Hardware Else Software', 'Software Only', 'Subframe Around Sun'.</sch:assert>
+      <sch:assert test=". = ('Hardware Compatible', 'Hardware Else Software', 'None', 'Software Only', 'Subframe Around Sun', 'Sun Subframe Or Full')">
+        The attribute img:subframe_type must be equal to one of the following values 'Hardware Compatible', 'Hardware Else Software', 'None', 'Software Only', 'Subframe Around Sun', 'Sun Subframe Or Full'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

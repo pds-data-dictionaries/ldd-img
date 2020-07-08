@@ -33,5 +33,5 @@ This LDD has been released for the following versions of the PDS4 information mo
 Each build is generated using the [lddtool](https://pds.nasa.gov/tools/about/ldd/) specific to a version of the [PDS4 Information Model](https://pds.nasa.gov/datastandards/documents/im/). The build command used is:
 
 ```
-lddtool -lpsnJ ldd-file.xml
+lddtool -lpsnJ PDS4_IMG_IngestLDD.xml
 ```
