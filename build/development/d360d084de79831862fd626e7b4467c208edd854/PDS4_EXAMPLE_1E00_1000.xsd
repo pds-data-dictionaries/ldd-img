@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- PDS4 XML/Schema for Name Space Id:example  Version:1.0.0.0 - Mon Jul 13 23:32:34 UTC 2020 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- *** This PDS4 product schema is an operational deliverable. *** -->
+  <!--                                                                           -->
+  <!--               Dictionary Stack                                            -->
+  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.0.0.0 - example: - Example LDD                                          -->
+  <!--   file:/home/runner/work/ldd-template/ldd-template/src/PDS4_EXAMPLE_Inges -->
+  <!--                                                                           -->
+  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://pds.nasa.gov/pds4/example/v1"
+    xmlns:example="http://pds.nasa.gov/pds4/example/v1"
+    xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+    version="1.0.0.0">
+ 
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
+ 
+  <xs:annotation>
+    <xs:documentation>
+This XML schema file has been generated from the Information Model.
+    </xs:documentation>
+  </xs:annotation>
+ 
+  <xs:element name="My_First_LDD" type="example:My_First_LDD"> </xs:element>
+
+  <xs:complexType name="My_First_LDD">
+    <xs:annotation>
+<xs:documentation>My first class</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="my_first_attribute" type="example:my_first_attribute" minOccurs="1" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+    <xs:annotation>
+      <xs:documentation>This section contains the simpleTypes that provide more constraints
+        than those at the base data type level. The simpleTypes defined here build on the base data
+        types. This is another component of the common dictionary and therefore falls within the
+        common namespace.
+      </xs:documentation>
+    </xs:annotation>
+
+  <xs:simpleType name="my_first_attribute">
+    <xs:annotation>
+<xs:documentation>My first attribute </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+ 
+  <xs:annotation>
+    <xs:documentation>
+[
+  {
+    "dataDictionary": {
+      "Title": "PDS4 Data Dictionary" ,
+      "Version": "1.14.0.0" ,
+      "Date": "Mon Jul 13 23:32:34 UTC 2020" ,
+      "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
+      "PropertyMapDictionary": [
+      ]
+    }
+  }
+]
+    </xs:documentation>
+  </xs:annotation>
+</xs:schema>

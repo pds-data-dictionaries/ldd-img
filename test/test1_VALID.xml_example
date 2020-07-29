@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- NOTE: DO NOT INCLUDE SPECIFIC SCHEMATRONS IN LABEL. THEY WILL BE ADDED VIA PIPELINE -->
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+  xmlns:example="http://pds.nasa.gov/pds4/example/v1"  
+  xmlns:pds="http://pds.nasa.gov/pds4/pds/v1" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- NOTE: DO NOT INCLUDE SPECIFIC SCHEMALOCATIONS IN LABEL. THEY WILL BE ADDED VIA PIPELINE -->
+
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:bundle:collection:product</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>My First Product</title>
+    <information_model_version>[IM_VERSION]</information_model_version>
+    <product_class>Product_Observational</product_class>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable"/>
+      <stop_date_time xsi:nil="true" nilReason="inapplicable"/>
+    </Time_Coordinates>
+    
+    <Investigation_Area>
+      <name>None</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>None</name>
+        <type>Telescope</type>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>None</name>
+      <type>Comet</type>
+    </Target_Identification>
+
+    <Discipline_Area>
+      <example:My_First_LDD>
+        <example:my_first_attribute>1</example:my_first_attribute>
+      </example:My_First_LDD>
+    </Discipline_Area
+>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>No.Data</file_name>
+      <creation_date_time>2019-04-30T19:32:42.000Z</creation_date_time>
+    </File>
+    <Array_3D_Image>
+      <local_identifier>test</local_identifier>
+      <offset unit="byte">11264</offset>
+      <axes>3</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>UnsignedByte</data_type>
+        <scaling_factor>1.0</scaling_factor>
+        <value_offset>0.0</value_offset>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Band</axis_name>
+        <elements>3</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>0.0</missing_constant>
+        <invalid_constant>0.0</invalid_constant>
+      </Special_Constants>
+    </Array_3D_Image>
+  </File_Area_Observational>
+</Product_Observational>

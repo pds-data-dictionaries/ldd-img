@@ -1,0 +1,3 @@
+"Sort Key","Type","Name","Version","Name Space Id","Description","Steward","Value Type","Minimum Cardinality","Maximum Cardinality","Minimum Value","Maximum Value","Minimum Characters","Maximum Characters","Unit of Measure Type","Specified Unit Id","Attribute Concept","Conceptual Domain"
+"example:My_First_LDD:1                  ","Class","My_First_LDD","1.0.0.0","example","My first class","janedoe","","","","","","","","","","",""
+"example:My_First_LDD:2                   example:my_first_attribute:1            ","Attribute","my_first_attribute","n/a","example","My first attribute ","janedoe","ASCII_Integer","1","1","-9223372036854775808","9223372036854775807","Unbounded","Unbounded","Units_of_None","none","TBD_classConcept","INTEGER"
