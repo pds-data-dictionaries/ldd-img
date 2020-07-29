@@ -117,12 +117,16 @@ jobs:
 
       - name: Add Dictionaries to Branch
         run: |
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git config --local github.token ${{ secrets.GITHUB_TOKEN }}
-            git add $DEPLOY_DIR
-            git commit -m "Auto-generated dictionaries from Github Actions"
-            git config --global push.default current
-            #git branch
-            git push 
+            if [ "${GITHUB_REF##*/}" != "master" ]; then
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
+              git config --local github.token ${{ secrets.GITHUB_TOKEN }}
+              git add $DEPLOY_DIR
+              git commit -m "Auto-generated dictionaries from Github Actions"
+              git config --global push.default current
+              #git branch
+              git push
+            else
+              echo "Skipping push to master"
+            fi
         if: ${{ success() }}
