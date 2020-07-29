@@ -73,7 +73,7 @@ jobs:
 
           echo "+++ Generate dictionaries"
           dependencies_dir=$GITHUB_WORKSPACE/src/dependencies
-          if [ -d "$dependencies_dir" ]; then
+          if ls $dependencies_dir/*/src/*IngestLDD*.xml 1> /dev/null 2>&1; then
             /tmp/lddtool-$LDDTOOL_VERSION/bin/lddtool -plJn $dependencies_dir/*/src/*IngestLDD*.xml
             files="$dependencies_dir/*/src/*IngestLDD*.xml $GITHUB_WORKSPACE/src/*IngestLDD*.xml"
           else
