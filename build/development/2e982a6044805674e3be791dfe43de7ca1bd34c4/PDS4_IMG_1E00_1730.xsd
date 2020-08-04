@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.3.0 - Wed Jul 29 16:35:42 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.3.0 - Tue Aug 04 22:38:07 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -3894,7 +3894,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Wed Jul 29 16:35:42 UTC 2020" ,
+      "Date": "Tue Aug 04 22:38:07 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
