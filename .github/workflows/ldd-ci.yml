@@ -85,7 +85,7 @@ jobs:
 
       - name: Validate Schemas and Schematrons
         run: |
-          wget -q --directory-prefix=/tmp https://github.com/NASA-PDS/validate/releases/download/v$VALIDATE_VERSION/validate-${VALIDATE_VERSION}-bin.tar.gz
+          wget -q --directory-prefix=/tmp https://github.com/NASA-PDS/validate/releases/download/$VALIDATE_VERSION/validate-${VALIDATE_VERSION}-bin.tar.gz
           tar -xf /tmp/validate-${VALIDATE_VERSION}-bin.tar.gz -C /tmp/
 
           DEPLOY_DIR=$DEPLOY_DIR/$GITHUB_SHA
