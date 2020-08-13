@@ -1,0 +1,132 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
+
+---
+
+name: Continuous Integration and Deployment
+
+on: push
+
+jobs:
+  build:
+    name: "Generate and Test Dictionaries (development build)"
+    runs-on: ubuntu-latest
+
+    env:
+      REG_TEST_DIR: ${{ format('{0}/{1}/', github.workspace, 'test') }}
+      DEPLOY_DIR: ${{ format('{0}/{1}/', github.workspace, 'build/development') }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip setuptools wheel
+
+      - name: Checkout submodules
+        uses: textbook/git-checkout-submodule-action@master
+
+      - name: Get Latest LDDTool and Validate Versions
+        run: |
+          echo ::set-env name=LDDTOOL_VERSION::$(curl --silent "https://api.github.com/repos/NASA-PDS/pds4-information-model/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//')
+          echo ::set-env name=VALIDATE_VERSION::$(curl --silent "https://api.github.com/repos/NASA-PDS/validate/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//')
+
+      - name: Get Latest IM Version
+        run: |
+          echo ::set-env name=IM_VERSION::$(curl --silent "https://raw.githubusercontent.com/NASA-PDS/pds4-information-model/v${{ env.LDDTOOL_VERSION }}/model-ontology/src/ontology/Data/config.properties" | grep 'infoModelVersionId' | awk -F= '{print $NF}')
+
+      - name: Convert IM Version
+        run: |
+          alpha_version=$(python -c "
+          import string
+          import os
+          alphadict = dict(zip(range(10), range(10)))
+          for x, y in enumerate(string.ascii_uppercase, 10):
+            alphadict[x] = str(y)
+          print(''.join(str(alphadict[int(val)]) for val in '$IM_VERSION'.split('.')))
+          ")
+
+          echo ::set-env name=IM_VERSION_ALPHA::$(echo $alpha_version)
+
+      - name: Download and Unpack LDDTool
+        run: |
+          wget -q --directory-prefix=/tmp https://github.com/NASA-PDS/pds4-information-model/releases/download/v$LDDTOOL_VERSION/lddtool-$LDDTOOL_VERSION-bin.tar.gz
+          tar -xf /tmp/lddtool-$LDDTOOL_VERSION-bin.tar.gz -C /tmp/
+          echo $GITHUB_WORKSPACE
+
+      - name: Generate Dictionaries
+        run: |
+          echo "+++ Cleanup development versions if they exist"
+          rm -fr $DEPLOY_DIR
+          DEPLOY_DIR=$DEPLOY_DIR/$GITHUB_SHA
+          mkdir -p $DEPLOY_DIR
+          cd $DEPLOY_DIR
+
+          echo "+++ Generate dictionaries"
+          dependencies_dir=$GITHUB_WORKSPACE/src/dependencies
+          if ls $dependencies_dir/*/src/*IngestLDD*.xml 1> /dev/null 2>&1; then
+            /tmp/lddtool-$LDDTOOL_VERSION/bin/lddtool -plJn $dependencies_dir/*/src/*IngestLDD*.xml
+            files="$dependencies_dir/*/src/*IngestLDD*.xml $GITHUB_WORKSPACE/src/*IngestLDD*.xml"
+          else
+            files="$GITHUB_WORKSPACE/src/*IngestLDD*.xml"
+          fi
+
+          echo "+++ Generating dictionaries for $files"
+          /tmp/lddtool-$LDDTOOL_VERSION/bin/lddtool -plJn $files
+
+      - name: Validate Schemas and Schematrons
+        run: |
+          wget -q --directory-prefix=/tmp https://github.com/NASA-PDS/validate/releases/download/$VALIDATE_VERSION/validate-${VALIDATE_VERSION}-bin.tar.gz
+          tar -xf /tmp/validate-${VALIDATE_VERSION}-bin.tar.gz -C /tmp/
+
+          DEPLOY_DIR=$DEPLOY_DIR/$GITHUB_SHA
+          /tmp/validate-$VALIDATE_VERSION/bin/validate --skip-content-validation -R pds4.label -x $DEPLOY_DIR/*.xsd -S $DEPLOY_DIR/*.sch -t $DEPLOY_DIR/*.xml
+
+      - name: Complete Regression Tests (if applicable)
+        run: |
+          if ls $REG_TEST_DIR/*.xml 1> /dev/null 2>&1; then
+
+            # Get the PDS core dictionaries
+            wget -q --directory-prefix=/tmp "https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_$IM_VERSION_ALPHA.xsd"
+            wget -q --directory-prefix=/tmp "https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_$IM_VERSION_ALPHA.sch"
+
+            # Find schema filename
+            #xsd="file:\/\/$(find $DEPLOY_DIR/*.xsd | head -1 | sed 's/\//\\\//g')"
+            #sch="file:\/\/$(find $DEPLOY_DIR/*.sch | head -1 | sed 's/\//\\\//g')"
+
+            # Update info in examples
+            sed -i "s/\[IM_VERSION\]/$IM_VERSION/g" $REG_TEST_DIR/*.xml
+            #sed -i "s/\[IM_VERSION_ALPHA\]/$IM_VERSION_ALPHA/g" $REG_TEST_DIR/*.xml
+            #sed -i "s/\[SCHEMA_LOCATION\]/$xsd/g" $REG_TEST_DIR/*.xml
+
+            DEPLOY_DIR=$DEPLOY_DIR/$GITHUB_SHA
+            /tmp/validate-$VALIDATE_VERSION/bin/validate --skip-content-validation -R pds4.label -x $DEPLOY_DIR/*.xsd /tmp/*.xsd -S $DEPLOY_DIR/*.sch /tmp/*.sch -t $REG_TEST_DIR/*VALID*.xml
+
+            # Run tests expected invalid
+            # TBD some regression test FAIL
+          fi
+
+      - name: Add Dictionaries to Branch
+        run: |
+            if [ "${GITHUB_REF##*/}" != "master" ]; then
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
+              git config --local github.token ${{ secrets.GITHUB_TOKEN }}
+              git add $DEPLOY_DIR
+              git commit -m "Auto-generated dictionaries from Github Actions"
+              git config --global push.default current
+              #git branch
+              git push
+            else
+              echo "Skipping push to master"
+            fi
+        if: ${{ success() }}
