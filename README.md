@@ -7,7 +7,7 @@ Steward: [IMG Node](https://pds-imaging.jpl.nasa.gov/)
 
 Only one LDD source version is kept such that it can be managed by github.
 
-- [1.D.0.0](src)
+- [1.E.0.0](src)
 
 ## Versions
 
