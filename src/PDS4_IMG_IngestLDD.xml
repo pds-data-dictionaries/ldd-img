@@ -95,12 +95,12 @@
         so setting current_value, erase_count and voltage_value to nilable=false
     - Added abstract_flag and element_flag for all Classes with defaults of false
     - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter, 
-      Subframe, and Instrument_State to element_flag = true
+      Subframe, and Instrument_State to element_flag = true (allows to be exposed class)
     - update lots of indentations in the classes to be more consistent
     - Add focus_distance to Focus.
     - Add Manual Last, Auto Last, and None to exposure_type
     - Change the minimum for icer_quality to 0 and updated definition
-    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_iamge-return to Detector
+    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_image_return to Detector
     - Add exposure_table, exposure_table_update_flag to Autoexposure
     - Add exposure_scale_factor, exposure_coadd_count, exposure_readout_count to Exposure
     - Add early_scaling to Companding
@@ -117,9 +117,17 @@
         auto_exposure_roi_first_line, auto_exposure_roi_first_sample attributes to Autoexposure
     - Added Image_Compression_Segment under JPEG_Parameters class
     - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
-
+    - Added Special_Point class and special_line, special_sample attributes
+    - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+    - Added observation_number under Frame class and parameter_table_id under Detector class
+    - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
+    - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
+        to Imaging and Commanded_Parameters class
+    - Added delta_focus_count attribute for Focus_Stack class
+        
   </comment>
-  <last_modification_date_time>2020-08-19T17:30:00Z</last_modification_date_time>
+  <last_modification_date_time>2020-08-24T17:30:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -727,6 +735,21 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>delta_focus_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>delta_focus_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the amount of change in focus for each image in the z-stack. The 
+      units should be the same as focus_position_count, which is often motor counts.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>input_dn_max</name>
     <version_id>1.0</version_id>
     <local_identifier>input_dn_max</local_identifier>
@@ -954,6 +977,22 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>download_priority</name>
+    <version_id>1.0</version_id>
+    <local_identifier>download_priority</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The download_priority attribute specifies which data to downlink/transmit, based on order of importance. 
+      The ranking and meaning of specific values will vary depending on the mission, and should be defined in the
+      mission software interface specification (SIS).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1249,7 +1288,22 @@
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>exposure_time_delta</name>
+    <version_id>1.0</version_id>
+    <local_identifier>exposure_time_delta</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the change in exposure time for this exposure compared to the previous. 
+      Should be 0 for the first item in the list.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>filter_id</name>
     <version_id>0.1</version_id>
@@ -1313,7 +1367,39 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>filter_window_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>filter_window_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The size in pixels of the window used for filtering in the 
+      line dimension. If the window varies across the image, this could contain 
+      the average window or initial window, as needed by the specific algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The size in pixels of the window used for filtering in the 
+      sample dimension. If the window varies across the image, this could contain 
+      the average window or initial window, as needed by the specific algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>first_line</name>
     <version_id>1.0</version_id>
@@ -1576,7 +1662,7 @@
   
   <DD_Attribute>
     <name>frame_type_name</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>frame_type_name</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -1587,7 +1673,6 @@
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <!--
       <DD_Permissible_Value>
         <value>Mono</value>
         <value_meaning> image was commanded as a single left or right monoscopic image
@@ -1597,7 +1682,6 @@
         <value>Stereo</value>
         <value_meaning> image was commanded as part of a stereo pair </value_meaning>
       </DD_Permissible_Value>
-      -->
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1683,8 +1767,68 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+ 
+   <DD_Attribute>
+    <name>hdr_acquisition_mode</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hdr_acquisition_mode</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies how the HDR frames were acquired.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Single</value>
+        <value_meaning>Single exposure.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Multiframe</value>
+        <value_meaning>HDR is processed using several separately-acquired images.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Piecewise</value>
+        <value_meaning>HDR is processed onboard the camera.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>No HDR processing.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
+    <name>hdr_frame_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hdr_frame_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the number of frames that go into the HDR product.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>hdr_clipping_threshold</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hdr_clipping_threshold</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the threshold for pixel clipping.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+   <DD_Attribute>
     <name>height_pixels</name>
     <version_id>1.0</version_id>
     <local_identifier>height_pixels</local_identifier>
@@ -1922,7 +2066,71 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>max_filter_window_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_filter_window_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The maximum size in pixels of the window used for filtering in the 
+      line dimension. If the window is constant across the image, filter_window_line 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
+  <DD_Attribute>
+    <name>max_filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The maximum size in pixels of the window used for filtering in the 
+      sample dimension. If the window is constant across the image, filter_window_sample 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>min_filter_window_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>min_filter_window_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The minimum size in pixels of the window used for filtering in the 
+      line dimension. If the window is constant across the image, filter_window_line 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>min_filter_window_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>min_filter_window_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The minimum size in pixels of the window used for filtering in the 
+      sample dimension. If the window is constant across the image, filter_window_sample 
+      should be used instead.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>motor_count</name>
     <version_id>1.0</version_id>
@@ -1935,6 +2143,21 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>observation_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>observation_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Identifies which observation of many this data product pertains to.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2239,6 +2462,20 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>parameter_table_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>parameter_table_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies which table of parameters to use, or were used. Tables are defined in a mission- and instrument-specific manner.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -2964,6 +3201,36 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>special_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>special_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Line number of the special point.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>special_sample</name>
+    <version_id>1.0</version_id>
+    <local_identifier>special_sample</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Sample number of the special point.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>striping_count</name>
     <version_id>1.0</version_id>
     <local_identifier>striping_count</local_identifier>
@@ -3075,7 +3342,35 @@
       <unit_of_measure_type>Units_of_Temperature</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>valid_maximum_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>valid_maximum_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent hare</submitter_name>
+    <definition>Specifies the maximum pixel DN value for pixels used by the autoexposure algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>valid_minimum_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>valid_minimum_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the minimum DN threshold for pixels used by the autoexposure algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>value_number</name>
     <version_id>1.0</version_id>
@@ -3199,102 +3494,6 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>filter_window_line</name>
-    <version_id>1.0</version_id>
-    <local_identifier>filter_window_line</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The size in pixels of the window used for filtering in the 
-      line dimension. If the window varies across the image, this could contain 
-      the average window or initial window, as needed by the specific algorithm.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-
-  <DD_Attribute>
-    <name>filter_window_sample</name>
-    <version_id>1.0</version_id>
-    <local_identifier>filter_window_sample</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The size in pixels of the window used for filtering in the 
-      sample dimension. If the window varies across the image, this could contain 
-      the average window or initial window, as needed by the specific algorithm.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>max_filter_window_line</name>
-    <version_id>1.0</version_id>
-    <local_identifier>max_filter_window_line</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The maximum size in pixels of the window used for filtering in the 
-      line dimension. If the window is constant across the image, filter_window_line 
-      should be used instead.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>max_filter_window_sample</name>
-    <version_id>1.0</version_id>
-    <local_identifier>max_filter_window_sample</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The maximum size in pixels of the window used for filtering in the 
-      sample dimension. If the window is constant across the image, filter_window_sample 
-      should be used instead.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>min_filter_window_line</name>
-    <version_id>1.0</version_id>
-    <local_identifier>min_filter_window_line</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The minimum size in pixels of the window used for filtering in the 
-      line dimension. If the window is constant across the image, filter_window_line 
-      should be used instead.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>min_filter_window_sample</name>
-    <version_id>1.0</version_id>
-    <local_identifier>min_filter_window_sample</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The minimum size in pixels of the window used for filtering in the 
-      sample dimension. If the window is constant across the image, filter_window_sample 
-      should be used instead.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
-  <DD_Attribute>
     <name>zoom_position</name>
     <version_id>1.0</version_id>
     <local_identifier>zoom_position</local_identifier>
@@ -3309,6 +3508,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
 
   
   <!--                   -->
@@ -3478,6 +3678,42 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>High_Dynamic_Range</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Thumbnail</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Row_Sum</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Col_Sum</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Reference_Pixel</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Histogram</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
   
   <!-- Class: Autoexposure -->
@@ -3575,6 +3811,18 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>exposure_table_update_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>valid_minimum_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>valid_maximum_pixel</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -3962,6 +4210,42 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>Dark_Current_Correction</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>High_Dynamic_Range</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Thumbnail</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Row_Sum</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Col_Sum</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Reference_Pixel</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Histogram</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -4393,7 +4677,7 @@
     <version_id>1.3</version_id>
     <local_identifier>Detector</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Detectorclass contains attributes describing the state of the
+    <definition>The Detector class contains attributes describing the state of the
       instrument detector. These are values directly read from the detector
       and do not necessarily reflect the state of the image after onboard
       processing. For example, the entire image may be read into memory and
@@ -4489,6 +4773,18 @@
     <DD_Association>
       <identifier_reference>early_image_return</identifier_reference>
       <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>parameter_table_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Special_Point</identifier_reference>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -5032,7 +5328,7 @@
   <!-- Class: Focus_Stack  -->
   <DD_Class>
     <name>Focus_Stack</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Focus_Stack</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The Focus_Stack class contains attributes that describe a set of images
@@ -5061,6 +5357,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>focus_merge_registration_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>delta_focus_count</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5099,6 +5401,12 @@
     </DD_Association>
     <DD_Association>
         <identifier_reference>product_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>observation_number</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
@@ -5802,7 +6110,109 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
+  <!-- Class: Reference_Pixel -->
+  <DD_Class>
+    <name>Reference_Pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Reference_Pixel</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Describes a Reference Pixel product, which is a set of dark, non-imaging 
+      pixels used to monitor electronics.
+product_flag.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+        <identifier_reference>product_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>download_priority</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Histogram -->
+  <DD_Class>
+    <name>Histogram</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Histogram</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Describes a Histogram product.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+        <identifier_reference>product_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>download_priority</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Col_Sum -->
+  <DD_Class>
+    <name>Col_Sum</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Col_Sum</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Describes a Column Summation product, which is a single row containing the sum of all 
+      pixels in each column of the image.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+        <identifier_reference>product_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>download_priority</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Row_Sum -->
+  <DD_Class>
+    <name>Row_Sum</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Row_Sum</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Describes a Row Summation product, which is a single column containing the sum of all 
+      pixels in each row of the image.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+        <identifier_reference>product_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>download_priority</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!-- Class: Sampling  -->
   <DD_Class>
     <name>Sampling</name>
@@ -5898,7 +6308,43 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
+  <!-- Class: Special_Point -->
+  <DD_Class>
+    <name>Special_Point</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Special_Point</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines a special point on the image detector, such as the location in 
+      pixel space that a co-boresighted instrument measures.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+        <identifier_reference>pds.name</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>pds.description</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>special_line</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>special_sample</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!-- Class: Subframe  -->
   <DD_Class>
     <name>Subframe</name>
@@ -5989,6 +6435,24 @@
     <DD_Association>
         <identifier_reference>product_flag</identifier_reference>
         <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>download_priority</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>Subframe</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>Onboard_Compression</identifier_reference>
+        <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -6171,6 +6635,85 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>  
+  
+  <!-- Class: High_Dynamic_Range -->
+  <DD_Class>
+    <name>High_Dynamic_Range</name>
+    <version_id>1.0</version_id>
+    <local_identifier>High_Dynamic_Range</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies parameters related to High Dynamic Range processing, which 
+      combines multiple exposures of different lengths into a single product with a 
+      greater dynamic range than any of the inputs.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>hdr_acquisition_mode</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>hdr_frame_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>hdr_clipping_threshold</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>High_Dynamic_Range_Exposure</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+   <!-- Class: High_Dynamic_Range_Exposure -->
+  <DD_Class>
+    <name>High_Dynamic_Range_Exposure</name>
+    <version_id>1.0</version_id>
+    <local_identifier>High_Dynamic_Range_Exposure</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies parameters for each individual exposure in an HDR image.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>exposure_duration</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>exposure_duration_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>exposure_time_delta</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.Internal_Reference</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!--                   -->
   <!--   Classes: END    -->
   <!--                   -->
@@ -6225,7 +6768,7 @@
       <rule_message>IMG:error:detector_params_child_check: img:Detector must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
-  
+
   <DD_Rule>
     <local_identifier>commanded_params_child_check</local_identifier>
     <rule_context>//img:Commanded_Parameters</rule_context>
@@ -6449,5 +6992,35 @@
       <rule_message>In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
-  
+
+  <DD_Rule>
+    <local_identifier>reference_type_check_detector</local_identifier>
+    <rule_context>img:Detector/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_raw_source_product'</rule_test>
+      <rule_message>In img:Detector, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <DD_Rule>
+    <local_identifier>reference_type_check_hdre</local_identifier>
+    <rule_context>img:High_Dynamic_Range_Exposure/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_raw_source_product'</rule_test>
+      <rule_message>In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <!--DD_Rule>  ** Not needed for now
+    <local_identifier>reference_type_check_onboard_compression</local_identifier>
+    <rule_context>img:Onboard_Compression/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_ancillary_data'</rule_test>
+      <rule_message>In img:Onboard_Compression, Internal_Reference.reference_type must be equal to 'data_to_ancillary_data'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule-->
+
 </Ingest_LDD>

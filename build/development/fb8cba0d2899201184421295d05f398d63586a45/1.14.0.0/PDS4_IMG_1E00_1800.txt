@@ -1,13 +1,13 @@
 PDS4 Local Data Dictionary Processing Report
 
 Configuration:
-   LDDTool Version        11.3.1
-   LDD Version Id:        1.7.3.0
+   LDDTool Version        11.3.2
+   LDD Version Id:        1.8.0.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Tue Aug 04 22:38:07 UTC 2020
+   Time                   Mon Aug 24 21:28:14 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -29,15 +29,15 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                65
-   Attributes             162
-   Associations           313
-   Error messages         1
-   Warning messages       16
-   Information messages   46
+   Classes                74
+   Attributes             187
+   Associations           373
+   Error messages         0
+   Warning messages       24
+   Information messages   52
 
 Detailed validation messages
-   ERROR    Class:  - At least one value for pds:local_reference_type or pds:reference_type must be defined for img:Detector/pds:Internal_Reference.
+   INFO     Attribute: <temperature_value> - A 'nilable' attribute was found that is not a required attribute in at least one class.
    WARNING  Header:  - New namespace id has been specified:img
    WARNING  Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
@@ -54,6 +54,14 @@ Detailed validation messages
    WARNING  Class: <Optical_Filter> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -69,6 +77,8 @@ Detailed validation messages
    INFO     Attribute: <filter_number> - This local attribute has a duplicate in the PDS4 data dictionary.
    INFO     Attribute: <first_line> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <first_sample> - The default minimum value provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <hdr_frame_count> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <hdr_clipping_threshold> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <height_pixels> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <icer_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <icer_quality> - The default maximum value provided by the attribute's data type is being overridden with 18
@@ -79,6 +89,7 @@ Detailed validation messages
    INFO     Attribute: <lines> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <line_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
    INFO     Attribute: <line_fov> - The default maximum value provided by the attribute's data type is being overridden with 360.0
+   INFO     Attribute: <observation_number> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <onboard_compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <onboard_compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
    INFO     Attribute: <onboard_compression_rate> - The default minimum value provided by the attribute's data type is being overridden with 0
@@ -97,14 +108,16 @@ Detailed validation messages
    INFO     Attribute: <segment_number> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <segment_status> - The default minimum characters provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <segment_status> - The default maximum characters provided by the attribute's data type is being overridden with 6
+   INFO     Attribute: <special_line> - The default minimum value provided by the attribute's data type is being overridden with 0
+   INFO     Attribute: <special_sample> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <striping_count> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <striping_overlap_rows> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <width_pixels> - The default minimum value provided by the attribute's data type is being overridden with 1
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.7.3.0
-   Full Name              Trent M. Hare (active), P. Geissler, R. Joyner, Jordan Padams, E. Rye, C. De Cesare
+   LDD Version            1.8.0.0
+   Full Name              Trent Hare
    Steward                img
    Namespace Id           img
    Comment                 This dictionary contains high level classes and attributes used in imaging and
@@ -161,19 +174,16 @@ Parsed Input - Header:
     - Added Video class to Commanded_Parameters. (bugfix)
     
     1.7.1.0, T.Hare
-    - Added filter_position_count, https://github.com/pds-data-dictionaries/ldd-img/issues/25
-    - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
-    - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
-    - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
-    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded), https://github.com/pds-data-dictionaries/ldd-img/issues/30
-    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*), 
-        https://github.com/pds-data-dictionaries/ldd-img/issues/28
-    - Under Video added frame_index and gop_start_index, https://github.com/pds-data-dictionaries/ldd-img/issues/26
-    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes,
-        https://github.com/pds-data-dictionaries/ldd-img/issues/8
+    - Added filte
+    - Added GOP_Frames
+    - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
+    - Added detector_to_image_flip
+    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
+    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
+    - Under Video added frame_index and gop_start_index
+    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes
     - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation attributes.
-        anded new Image_Mask added under both Imaging and Commanded_Parameters classes,
-        https://github.com/pds-data-dictionaries/ldd-img/issues/29
+        anded new Image_Mask added under both Imaging and Commanded_Parameters classes
     - Added mask_transparent_value attribute to Image_Mask_File class
     
     1.7.2.0 P.Geissler
@@ -190,19 +200,39 @@ Parsed Input - Header:
         so setting current_value, erase_count and voltage_value to nilable=false
     - Added abstract_flag and element_flag for all Classes with defaults of false
     - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter, 
-      Subframe, and Instrument_State to element_flag = true
+      Subframe, and Instrument_State to element_flag = true (allows to be exposed class)
     - update lots of indentations in the classes to be more consistent
     - Add focus_distance to Focus.
     - Add Manual Last, Auto Last, and None to exposure_type
     - Change the minimum for icer_quality to 0 and updated definition
-    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_iamge-return to Detector
+    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_image_return to Detector
     - Add exposure_table, exposure_table_update_flag to Autoexposure
     - Add exposure_scale_factor, exposure_coadd_count, exposure_readout_count to Exposure
     - Add early_scaling to Companding
     
-
+    1.8.0.0 T.Hare
+    - Update to PDS IM 1.E.0.0
+    - Added GZIP and LZO to onboard_compression_type enumeration options
+    - Added Optical_Properties class with focel_length, f_number, zoom_position attributes
+    - Added focus_initialization_flag attribute under the Focus class
+    - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
+    - Updated img_temperature_value to allow nillable=true
+    - Added auto_exposure_lower_threshold, auto_exposure_lower_limit, auto_exposure_upper_threshold,
+        auto_exposure_upper_limit, auto_exposure_roi_lines, auto_exposure_roi_samples,
+        auto_exposure_roi_first_line, auto_exposure_roi_first_sample attributes to Autoexposure
+    - Added Image_Compression_Segment under JPEG_Parameters class
+    - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
+    - Added Special_Point class and special_line, special_sample attributes
+    - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+    - Added observation_number under Frame class and parameter_table_id under Detector class
+    - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
+    - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
+        to Imaging and Commanded_Parameters class
+    - Added delta_focus_count attribute for Focus_Stack class
+        
   
-   Last Modification Time 2020-05-13T17:30:00Z
+   Last Modification Time 2020-08-24T17:30:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -237,6 +267,46 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            The auto_exposure_pixel_fraction attribute specifies the percentage of pixels whose DN values may exceed the auto_expsoure_data_cut.
 
+   name                   auto_exposure_lower_threshold
+   version                1.14
+   value data type        ASCII_Integer
+   description            Specifies the lower threshold DN value for which a specified number of pixels is permitted to exceed. The auto_exposure_lower_limit defines the number of pixels allowed to exceed this threshold.
+
+   name                   auto_exposure_lower_limit
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the maximum number of pixels that are allowed to be below the lower threshold defined by auto_exposure_lower_limit.
+
+   name                   auto_exposure_upper_threshold
+   version                1.14
+   value data type        ASCII_Integer
+   description            Specifies the upper threshold DN value for which a specified number of pixels is permitted to exceed. The auto_exposure_upper_limit defines the number of pixels allowed to exceed this threshold.
+
+   name                   auto_exposure_upper_limit
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the maximum number of pixels that are allowed to be above the upper threshold defined by auto_exposure_upper_limit.
+
+   name                   auto_exposure_roi_lines
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the number of lines in the autoexposure region of interest.
+
+   name                   auto_exposure_roi_samples
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the number of samples in the autoexposure region of interest.
+
+   name                   auto_exposure_roi_first_line
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the (1-based) starting line for the autoexposure region of interest.
+
+   name                   auto_exposure_roi_first_sample
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the (1-based) starting sample for the autoexposure region of interest.
+
    name                   autofocus_step_count
    version                1.14
    value data type        ASCII_NonNegative_Integer
@@ -250,12 +320,12 @@ Parsed Input - Attributes:
    name                   bad_pixel_replacement_flag
    version                1.14
    value data type        ASCII_Boolean
-   description            If true, specifies whether or not bad pixel replacement processing was requested or completed. See bad_pixel_replacement_table.
+   description            If true, specifies whether or not bad pixel replacement processing was requested or completed. See bad_pixel_replacement_table_id.
 
-   name                   bad_pixel_replacement_table
+   name                   bad_pixel_replacement_table_id
    version                1.14
    value data type        ASCII_Short_String_Collapsed
-   description            Specfies the table number of the bad pixel table used in the bad pixel replacement process. See also bad_pixel_replacement_flag.
+   description            Specifies the table used to replace bad pixels. A bad pixel table typically lists the location of each bad pixel on a detector. The specific table used is mission-specific.
 
    name                   bandwidth
    version                1.14
@@ -319,6 +389,11 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The color_subsampling_mode attribute specifies the JPEG color subsampling mode used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 'Grayscale' - indicates a grayscale image
+
+   name                   delta_focus_count
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the amount of change in focus for each image in the z-stack. The units should be the same as focus_position_count, which is often motor counts.
 
    name                   input_dn_max
    version                1.14
@@ -391,6 +466,11 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The device_state attribute indicates the state of a sensor or other device associated with the imaging instrument. These states are interpreted in an instrument-specific way.
+
+   name                   download_priority
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            The download_priority attribute specifies which data to downlink/transmit, based on order of importance. The ranking and meaning of specific values will vary depending on the mission, and should be defined in the mission software interface specification (SIS).
 
    name                   downtrack_summing
    version                1.14
@@ -478,6 +558,11 @@ Parsed Input - Attributes:
    value data type        ASCII_Short_String_Collapsed
    description            The exposure_type attribute indicates the exposure setting on a camera. Valid values: 'Manual' - manual exposure setting, 'Auto' - autoexposure is applied by the camera, 'Test' - test exposure setting telling the camera to return a fixed-pattern test image.
 
+   name                   exposure_time_delta
+   version                1.14
+   value data type        ASCII_Real
+   description            Specifies the change in exposure time for this exposure compared to the previous. Should be 0 for the first item in the list.
+
    name                   filter_id
    version                1.14
    value data type        ASCII_Short_String_Collapsed
@@ -500,6 +585,18 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The filter position count is the position in motor counts of the filter wheel motor.
+
+   name                   filter_window_line
+   version                1.14
+   value data type        ASCII_Real
+   description            The size in pixels of the window used for filtering in the line dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
+   unit of measure type   Units_of_Misc
+
+   name                   filter_window_sample
+   version                1.14
+   value data type        ASCII_Real
+   description            The size in pixels of the window used for filtering in the sample dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
+   unit of measure type   Units_of_Misc
 
    name                   first_line
    version                1.14
@@ -543,6 +640,23 @@ Parsed Input - Attributes:
    value data type        ASCII_Boolean
    description             The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.
 
+   name                   focus_initialization_flag
+   version                1.14
+   value data type        ASCII_Boolean
+   description            Specifies whether the instrument focus mechanism should be (or was) initialized before use.
+
+   name                   focal_length
+   version                1.14
+   value data type        ASCII_Real
+   description            Defines the focal length of the optics used in acquiring the image.
+   unit of measure type   Units_of_Length
+
+   name                   f_number
+   version                1.14
+   value data type        ASCII_Real
+   description            Defines the f/number for the optics used in acquiring the image.
+   unit of measure type   Units_of_Length
+
    name                   frame_count
    version                1.14
    value data type        ASCII_NonNegative_Integer
@@ -552,6 +666,11 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The frame_id attribute specifies an identification for a particular instrument measurement frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different instrument modes. These sequences repeat from cycle to cycle and sometimes within a cycle.
+
+   name                   frame_index
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            The frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count.
 
    name                   frame_interval
    version                1.14
@@ -595,10 +714,22 @@ Parsed Input - Attributes:
    value data type        ASCII_NonNegative_Integer
    description            Videos can be broken into Groups of Pictures (GOP)s, which group a number of frames together. The gop_start_index attribute specifies the index of the first frame of the GOP (starting at 1). Thus, frame_index = gop_start_index + gop_frame_index - 1.
 
-   name                   frame_index
+   name                   hdr_acquisition_mode
+   version                1.14
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies how the HDR frames were acquired.
+
+   name                   hdr_frame_count
    version                1.14
    value data type        ASCII_NonNegative_Integer
-   description            The frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count.
+   description            Specifies the number of frames that go into the HDR product.
+   minimum value          0
+
+   name                   hdr_clipping_threshold
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the threshold for pixel clipping.
+   minimum value          0
 
    name                   height_pixels
    version                1.14
@@ -693,10 +824,40 @@ Parsed Input - Attributes:
    value data type        ASCII_NonNegative_Integer
    description             The missing_pixel_count attribute identifies the total number of missing pixels defined by the image or image segment.
 
+   name                   max_filter_window_line
+   version                1.14
+   value data type        ASCII_Real
+   description            The maximum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
+   unit of measure type   Units_of_Misc
+
+   name                   max_filter_window_sample
+   version                1.14
+   value data type        ASCII_Real
+   description            The maximum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
+   unit of measure type   Units_of_Misc
+
+   name                   min_filter_window_line
+   version                1.14
+   value data type        ASCII_Real
+   description            The minimum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
+   unit of measure type   Units_of_Misc
+
+   name                   min_filter_window_sample
+   version                1.14
+   value data type        ASCII_Real
+   description            The minimum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
+   unit of measure type   Units_of_Misc
+
    name                   motor_count
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The motor_count attribute specifies the raw motor counts for the specified device, which indicates the position of the associated mechanism in a device-specific way.
+
+   name                   observation_number
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Identifies which observation of many this data product pertains to.
+   minimum value          0
 
    name                   onboard_compression_class
    version                1.14
@@ -730,7 +891,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_type
    version                1.14
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
    minimum characters     1
    maximum characters     255
 
@@ -779,6 +940,11 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
 
+   name                   parameter_table_id
+   version                1.14
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies which table of parameters to use, or were used. Tables are defined in a mission- and instrument-specific manner.
+
    name                   pointing_model_name
    version                1.14
    value data type        ASCII_Short_String_Collapsed
@@ -798,6 +964,11 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The processing_venue attribute specifies where the processing described by the parent class was performed. 
+
+   name                   product_flag
+   version                1.14
+   value data type        ASCII_Boolean
+   description            Indicates whether the product in the enclosing class was requested for downlink (when in Commanded_Parameters), or whether this product actually is the type in question (when in Imaging). For example, Commanded_Parameters.Histogram.product_flag = true indicates that a histogram was requested as part of the command that created the data product being labeled, while Imaging.Histogram.product_flag = true indicates that this data product itself is (or contains) a histogram.
 
    name                   progressive_stage
    version                1.14
@@ -981,6 +1152,18 @@ Parsed Input - Attributes:
    value data type        ASCII_Short_String_Collapsed
    description            The shutter_subtraction_mode specifies whether shutter subtraction will be performed, or if it is dependent on the exposure_duration_threshold_count.
 
+   name                   special_line
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Line number of the special point.
+   minimum value          0
+
+   name                   special_sample
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            Sample number of the special point.
+   minimum value          0
+
    name                   striping_count
    version                1.14
    value data type        ASCII_NonNegative_Integer
@@ -1007,7 +1190,18 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Real
    description            The temperature_value attribute provides the temperature, in the specified units, of some point on an imaging instrument or other imaging instrument device.
+   nillable               true
    unit of measure type   Units_of_Temperature
+
+   name                   valid_maximum_pixel
+   version                1.14
+   value data type        ASCII_Integer
+   description            Specifies the maximum pixel DN value for pixels used by the autoexposure algorithm.
+
+   name                   valid_minimum_pixel
+   version                1.14
+   value data type        ASCII_Integer
+   description            Specifies the minimum DN threshold for pixels used by the autoexposure algorithm.
 
    name                   value_number
    version                1.14
@@ -1054,41 +1248,10 @@ Parsed Input - Attributes:
    description            The y_center attribute specifies the line coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
    unit of measure type   Units_of_Misc
 
-   name                   filter_window_line
+   name                   zoom_position
    version                1.14
    value data type        ASCII_Real
-   description            The size in pixels of the window used for filtering in the line dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
-   unit of measure type   Units_of_Misc
-
-   name                   filter_window_sample
-   version                1.14
-   value data type        ASCII_Real
-   description            The size in pixels of the window used for filtering in the sample dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
-   unit of measure type   Units_of_Misc
-
-   name                   max_filter_window_line
-   version                1.14
-   value data type        ASCII_Real
-   description            The maximum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
-   unit of measure type   Units_of_Misc
-
-   name                   max_filter_window_sample
-   version                1.14
-   value data type        ASCII_Real
-   description            The maximum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
-   unit of measure type   Units_of_Misc
-
-   name                   min_filter_window_line
-   version                1.14
-   value data type        ASCII_Real
-   description            The minimum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
-   unit of measure type   Units_of_Misc
-
-   name                   min_filter_window_sample
-   version                1.14
-   value data type        ASCII_Real
-   description            The minimum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
-   unit of measure type   Units_of_Misc
+   description            The zoom_position attribute defined, in a camera-specific way, the zoom metric that should be used for geometric processing of the data (e.g. for creating camera models). This will often be the zoom motor count.
 
 Parsed Input - Classes:
 
@@ -1220,6 +1383,36 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      High_Dynamic_Range
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Thumbnail
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Row_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Col_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Reference_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Histogram
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
    name                   Autoexposure
    description            The Autoexposure class contains attributes used to identify or describe the algorithm used to automatically calculate the proper exposure time. This is generally based on some kind of histogram analysis. The specific autoexposure algorithm used is defined in the processing_algorithm attribute, and the specific set of attributes needed to describe it will vary based on the algorithm. Examples of autoexposure algorithms include "Maki 2003" used on MER, MSL ECAMs, M2020 ECAMS; "Maurice 2012" used on MSL ChemCam; "Smith 1997" used on Mars Pathfinder Imager.
    is abstract            false
@@ -1243,6 +1436,46 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      auto_exposure_lower_threshold
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_lower_limit
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_upper_threshold
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_upper_limit
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_roi_lines
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_roi_samples
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_roi_first_line
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      auto_exposure_roi_first_sample
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      max_auto_exposure_iteration_count
       minimum occurrences   0
       maximum occurrences   1
@@ -1254,6 +1487,16 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      exposure_table_update_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      valid_minimum_pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      valid_maximum_pixel
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -1543,6 +1786,36 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Dark_Current_Correction
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      High_Dynamic_Range
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Thumbnail
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Row_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Col_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Reference_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Histogram
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1871,7 +2144,7 @@ Parsed Input - Classes:
       reference type        component_of
 
    name                   Detector
-   description            The Detectorclass contains attributes describing the state of the instrument detector. These are values directly read from the detector and do not necessarily reflect the state of the image after onboard processing. For example, the entire image may be read into memory and then subframed in software, in which case the subframe attributes in this class reflect the entire image (as read from the detector), whereas those in the Subframe class represent the final subframe results.
+   description            The Detector class contains attributes describing the state of the instrument detector. These are values directly read from the detector and do not necessarily reflect the state of the image after onboard processing. For example, the entire image may be read into memory and then subframed in software, in which case the subframe attributes in this class reflect the entire image (as read from the detector), whereas those in the Subframe class represent the final subframe results.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -1938,7 +2211,7 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      bad_pixel_replacement_table
+      local identifier      bad_pixel_replacement_table_id
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -1952,6 +2225,16 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      parameter_table_id
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Special_Point
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
 
       local identifier      pds.Internal_Reference
       minimum occurrences   0
@@ -2349,6 +2632,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      focus_initialization_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
    name                   Focus_Stack
    description            The Focus_Stack class contains attributes that describe a set of images taken at different focus settings, which are often merged to create a best-focus image or combined to extract range information. Focus stacks are also sometimes called ZStacks. 
    is abstract            false
@@ -2377,13 +2665,18 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      delta_focus_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      Data_Processing
       minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
 
    name                   Frame
-   description            The Frame class contains attributes providing information specific to an image frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different instrument modes.
+   description            The Frame class contains attributes providing information specific to an image frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different instrument modes. In the context of Frame, product_flag refers to the actual image.
    is abstract            false
    is choice              false
    subclass of            USER
@@ -2396,6 +2689,16 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      frame_type_name
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      observation_number
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2573,6 +2876,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      Image_Compression_Segment
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
    name                   JPEG_Progressive_Parameters
    description             The JPEG_Progressive_Parameters class contains attributes describing an interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail. This is ideal for large images that will be displayed while downloading over a slow connection, allowing a reasonable preview after receiving only a portion of the data.
    is abstract            false
@@ -2715,6 +3023,29 @@ Parsed Input - Classes:
 
       local identifier      responsivity_factor_b
       minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Optical_Properties
+   description            The Optical_Properties class describes properties of the optics used in acquiring the image.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      focal_length
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      f_number
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      zoom_position
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
@@ -2909,6 +3240,83 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        parent_of
 
+   name                   Reference_Pixel
+   description            Describes a Reference Pixel product, which is a set of dark, non-imaging pixels used to monitor electronics. product_flag.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   Histogram
+   description            Describes a Histogram product.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Col_Sum
+   description            Describes a Column Summation product, which is a single row containing the sum of all pixels in each column of the image.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Row_Sum
+   description            Describes a Row Summation product, which is a single column containing the sum of all pixels in each row of the image.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
    name                   Sampling
    description             The Sampling class contains attributes and classes related to the sampling, scaling, companding, and compression or reduction in resolution of data.
    is abstract            false
@@ -2985,6 +3393,34 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        parent_of
 
+   name                   Special_Point
+   description            Defines a special point on the image detector, such as the location in pixel space that a co-boresighted instrument measures.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pds.name
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.description
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      special_line
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      special_sample
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
    name                   Subframe
    description             The Subframe class describes the position and other optional characteristics of an image subframe, relative to the original image. 
    is abstract            false
@@ -2994,22 +3430,22 @@ Parsed Input - Classes:
    Associations
 
       local identifier      first_line
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      first_sample
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      lines
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      samples
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
@@ -3037,6 +3473,44 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+   name                   Thumbnail
+   description            Describes a Thumbnail product, which is a greatly reduced resolution version of the image.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      frame_id
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      frame_type_name
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      product_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Subframe
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Onboard_Compression
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
 
    name                   Video
    description            The Video class contains attributes related to video observations, defined as a regular time series of frames. The class can be used to describe a single frame within the video, or the video as a whole.
@@ -3176,5 +3650,66 @@ Parsed Input - Classes:
       minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
+
+   name                   High_Dynamic_Range
+   description            Specifies parameters related to High Dynamic Range processing, which combines multiple exposures of different lengths into a single product with a greater dynamic range than any of the inputs.
+   is abstract            false
+   is choice              false
+   subclass of            Data_Processing
+
+   Associations
+
+      local identifier      hdr_acquisition_mode
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      hdr_frame_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      hdr_clipping_threshold
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Data_Processing
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        parent_of
+
+      local identifier      High_Dynamic_Range_Exposure
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   High_Dynamic_Range_Exposure
+   description            Specifies parameters for each individual exposure in an HDR image.
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      exposure_duration
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      exposure_duration_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      exposure_time_delta
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
 
 End of Report
