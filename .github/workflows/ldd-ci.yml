@@ -49,6 +49,9 @@ jobs:
         with:
           python-version: '3.7'
 
+      - name: Checkout submodules for dependencies
+        uses: textbook/git-checkout-submodule-action@master
+
       - name: Generate LDDs
         id: generate
         uses: NASA-PDS/gh-action-pds4-ldd@master
