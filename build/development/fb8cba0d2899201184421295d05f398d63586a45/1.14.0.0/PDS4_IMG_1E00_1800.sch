@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.7.3.0 - Tue Aug 04 22:38:07 UTC 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.0.0 - Mon Aug 24 21:28:14 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -187,6 +187,12 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Focus">
+      <sch:assert test="if (img:focus_initialization_flag) then img:focus_initialization_flag = ('true', 'false') else true()">
+        The attribute img:focus_initialization_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Focus/img:best_focus_distance">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
@@ -217,11 +223,37 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Frame">
+      <sch:assert test="if (img:product_flag) then img:product_flag = ('true', 'false') else true()">
+        The attribute img:product_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Frame/img:frame_id">
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Frame/img:frame_type_name">
+      <sch:assert test=". = ('Mono', 'Stereo')">
+        The attribute img:frame_type_name must be equal to one of the following values 'Mono', 'Stereo'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:High_Dynamic_Range">
+      <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
+        The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:High_Dynamic_Range/img:hdr_acquisition_mode">
+      <sch:assert test=". = ('Multiframe', 'None', 'Piecewise', 'Single')">
+        The attribute img:hdr_acquisition_mode must be equal to one of the following values 'Multiframe', 'None', 'Piecewise', 'Single'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_duration">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -304,8 +336,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_type">
-      <sch:assert test=". = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')">
-        The attribute img:onboard_compression_type must be equal to one of the following values 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None'.</sch:assert>
+      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'MSSS Lossless', 'None')">
+        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'MSSS Lossless', 'None'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -316,6 +348,18 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Optical_Filter/img:center_filter_wavelength">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Optical_Properties/img:f_number">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Optical_Properties/img:focal_length">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
@@ -423,6 +467,22 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Thumbnail">
+      <sch:assert test="if (img:product_flag) then img:product_flag = ('true', 'false') else true()">
+        The attribute img:product_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Thumbnail/img:frame_id">
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Thumbnail/img:frame_type_name">
+      <sch:assert test=". = ('Mono', 'Stereo')">
+        The attribute img:frame_type_name must be equal to one of the following values 'Mono', 'Stereo'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Video">
       <sch:assert test="if (img:video_flag) then img:video_flag = ('true', 'false') else true()">
         The attribute img:video_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
@@ -492,6 +552,18 @@
     <sch:rule context="img:Brightness_Correction_Image/pds:Internal_Reference">
       <sch:assert test="pds:reference_type = 'data_to_brightness_correction'">
         In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Detector/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
+        In img:Detector, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:High_Dynamic_Range_Exposure/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
+        In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

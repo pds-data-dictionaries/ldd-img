@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.7.3.0 - Tue Aug 04 22:38:07 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.0.0 - Mon Aug 24 21:28:14 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.7.3.0 - img: - Imaging                                                  -->
+  <!-- 1.8.0.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,7 +14,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.7.3.0">
+    version="1.8.0.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
  
@@ -74,19 +74,16 @@
     - Added Video class to Commanded_Parameters. (bugfix)
     
     1.7.1.0, T.Hare
-    - Added filter_position_count, https://github.com/pds-data-dictionaries/ldd-img/issues/25
-    - Added GOP_Frames, https://github.com/pds-data-dictionaries/ldd-img/issues/26
-    - Added atmospheric_opacity and atmospheric_opacity_reference, https://github.com/pds-data-dictionaries/ldd-img/issues/27
-    - Added detector_to_image_flip, https://github.com/pds-data-dictionaries/ldd-img/issues/31
-    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded), https://github.com/pds-data-dictionaries/ldd-img/issues/30
-    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*), 
-        https://github.com/pds-data-dictionaries/ldd-img/issues/28
-    - Under Video added frame_index and gop_start_index, https://github.com/pds-data-dictionaries/ldd-img/issues/26
-    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes,
-        https://github.com/pds-data-dictionaries/ldd-img/issues/8
+    - Added filte
+    - Added GOP_Frames
+    - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
+    - Added detector_to_image_flip
+    - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
+    - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
+    - Under Video added frame_index and gop_start_index
+    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes
     - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation attributes.
-        anded new Image_Mask added under both Imaging and Commanded_Parameters classes,
-        https://github.com/pds-data-dictionaries/ldd-img/issues/29
+        anded new Image_Mask added under both Imaging and Commanded_Parameters classes
     - Added mask_transparent_value attribute to Image_Mask_File class
     
     1.7.2.0 P.Geissler
@@ -103,17 +100,37 @@
         so setting current_value, erase_count and voltage_value to nilable=false
     - Added abstract_flag and element_flag for all Classes with defaults of false
     - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter, 
-      Subframe, and Instrument_State to element_flag = true
+      Subframe, and Instrument_State to element_flag = true (allows to be exposed class)
     - update lots of indentations in the classes to be more consistent
     - Add focus_distance to Focus.
     - Add Manual Last, Auto Last, and None to exposure_type
     - Change the minimum for icer_quality to 0 and updated definition
-    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_iamge-return to Detector
+    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_image_return to Detector
     - Add exposure_table, exposure_table_update_flag to Autoexposure
     - Add exposure_scale_factor, exposure_coadd_count, exposure_readout_count to Exposure
     - Add early_scaling to Companding
     
-
+    1.8.0.0 T.Hare
+    - Update to PDS IM 1.E.0.0
+    - Added GZIP and LZO to onboard_compression_type enumeration options
+    - Added Optical_Properties class with focel_length, f_number, zoom_position attributes
+    - Added focus_initialization_flag attribute under the Focus class
+    - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
+    - Updated img_temperature_value to allow nillable=true
+    - Added auto_exposure_lower_threshold, auto_exposure_lower_limit, auto_exposure_upper_threshold,
+        auto_exposure_upper_limit, auto_exposure_roi_lines, auto_exposure_roi_samples,
+        auto_exposure_roi_first_line, auto_exposure_roi_first_sample attributes to Autoexposure
+    - Added Image_Compression_Segment under JPEG_Parameters class
+    - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
+    - Added Special_Point class and special_line, special_sample attributes
+    - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+    - Added observation_number under Frame class and parameter_table_id under Detector class
+    - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
+    - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
+        to Imaging and Commanded_Parameters class
+    - Added delta_focus_count attribute for Focus_Stack class
+        
   
     </xs:documentation>
   </xs:annotation>
@@ -122,6 +139,7 @@
   <xs:element name="Detector" type="img:Detector"> </xs:element>
   <xs:element name="Exposure" type="img:Exposure"> </xs:element>
   <xs:element name="Focus" type="img:Focus"> </xs:element>
+  <xs:element name="High_Dynamic_Range" type="img:High_Dynamic_Range"> </xs:element>
   <xs:element name="Imaging" type="img:Imaging"> </xs:element>
   <xs:element name="Instrument_State" type="img:Instrument_State"> </xs:element>
   <xs:element name="Onboard_Compression" type="img:Onboard_Compression"> </xs:element>
@@ -147,9 +165,19 @@
           <xs:element name="auto_exposure_data_cut" type="img:auto_exposure_data_cut" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_percent" type="img:auto_exposure_percent" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_pixel_fraction" type="img:auto_exposure_pixel_fraction" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_lower_threshold" type="img:auto_exposure_lower_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_lower_limit" type="img:auto_exposure_lower_limit" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_upper_threshold" type="img:auto_exposure_upper_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_upper_limit" type="img:auto_exposure_upper_limit" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_lines" type="img:auto_exposure_roi_lines" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_samples" type="img:auto_exposure_roi_samples" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_first_line" type="img:auto_exposure_roi_first_line" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_first_sample" type="img:auto_exposure_roi_first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="max_auto_exposure_iteration_count" type="img:max_auto_exposure_iteration_count" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="exposure_table" type="img:exposure_table" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="exposure_table_update_flag" type="img:exposure_table_update_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="valid_minimum_pixel" type="img:valid_minimum_pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="valid_maximum_pixel" type="img:valid_maximum_pixel" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -251,6 +279,18 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Col_Sum">
+    <xs:annotation>
+      <xs:documentation>Describes a Column Summation product, which is a
+        single row containing the sum of all pixels in each column of
+        the image.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Color_Filter_Array">
     <xs:annotation>
       <xs:documentation>The Color_Filter_Array class describes whether
@@ -331,6 +371,12 @@
       <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -504,14 +550,14 @@
 
   <xs:complexType name="Detector">
     <xs:annotation>
-      <xs:documentation>The Detectorclass contains attributes describing
-        the state of the instrument detector. These are values directly
-        read from the detector and do not necessarily reflect the state
-        of the image after onboard processing. For example, the entire
-        image may be read into memory and then subframed in software, in
-        which case the subframe attributes in this class reflect the
-        entire image (as read from the detector), whereas those in the
-        Subframe class represent the final subframe
+      <xs:documentation>The Detector class contains attributes
+        describing the state of the instrument detector. These are
+        values directly read from the detector and do not necessarily
+        reflect the state of the image after onboard processing. For
+        example, the entire image may be read into memory and then
+        subframed in software, in which case the subframe attributes in
+        this class reflect the entire image (as read from the detector),
+        whereas those in the Subframe class represent the final subframe
         results.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
@@ -527,9 +573,11 @@
       <xs:element name="gain_number" type="img:gain_number" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="analog_offset" type="img:analog_offset" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="bad_pixel_replacement_flag" type="img:bad_pixel_replacement_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="bad_pixel_replacement_table" type="img:bad_pixel_replacement_table" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="bad_pixel_replacement_table_id" type="img:bad_pixel_replacement_table_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="instrument_idle_timeout" type="img:instrument_idle_timeout" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="early_image_return" type="img:early_image_return" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="parameter_table_id" type="img:parameter_table_id" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Special_Point" type="img:Special_Point" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="pds:Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
@@ -649,7 +697,7 @@
       <xs:extension base="img:Device_Parameters">
         <xs:sequence>
           <xs:element name="raw_count" type="img:raw_count" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="temperature_value" type="img:temperature_value" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="temperature_value" nillable="true" type="img:temperature_value" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="temperature_status" type="img:temperature_status" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
@@ -800,6 +848,7 @@
       <xs:element name="minimum_focus_distance" type="img:minimum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="best_focus_distance" type="img:best_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="maximum_focus_distance" type="img:maximum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_initialization_flag" type="img:focus_initialization_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:focus_mode = ('Autofocus', 'Manual', 'Relative', 'ZStack')"/> -->
@@ -821,6 +870,7 @@
           <xs:element name="frame_count" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="focus_merge_blending_flag" type="img:focus_merge_blending_flag" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="focus_merge_registration_flag" type="img:focus_merge_registration_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="delta_focus_count" type="img:delta_focus_count" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -831,17 +881,65 @@
       <xs:documentation>The Frame class contains attributes providing
         information specific to an image frame. A frame consists of a
         sequence of measurements made over a specified time interval,
-        and may include measurements from different instrument
-        modes.</xs:documentation>
+        and may include measurements from different instrument modes. In
+        the context of Frame, product_flag refers to the actual
+        image.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="frame_id" type="img:frame_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_type_name" type="img:frame_type_name" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="observation_number" type="img:observation_number" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test=")"/> -->
-    <!-- <xs:assert test=")"/> -->
+    <!-- <xs:assert test="img:frame_type_name = ('Mono', 'Stereo')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
+  <xs:complexType name="High_Dynamic_Range">
+    <xs:annotation>
+      <xs:documentation>Specifies parameters related to High Dynamic
+        Range processing, which combines multiple exposures of different
+        lengths into a single product with a greater dynamic range than
+        any of the inputs.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="img:Data_Processing">
+        <xs:sequence>
+          <xs:element name="hdr_acquisition_mode" type="img:hdr_acquisition_mode" minOccurs="1" maxOccurs="1"> </xs:element>
+          <xs:element name="hdr_frame_count" type="img:hdr_frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="hdr_clipping_threshold" type="img:hdr_clipping_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="High_Dynamic_Range_Exposure" type="img:High_Dynamic_Range_Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
+        </xs:sequence>
+        <!-- Begin assert statements for schematron - Enumerated Values -->
+        <!-- <xs:assert test="img:hdr_acquisition_mode = ('Multiframe', 'None', 'Piecewise', 'Single')"/> -->
+        <!-- End assert statements for schematron - Enumerated Values -->
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="High_Dynamic_Range_Exposure">
+    <xs:annotation>
+      <xs:documentation>Specifies parameters for each individual
+        exposure in an HDR image.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="exposure_duration" type="img:exposure_duration" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="exposure_duration_count" type="img:exposure_duration_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="exposure_time_delta" type="img:exposure_time_delta" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="pds:Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Histogram">
+    <xs:annotation>
+<xs:documentation>Describes a Histogram product.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="ICER_Parameters">
@@ -988,6 +1086,12 @@
       <xs:element name="Commanded_Parameters" type="img:Commanded_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1017,6 +1121,7 @@
       <xs:element name="color_subsampling_mode" type="img:color_subsampling_mode" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="jpeg_quality" type="img:jpeg_quality" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="jpeg_parameter" type="img:jpeg_parameter" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Compression_Segment" type="img:Image_Compression_Segment" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:color_subsampling_mode = ('4:2:2', '4:4:4', 'Grayscale')"/> -->
@@ -1138,7 +1243,7 @@
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:onboard_compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:onboard_compression_type = ('ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'MSSS Lossless', 'None')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'MSSS Lossless', 'None')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
@@ -1177,6 +1282,19 @@
       <xs:element name="center_filter_wavelength" type="img:center_filter_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Optical_Properties">
+    <xs:annotation>
+      <xs:documentation>The Optical_Properties class describes
+        properties of the optics used in acquiring the
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="focal_length" type="img:focal_length" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="f_number" type="img:f_number" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="zoom_position" type="img:zoom_position" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1302,6 +1420,31 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="Reference_Pixel">
+    <xs:annotation>
+      <xs:documentation>Describes a Reference Pixel product, which is a
+        set of dark, non-imaging pixels used to monitor electronics.
+        product_flag.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Row_Sum">
+    <xs:annotation>
+      <xs:documentation>Describes a Row Summation product, which is a
+        single column containing the sum of all pixels in each row of
+        the image.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Sampling">
     <xs:annotation>
       <xs:documentation> The Sampling class contains attributes and
@@ -1363,6 +1506,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="Special_Point">
+    <xs:annotation>
+      <xs:documentation>Defines a special point on the image detector,
+        such as the location in pixel space that a co-boresighted
+        instrument measures.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="special_line" type="img:special_line" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="special_sample" type="img:special_sample" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="Subframe">
     <xs:annotation>
       <xs:documentation> The Subframe class describes the position and
@@ -1370,10 +1527,10 @@
         the original image. </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="first_line" type="img:first_line" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="first_sample" type="img:first_sample" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="lines" type="img:lines" minOccurs="1" maxOccurs="1"> </xs:element>
-      <xs:element name="samples" type="img:samples" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="first_line" type="img:first_line" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="first_sample" type="img:first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="lines" type="img:lines" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="samples" type="img:samples" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="line_fov" type="img:line_fov" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_fov" type="img:sample_fov" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1382,6 +1539,26 @@
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:subframe_type = ('Hardware Compatible', 'Hardware Else Software', 'None', 'Software Only', 'Subframe Around Sun', 'Sun Subframe Or Full')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
+  <xs:complexType name="Thumbnail">
+    <xs:annotation>
+      <xs:documentation>Describes a Thumbnail product, which is a
+        greatly reduced resolution version of the
+        image.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="frame_id" type="img:frame_id" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="frame_type_name" type="img:frame_type_name" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test=")"/> -->
+    <!-- <xs:assert test="img:frame_type_name = ('Mono', 'Stereo')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
@@ -1480,6 +1657,32 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="auto_exposure_lower_limit">
+    <xs:annotation>
+      <xs:documentation>Specifies the maximum number of pixels that are
+        allowed to be below the lower threshold defined by
+        auto_exposure_lower_limit.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_lower_threshold">
+    <xs:annotation>
+      <xs:documentation>Specifies the lower threshold DN value for which
+        a specified number of pixels is permitted to exceed. The
+        auto_exposure_lower_limit defines the number of pixels allowed
+        to exceed this threshold.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="auto_exposure_percent">
     <xs:annotation>
       <xs:documentation>The auto_exposure_percent attribute specifies
@@ -1505,6 +1708,80 @@
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_roi_first_line">
+    <xs:annotation>
+      <xs:documentation>Specifies the (1-based) starting line for the
+        autoexposure region of interest.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_roi_first_sample">
+    <xs:annotation>
+      <xs:documentation>Specifies the (1-based) starting sample for the
+        autoexposure region of interest.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_roi_lines">
+    <xs:annotation>
+      <xs:documentation>Specifies the number of lines in the
+        autoexposure region of interest.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_roi_samples">
+    <xs:annotation>
+      <xs:documentation>Specifies the number of samples in the
+        autoexposure region of interest.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_upper_limit">
+    <xs:annotation>
+      <xs:documentation>Specifies the maximum number of pixels that are
+        allowed to be above the upper threshold defined by
+        auto_exposure_upper_limit.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="auto_exposure_upper_threshold">
+    <xs:annotation>
+      <xs:documentation>Specifies the upper threshold DN value for which
+        a specified number of pixels is permitted to exceed. The
+        auto_exposure_upper_limit defines the number of pixels allowed
+        to exceed this threshold.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -1539,17 +1816,18 @@
     <xs:annotation>
       <xs:documentation>If true, specifies whether or not bad pixel
         replacement processing was requested or completed. See
-        bad_pixel_replacement_table.</xs:documentation>
+        bad_pixel_replacement_table_id.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="bad_pixel_replacement_table">
+  <xs:simpleType name="bad_pixel_replacement_table_id">
     <xs:annotation>
-      <xs:documentation>Specfies the table number of the bad pixel table
-        used in the bad pixel replacement process. See also
-        bad_pixel_replacement_flag.</xs:documentation>
+      <xs:documentation>Specifies the table used to replace bad pixels.
+        A bad pixel table typically lists the location of each bad pixel
+        on a detector. The specific table used is
+        mission-specific.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -1818,6 +2096,20 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="delta_focus_count">
+    <xs:annotation>
+      <xs:documentation>Defines the amount of change in focus for each
+        image in the z-stack. The units should be the same as
+        focus_position_count, which is often motor
+        counts.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="detector_to_image_flip">
     <xs:annotation>
       <xs:documentation>The detector_to_image_flip attribute indicates
@@ -1892,6 +2184,21 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="download_priority">
+    <xs:annotation>
+      <xs:documentation>The download_priority attribute specifies which
+        data to downlink/transmit, based on order of importance. The
+        ranking and meaning of specific values will vary depending on
+        the mission, and should be defined in the mission software
+        interface specification (SIS).</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -2116,6 +2423,18 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="exposure_time_delta">
+    <xs:annotation>
+      <xs:documentation>Specifies the change in exposure time for this
+        exposure compared to the previous. Should be 0 for the first
+        item in the list.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="exposure_type">
     <xs:annotation>
       <xs:documentation>The exposure_type attribute indicates the
@@ -2129,6 +2448,25 @@
      <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="f_number_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="f_number">
+    <xs:annotation>
+      <xs:documentation>Defines the f/number for the optics used in
+        acquiring the image.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:f_number_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="filter_id">
     <xs:annotation>
@@ -2250,6 +2588,25 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="focal_length_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="focal_length">
+    <xs:annotation>
+      <xs:documentation>Defines the focal length of the optics used in
+        acquiring the image.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:focal_length_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
   <xs:simpleType name="focus_distance_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -2271,6 +2628,15 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="focus_initialization_flag">
+    <xs:annotation>
+      <xs:documentation>Specifies whether the instrument focus mechanism
+        should be (or was) initialized before use.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="focus_merge_blending_flag">
     <xs:annotation>
@@ -2506,6 +2872,41 @@
         gop_start_index attribute specifies the index of the first frame
         of the GOP (starting at 1). Thus, frame_index = gop_start_index
         + gop_frame_index - 1.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="hdr_acquisition_mode">
+    <xs:annotation>
+      <xs:documentation>Specifies how the HDR frames were
+        acquired.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="hdr_clipping_threshold">
+    <xs:annotation>
+      <xs:documentation>Specifies the threshold for pixel
+        clipping.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="hdr_frame_count">
+    <xs:annotation>
+      <xs:documentation>Specifies the number of frames that go into the
+        HDR product.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
@@ -2928,6 +3329,18 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="observation_number">
+    <xs:annotation>
+      <xs:documentation>Identifies which observation of many this data
+        product pertains to.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="onboard_B_b">
     <xs:annotation>
       <xs:documentation>Specifies the factor that has been multiplied by
@@ -3125,8 +3538,9 @@
     <xs:annotation>
       <xs:documentation>The onboard_compression_type attribute
         identifies the type of on-board compression used for data
-        storage and transmission. Valid Values: 'ICER', 'LOCO', 'JPEG',
-        'JPEG Progressive', 'MSSS Lossless', 'None'.</xs:documentation>
+        storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO',
+        'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless',
+        'None'.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -3143,6 +3557,18 @@
     <xs:restriction base="pds:ASCII_Integer">
      <xs:minInclusive value="-9223372036854775808"/>
      <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="parameter_table_id">
+    <xs:annotation>
+      <xs:documentation>Specifies which table of parameters to use, or
+        were used. Tables are defined in a mission- and
+        instrument-specific manner.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3213,6 +3639,22 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="product_flag">
+    <xs:annotation>
+      <xs:documentation>Indicates whether the product in the enclosing
+        class was requested for downlink (when in Commanded_Parameters),
+        or whether this product actually is the type in question (when
+        in Imaging). For example,
+        Commanded_Parameters.Histogram.product_flag = true indicates
+        that a histogram was requested as part of the command that
+        created the data product being labeled, while
+        Imaging.Histogram.product_flag = true indicates that this data
+        product itself is (or contains) a histogram.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3661,6 +4103,30 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="special_line">
+    <xs:annotation>
+      <xs:documentation>Line number of the special
+        point.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="special_sample">
+    <xs:annotation>
+      <xs:documentation>Sample number of the special
+        point.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="striping_count">
     <xs:annotation>
       <xs:documentation>Specifies the number of stripes (N) used during
@@ -3742,9 +4208,32 @@
     <xs:simpleContent>
       <xs:extension base="img:temperature_value_WO_Units">
         <xs:attribute name="unit" type="pds:Units_of_Temperature" use="required" />
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="valid_maximum_pixel">
+    <xs:annotation>
+      <xs:documentation>Specifies the maximum pixel DN value for pixels
+        used by the autoexposure algorithm.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="valid_minimum_pixel">
+    <xs:annotation>
+      <xs:documentation>Specifies the minimum DN threshold for pixels
+        used by the autoexposure algorithm.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="valid_pixel_count">
     <xs:annotation>
@@ -3886,6 +4375,20 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="zoom_position">
+    <xs:annotation>
+      <xs:documentation>The zoom_position attribute defined, in a
+        camera-specific way, the zoom metric that should be used for
+        geometric processing of the data (e.g. for creating camera
+        models). This will often be the zoom motor
+        count.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
  
   <xs:annotation>
     <xs:documentation>
@@ -3894,7 +4397,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Tue Aug 04 22:38:07 UTC 2020" ,
+      "Date": "Mon Aug 24 21:28:14 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "PropertyMapDictionary": [
       ]
