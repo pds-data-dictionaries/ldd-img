@@ -3,7 +3,7 @@
 
 ---
 
-name: Generate LDD
+name: LDD Automation with PDSEN CI Bot
 
 on:
    push:
@@ -11,47 +11,106 @@ on:
        - '*'
        - '!master'
      paths:
-       - 'src/*.xml'
-       - '.github/workflows/*.yml'
+      - 'src/*.xml'
+      - '.github/workflows/*.yml'
 
 env:
-  IM_VERSION: '1.14.0.0'
-  IM_VERSION_SHORT: '1E00'
-  # Historical IM Version Variables Here
-  PDS_SCHEMA_URL: 'https://pds.nasa.gov/pds4/pds/v1/'
-  REGRESSION_TEST_DIR: ${{ format('{0}/{1}/', github.workspace, 'test') }}
+  REGRESSION_TEST_PATH: ${{ format('{0}/{1}/', github.workspace, 'test') }}
   # TODO - Have to hard-code this for now since Actions don't yet allow the use of env here.
-  DEPLOY_DIR: ${{ format('{0}/{1}/{2}', github.workspace, 'build/development', github.sha) }}
+  DEPLOY_PATH: ${{ format('{0}/{1}/{2}', github.workspace, 'build/development', github.sha) }}
+  LOGS_PATH: ${{ format('{0}/{1}', github.workspace, 'logs') }}
 
 jobs:
-  build:
+  build: # job 1
     name: 'LDD Build'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        pds4_version: [ '1.14.0.0' ]
+        # Example of how to specify multiple versions
+        # pds4_version: [ '1.13.0.0', '1.14.0.0' ]
+
+        # include:
+          # Example of including older version with LDDTool dev version
+          # - pds4_version: '1.13.0.0'
+          #   lddtool_development_release: True
+
+          # Example of include for development release of IM
+          # - pds4_version: '1.15.0.0'
+          #   lddtool_development_release: True
+          #   pds4_development_release: True
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+
+      - name: Generate LDDs
+        id: generate
+        uses: NASA-PDS/gh-action-pds4-ldd@master
+        with:
+          data_path: ${{ format('{0}/{1}', env.DEPLOY_PATH, matrix.pds4_version) }}
+          pds4_im_version: ${{ matrix.pds4_version }}
+          pds4_development_release: ${{ matrix.pds4_development_release }}
+          lddtool_development_release: ${{ matrix.lddtool_development_release }}
+          test_path: ${{ env.REGRESSION_TEST_PATH }}
+          logs_path: ${{ env.LOGS_PATH }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload LDDs to Github Action Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: v${{matrix.pds4_version}}_LDDs
+          path: ${{ env.DEPLOY_PATH }}
+        if: ${{ always() }}
+
+      - name: Upload Logs to Github Action Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: v${{matrix.pds4_version}}_execution_logs
+          path: ${{ env.LOGS_PATH }}
+        if: ${{ always() }}
+
+  upload: # job 2
+    name: 'Upload LDDs to Github'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Generate v${{env.IM_VERSION}} LDDs
-        uses: NASA-PDS/gh-action-pds4-ldd@master
+      - uses: actions/download-artifact@v2
         with:
-          datapath: ${{ format('{0}/{1}', env.DEPLOY_DIR, env.IM_VERSION) }}
-          pds4_im_version: ${{ env.IM_VERSION }}
-          pds4_im_short_version: ${{ env.IM_VERSION_SHORT }}
-          schemas: ${{ format('{0}/{1}/{2}', env.DEPLOY_DIR, env.IM_VERSION, '*.xsd') }}
-          schematrons: ${{ format('{0}/{1}/{2}', env.DEPLOY_DIR, env.IM_VERSION, '*.sch') }}
-          pds_schema_url: ${{ env.PDS_SCHEMA_URL }}
-          test_dir: ${{ env.REGRESSION_TEST_DIR }}
+          path: /tmp/artifacts
 
-      # Historical IM Version LDD Generation Here
+      - name: Display structure of downloaded files
+        run: ls -R /tmp/artifacts
+
+      - name: Clean out old LDDs
+        run: |
+          path=$(dirname ${{ env.DEPLOY_PATH }})
+          rm -fr $path/*
+
+      - name: Move the LDDs to their new home
+        run: |
+          mkdir -p ${{ env.DEPLOY_PATH }}
+          mv /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
+
+      - name: Display structure of downloaded files
+        run: ls -R ${{ env.DEPLOY_PATH }}
 
       - name: Push LDDs to Github
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "pdsen-ci@jpl.nasa.gov"
+          git config --local user.name "PDSEN CI Bot"
           git config --local github.token ${{ secrets.GITHUB_TOKEN }}
-          git add -A $(dirname ${{ env.DEPLOY_DIR }})
-          git commit -m "Auto-generated dictionaries from Github Actions"
+          git add -A $(dirname ${{ env.DEPLOY_PATH }})
+          git commit -m "Auto-generated LDD by PDSEN CI Bot"
           git config --global push.default current
           git push
 
+    needs: build
 
