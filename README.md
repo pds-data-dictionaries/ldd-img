@@ -19,6 +19,7 @@ The build process insures compatiblity of the LDD with the core information mode
 
 This LDD has been released for the following versions of the PDS4 information model:
 
+- [PDS4 IM v1.E.0.0 (IMG LDD v1.8.0.0)](build/1.E.0.0_1.8.0.0)
 - [PDS4 IM v1.D.0.0 (IMG LDD v1.7.3.0)](build/1.D.0.0_1.7.3.0)
 - [PDS4 IM v1.D.0.0 (IMG LDD v1.7.0.0)](build/1.D.0.0_1.7.0.0)
 - [PDS4 IM v1.B.0.0 (IMG LDD v1.6.1.0)](https://github.com/nasa-pds-data-dictionaries/ldd-img/releases/tag/v1.6.1.0)
