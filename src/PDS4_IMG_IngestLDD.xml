@@ -1474,28 +1474,29 @@
     <definition>The focus_mode attribute specifies the type of focus command, for example:
       Autofocus, Manual, ZStack, or Relative (focus adjustment based on a previous autofocus).</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-      <DD_Permissible_Value>
-        <value>Autofocus</value>
-        <value_meaning>The focus was commanded by the autofocus algorithm.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Manual</value>
-        <value_meaning>The exact focus position was set manually.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>ZStack</value>
-        <value_meaning>Images were acquired at multiple autofocus positions.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>Relative</value>
-        <value_meaning>A focus adjustment was made relative to a previous position.</value_meaning>
-      </DD_Permissible_Value>
+<!--
+   comments: this will be free text, some examples below
+
+   ZSTACK - Images were acquired at multiple autofocus positions.
+   RELATIVE - A focus adjustment was made relative to a previous position.
+   
+   (SuperCam)
+   NO_FOCUS - Doesn't move focus
+   MANUAL - Positions focus based on other parameters (focus_distance for SuperCam)
+   BASELINE - Uses SuperCam laser to find optimal focus position
+   AF_OFFSET - Applies offset from last autofocus solution
+   
+   (Mastcam-Z and SHERLOC)
+   AUTOFOCUS - Autofocus mode
+   EARLY_TERMINATION - Stops the autofocus before the full number of steps has been reached if a peak is detected
+   THRESHOLD - Causes the focus to not be changed if a test image is within a certain percentage of the last image taken with autofocus (5% for Mastcam-Z and SHERLOC)
+   EARLY_TERMINATION_AND_THRESHOLD - combination of both
+-->
     </DD_Value_Domain>
   </DD_Attribute>
-  
   <DD_Attribute>
     <name>focus_position</name>
     <version_id>1.0</version_id>
