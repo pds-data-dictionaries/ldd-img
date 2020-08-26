@@ -125,7 +125,7 @@
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
-        
+
   </comment>
   <last_modification_date_time>2020-08-24T17:30:00Z</last_modification_date_time>
 
