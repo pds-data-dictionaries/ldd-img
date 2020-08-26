@@ -125,7 +125,8 @@
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
-
+    - set LED_Illumination_Source to min occurance=0 to any
+  
   </comment>
   <last_modification_date_time>2020-08-24T17:30:00Z</last_modification_date_time>
 
@@ -5477,7 +5478,7 @@
     <DD_Association>
       <identifier_reference>LED_Illumination_Source</identifier_reference>
       <reference_type>component_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
