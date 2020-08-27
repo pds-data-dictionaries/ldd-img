@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Thu Aug 27 00:53:44 UTC 2020" ,
+      "Date": "Thu Aug 27 19:51:47 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -1356,6 +1356,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Illumination" ,
+                "title": "Illumination" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1160" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Illumination"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Image_Mask" ,
                 "title": "Image_Mask" ,
                 "assocType": "component_of" ,
@@ -1365,7 +1381,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1160" ,
+                "classOrder": "1170" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask"
                  ]
@@ -1381,7 +1397,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1170" ,
+                "classOrder": "1180" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -1397,9 +1413,25 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1180" ,
+                "classOrder": "1190" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Filter"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Optical_Properties" ,
+                "title": "Optical_Properties" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1200" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Optical_Properties"
                  ]
               }
             }
@@ -1413,7 +1445,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1190" ,
+                "classOrder": "1210" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
@@ -1429,7 +1461,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1200" ,
+                "classOrder": "1220" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -1445,7 +1477,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1210" ,
+                "classOrder": "1230" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Reference_Pixel"
                  ]
@@ -1461,7 +1493,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1220" ,
+                "classOrder": "1240" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Row_Sum"
                  ]
@@ -1477,7 +1509,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1230" ,
+                "classOrder": "1250" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -1493,7 +1525,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1240" ,
+                "classOrder": "1260" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Shutter_Subtraction"
                  ]
@@ -1509,7 +1541,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1250" ,
+                "classOrder": "1270" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -1525,7 +1557,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1260" ,
+                "classOrder": "1280" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Thumbnail"
                  ]
@@ -1541,7 +1573,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1270" ,
+                "classOrder": "1290" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Video"
                  ]

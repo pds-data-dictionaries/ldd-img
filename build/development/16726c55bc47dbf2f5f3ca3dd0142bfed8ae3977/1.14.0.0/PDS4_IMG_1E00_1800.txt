@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Aug 27 00:53:44 UTC 2020
+   Time                   Thu Aug 27 19:51:47 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                74
    Attributes             187
-   Associations           375
+   Associations           377
    Error messages         0
    Warning messages       31
    Information messages   52
@@ -240,7 +240,7 @@ Parsed Input - Header:
     - set LED_Illumination_Source to min occurance=0 to any
   
   
-   Last Modification Time 2020-08-24T17:30:00Z
+   Last Modification Time 2020-08-26T17:30:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -1773,6 +1773,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Illumination
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Image_Mask
       minimum occurrences   0
       maximum occurrences   1
@@ -1786,6 +1791,11 @@ Parsed Input - Classes:
       local identifier      Optical_Filter
       minimum occurrences   0
       maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Optical_Properties
+      minimum occurrences   0
+      maximum occurrences   1
       reference type        component_of
 
       local identifier      Pointing_Correction
