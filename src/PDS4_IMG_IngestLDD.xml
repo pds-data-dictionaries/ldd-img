@@ -128,7 +128,7 @@
     - set LED_Illumination_Source to min occurance=0 to any
   
   </comment>
-  <last_modification_date_time>2020-08-24T17:30:00Z</last_modification_date_time>
+  <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -4187,6 +4187,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Illumination</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -4203,6 +4209,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Optical_Properties</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Pointing_Correction</identifier_reference>
@@ -6960,7 +6972,7 @@ product_flag.</definition>
     <rule_context>//img:ICER_Parameters</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>count(img:Image_Compression_Segment) = img:segment_count </rule_test>
+      <rule_test>(count(img:Image_Compression_Segment) = img:segment_count) or (count(img:Image_Compression_Segment) = 0)</rule_test>
       <rule_message>IMG:error:icer_comprs_segment_check: img:ICER_Parameters/img:segment_count must match the number of img:Image_Compression_Segment classes.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
