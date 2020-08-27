@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.0.0 - Mon Aug 24 21:28:14 UTC 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.0.0 - Thu Aug 27 19:51:47 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -76,7 +76,7 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:ICER_Parameters">
-      <sch:assert test="count(img:Image_Compression_Segment) = img:segment_count ">
+      <sch:assert test="(count(img:Image_Compression_Segment) = img:segment_count) or (count(img:Image_Compression_Segment) = 0)">
         IMG:error:icer_comprs_segment_check: img:ICER_Parameters/img:segment_count must match the number of img:Image_Compression_Segment classes.</sch:assert>
     </sch:rule>
   </sch:pattern>
@@ -187,12 +187,6 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Focus">
-      <sch:assert test="if (img:focus_initialization_flag) then img:focus_initialization_flag = ('true', 'false') else true()">
-        The attribute img:focus_initialization_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
     <sch:rule context="img:Focus/img:best_focus_distance">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
@@ -202,12 +196,6 @@
     <sch:rule context="img:Focus/img:focus_distance">
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Focus/img:focus_mode">
-      <sch:assert test=". = ('Autofocus', 'Manual', 'Relative', 'ZStack')">
-        The attribute img:focus_mode must be equal to one of the following values 'Autofocus', 'Manual', 'Relative', 'ZStack'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

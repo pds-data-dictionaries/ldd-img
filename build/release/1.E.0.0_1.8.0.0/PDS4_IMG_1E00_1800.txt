@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Aug 24 21:28:14 UTC 2020
+   Time                   Thu Aug 27 19:51:47 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -31,9 +31,9 @@ Parameters:
 Summary:
    Classes                74
    Attributes             187
-   Associations           373
+   Associations           377
    Error messages         0
-   Warning messages       24
+   Warning messages       31
    Information messages   52
 
 Detailed validation messages
@@ -42,26 +42,33 @@ Detailed validation messages
    WARNING  Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Focus> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Optical_Filter> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Instrument_State> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Focus> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Optical_Filter> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <High_Dynamic_Range> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
-   WARNING  Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+   WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -105,7 +112,7 @@ Detailed validation messages
    INFO     Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
    INFO     Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
    INFO     Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
-   INFO     Attribute: <segment_number> - The default minimum value provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <segment_number> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <segment_status> - The default minimum characters provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <segment_status> - The default maximum characters provided by the attribute's data type is being overridden with 6
    INFO     Attribute: <special_line> - The default minimum value provided by the attribute's data type is being overridden with 0
@@ -174,7 +181,7 @@ Parsed Input - Header:
     - Added Video class to Commanded_Parameters. (bugfix)
     
     1.7.1.0, T.Hare
-    - Added filte
+    - Added filter
     - Added GOP_Frames
     - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
     - Added detector_to_image_flip
@@ -230,9 +237,10 @@ Parsed Input - Header:
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
-        
+    - set LED_Illumination_Source to min occurance=0 to any
   
-   Last Modification Time 2020-08-24T17:30:00Z
+  
+   Last Modification Time 2020-08-26T17:30:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -1133,7 +1141,7 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The segment_number attribute identifies which compression segment is described in the current Segment class. 
-   minimum value          1
+   minimum value          0
 
    name                   segment_quality
    version                1.14
@@ -1273,12 +1281,22 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Col_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Color_Filter_Array
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      Color_Processing
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1318,7 +1336,22 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      High_Dynamic_Range
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Histogram
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Illumination
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Image_Mask
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1333,12 +1366,27 @@ Parsed Input - Classes:
       maximum occurrences   *
       reference type        component_of
 
+      local identifier      Optical_Properties
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Pointing_Correction
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      Radiometric_Correction
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Reference_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Row_Sum
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1358,6 +1406,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Thumbnail
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Video
       minimum occurrences   0
       maximum occurrences   1
@@ -1369,46 +1422,6 @@ Parsed Input - Classes:
       reference type        component_of
 
       local identifier      Commanded_Parameters
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Image_Mask
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Dark_Current_Correction
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      High_Dynamic_Range
-      minimum occurrences   0
-      maximum occurrences   *
-      reference type        component_of
-
-      local identifier      Thumbnail
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Row_Sum
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Col_Sum
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Reference_Pixel
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Histogram
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1446,12 +1459,12 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      auto_exposure_upper_threshold
+      local identifier      auto_exposure_roi_first_line
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      auto_exposure_upper_limit
+      local identifier      auto_exposure_roi_first_sample
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -1466,12 +1479,12 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      auto_exposure_roi_first_line
+      local identifier      auto_exposure_upper_threshold
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      auto_exposure_roi_first_sample
+      local identifier      auto_exposure_upper_limit
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -1491,12 +1504,12 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      valid_minimum_pixel
+      local identifier      valid_maximum_pixel
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      valid_maximum_pixel
+      local identifier      valid_minimum_pixel
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -1695,12 +1708,22 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Col_Sum
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Color_Filter_Array
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      Color_Processing
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1740,6 +1763,26 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      High_Dynamic_Range
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      Histogram
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Illumination
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Image_Mask
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Onboard_Compression
       minimum occurrences   0
       maximum occurrences   *
@@ -1750,12 +1793,27 @@ Parsed Input - Classes:
       maximum occurrences   *
       reference type        component_of
 
+      local identifier      Optical_Properties
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Pointing_Correction
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
       local identifier      Radiometric_Correction
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Reference_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Row_Sum
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -1775,47 +1833,12 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Video
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Image_Mask
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Dark_Current_Correction
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      High_Dynamic_Range
-      minimum occurrences   0
-      maximum occurrences   *
-      reference type        component_of
-
       local identifier      Thumbnail
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Row_Sum
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Col_Sum
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Reference_Pixel
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        component_of
-
-      local identifier      Histogram
+      local identifier      Video
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
@@ -2617,6 +2640,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      focus_initialization_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      minimum_focus_distance
       minimum occurrences   0
       maximum occurrences   1
@@ -2628,11 +2656,6 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      maximum_focus_distance
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        attribute_of
-
-      local identifier      focus_initialization_flag
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2745,7 +2768,7 @@ Parsed Input - Classes:
    Associations
 
       local identifier      LED_Illumination_Source
-      minimum occurrences   1
+      minimum occurrences   0
       maximum occurrences   *
       reference type        component_of
 
@@ -3248,12 +3271,12 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      product_flag
+      local identifier      download_priority
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      download_priority
+      local identifier      product_flag
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3271,12 +3294,12 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      product_flag
+      local identifier      download_priority
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      download_priority
+      local identifier      product_flag
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3289,12 +3312,12 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      product_flag
+      local identifier      download_priority
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      download_priority
+      local identifier      product_flag
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3307,12 +3330,12 @@ Parsed Input - Classes:
 
    Associations
 
-      local identifier      product_flag
+      local identifier      download_priority
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      download_priority
+      local identifier      product_flag
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3335,6 +3358,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      missing_pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      sample_bits
       minimum occurrences   0
       maximum occurrences   1
@@ -3351,11 +3379,6 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      saturated_pixel_count
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        attribute_of
-
-      local identifier      missing_pixel_count
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3482,6 +3505,11 @@ Parsed Input - Classes:
 
    Associations
 
+      local identifier      download_priority
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      frame_id
       minimum occurrences   0
       maximum occurrences   1
@@ -3497,17 +3525,17 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
-      local identifier      download_priority
-      minimum occurrences   0
-      maximum occurrences   1
-      reference type        attribute_of
-
-      local identifier      Subframe
+      local identifier      Onboard_Compression
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
 
-      local identifier      Onboard_Compression
+      local identifier      Sampling
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Subframe
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of

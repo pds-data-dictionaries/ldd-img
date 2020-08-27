@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.0.0 - Mon Aug 24 21:28:14 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.0.0 - Thu Aug 27 19:51:47 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -74,7 +74,7 @@
     - Added Video class to Commanded_Parameters. (bugfix)
     
     1.7.1.0, T.Hare
-    - Added filte
+    - Added filter
     - Added GOP_Frames
     - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
     - Added detector_to_image_flip
@@ -130,7 +130,8 @@
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
-        
+    - set LED_Illumination_Source to min occurance=0 to any
+  
   
     </xs:documentation>
   </xs:annotation>
@@ -144,6 +145,7 @@
   <xs:element name="Instrument_State" type="img:Instrument_State"> </xs:element>
   <xs:element name="Onboard_Compression" type="img:Onboard_Compression"> </xs:element>
   <xs:element name="Optical_Filter" type="img:Optical_Filter"> </xs:element>
+  <xs:element name="Sampling" type="img:Sampling"> </xs:element>
   <xs:element name="Subframe" type="img:Subframe"> </xs:element>
 
   <xs:complexType name="Autoexposure">
@@ -167,17 +169,17 @@
           <xs:element name="auto_exposure_pixel_fraction" type="img:auto_exposure_pixel_fraction" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_lower_threshold" type="img:auto_exposure_lower_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_lower_limit" type="img:auto_exposure_lower_limit" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="auto_exposure_upper_threshold" type="img:auto_exposure_upper_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="auto_exposure_upper_limit" type="img:auto_exposure_upper_limit" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="auto_exposure_roi_lines" type="img:auto_exposure_roi_lines" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="auto_exposure_roi_samples" type="img:auto_exposure_roi_samples" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_roi_first_line" type="img:auto_exposure_roi_first_line" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="auto_exposure_roi_first_sample" type="img:auto_exposure_roi_first_sample" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_lines" type="img:auto_exposure_roi_lines" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_roi_samples" type="img:auto_exposure_roi_samples" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_upper_threshold" type="img:auto_exposure_upper_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="auto_exposure_upper_limit" type="img:auto_exposure_upper_limit" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="max_auto_exposure_iteration_count" type="img:max_auto_exposure_iteration_count" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="exposure_table" type="img:exposure_table" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="exposure_table_update_flag" type="img:exposure_table_update_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="valid_minimum_pixel" type="img:valid_minimum_pixel" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="valid_maximum_pixel" type="img:valid_maximum_pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="valid_minimum_pixel" type="img:valid_minimum_pixel" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -286,8 +288,8 @@
         the image.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -352,8 +354,10 @@
     <xs:sequence>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Brightness_Correction" type="img:Brightness_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -361,22 +365,22 @@
       <xs:element ref="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Illumination" type="img:Illumination" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Optical_Properties" type="img:Optical_Properties" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Pointing_Correction" type="img:Pointing_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -845,14 +849,11 @@
       <xs:element name="autofocus_step_size" type="img:autofocus_step_size" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="autofocus_step_count" type="img:autofocus_step_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="focus_distance" type="img:focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="focus_initialization_flag" type="img:focus_initialization_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="minimum_focus_distance" type="img:minimum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="best_focus_distance" type="img:best_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="maximum_focus_distance" type="img:maximum_focus_distance" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="focus_initialization_flag" type="img:focus_initialization_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
-    <!-- Begin assert statements for schematron - Enumerated Values -->
-    <!-- <xs:assert test="img:focus_mode = ('Autofocus', 'Manual', 'Relative', 'ZStack')"/> -->
-    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
   <xs:complexType name="Focus_Stack">
@@ -937,8 +938,8 @@
 <xs:documentation>Describes a Histogram product.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -967,7 +968,7 @@
         imaging target.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="LED_Illumination_Source" type="img:LED_Illumination_Source" minOccurs="1" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="LED_Illumination_Source" type="img:LED_Illumination_Source" minOccurs="0" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1064,8 +1065,10 @@
     <xs:sequence>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="1" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Brightness_Correction" type="img:Brightness_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1073,25 +1076,24 @@
       <xs:element ref="img:Focus" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Focus_Stack" type="img:Focus_Stack" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Frame" type="img:Frame" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Illumination" type="img:Illumination" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+      <xs:element name="Optical_Properties" type="img:Optical_Properties" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Pointing_Correction" type="img:Pointing_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Radiometric_Correction" type="img:Radiometric_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Sampling" type="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Instrument_State" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Commanded_Parameters" type="img:Commanded_Parameters" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
-      <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Col_Sum" type="img:Col_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Reference_Pixel" type="img:Reference_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1427,8 +1429,8 @@
         product_flag.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
@@ -1440,8 +1442,8 @@
         the image.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1455,11 +1457,11 @@
     <xs:sequence>
       <xs:element name="crosstrack_summing" type="img:crosstrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="downtrack_summing" type="img:downtrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bits" type="img:sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bit_mask" type="img:sample_bit_mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sampling_factor" type="img:sampling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="saturated_pixel_count" type="img:saturated_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="valid_pixel_count" type="img:valid_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Companding" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
@@ -1549,12 +1551,13 @@
         image.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_id" type="img:frame_id" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="frame_type_name" type="img:frame_type_name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="product_flag" type="img:product_flag" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element name="download_priority" type="img:download_priority" minOccurs="0" maxOccurs="1"> </xs:element>
-      <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test=")"/> -->
@@ -4006,7 +4009,7 @@
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="1"/>
+     <xs:minInclusive value="0"/>
      <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
@@ -4389,21 +4392,4 @@
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
- 
-  <xs:annotation>
-    <xs:documentation>
-[
-  {
-    "dataDictionary": {
-      "Title": "PDS4 Data Dictionary" ,
-      "Version": "1.14.0.0" ,
-      "Date": "Mon Aug 24 21:28:14 UTC 2020" ,
-      "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
-      "PropertyMapDictionary": [
-      ]
-    }
-  }
-]
-    </xs:documentation>
-  </xs:annotation>
 </xs:schema>
