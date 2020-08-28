@@ -49,8 +49,9 @@ jobs:
         with:
           python-version: '3.7'
 
-      - name: Checkout submodules for dependencies
-        uses: textbook/git-checkout-submodule-action@master
+      - name: Update submodules for dependencies
+        run: |
+          git submodule update --init --force --remote
 
       - name: Generate LDDs
         id: generate
