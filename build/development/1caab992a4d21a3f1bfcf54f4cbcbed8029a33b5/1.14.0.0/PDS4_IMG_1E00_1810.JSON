@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Fri Aug 28 00:33:17 UTC 2020" ,
+      "Date": "Fri Aug 28 23:47:11 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -4431,6 +4431,22 @@
             "description": " The Illumination class provides attributes describing the illumination sources used to illuminate the imaging target."
               , "associationList": [
              {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Illumination.pds.name" ,
+                "title": "name" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Illumination.pds.name"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Illumination.img.LED_Illumination_Source" ,
                 "title": "LED_Illumination_Source" ,
                 "assocType": "component_of" ,
@@ -4440,7 +4456,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1010" ,
+                "classOrder": "1020" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.LED_Illumination_Source"
                  ]
@@ -5831,6 +5847,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.LED_Illumination_Source.img.illumination_state" ,
+                "title": "illumination_state" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.LED_Illumination_Source.img.illumination_state"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.LED_Illumination_Source.img.illumination_wavelength" ,
                 "title": "illumination_wavelength" ,
                 "assocType": "attribute_of" ,
@@ -5840,7 +5872,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.LED_Illumination_Source.img.illumination_wavelength"
                  ]
@@ -5890,6 +5922,22 @@
                 "classOrder": "1020" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.LOCO_Parameters.img.missing_pixel_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.LOCO_Parameters.img.Image_Compression_Segment" ,
+                "title": "Image_Compression_Segment" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1030" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Image_Compression_Segment"
                  ]
               }
             }
@@ -10090,7 +10138,7 @@
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
             "minimumCharacters": "Unbounded" ,
             "maximumCharacters": "Unbounded" ,
-            "minimumValue": "1" ,
+            "minimumValue": "0" ,
             "maximumValue": "18446744073709551615" ,
             "pattern": "[0-9]+" ,
             "unitOfMeasure": "null" ,
@@ -11001,6 +11049,31 @@
         }
       , {
           "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Illumination.pds.name" ,
+            "title": "name" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "pds" ,
+            "steward": "pds" ,
+            "versionId": "1.14" ,
+            "description": "The name attribute provides a word or combination of words by which the object is known." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "UTF8_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.UTF8_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
             "identifier": "0001_NASA_PDS_1.img.Image_Compression_Segment.img.first_line" ,
             "title": "first_line" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
@@ -11668,6 +11741,31 @@
             "minimumValue": "0" ,
             "maximumValue": "18446744073709551615" ,
             "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.LED_Illumination_Source.img.illumination_state" ,
+            "title": "illumination_state" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.14" ,
+            "description": "The illumination_state attribute provides if the LED was On or Off." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,

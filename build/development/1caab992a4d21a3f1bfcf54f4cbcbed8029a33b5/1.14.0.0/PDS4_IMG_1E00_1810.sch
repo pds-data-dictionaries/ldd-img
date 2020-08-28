@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.1.0 - Fri Aug 28 00:33:17 UTC 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.1.0 - Fri Aug 28 23:47:11 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -106,8 +106,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Color_Filter_Array/img:color_filter_array_type">
-      <sch:assert test=". = ('Bayer RGGB')">
-        The attribute img:color_filter_array_type must be equal to the value 'Bayer RGGB'.</sch:assert>
+      <sch:assert test=". = ('Bayer RGGB', 'None')">
+        The attribute img:color_filter_array_type must be equal to one of the following values 'Bayer RGGB', 'None'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -302,6 +302,12 @@
     <sch:rule context="img:JPEG_Progressive_Parameters/img:color_subsampling_mode">
       <sch:assert test=". = ('4:2:2', '4:4:4', 'Grayscale')">
         The attribute img:color_subsampling_mode must be equal to one of the following values '4:2:2', '4:4:4', 'Grayscale'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:LED_Illumination_Source/img:illumination_state">
+      <sch:assert test=". = ('Off', 'On')">
+        The attribute img:illumination_state must be equal to one of the following values 'Off', 'On'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

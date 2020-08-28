@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Fri Aug 28 00:33:17 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Fri Aug 28 23:47:11 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -124,13 +124,18 @@
     - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
     - Added Special_Point class and special_line, special_sample attributes
     - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
-       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clexposure_count ipping_threshold, exposure_time_delta
     - Added observation_number under Frame class and parameter_table_id under Detector class
     - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
     - set LED_Illumination_Source to min occurance=0 to any
+    
+    1.8.1.0 T.Hare
+    - Updated exposure_count set minimum to 0
+    - Added Image_Compression_Segment class to LOCO_Parameters
+    - Added illumination_state attribute to LED_Illumination_Source class
   
   
     </xs:documentation>
@@ -313,7 +318,7 @@
           <xs:element name="color_filter_array_state" type="img:color_filter_array_state" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
-        <!-- <xs:assert test="img:color_filter_array_type = ('Bayer RGGB')"/> -->
+        <!-- <xs:assert test="img:color_filter_array_type = ('Bayer RGGB', 'None')"/> -->
         <!-- <xs:assert test="img:color_filter_array_state = ('Decoded', 'Encoded', 'No CFA')"/> -->
         <!-- End assert statements for schematron - Enumerated Values -->
       </xs:extension>
@@ -968,6 +973,7 @@
         imaging target.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="LED_Illumination_Source" type="img:LED_Illumination_Source" minOccurs="0" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
@@ -1161,8 +1167,12 @@
     <xs:sequence>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="illumination_state" type="img:illumination_state" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="illumination_wavelength" type="img:illumination_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:illumination_state = ('Off', 'On')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
   <xs:complexType name="LOCO_Parameters">
@@ -1175,6 +1185,7 @@
     <xs:sequence>
       <xs:element name="wavelet_filter" type="img:wavelet_filter" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Compression_Segment" type="img:Image_Compression_Segment" minOccurs="0" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -2314,7 +2325,7 @@
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="1"/>
+     <xs:minInclusive value="0"/>
      <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
@@ -2991,6 +3002,17 @@
         process this image. The valid values are open-ended but examples
         of valid values include: None, D65, 3000K,
         5000K.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="illumination_state">
+    <xs:annotation>
+      <xs:documentation>The illumination_state attribute provides if the
+        LED was On or Off.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>

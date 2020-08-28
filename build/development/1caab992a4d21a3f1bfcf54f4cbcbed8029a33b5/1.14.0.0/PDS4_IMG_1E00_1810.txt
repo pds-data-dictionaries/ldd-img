@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Fri Aug 28 00:33:17 UTC 2020
+   Time                   Fri Aug 28 23:47:11 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -30,8 +30,8 @@ Parameters:
 
 Summary:
    Classes                74
-   Attributes             187
-   Associations           377
+   Attributes             188
+   Associations           380
    Error messages         0
    Warning messages       31
    Information messages   52
@@ -74,7 +74,7 @@ Detailed validation messages
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
    INFO     Attribute: <detector_to_image_rotation> - The default maximum value provided by the attribute's data type is being overridden with 360.0
    INFO     Attribute: <downtrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
-   INFO     Attribute: <exposure_count> - The default minimum value provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <exposure_count> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <exposure_duration> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <exposure_coadd_count> - The default minimum characters provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <exposure_readout_count> - The default minimum characters provided by the attribute's data type is being overridden with 0
@@ -231,13 +231,18 @@ Parsed Input - Header:
     - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
     - Added Special_Point class and special_line, special_sample attributes
     - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
-       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clexposure_count ipping_threshold, exposure_time_delta
     - Added observation_number under Frame class and parameter_table_id under Detector class
     - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
     - set LED_Illumination_Source to min occurance=0 to any
+    
+    1.8.1.0 T.Hare
+    - Updated exposure_count set minimum to 0
+    - Added Image_Compression_Segment class to LOCO_Parameters
+    - Added illumination_state attribute to LED_Illumination_Source class
   
   
    Last Modification Time 2020-08-26T17:30:00Z
@@ -515,7 +520,7 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The exposure count attribute provides the number of exposures taken during a certain interval, such as the duration of one command. For example, this may include the number of exposures needed by an autoexpose algorithm.
-   minimum value          1
+   minimum value          0
 
    name                   exposure_duration
    version                1.14
@@ -768,6 +773,11 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            The illumination_wavelength attribute provides the wavelength of an LED that was used to illuminate this image.
    unit of measure type   Units_of_Length
+
+   name                   illumination_state
+   version                1.14
+   value data type        ASCII_Short_String_Collapsed
+   description            The illumination_state attribute provides if the LED was On or Off.
 
    name                   interframe_delay
    version                1.14
@@ -2767,6 +2777,11 @@ Parsed Input - Classes:
 
    Associations
 
+      local identifier      pds.name
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      LED_Illumination_Source
       minimum occurrences   0
       maximum occurrences   *
@@ -2786,6 +2801,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      pds.description
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      illumination_state
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2972,6 +2992,11 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      Image_Compression_Segment
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
 
    name                   Onboard_Color_Matrix
    description            The Onboard_Color_Matrix class represents a 3x3 matrix that is used onboard to perform color correction. It is done after de-Bayering, as all three color bands are needed for each pixel. The first three elements are multiplied by the R,G,B (respectively) pixel values and summed to get the output Red pixel value. Similarly, the second three create the output Green, and the last three the output Blue. If the label is not present, no correction was performed.
