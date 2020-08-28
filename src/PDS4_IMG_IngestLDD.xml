@@ -119,13 +119,18 @@
     - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
     - Added Special_Point class and special_line, special_sample attributes
     - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
-       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clipping_threshold, exposure_time_delta
+       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clexposure_count ipping_threshold, exposure_time_delta
     - Added observation_number under Frame class and parameter_table_id under Detector class
     - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
         to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
     - set LED_Illumination_Source to min occurance=0 to any
+    
+    1.8.1.0 T.Hare
+    - Updated exposure_count set minimum to 0
+    - Added Image_Compression_Segment class to LOCO_Parameters
+    - Added illumination_state attribute to LED_Illumination_Source class
   
   </comment>
   <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
@@ -629,7 +634,7 @@
   
   <DD_Attribute>
     <name>color_filter_array_type</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>color_filter_array_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
@@ -648,6 +653,10 @@
           in each 2x2 square of pixels. The RGGB type indicates the phasing of
           the colors, in the order upper left, upper right, lower left, and lower
           right. RGGB is the most common phasing but others are possible</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>No color filter array</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1100,7 +1109,7 @@
   
   <DD_Attribute>
     <name>exposure_count</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>exposure_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -1110,7 +1119,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <minimum_value>1</minimum_value>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1905,6 +1914,28 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>illumination_state</name>
+    <version_id>1.0</version_id>
+    <local_identifier>illumination_state</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The illumination_state attribute provides if the LED was On or Off.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>On</value>
+        <value_meaning>Illumination state (LED) is On.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Off</value>
+        <value_meaning>Illumination state (LED) is Off.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -5488,6 +5519,12 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+      <identifier_reference>pds.name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>LED_Illumination_Source</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -5513,6 +5550,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>illumination_state</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5740,6 +5783,12 @@
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>Image_Compression_Segment</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
   
