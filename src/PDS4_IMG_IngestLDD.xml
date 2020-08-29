@@ -131,6 +131,7 @@
     - Updated exposure_count set minimum to 0
     - Added Image_Compression_Segment class to LOCO_Parameters
     - Added illumination_state attribute to LED_Illumination_Source class
+    - Allow motor_count to be negative
   
   </comment>
   <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
@@ -2166,7 +2167,7 @@
 
   <DD_Attribute>
     <name>motor_count</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>motor_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
@@ -2175,7 +2176,7 @@
       mechanism in a device-specific way.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
