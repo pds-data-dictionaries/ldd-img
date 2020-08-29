@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Fri Aug 28 23:47:11 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Sat Aug 29 02:59:53 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -136,6 +136,7 @@
     - Updated exposure_count set minimum to 0
     - Added Image_Compression_Segment class to LOCO_Parameters
     - Added illumination_state attribute to LED_Illumination_Source class
+    - Allow motor_count to be negative
   
   
     </xs:documentation>
@@ -3347,10 +3348,9 @@
         position of the associated mechanism in a device-specific
         way.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
