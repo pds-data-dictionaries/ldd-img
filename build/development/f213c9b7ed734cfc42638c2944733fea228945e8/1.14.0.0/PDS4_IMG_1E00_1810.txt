@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Sat Aug 29 02:59:53 UTC 2020
+   Time                   Sun Aug 30 00:32:22 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                74
    Attributes             188
-   Associations           380
+   Associations           381
    Error messages         0
    Warning messages       31
    Information messages   52
@@ -91,7 +91,7 @@ Detailed validation messages
    INFO     Attribute: <icer_quality> - The default maximum value provided by the attribute's data type is being overridden with 18
    INFO     Attribute: <interframe_delay> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <instrument_idle_timeout> - The default minimum value provided by the attribute's data type is being overridden with 0
-   INFO     Attribute: <jpeg_quality> - The default minimum value provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <jpeg_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <jpeg_quality> - The default maximum value provided by the attribute's data type is being overridden with 100
    INFO     Attribute: <lines> - The default minimum value provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <line_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -244,6 +244,8 @@ Parsed Input - Header:
     - Added Image_Compression_Segment class to LOCO_Parameters
     - Added illumination_state attribute to LED_Illumination_Source class
     - Allow motor_count to be negative
+    - Allow jpeg_quality to 0
+    - Added segment_count to LOCO_Parameters class
   
   
    Last Modification Time 2020-08-26T17:30:00Z
@@ -803,7 +805,7 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression.
-   minimum value          1
+   minimum value          0
    maximum value          100
 
    name                   lines
@@ -2990,6 +2992,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      missing_pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      segment_count
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of

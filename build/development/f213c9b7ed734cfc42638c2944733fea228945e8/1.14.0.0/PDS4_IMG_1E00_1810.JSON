@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Sat Aug 29 02:59:53 UTC 2020" ,
+      "Date": "Sun Aug 30 00:32:22 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -5926,6 +5926,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.LOCO_Parameters.img.segment_count" ,
+                "title": "segment_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.LOCO_Parameters.img.segment_count"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.LOCO_Parameters.img.Image_Compression_Segment" ,
                 "title": "Image_Compression_Segment" ,
                 "assocType": "component_of" ,
@@ -5935,7 +5951,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Compression_Segment"
                  ]
@@ -11713,7 +11729,7 @@
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
             "minimumCharacters": "Unbounded" ,
             "maximumCharacters": "Unbounded" ,
-            "minimumValue": "1" ,
+            "minimumValue": "0" ,
             "maximumValue": "100" ,
             "pattern": "[0-9]+" ,
             "unitOfMeasure": "null" ,
@@ -11856,6 +11872,31 @@
             "steward": "img" ,
             "versionId": "1.14" ,
             "description": " The missing_pixel_count attribute identifies the total number of missing pixels defined by the image or image segment." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.LOCO_Parameters.img.segment_count" ,
+            "title": "segment_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.14" ,
+            "description": " The segment_count attribute identifies the number of segments into which the image was partitioned for error containment purposes." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
