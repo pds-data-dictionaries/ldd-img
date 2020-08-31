@@ -134,6 +134,8 @@
     - Allow motor_count to be negative
     - Allow jpeg_quality to 0
     - Added segment_count to LOCO_Parameters class
+    - Added onboard_compression_venue to Onboard_Compression class
+    - Added 'Lossless' as a valid for onboard_compression_type attribute
   
   </comment>
   <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
@@ -2311,7 +2313,7 @@
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
-      'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.</definition>
+      'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2352,12 +2354,41 @@
         <value_meaning>Lossless compression algorithm developed by Malin Space Science Systems.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
+        <value>Lossless</value>
+        <value_meaning>Lossless compression method was used.</value_meaning>
+      </DD_Permissible_Value>
+    <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>No on-board compression was used.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>onboard_compression_venue</name>
+    <version_id>1.0</version_id>
+    <local_identifier>onboard_compression_venue</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition> The onboard_compression_venue attribute specifies where the 
+      onboard compression was performed.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <minimum_characters>1</minimum_characters>
+      <maximum_characters>255</maximum_characters>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Hardware</value>
+        <value_meaning>Compression was applied on the hardward platform</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Software</value>
+        <value_meaning>Compression was applied in software</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>onboard_R_r</name>
     <version_id>1.0</version_id>
@@ -4507,6 +4538,12 @@
     </DD_Association>
     <DD_Association>
         <identifier_reference>onboard_compression_quality</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>onboard_compression_venue</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
