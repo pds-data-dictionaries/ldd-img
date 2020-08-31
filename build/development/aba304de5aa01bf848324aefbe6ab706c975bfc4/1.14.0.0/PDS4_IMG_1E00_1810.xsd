@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Sun Aug 30 00:32:22 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Mon Aug 31 00:33:28 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -139,6 +139,8 @@
     - Allow motor_count to be negative
     - Allow jpeg_quality to 0
     - Added segment_count to LOCO_Parameters class
+    - Added onboard_compression_venue to Onboard_Compression class
+    - Added 'Lossless' as a valid for onboard_compression_type attribute
   
   
     </xs:documentation>
@@ -1249,6 +1251,7 @@
       <xs:element name="onboard_compression_rate" type="img:onboard_compression_rate" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="onboard_compression_ratio" type="img:onboard_compression_ratio" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="onboard_compression_quality" type="img:onboard_compression_quality" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="onboard_compression_venue" type="img:onboard_compression_venue" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="deferred_flag" type="img:deferred_flag" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="error_pixel_count" type="img:error_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -1260,7 +1263,8 @@
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:onboard_compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'MSSS Lossless', 'None')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_venue = ('Hardware', 'Software')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
@@ -3567,8 +3571,20 @@
       <xs:documentation>The onboard_compression_type attribute
         identifies the type of on-board compression used for data
         storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO',
-        'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless',
+        'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless',
         'None'.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="onboard_compression_venue">
+    <xs:annotation>
+      <xs:documentation> The onboard_compression_venue attribute
+        specifies where the onboard compression was
+        performed.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>

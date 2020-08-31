@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Sun Aug 30 00:32:22 UTC 2020
+   Time                   Mon Aug 31 00:33:28 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -30,11 +30,11 @@ Parameters:
 
 Summary:
    Classes                74
-   Attributes             188
-   Associations           381
+   Attributes             189
+   Associations           382
    Error messages         0
    Warning messages       31
-   Information messages   52
+   Information messages   54
 
 Detailed validation messages
    INFO     Attribute: <temperature_value> - A 'nilable' attribute was found that is not a required attribute in at least one class.
@@ -103,6 +103,8 @@ Detailed validation messages
    INFO     Attribute: <onboard_compression_ratio> - The default minimum value provided by the attribute's data type is being overridden with 0.0
    INFO     Attribute: <onboard_compression_type> - The default minimum characters provided by the attribute's data type is being overridden with 1
    INFO     Attribute: <onboard_compression_type> - The default maximum characters provided by the attribute's data type is being overridden with 255
+   INFO     Attribute: <onboard_compression_venue> - The default minimum characters provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <onboard_compression_venue> - The default maximum characters provided by the attribute's data type is being overridden with 255
    INFO     Attribute: <progressive_stage> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <horizon_mask_elevation> - The default minimum value provided by the attribute's data type is being overridden with -90.0
    INFO     Attribute: <horizon_mask_elevation> - The default maximum value provided by the attribute's data type is being overridden with 90.0
@@ -246,6 +248,8 @@ Parsed Input - Header:
     - Allow motor_count to be negative
     - Allow jpeg_quality to 0
     - Added segment_count to LOCO_Parameters class
+    - Added onboard_compression_venue to Onboard_Compression class
+    - Added 'Lossless' as a valid for onboard_compression_type attribute
   
   
    Last Modification Time 2020-08-26T17:30:00Z
@@ -912,7 +916,14 @@ Parsed Input - Attributes:
    name                   onboard_compression_type
    version                1.14
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'.
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.
+   minimum characters     1
+   maximum characters     255
+
+   name                   onboard_compression_venue
+   version                1.14
+   value data type        ASCII_Short_String_Collapsed
+   description             The onboard_compression_venue attribute specifies where the onboard compression was performed.
    minimum characters     1
    maximum characters     255
 
@@ -2000,6 +2011,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      onboard_compression_quality
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      onboard_compression_venue
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
