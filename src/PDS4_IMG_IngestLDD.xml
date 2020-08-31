@@ -136,6 +136,7 @@
     - Added segment_count to LOCO_Parameters class
     - Added onboard_compression_venue to Onboard_Compression class
     - Added 'Lossless' as a valid for onboard_compression_type attribute
+    - Allow decomposition_stages to have a minimum of 0
   
   </comment>
   <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
@@ -872,7 +873,7 @@
   
   <DD_Attribute>
     <name>decomposition_stages</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>decomposition_stages</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -880,7 +881,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <minimum_value>1</minimum_value>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1993,7 +1994,7 @@
   
   <DD_Attribute>
     <name>jpeg_quality</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>jpeg_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -2202,7 +2203,7 @@
   
   <DD_Attribute>
     <name>onboard_compression_class</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>onboard_compression_class</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
