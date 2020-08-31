@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Sun Aug 30 00:32:22 UTC 2020" ,
+      "Date": "Mon Aug 31 00:33:28 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -6278,6 +6278,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Onboard_Compression.img.onboard_compression_venue" ,
+                "title": "onboard_compression_venue" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1070" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Onboard_Compression.img.onboard_compression_venue"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Onboard_Compression.img.deferred_flag" ,
                 "title": "deferred_flag" ,
                 "assocType": "attribute_of" ,
@@ -6287,7 +6303,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression.img.deferred_flag"
                  ]
@@ -6303,7 +6319,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression.img.error_pixel_count"
                  ]
@@ -6319,7 +6335,7 @@
                 "groupName": "XSChoice#12" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1100" ,
+                "classOrder": "1110" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.ICER_Parameters",
                   "0001_NASA_PDS_1.img.LOCO_Parameters",
@@ -12471,7 +12487,32 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.14" ,
-            "description": "The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'None'." ,
+            "description": "The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Onboard_Compression.img.onboard_compression_venue" ,
+            "title": "onboard_compression_venue" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.14" ,
+            "description": " The onboard_compression_venue attribute specifies where the onboard compression was performed." ,
             "isNillable": "false" ,
             "isEnumerated": "true" ,
             "isDeprecated": "false" ,
