@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Aug 31 00:33:28 UTC 2020
+   Time                   Mon Aug 31 19:13:39 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -70,7 +70,7 @@ Detailed validation messages
    WARNING  Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    WARNING  Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
    INFO     Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
-   INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 1
+   INFO     Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 0
    INFO     Attribute: <detector_to_image_rotation> - The default minimum value provided by the attribute's data type is being overridden with 0.0
    INFO     Attribute: <detector_to_image_rotation> - The default maximum value provided by the attribute's data type is being overridden with 360.0
    INFO     Attribute: <downtrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
@@ -250,6 +250,7 @@ Parsed Input - Header:
     - Added segment_count to LOCO_Parameters class
     - Added onboard_compression_venue to Onboard_Compression class
     - Added 'Lossless' as a valid for onboard_compression_type attribute
+    - Allow decomposition_stages to have a minimum of 0
   
   
    Last Modification Time 2020-08-26T17:30:00Z
@@ -451,7 +452,7 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The decomposition_stages attribute identifies the number of stages of decomposition.
-   minimum value          1
+   minimum value          0
 
    name                   deferred_flag
    version                1.14
