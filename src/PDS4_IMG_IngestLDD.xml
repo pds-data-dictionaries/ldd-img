@@ -137,6 +137,8 @@
     - Added onboard_compression_venue to Onboard_Compression class
     - Added 'Lossless' as a valid for onboard_compression_type attribute
     - Allow decomposition_stages to have a minimum of 0
+    - Updated exposure_time_delta to Units_of_Time
+    - Updated High_Dynamic_Range_Exposure to be unbounded
   
   </comment>
   <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
@@ -1316,7 +1318,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -6797,7 +6799,7 @@ product_flag.</definition>
       <identifier_reference>High_Dynamic_Range_Exposure</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
   

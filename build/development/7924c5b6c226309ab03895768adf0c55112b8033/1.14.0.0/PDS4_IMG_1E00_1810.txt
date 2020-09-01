@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Aug 31 19:13:39 UTC 2020
+   Time                   Tue Sep 01 01:49:42 UTC 2020
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -251,6 +251,8 @@ Parsed Input - Header:
     - Added onboard_compression_venue to Onboard_Compression class
     - Added 'Lossless' as a valid for onboard_compression_type attribute
     - Allow decomposition_stages to have a minimum of 0
+    - Updated exposure_time_delta to Units_of_Time
+    - Updated High_Dynamic_Range_Exposure to be unbounded
   
   
    Last Modification Time 2020-08-26T17:30:00Z
@@ -583,6 +585,7 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Real
    description            Specifies the change in exposure time for this exposure compared to the previous. Should be 0 for the first item in the list.
+   unit of measure type   Units_of_Time
 
    name                   filter_id
    version                1.14
@@ -3759,7 +3762,7 @@ Parsed Input - Classes:
 
       local identifier      High_Dynamic_Range_Exposure
       minimum occurrences   0
-      maximum occurrences   1
+      maximum occurrences   *
       reference type        component_of
 
    name                   High_Dynamic_Range_Exposure
