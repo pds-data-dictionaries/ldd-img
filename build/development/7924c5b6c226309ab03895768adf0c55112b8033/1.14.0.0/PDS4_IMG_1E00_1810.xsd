@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Mon Aug 31 19:13:39 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Tue Sep 01 01:49:42 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -142,6 +142,8 @@
     - Added onboard_compression_venue to Onboard_Compression class
     - Added 'Lossless' as a valid for onboard_compression_type attribute
     - Allow decomposition_stages to have a minimum of 0
+    - Updated exposure_time_delta to Units_of_Time
+    - Updated High_Dynamic_Range_Exposure to be unbounded
   
   
     </xs:documentation>
@@ -922,7 +924,7 @@
           <xs:element name="hdr_acquisition_mode" type="img:hdr_acquisition_mode" minOccurs="1" maxOccurs="1"> </xs:element>
           <xs:element name="hdr_frame_count" type="img:hdr_frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="hdr_clipping_threshold" type="img:hdr_clipping_threshold" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="High_Dynamic_Range_Exposure" type="img:High_Dynamic_Range_Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="High_Dynamic_Range_Exposure" type="img:High_Dynamic_Range_Exposure" minOccurs="0" maxOccurs="unbounded"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
         <!-- <xs:assert test="img:hdr_acquisition_mode = ('Multiframe', 'None', 'Piecewise', 'Single')"/> -->
@@ -2446,17 +2448,25 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="exposure_time_delta">
-    <xs:annotation>
-      <xs:documentation>Specifies the change in exposure time for this
-        exposure compared to the previous. Should be 0 for the first
-        item in the list.</xs:documentation>
-    </xs:annotation>
+  <xs:simpleType name="exposure_time_delta_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="exposure_time_delta">
+    <xs:annotation>
+      <xs:documentation>Specifies the change in exposure time for this
+        exposure compared to the previous. Should be 0 for the first
+        item in the list.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:exposure_time_delta_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Time" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="exposure_type">
     <xs:annotation>
