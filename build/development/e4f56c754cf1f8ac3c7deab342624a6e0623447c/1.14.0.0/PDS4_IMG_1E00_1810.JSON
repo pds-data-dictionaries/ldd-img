@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.14.0.0" ,
-      "Date": "Tue Sep 01 01:49:42 UTC 2020" ,
+      "Date": "Tue Sep 08 20:47:24 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -8952,6 +8952,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Decoded" ,
+                  "valueMeaning": "Indicates the image has been processed such that it no longer contains the CFA pattern. This generally means the image is color, but it could also mean that processing has been applied to remove the effects of the CFA pattern and still be a single band, or that the result is a multispectral image. The algorithm used to decode the pattern is indicated by the processing_algorithm attribute in the Color_Filter_Array class." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Encoded" ,
+                  "valueMeaning": "Indicates the CFA pattern is still present in the image. The image should be a single band, with each pixel containing the appropriate color value as determined by the color_filter_array_type. An encoded image is not directly viewable as color; it must be decoded first." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "No CFA" ,
+                  "valueMeaning": "Indicates the image is not and has never been CFA encoded. In this case, Color_Filter_Array would simply not be present in the label. This value is present in case it needs to be explicitly stated that there is no CFA." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -8977,6 +8997,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Bayer RGGB" ,
+                  "valueMeaning": "The Bayer CFA pattern contains one red, one blue, and two green pixels in each 2x2 square of pixels. The RGGB type indicates the phasing of the colors, in the order upper left, upper right, lower left, and lower right. RGGB is the most common phasing but others are possible" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "No color filter array" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -9002,6 +9036,86 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "All" ,
+                  "valueMeaning": "Used for 3-band images, or (preferred) the keyword may be absent." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Blue" ,
+                  "valueMeaning": "Blue band of one of the RGB types." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Green" ,
+                  "valueMeaning": "Green band of one of the RGB types." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Hue" ,
+                  "valueMeaning": "Hue component of HSI" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Intensity" ,
+                  "valueMeaning": "Intensity component of HSI" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Red" ,
+                  "valueMeaning": "Red band of one of the RGB types." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Saturation" ,
+                  "valueMeaning": "Saturation component of HSI" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "XYZ_X" ,
+                  "valueMeaning": "X (uppercase) value of CIE_XYZ." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "XYZ_Y" ,
+                  "valueMeaning": "Y (uppercase) value of CIE_XYZ." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "XYZ_Z" ,
+                  "valueMeaning": "Z (uppercase) value of CIE_XYZ." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "xyY_YY" ,
+                  "valueMeaning": "Capital Y value of CIE_xyY. The Y is repeated in order to distinguish it from xyY_y on a case-insensitive basis." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "xyY_x" ,
+                  "valueMeaning": "x (lowercase) value of CIE_xyY." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "xyY_y" ,
+                  "valueMeaning": "y (lowercase) value of CIE_xyY." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -9077,6 +9191,50 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "CIE_XYZ" ,
+                  "valueMeaning": "Tristimulus values defined by CIE." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "CIE_xyY" ,
+                  "valueMeaning": "Chromaticity and luminance coordinates defined by CIE." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "HSI" ,
+                  "valueMeaning": "Hue, Saturation, Intensity" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "iRGB" ,
+                  "valueMeaning": "Instrument RGB. This is Red, Green, Blue color as it comes from the instrument, without any color correction." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "pRGB" ,
+                  "valueMeaning": "Planetary RGB. Corrected Red, Green, Blue color using an approximation of the actual illuminant at the planetary surface. For Mars missions this is typically 3000-4000K." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "sRGB" ,
+                  "valueMeaning": "Standard RGB, as defined by XXXXX. Corrected Red, Green, Blue color using a standard 5000K illuminant." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "wRGB" ,
+                  "valueMeaning": "White Balanced RGB. Red, Green, Blue with a simple white balance applied." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -9177,6 +9335,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Companded" ,
+                  "valueMeaning": "values are currently companded" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Expanded" ,
+                  "valueMeaning": "values have been companded but are now expanded back to original size" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "values have not been companded" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -9402,6 +9580,50 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Ground" ,
+                  "valueMeaning": "Processing was done on the ground. " ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Ground Refined" ,
+                  "valueMeaning": "Onboard processing was reversed and new ground processing was applied. For example, removing a synthetic flat field from onboard processing and replacing it with a true flat field." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "Processing has not been done." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard" ,
+                  "valueMeaning": "Processing was done onboard (hardware or software is unspecified)." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Both" ,
+                  "valueMeaning": "Processing was done onboard by both hardware and software." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Hardware" ,
+                  "valueMeaning": "Processing was done by hardware onboard the spacecraft, such as inside the camera." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Software" ,
+                  "valueMeaning": "processing was done by flight software onboard the spacecraft." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -9577,6 +9799,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Horizontal" ,
+                  "valueMeaning": "Horizontal means a left-to-right flip" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "None, meaning no flip applied, is optionally added for completeness. Otherwise this attribute can simply not be included." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Vertical" ,
+                  "valueMeaning": "Vertical means a top-to-bottom-flip" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -10302,6 +10544,44 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Auto" ,
+                  "valueMeaning": "Autoexposure is applied by the camera." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Auto Last" ,
+                  "valueMeaning": "Autoexposure using prior image as a seed." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Manual" ,
+                  "valueMeaning": "Manual exposure setting." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Manual Last" ,
+                  "valueMeaning": "Use same exposure as the prior image." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "No exposure requested." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Test" ,
+                  "valueMeaning": "Test exposure setting telling the camera to return a fixed-pattern test image." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -10727,6 +11007,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Mono" ,
+                  "valueMeaning": " image was commanded as a single left or right monoscopic image " ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Stereo" ,
+                  "valueMeaning": " image was commanded as part of a stereo pair " ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -10802,6 +11096,32 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Multiframe" ,
+                  "valueMeaning": "HDR is processed using several separately-acquired images." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "No HDR processing." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Piecewise" ,
+                  "valueMeaning": "HDR is processed onboard the camera." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Single" ,
+                  "valueMeaning": "Single exposure." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -11527,6 +11847,50 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Ground" ,
+                  "valueMeaning": "Processing was done on the ground. " ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Ground Refined" ,
+                  "valueMeaning": "Onboard processing was reversed and new ground processing was applied. For example, removing a synthetic flat field from onboard processing and replacing it with a true flat field." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "Processing has not been done." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard" ,
+                  "valueMeaning": "Processing was done onboard (hardware or software is unspecified)." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Both" ,
+                  "valueMeaning": "Processing was done onboard by both hardware and software." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Hardware" ,
+                  "valueMeaning": "Processing was done by hardware onboard the spacecraft, such as inside the camera." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard Software" ,
+                  "valueMeaning": "processing was done by flight software onboard the spacecraft." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -11627,6 +11991,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "description" ,
+                  "valueMeaning": "A mask_type listed as \"description\" indicates that the file, e.g., a text or xml based file, describes the mask in some other way depending on the processing_algorithm." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "image" ,
+                  "valueMeaning": "Most masks are of \"image\" type, this means it is an image of the same size as the current image containing mask information at each pixel." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -11702,6 +12080,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "4:2:2" ,
+                  "valueMeaning": "indicates 4:2:2 chroma subsampling. The typical case. The two chroma components are sampled at half the sample rate of luma: the horizontal chroma resolution is halved. This reduces the bandwidth of an uncompressed video signal by one-third with little to no visual difference." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "4:4:4" ,
+                  "valueMeaning": "Indicates 4:4:4 chroma sampling. Each of the three Y'CbCr components have the same sample rate, thus there is no chroma subsampling" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Grayscale" ,
+                  "valueMeaning": "indicates a grayscale image" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -11802,6 +12200,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Off" ,
+                  "valueMeaning": "Illumination state (LED) is Off." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "On" ,
+                  "valueMeaning": "Illumination state (LED) is On." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -12377,6 +12789,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Lossless" ,
+                  "valueMeaning": "Lossless compression means that after compression and decompression, the data is the same (bit-for-bit) as the original." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Lossy" ,
+                  "valueMeaning": "Lossy compression means that the data after decompression differs in some way from the data before compression." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Uncompressed" ,
+                  "valueMeaning": "Uncompressed data is also lossless, but use of the \"Uncompressed\" value indicates that data was not compressed." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -12502,6 +12934,68 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "GZIP" ,
+                  "valueMeaning": "GNU Gzip lossless compression using Lempel-Ziv coding (LZ77)" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "ICER" ,
+                  "valueMeaning": "ICER Adaptive Variable-Length Coding (ICER)" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "ICT" ,
+                  "valueMeaning": "Integer Cosine Transform" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "JPEG" ,
+                  "valueMeaning": "Joint Photographic Experts Group, an industry standard lossy compression algorithm." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "JPEG Progressive" ,
+                  "valueMeaning": "interlaced progressive JPEG format, in which data is compressed in multiple passes of progressively higher detail." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "LOCO" ,
+                  "valueMeaning": "Low-Complexity Lossless Compression" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "LZO" ,
+                  "valueMeaning": "Lempel-Ziv-Oberhumer, a type of lossless data compression focused on decompression speed." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Lossless" ,
+                  "valueMeaning": "Lossless compression method was used." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "MSSS Lossless" ,
+                  "valueMeaning": "Lossless compression algorithm developed by Malin Space Science Systems." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "No on-board compression was used." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -12527,6 +13021,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Hardware" ,
+                  "valueMeaning": "Compression was applied on the hardward platform" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Software" ,
+                  "valueMeaning": "Compression was applied in software" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -13227,6 +13735,26 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "No CFA" ,
+                  "valueMeaning": "Indicates the image is not and has never been CFA encoded. In this case, Color_Filter_Array would simply not be present in the label. This value is present in case it needs to be explicitly stated that there is no CFA." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Scaled Spectral Radiance" ,
+                  "valueMeaning": "Radiometric correction results are expressed as Spectral Radiance, but have subsequently been scaled in some way to compensate for photometric effects (for example, adjusting the brightness as if the sun was at zenith or correcting for the impact of atmospheric opacity (tau))." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Spectral Radiance" ,
+                  "valueMeaning": "Radiometric correction results are expressed in units of Spectral Radiance (generally W\/m^2\/sr\/nm)." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -13727,6 +14255,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Conditional" ,
+                  "valueMeaning": "the exposure_duration_threshold_count will determine whether or not shutter subtraction will be performed" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "True" ,
+                  "valueMeaning": "shutter subtraction will be performed" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -14152,6 +14694,44 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Hardware Compatible" ,
+                  "valueMeaning": "Use hardware only if compatible." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Hardware Else Software" ,
+                  "valueMeaning": "Use hardware then software." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "No subframe requested." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Software Only" ,
+                  "valueMeaning": "Software processsing only." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Subframe Around Sun" ,
+                  "valueMeaning": "If the sun is found, send a subframed image of the sun. If sun is not found, send back no image." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Sun Subframe Or Full" ,
+                  "valueMeaning": "If the sun is found, send a subframed image of the sun. If the sun is not found, send back the entire image." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {
@@ -14277,6 +14857,20 @@
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
             "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Mono" ,
+                  "valueMeaning": " image was commanded as a single left or right monoscopic image " ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Stereo" ,
+                  "valueMeaning": " image was commanded as part of a stereo pair " ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
           }
         }
       , {

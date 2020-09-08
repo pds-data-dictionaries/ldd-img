@@ -27,19 +27,19 @@ jobs:
 
     strategy:
       matrix:
-        pds4_version: [ '1.14.0.0' ]
+        pds4_version: [ '1.14.0.0', '1.15.0.0' ]
         # Example of how to specify multiple versions
         # pds4_version: [ '1.13.0.0', '1.14.0.0' ]
 
-        # include:
+        include:
           # Example of including older version with LDDTool dev version
-          # - pds4_version: '1.13.0.0'
-          #   lddtool_development_release: True
+          - pds4_version: '1.14.0.0'
+            lddtool_development_release: True
 
           # Example of include for development release of IM
-          # - pds4_version: '1.15.0.0'
-          #   lddtool_development_release: True
-          #   pds4_development_release: True
+          - pds4_version: '1.15.0.0'
+            lddtool_development_release: True
+            pds4_development_release: True
 
     steps:
       - uses: actions/checkout@v2
