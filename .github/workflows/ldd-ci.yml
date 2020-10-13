@@ -1,8 +1,6 @@
 # This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
-
 ---
-
 name: LDD Automation with PDSEN CI Bot
 
 on:
@@ -17,17 +15,18 @@ on:
 env:
   REGRESSION_TEST_PATH: ${{ format('{0}/{1}/', github.workspace, 'test') }}
   # TODO - Have to hard-code this for now since Actions don't yet allow the use of env here.
-  DEPLOY_PATH: ${{ format('{0}/{1}/{2}', github.workspace, 'build/development', github.sha) }}
   LOGS_PATH: ${{ format('{0}/{1}', github.workspace, 'logs') }}
 
 jobs:
   build: # job 1
     name: 'LDD Build'
     runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
 
     strategy:
       matrix:
-        pds4_version: [ '1.14.0.0', '1.15.0.0' ]
+        # pds4_version: [ '1.14.0.0', '1.15.0.0' ]
+        pds4_version: [ '1.14.0.0' ]
         # Example of how to specify multiple versions
         # pds4_version: [ '1.13.0.0', '1.14.0.0' ]
 
@@ -39,10 +38,21 @@ jobs:
           # Example of include for development release of IM
           - pds4_version: '1.15.0.0'
             lddtool_development_release: True
-            pds4_development_release: True
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - name: Initialize workflow variables
+        id: vars
+        shell: bash
+        run: |
+          if [[ "${{github.ref}}" == *"release"* ]]; then
+            echo "DEPLOY_PATH=${{github.workspace}}/build/release" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_PATH=${{github.workspace}}/build/development/${{github.sha}}"  >> $GITHUB_ENV
+          fi
 
       - name: Set up Python 3
         uses: actions/setup-python@v1
@@ -63,7 +73,7 @@ jobs:
           lddtool_development_release: ${{ matrix.lddtool_development_release }}
           test_path: ${{ env.REGRESSION_TEST_PATH }}
           logs_path: ${{ env.LOGS_PATH }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
 
       - name: Upload LDDs to Github Action Artifacts
         uses: actions/upload-artifact@v1
@@ -79,12 +89,21 @@ jobs:
           path: ${{ env.LOGS_PATH }}
         if: ${{ always() }}
 
+
   upload: # job 2
-    name: 'Upload LDDs to Github'
+    name: 'Upload LDDs to Github Repo'
     runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
 
       - uses: actions/download-artifact@v2
         with:
@@ -93,28 +112,45 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R /tmp/artifacts
 
-      - name: Clean out old LDDs
+      - name: Initialize workflow variables and cleanup
+        id: vars
+        shell: bash
         run: |
-          path=$(dirname ${{ env.DEPLOY_PATH }})
-          rm -fr $path/*
+          if [[ "${{github.ref}}" == *"release"* ]]; then
+            echo "DEPLOY_PATH=${{github.workspace}}/build/development/${{github.sha}}" >> $GITHUB_ENV
+            rm -fr ${{github.workspace}}/build/development
+          fi
 
       - name: Move the LDDs to their new home
         run: |
           mkdir -p ${{ env.DEPLOY_PATH }}
-          mv /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
+          cp -R /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
 
       - name: Display structure of downloaded files
         run: ls -R ${{ env.DEPLOY_PATH }}
+
+      - name: Clean previous dev/snapshot tags
+        run: |
+          git fetch --prune --unshallow --tags
+          git tag -l | grep 'dev' | xargs -t -I arg sh -c 'git tag -d arg;git push --delete origin arg;'
+
+      - name: Publish new dev release
+        run: |
+           pip install pds-github-util
+           ldd-release --ingest_ldd_src_dir ${{github.workspace}}/src --ldd_output_path ${{ env.DEPLOY_PATH }} --token ${{ secrets.ADMIN_GITHUB_TOKEN }} --dev
 
       - name: Push LDDs to Github
         run: |
           git config --local user.email "pdsen-ci@jpl.nasa.gov"
           git config --local user.name "PDSEN CI Bot"
-          git config --local github.token ${{ secrets.GITHUB_TOKEN }}
           git add -A $(dirname ${{ env.DEPLOY_PATH }})
           git commit -m "Auto-generated LDD by PDSEN CI Bot"
-          git config --global push.default current
-          git push
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
     needs: build
 
