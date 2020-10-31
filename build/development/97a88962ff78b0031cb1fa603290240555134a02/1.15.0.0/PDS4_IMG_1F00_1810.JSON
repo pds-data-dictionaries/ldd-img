@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.15.0.0" ,
-      "Date": "Tue Sep 08 20:47:17 UTC 2020" ,
+      "Date": "Sat Oct 31 14:38:11 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -1372,6 +1372,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Image_Filter" ,
+                "title": "Image_Filter" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1170" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Image_Filter"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Image_Mask" ,
                 "title": "Image_Mask" ,
                 "assocType": "component_of" ,
@@ -1381,7 +1397,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1170" ,
+                "classOrder": "1180" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask"
                  ]
@@ -1397,7 +1413,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1180" ,
+                "classOrder": "1190" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -1413,7 +1429,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1190" ,
+                "classOrder": "1200" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Filter"
                  ]
@@ -1429,7 +1445,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1200" ,
+                "classOrder": "1210" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Properties"
                  ]
@@ -1445,7 +1461,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1210" ,
+                "classOrder": "1220" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
@@ -1461,7 +1477,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1220" ,
+                "classOrder": "1230" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -1477,7 +1493,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1230" ,
+                "classOrder": "1240" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Reference_Pixel"
                  ]
@@ -1493,7 +1509,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1240" ,
+                "classOrder": "1250" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Row_Sum"
                  ]
@@ -1509,7 +1525,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1250" ,
+                "classOrder": "1260" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -1525,9 +1541,25 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1260" ,
+                "classOrder": "1270" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Shutter_Subtraction"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Spatial_Filter" ,
+                "title": "Spatial_Filter" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1280" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Spatial_Filter"
                  ]
               }
             }
@@ -1541,7 +1573,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1270" ,
+                "classOrder": "1290" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -1557,9 +1589,25 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1280" ,
+                "classOrder": "1300" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Thumbnail"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Tiling" ,
+                "title": "Tiling" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1310" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Tiling"
                  ]
               }
             }
@@ -1573,7 +1621,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1290" ,
+                "classOrder": "1320" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Video"
                  ]
@@ -4828,6 +4876,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Image_Mask.img.horizon_mask_elevation" ,
+                "title": "horizon_mask_elevation" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Image_Mask.img.horizon_mask_elevation"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Image_Mask.img.processing_venue" ,
                 "title": "processing_venue" ,
                 "assocType": "attribute_of" ,
@@ -4837,7 +4901,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1020" ,
+                "classOrder": "1030" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Image_Mask.img.processing_venue"
                  ]
@@ -4853,7 +4917,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1030" ,
+                "classOrder": "1040" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Image_Mask.img.processing_algorithm"
                  ]
@@ -4869,7 +4933,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1040" ,
+                "classOrder": "1050" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Image_Mask.img.sequence_number"
                  ]
@@ -4885,7 +4949,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1050" ,
+                "classOrder": "1060" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask_File"
                  ]
@@ -5275,6 +5339,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Image_Filter" ,
+                "title": "Image_Filter" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1170" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Image_Filter"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Imaging.img.Image_Mask" ,
                 "title": "Image_Mask" ,
                 "assocType": "component_of" ,
@@ -5284,7 +5364,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1170" ,
+                "classOrder": "1180" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask"
                  ]
@@ -5300,7 +5380,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1180" ,
+                "classOrder": "1190" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -5316,7 +5396,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1190" ,
+                "classOrder": "1200" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Filter"
                  ]
@@ -5332,7 +5412,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1200" ,
+                "classOrder": "1210" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Properties"
                  ]
@@ -5348,7 +5428,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1210" ,
+                "classOrder": "1220" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
@@ -5364,7 +5444,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1220" ,
+                "classOrder": "1230" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -5380,7 +5460,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1230" ,
+                "classOrder": "1240" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Reference_Pixel"
                  ]
@@ -5396,7 +5476,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1240" ,
+                "classOrder": "1250" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Row_Sum"
                  ]
@@ -5412,7 +5492,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1250" ,
+                "classOrder": "1260" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -5428,9 +5508,25 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1260" ,
+                "classOrder": "1270" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Shutter_Subtraction"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Spatial_Filter" ,
+                "title": "Spatial_Filter" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1280" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Spatial_Filter"
                  ]
               }
             }
@@ -5444,9 +5540,25 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1270" ,
+                "classOrder": "1290" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Tiling" ,
+                "title": "Tiling" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1300" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Tiling"
                  ]
               }
             }
@@ -5460,7 +5572,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1280" ,
+                "classOrder": "1310" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Thumbnail"
                  ]
@@ -5476,7 +5588,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1290" ,
+                "classOrder": "1320" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Video"
                  ]
@@ -5492,7 +5604,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1300" ,
+                "classOrder": "1330" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Instrument_State"
                  ]
@@ -5508,7 +5620,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1310" ,
+                "classOrder": "1340" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Commanded_Parameters"
                  ]
@@ -8212,6 +8324,278 @@
                 "classOrder": "1070" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Tile" ,
+            "title": "Tile" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "Contains parameters that describe how an image was or will be broken into tiles, before reassembly into a whole. This is generally intended for cameras that break up an exposure into tiles for transmission, but can also be used to describe tiling done by a ground system (e.g. for display purposes) if needed. Tiles need not be regular nor do they need to cover the entire area, and irregular tiles may overlap. Note that the image in which this class appears is expected to contain all the tiles (i.e. not just a single tile)."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_number" ,
+                "title": "tile_number" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "1" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tile.img.tile_number"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_num_bands" ,
+                "title": "tile_num_bands" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tile.img.tile_num_bands"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_upsample_method" ,
+                "title": "tile_upsample_method" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tile.img.tile_upsample_method"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.pds.Internal_Reference" ,
+                "title": "Internal_Reference" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "true" ,
+                "isAny": "false" ,
+                "groupName": "XSChoice#18" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "classId": [
+                  "0001_NASA_PDS_1.pds.Internal_Reference",
+                  "0001_NASA_PDS_1.pds.Local_Internal_Reference",
+                  "0001_NASA_PDS_1.pds.External_Reference"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.img.Pixel_Averaging_Dimensions" ,
+                "title": "Pixel_Averaging_Dimensions" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1080" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Pixel_Averaging_Dimensions"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tile.img.Subframe" ,
+                "title": "Subframe" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1090" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Subframe"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling" ,
+            "title": "Tiling" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "Contains parameters that describe how an image was or will be broken into tiles, before reassembly into a whole. This is generally intended for cameras that break up an exposure into tiles for transmission, but can also be used to describe tiling done by a ground system (e.g. for display purposes) if needed. Tiles need not be regular nor do they need to cover the entire area, and irregular tiles may overlap. Note that the image in which this class appears is expected to contain all the tiles (i.e. not just a single tile)."
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.pds.description" ,
+                "title": "description" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.pds.description"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.num_line_tiles" ,
+                "title": "num_line_tiles" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.num_line_tiles"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.num_sample_tiles" ,
+                "title": "num_sample_tiles" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.num_sample_tiles"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_count" ,
+                "title": "tile_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1040" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.tile_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_lines" ,
+                "title": "tile_lines" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.tile_lines"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_samples" ,
+                "title": "tile_samples" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1060" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.tile_samples"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_type" ,
+                "title": "tile_type" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1070" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.tile_type"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_venue" ,
+                "title": "tile_venue" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1080" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Tiling.img.tile_venue"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Tiling.img.Tile" ,
+                "title": "Tile" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1090" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Tile"
                  ]
               }
             }
@@ -11643,9 +12027,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11668,9 +12052,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11693,9 +12077,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11718,9 +12102,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11743,9 +12127,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11768,9 +12152,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -11796,6 +12180,31 @@
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Image_Mask.img.horizon_mask_elevation" ,
+            "title": "horizon_mask_elevation" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Specifies the elevation above which the image is masked off." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-90.0" ,
+            "maximumValue": "90.0" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "Units_of_Angle" ,
+            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Angle" ,
+            "unitId": "arcmin, arcsec, deg, hr, mrad, rad" ,
             "defaultUnitId": "null"
           }
         }
@@ -12774,7 +13183,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.15" ,
-            "description": "The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'" ,
+            "description": "The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed', 'StarPixelLossless' and 'StarPixelFlexible'." ,
             "isNillable": "false" ,
             "isEnumerated": "true" ,
             "isDeprecated": "false" ,
@@ -12799,6 +13208,18 @@
             , {"PermissibleValue": {
                   "value": "Lossy" ,
                   "valueMeaning": "Lossy compression means that the data after decompression differs in some way from the data before compression." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "StarPixelFlexible" ,
+                  "valueMeaning": "StarPixel Flexible is a lossy hardware enabled compression, for example used for both Hayabusa 2 ONC and TIR instruments. for more: https:\/\/www.mdpi.com\/1424-8220\/15\/10\/24926\/htm" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "StarPixelLossless" ,
+                  "valueMeaning": "StarPixel Lossless is a lossless hardware enabled compression, for example used for both Hayabusa 2 ONC and TIR instruments. for more: https:\/\/www.mdpi.com\/1424-8220\/15\/10\/24926\/htm" ,
                   "isDeprecated": "false"
                 }
              }
@@ -14290,9 +14711,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14315,9 +14736,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14340,9 +14761,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14365,9 +14786,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14390,9 +14811,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14415,9 +14836,9 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
-            "unitOfMeasure": "Units_of_Misc" ,
-            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Misc" ,
-            "unitId": "DN, electron\/DN, pixel" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
             "defaultUnitId": "null"
           }
         }
@@ -14888,6 +15309,329 @@
             "dataType": "ASCII_Boolean" ,
             "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
             "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_num_bands" ,
+            "title": "tile_num_bands" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Specifies the number of bands for this tile." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_number" ,
+            "title": "tile_number" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Specifies the tile number (array index), starting at 1." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tile.img.tile_upsample_method" ,
+            "title": "tile_upsample_method" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Specifies how tiles were upsampled (if needed) to create the full image. Replication simply repeats the pixel value as many times as necessary, Bilinear is bilinear interpolation, and None means upsampling was not necessary." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Bilinear" ,
+                  "valueMeaning": "Bilinear interpolation" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "None" ,
+                  "valueMeaning": "None means upsampling was not necessary" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Replication" ,
+                  "valueMeaning": "Replication simply repeats the pixel value as many times as necessary" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.num_line_tiles" ,
+            "title": "num_line_tiles" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the number of tiles in the line direction for a regular tile. Not used for irregular tiles." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.num_sample_tiles" ,
+            "title": "num_sample_tiles" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the number of tiles in the sample direction for a regular tile. Not used for irregular tiles." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_count" ,
+            "title": "tile_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the number of tiles in this set. Should be present and equal to the number of Tile objects if Tile is used; optional if Tile is not used." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_lines" ,
+            "title": "tile_lines" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the number of lines in a regular tile. Not used for irregular tiles." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_samples" ,
+            "title": "tile_samples" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the number of samples in a regular tile. Not used for irregular tiles." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_type" ,
+            "title": "tile_type" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Defines the type of tiles. Regular tiles are the same size throughout (although the last row or column of tiles might be smaller in order to fit the image size) and should have tile_lines and tile_samples defined. Irregular tiles may have different sizes per tile, described in each Tile class." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Irregular" ,
+                  "valueMeaning": "tiles sizes are not regular or the same size throughout" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Regular" ,
+                  "valueMeaning": "tiles sizes are the same size thorughout." ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.img.tile_venue" ,
+            "title": "tile_venue" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "Specifies where the tiling was done. Generally, Onboard indicates that this image is a reassembly of tiles sent from the spacecraft, while Ground indicates a tile decomposition after processing." ,
+            "isNillable": "false" ,
+            "isEnumerated": "true" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          , "PermissibleValueList": [
+              {"PermissibleValue": {
+                  "value": "Ground" ,
+                  "valueMeaning": "Ground indicates a tile decomposition after processing" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Onboard" ,
+                  "valueMeaning": "Onboard indicates that this image is a reassembly of tiles sent from the spacecraft" ,
+                  "isDeprecated": "false"
+                }
+             }
+           ]
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Tiling.pds.description" ,
+            "title": "description" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "pds" ,
+            "steward": "pds" ,
+            "versionId": "1.15" ,
+            "description": "The description attribute provides a statement, picture in words, or account that describes or is otherwise relevant to the object." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "UTF8_Text_Preserved" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.UTF8_Text_Preserved" ,
+            "minimumCharacters": "1" ,
             "maximumCharacters": "Unbounded" ,
             "minimumValue": "Unbounded" ,
             "maximumValue": "Unbounded" ,
