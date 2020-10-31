@@ -139,9 +139,17 @@
     - Allow decomposition_stages to have a minimum of 0
     - Updated exposure_time_delta to Units_of_Time
     - Updated High_Dynamic_Range_Exposure to be unbounded
-  
+
+    1.8.2.0 T.Hare
+    - Added Tiling Class and uts attributes
+    - Added "StarPixelLossless" and "StarPixelFlexible" as compression types under onboard_compression_type
+        for Hayabusa 2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
+    - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
+    - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
+    - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+
   </comment>
-  <last_modification_date_time>2020-08-26T17:30:00Z</last_modification_date_time>
+  <last_modification_date_time>2020-08-30T07:37:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1398,7 +1406,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1414,7 +1422,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -2120,7 +2128,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2136,7 +2144,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2152,7 +2160,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2168,7 +2176,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -2214,7 +2222,8 @@
       storage and transmission. Note that the onboard_compression_type 
       identifies the specific compression algorithm used (for example, ICER), 
       whereas the onboard_compression_class gives a simple indicator of the type of 
-      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'</definition>
+      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed',
+      'StarPixelLossless' and 'StarPixelFlexible'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2228,6 +2237,16 @@
         <value>Lossy</value>
         <value_meaning>Lossy compression means that the data after decompression differs in some way 
           from the data before compression.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>StarPixelFlexible</value>
+        <value_meaning>StarPixel Flexible is a lossy hardware enabled compression, for example used for both
+           Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>StarPixelLossless</value>
+        <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
+           Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Uncompressed</value>
@@ -3412,6 +3431,193 @@
       <unit_of_measure_type>Units_of_Temperature</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>tile_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the number of tiles in this set. Should be present and 
+      equal to the number of Tile objects if Tile is used; optional if Tile is not used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_lines</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_lines</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the number of lines in a regular tile. Not used for irregular tiles.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_num_bands</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_num_bands</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the number of bands for this tile.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the tile number (array index), starting at 1.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_samples</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_samples</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the number of samples in a regular tile. Not used for irregular tiles.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>tile_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the type of tiles. Regular tiles are the same size throughout 
+      (although the last row or column of tiles might be smaller in order to fit the 
+      image size) and should have tile_lines and tile_samples defined. Irregular tiles 
+      may have different sizes per tile, described in each Tile class.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Irregular</value>
+        <value_meaning>tiles sizes are not regular or the same size throughout</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Regular</value>
+        <value_meaning>tiles sizes are the same size thorughout.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_upsample_method</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_upsample_method</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies how tiles were upsampled (if needed) to create the full image. 
+      Replication simply repeats the pixel value as many times as necessary, Bilinear is 
+      bilinear interpolation, and None means upsampling was not necessary.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Bilinear</value>
+        <value_meaning>Bilinear interpolation</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Replication</value>
+        <value_meaning>Replication simply repeats the pixel value as many times as necessary</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>None means upsampling was not necessary</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>tile_venue</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tile_venue</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies where the tiling was done. Generally, Onboard indicates that this 
+      image is a reassembly of tiles sent from the spacecraft, while Ground indicates a tile 
+      decomposition after processing.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Ground</value>
+        <value_meaning>Ground indicates a tile decomposition after processing</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Onboard</value>
+        <value_meaning>Onboard indicates that this image is a reassembly of tiles sent from the spacecraft</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>num_line_tiles</name>
+    <version_id>1.0</version_id>
+    <local_identifier>num_line_tiles</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the number of tiles in the line direction for a 
+      regular tile. Not used for irregular tiles.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>num_sample_tiles</name>
+    <version_id>1.0</version_id>
+    <local_identifier>num_sample_tiles</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the number of tiles in the sample direction for a 
+      regular tile. Not used for irregular tiles.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+
 
   <DD_Attribute>
     <name>valid_maximum_pixel</name>
@@ -3701,6 +3907,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Image_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -3761,10 +3973,22 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Spatial_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Subframe</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Tiling</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Thumbnail</identifier_reference>
@@ -4261,6 +4485,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Image_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -4321,6 +4551,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Spatial_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Subframe</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -4331,6 +4567,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Tiling</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Video</identifier_reference>
@@ -4685,6 +4927,12 @@
     <element_flag>false</element_flag>
     <DD_Association>
       <identifier_reference>active_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>horizon_mask_elevation</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -6702,6 +6950,129 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Tile -->
+  <DD_Class>
+    <name>Tile</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Tile</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Contains parameters that describe how an image was or will be broken 
+      into tiles, before reassembly into a whole. This is generally intended for cameras 
+      that break up an exposure into tiles for transmission, but can also be used to 
+      describe tiling done by a ground system (e.g. for display purposes) if needed. 
+      Tiles need not be regular nor do they need to cover the entire area, and irregular 
+      tiles may overlap. Note that the image in which this class appears is expected to 
+      contain all the tiles (i.e. not just a single tile).</definition>
+    <DD_Association>
+        <identifier_reference>tile_number</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>1</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_num_bands</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_upsample_method</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>pds.Internal_Reference</identifier_reference>
+      <identifier_reference>pds.Local_Internal_Reference</identifier_reference>
+      <identifier_reference>pds.External_Reference</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Pixel_Averaging_Dimensions</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Subframe</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Tiling -->
+  <DD_Class>
+    <name>Tiling</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Tiling</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Contains parameters that describe how an image was or will be broken 
+      into tiles, before reassembly into a whole. This is generally intended for cameras 
+      that break up an exposure into tiles for transmission, but can also be used to 
+      describe tiling done by a ground system (e.g. for display purposes) if needed. 
+      Tiles need not be regular nor do they need to cover the entire area, and irregular 
+      tiles may overlap. Note that the image in which this class appears is expected to 
+      contain all the tiles (i.e. not just a single tile).</definition>
+    <DD_Association>
+        <identifier_reference>pds.description</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>num_line_tiles</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>num_sample_tiles</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_count</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_lines</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_samples</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_type</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>tile_venue</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>Tile</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
   
