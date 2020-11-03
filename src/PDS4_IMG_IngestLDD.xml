@@ -142,7 +142,7 @@
 
     1.8.2.0 T.Hare
     - Added Tiling Class and uts attributes
-    - Added "StarPixelLossless" and "StarPixelFlexible" as compression types under onboard_compression_type
+    - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
         for Hayabusa 2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
@@ -2213,7 +2213,7 @@
   
   <DD_Attribute>
     <name>onboard_compression_class</name>
-    <version_id>1.1</version_id>
+    <version_id>1.2</version_id>
     <local_identifier>onboard_compression_class</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -2223,7 +2223,7 @@
       identifies the specific compression algorithm used (for example, ICER), 
       whereas the onboard_compression_class gives a simple indicator of the type of 
       compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed',
-      'StarPixelLossless' and 'StarPixelFlexible'.</definition>
+      'StarPixel Lossless' and 'StarPixel Flexible'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2239,12 +2239,12 @@
           from the data before compression.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
-        <value>StarPixelFlexible</value>
+        <value>StarPixel Flexible</value>
         <value_meaning>StarPixel Flexible is a lossy hardware enabled compression, for example used for both
            Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
-        <value>StarPixelLossless</value>
+        <value>StarPixel Lossless</value>
         <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
            Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
       </DD_Permissible_Value>
