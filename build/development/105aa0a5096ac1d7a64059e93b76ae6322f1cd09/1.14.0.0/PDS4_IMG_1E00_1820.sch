@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.2.0 - Sat Oct 31 14:41:18 UTC 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.2.0 - Tue Nov 03 16:30:51 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -300,8 +300,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_class">
-      <sch:assert test=". = ('Lossless', 'Lossy', 'StarPixelFlexible', 'StarPixelLossless', 'Uncompressed')">
-        The attribute img:onboard_compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'StarPixelFlexible', 'StarPixelLossless', 'Uncompressed'.</sch:assert>
+      <sch:assert test=". = ('Lossless', 'Lossy', 'StarPixel Flexible', 'StarPixel Lossless', 'Uncompressed')">
+        The attribute img:onboard_compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'StarPixel Flexible', 'StarPixel Lossless', 'Uncompressed'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
