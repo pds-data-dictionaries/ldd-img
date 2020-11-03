@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Tue Nov 03 16:30:51 UTC 2020 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Tue Nov 03 16:51:41 UTC 2020 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
   <!-- 1.8.2.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
@@ -16,7 +16,7 @@
     attributeFormDefault="unqualified"
     version="1.8.2.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -152,6 +152,7 @@
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+    - Add array_band_number attribute to Optical_Filter
 
   
     </xs:documentation>
@@ -1319,6 +1320,7 @@
       <xs:element name="filter_position_count" type="img:filter_position_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="bandwidth" type="img:bandwidth" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="center_filter_wavelength" type="img:center_filter_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="array_band_number" type="img:array_band_number" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
@@ -1719,6 +1721,19 @@
     <xs:restriction base="pds:ASCII_Integer">
      <xs:minInclusive value="-9223372036854775808"/>
      <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="array_band_number">
+    <xs:annotation>
+      <xs:documentation>The array_band_number is the image plane (band)
+        in the array that corresponds to the optical filter with which
+        the image was acquired.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 

@@ -1,16 +1,16 @@
 PDS4 Local Data Dictionary Processing Report
 
 Configuration:
-   LDDTool Version        10.1.0
+   LDDTool Version        0.0.0
    LDD Version Id:        1.8.2.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Tue Nov 03 16:30:52 UTC 2020
-   Common Schema          [PDS4_PDS_1F00.xsd]
-   Common Schematron      [PDS4_PDS_1F00.sch]
-   IM Version Id:         1.15.0.0
+   Time                   Tue Nov 03 16:51:36 UTC 2020
+   Common Schema          [PDS4_PDS_1E00.xsd]
+   Common Schematron      [PDS4_PDS_1E00.sch]
+   IM Version Id:         1.14.0.0
    IM Namespace Id:       pds
    IM Label Version Id:   1.0
    IM Object Model        [UpperModel.pont]
@@ -30,8 +30,8 @@ Parameters:
 
 Summary:
    Classes                76
-   Attributes             199
-   Associations           406
+   Attributes             200
+   Associations           407
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -176,6 +176,7 @@ Parsed Input - Header:
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+    - Add array_band_number attribute to Optical_Filter
 
   
    Last Modification Time 2020-08-30T07:37:00Z
@@ -184,208 +185,213 @@ Parsed Input - Header:
 Parsed Input - Attributes:
 
    name                   active_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            The active_flag attribute indicates whether or not the data processing described by the parent class is active. In general, the presence of the parent class implies it is active and thus active_flag is optional. The primary purpose for active_flag is to either explicitly indicate a correction is not active (for example, if it normally is but was explicitly turned off), or to be able to provide parameters for historical reasons that may no longer be relevant to a current correction. 
 
    name                   analog_offset
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The analog_offset attribute identifies the analog value that is subtracted from the signal prior to the analog/digital conversion.
 
+   name                   array_band_number
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description            The array_band_number is the image plane (band) in the array that corresponds to the optical filter with which the image was acquired.
+
    name                   auto_exposure_data_cut
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The auto_exposure_data_cut attribute specifies the DN value which a specified fraction of pixels is permitted to exceed. The fraction is specified using the auto_exposure_data_fraction attribute.
 
    name                   max_auto_exposure_iteration_count
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The max_auto_exposure_iteration_count attribute specifies the maximum number of exposure iterations the instrument will perform in order to obtain the requested exposure.
 
    name                   auto_exposure_percent
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The auto_exposure_percent attribute specifies the auto-exposure early-termination percent. If the desired DN (auto_exposure_data_cut) is within this percentage of the measured DN (the DN at which the percentage of pixels above that DN equals or exceeds the auto_exposure_pixel_fraction), then the auto exposure algorithm is terminated and the calculated time is accepted.
 
    name                   auto_exposure_pixel_fraction
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The auto_exposure_pixel_fraction attribute specifies the percentage of pixels whose DN values may exceed the auto_expsoure_data_cut.
 
    name                   auto_exposure_lower_threshold
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            Specifies the lower threshold DN value for which a specified number of pixels is permitted to exceed. The auto_exposure_lower_limit defines the number of pixels allowed to exceed this threshold.
 
    name                   auto_exposure_lower_limit
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the maximum number of pixels that are allowed to be below the lower threshold defined by auto_exposure_lower_limit.
 
    name                   auto_exposure_upper_threshold
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            Specifies the upper threshold DN value for which a specified number of pixels is permitted to exceed. The auto_exposure_upper_limit defines the number of pixels allowed to exceed this threshold.
 
    name                   auto_exposure_upper_limit
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the maximum number of pixels that are allowed to be above the upper threshold defined by auto_exposure_upper_limit.
 
    name                   auto_exposure_roi_lines
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of lines in the autoexposure region of interest.
 
    name                   auto_exposure_roi_samples
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of samples in the autoexposure region of interest.
 
    name                   auto_exposure_roi_first_line
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the (1-based) starting line for the autoexposure region of interest.
 
    name                   auto_exposure_roi_first_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the (1-based) starting sample for the autoexposure region of interest.
 
    name                   autofocus_step_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The autofocus_step_count attribute specifies the number of steps (images) to be taken by an autofocus algorithm.
 
    name                   autofocus_step_size
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The autofocus_step_size attribute specifies the size in motor counts of each (or the initial) step taken by the focus adjustment mechanism in an autofocus algorithm.
 
    name                   bad_pixel_replacement_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            If true, specifies whether or not bad pixel replacement processing was requested or completed. See bad_pixel_replacement_table_id.
 
    name                   bad_pixel_replacement_table_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies the table used to replace bad pixels. A bad pixel table typically lists the location of each bad pixel on a detector. The specific table used is mission-specific.
 
    name                   bandwidth
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The bandwidth attribute provides a measure of the spectral width of a filter. For a root-mean-square detector this is the effective bandwidth of the filter, i.e. the full width of an ideal square filter having a flat response over the bandwidth and zero response elsewhere. Another common method for measuring bandwidth is Full Width at Half Maximum, which is the width of a "bump" on a curve or function. It is given by the distance between points on the curve at which the function reaches half of its maximum value.
    unit of measure type   Units_of_Length
 
    name                   best_focus_distance
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The best_focus_distance attribute specifies the estimated distance to best focus.
    unit of measure type   Units_of_Length
 
    name                   brightness_scale
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The brightness_scale attribute defines the multiplicative factor used for a linear brightness correction.
 
    name                   brightness_offset
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The brightness_offset attribute defines the additive factor used for a linear brightness correction.
 
    name                   center_filter_wavelength
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The center_filter_wavelength attribute provides the wavelength of the center of the passband, or the peak transmissivity, for an instrument filter. 
    unit of measure type   Units_of_Length
 
    name                   color_component
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            For single-band images, this defines which component of the color space is represented by this band. This keyword is not needed for 3-band images, as all bands are represented.
 
    name                   color_dn_scaling_factor
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The color_dn_scaling_factor attribute specifies the actual value used to scale the color values. This value is determined using the color_dn_scaling_method.
 
    name                   color_dn_scaling_method
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The color_dn_scaling_method attribute defines how the color values are scaled. EXPOSURE_NORMALIZED_COLOR means that the color values have been normalized based on exposure time, so neighboring images in a mosaic will have the same color values. DN_COLOR means that the color values are based on the raw DNs, so images take full advantage of the available dynamic range but may not match with neighbors in a mosaic.
 
    name                   color_filter_array_state
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies whether the image still has a CFA pattern ("Encoded"), the CFA pattern has been removed ("Decoded") or it never had a pattern ("No CFA").
 
    name                   color_filter_array_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the type of Color Filter Array (CFA) used to encode multiple colors in a single exposure. The most common example of this is the Bayer pattern. This is optional if there is no CFA. Additional attributes, specific to each CFA type, define whether or not the CFA pattern has been removed, and if so, how (e.g. bayer_algorithm).
 
    name                   color_space
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the color space in which this product is expressed. Some color spaces (e.g. XYZ or xyY) are independent of illuminant, while for others (e.g. sRGB or pRGB) the illuminant matters. It is expected that the defined color spaces will increase over time.
 
    name                   color_subsampling_mode
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The color_subsampling_mode attribute specifies the JPEG color subsampling mode used during compression. Valid values: '4:2:2' - 4:2:2 chroma subsampling, which is the typical case, '4:4:4' - 4:4:4 chroma sampling, which indicates no subsampling, 'Grayscale' - indicates a grayscale image
 
    name                   delta_focus_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the amount of change in focus for each image in the z-stack. The units should be the same as focus_position_count, which is often motor counts.
 
    name                   input_dn_max
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The input_dn_max attribute provides the value of the maximum DN in the input image that is assigned a specific DN in the output image during companding.
 
    name                   input_dn_min
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The input_dn_min attribute provides the value of the minimum DN in the input image that is assigned a specific DN in the output image during companding.
 
    name                   output_dn
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The output_dn attribute provides the value of the DN in the output image that is assigned to a given range of DN in the input image during companding.
 
    name                   companding_state
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The companding_state attribute specifies whether the data is or has had its bit depth reduced, for example conversion from 12 to 8 bits via a lookup table or bit scaling. Valid values: None - values have not been companded. Companded - values are currently companded. Expanded - values have been companded but are now expanded back to original size.
 
    name                   crosstrack_summing
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The crosstrack_summing attribute provides the number of detector pixel values in the crosstrack direction that have been averaged to produce the final output pixel.
    minimum value          1
 
    name                   current_value
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The current_value attribute provides provides the current, in the specified units, of an imaging instrument or some part of the imaging instrument.
    unit of measure type   Units_of_Current
 
    name                   decomposition_stages
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The decomposition_stages attribute identifies the number of stages of decomposition.
    minimum value          0
 
    name                   deferred_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description             The deferred_flag attribute specifies whether compression was done at the time of image acquisition, or was deferred until later (typically at downlink time). 
 
    name                   detector_to_image_rotation
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description             The detector_to_image_rotation attribute specifies the clockwise rotation, in degrees, that was applied to an image along its optical path through an instrument, from detector to final image orientation. Note that if both this attribute and detector_to_image_flip exist, the flip is assumed to have happened before the rotation.
    minimum value          0.0
@@ -393,358 +399,358 @@ Parsed Input - Attributes:
    unit of measure type   Units_of_Angle
 
    name                   detector_to_image_flip
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The detector_to_image_flip attribute indicates whether and how the image was flipped (mirror image) along its optical path through an instrument, from detector to final image orientation. "Horizontal" means a left-to-right flip, while "Vertical" means a top-to-bottom-flip. Note that if both this attribute and detector_to_image_rotation exist, the flip is assumed to have happened before the rotation.
 
    name                   device_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The device_id attribute supplies the identifier of an imaging instrument, an imaging instrument device, or some point on the instrument or device.
 
    name                   device_name
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The device_name attribute supplies the formal name for an imaging instrument, an imaging instrument device, or some point on the instrument or device.
    nillable               true
 
    name                   device_state
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The device_state attribute indicates the state of a sensor or other device associated with the imaging instrument. These states are interpreted in an instrument-specific way.
 
    name                   download_priority
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The download_priority attribute specifies which data to downlink/transmit, based on order of importance. The ranking and meaning of specific values will vary depending on the mission, and should be defined in the mission software interface specification (SIS).
 
    name                   downtrack_summing
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The downtrack_summing attribute provides the number of detector pixel values in the downtrack direction that have been averaged to produce the final output pixel.
    minimum value          1
 
    name                   early_image_return
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            Indicates is there was a deferral of on-board post-processing of an image. For MSL, returns the image early to an onboard client. Early processing includes rotation, bad pixels, flat field, early scaling, and camera model production.
 
    name                   early_scaling
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            If true, indicates that the companding was or should be done "early" in the onboard processing chain, for instruments where there is an option. For MSL, early processing is where the image is prepared for use by any client, including those on board, such as rotation, bad pixels, flat field, early scaling, and camera model production. Contrast that with late processing, which includes compression and telemetry generation, and processing for thumbnails, subframes, histograms, and row/column sums.
 
    name                   encoded_display_gamma
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the gamma value encoded in this image. Gamma correction is used to nonlinearly compress the intensities in an image, and most display systems assume that images are encoded with an sRGB gamma. Note that this is a string value because the most common gamma correction ("sRGB") is not precisely expressible as a gamma exponent. A numeric value indicates a gamma exponent.
 
    name                   erase_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The erase_count specifies the number of times a detector has been or will be flushed of data in raw counts, dependent on the parent class for the attribute.
 
    name                   error_pixel_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The error_pixel_count attribute specifies the number of pixels that are outside a valid DN range, after all decompression and post decompression processing has been completed. 
 
    name                   exposure_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The exposure count attribute provides the number of exposures taken during a certain interval, such as the duration of one command. For example, this may include the number of exposures needed by an autoexpose algorithm.
    minimum value          0
 
    name                   exposure_duration
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The exposure_duration attribute provides the amount of time the instrument sensor was gathering light from the scene, such as between opening and closing of a shutter, or between flushing and readout of a CCD.
    minimum value          0
    unit of measure type   Units_of_Time
 
    name                   exposure_duration_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The exposure_duration_count attribute specifies the value, in raw counts, for the amount of time the instrument sensor was gathering light from the scene, such as between opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts instead of time, and the translation of exposure_duration_count to exposure_duration will differ by mission.
 
    name                   exposure_duration_threshold_count
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The exposure_duration_threshold specifies the exposure time threshold in raw counts, when shutter_subtraction_mode = 'Conditional'.
 
    name                   exposure_scale_factor
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies a multiplier to the base exposure time. The base exposure time is either user-commanded or is read from the onboard exposure time table. The resulting number is used by the cameras as the actual commanded exposure time. This scale factor is commonly used during multi-spectral imaging, when the base exposure time is known for one filter and exposure_scale_factor is used to scale the exposure time to levels appropriate for the other filters.
 
    name                   exposure_table
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Identifies the exposure table to be used, or that was used. The exposure table provides the seed exposure value to use for each camera for the autoexposure algorithm.
 
    name                   exposure_coadd_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the total number of exposures summed (co-added) together to obtain the final image. Co-adding increases the signal-to-noise ratio.
    minimum characters     0
 
    name                   exposure_readout_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of times an exposure, or part of an exposure, has been read from the camera. Multiple readouts could be due to tiling of the image, among other reasons.
    minimum characters     0
 
    name                   exposure_table_update_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            If true, specifies whether or not to update the autoexposure table based on the results of this exposure.
 
    name                   exposure_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The exposure_type attribute indicates the exposure setting on a camera. Valid values: 'Manual' - manual exposure setting, 'Auto' - autoexposure is applied by the camera, 'Test' - test exposure setting telling the camera to return a fixed-pattern test image.
 
    name                   exposure_time_delta
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the change in exposure time for this exposure compared to the previous. Should be 0 for the first item in the list.
    unit of measure type   Units_of_Time
 
    name                   filter_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The filter_id attribute provides a short string identifier for an instrument filter through which an image or measurement was acquired or which is associated with a given instrument mode. 
    minimum characters     1
    maximum characters     16
 
    name                   filter_name
-   version                1.15
+   version                1.14
    value data type        UTF8_Short_String_Preserved
    description            The filter_name attribute provides the name, described in the mission documentation, of the optical filter through which an image or measurement was acquired.
    minimum characters     1
 
    name                   filter_number
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The filter_number attribute provides the numeric identifier of an instrument filter through which an image or measurement was acquired or which is associated with a given instrument mode.
 
    name                   filter_position_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The filter position count is the position in motor counts of the filter wheel motor.
 
    name                   filter_window_line
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The size in pixels of the window used for filtering in the line dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
 
    name                   filter_window_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The size in pixels of the window used for filtering in the sample dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
 
    name                   first_line
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The first_line attribute indicates the line within a source image that corresponds to the first line in a sub-image.
    minimum value          1
 
    name                   first_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The first_sample attribute indicates the sample within a source image that corresponds to the first sample in a sub-image. 
    minimum value          1
 
    name                   focus_merge_blending_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            The focus_merge_blending_flag attribute indicates whether intra-stack image blending has been performed during a focus merge operation. A value of 'false' means images were merged without blending.
 
    name                   focus_merge_registration_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            The focus_merge_registration_flag attribute indicates whether intra-stack image registration has been performed during a focus merge operation. A value of 'true' indicates that intra-stack image registration has been performed during the focus merge operation, while 'false' indicates that images have been merged without translation.
 
    name                   focus_mode
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The focus_mode attribute specifies the type of focus command, for example: Autofocus, Manual, ZStack, or Relative (focus adjustment based on a previous autofocus).
 
    name                   focus_position
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The focus_position attribute defines, in a camera-specific way, the focus metric that should be used for geometric processing of the data (e.g. for creating camera models). This will often be the focus motor count.
 
    name                   focus_position_count
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The focus_position_count attribute specifies a commanded focus, or the initial focus position used by the autofocus algorithm.
 
    name                   focus_stack_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description             The focus_stack_flag attribute indicates whether or not focus stack image products were created during the autofocus imaging step.
 
    name                   focus_initialization_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            Specifies whether the instrument focus mechanism should be (or was) initialized before use.
 
    name                   focal_length
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Defines the focal length of the optics used in acquiring the image.
    unit of measure type   Units_of_Length
 
    name                   f_number
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Defines the f/number for the optics used in acquiring the image.
    unit of measure type   Units_of_Length
 
    name                   frame_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The frame_count attribute indicates the total number of image frames acquired, such as for a video or focus stack observation.
 
    name                   frame_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The frame_id attribute specifies an identification for a particular instrument measurement frame. A frame consists of a sequence of measurements made over a specified time interval, and may include measurements from different instrument modes. These sequences repeat from cycle to cycle and sometimes within a cycle.
 
    name                   frame_index
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count.
 
    name                   frame_interval
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The frame_interval attribute defines the time between the start of successive frames in a video product.
    unit of measure type   Units_of_Time
 
    name                   frame_rate
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description             The frame_rate attribute specifies the calculated frame rate for video products.
    unit of measure type   Units_of_Frame_Rate
 
    name                   frame_type_name
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The frame_type_name attribute specifies whether the image was commanded as part of a stereo pair or as a single left or right monoscopic image. If frame_type = 'Stereo', a left and a right image should be present.
 
    name                   gain_mode_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The gain_mode_id attribute identifies the gain state of an instrument. Gain is a constant value which is multiplied with an instrument's output signal to increase or decrease the level of that output. These modes may vary by mission so the permissible values should be set by the mission dictionaries.
 
    name                   gain_number
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The gain_number attribute specifies the gain value used in the analog to digital conversion. The gain value is a multiplicative factor used in the analog to digital conversion.
 
    name                   gop_frame_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The gop_frame_count attribute indicates, for video products compressed into a group of images (Group Of Pictures or GOP), the number of images in a GOP. This is not necessarily the total number of frames in the observation (see frame_count), as the observation may consist of a number of GOPs.
 
    name                   gop_frame_index
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Videos can be broken into Groups of Pictures (GOP)s, which group a number of frames together. The gop_frame_index attribute specifies the frame index within a Group Of Pictures (GOP) starting at 1. This is distinct from frame_index, which is the index into the video as a whole.
 
    name                   gop_start_index
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Videos can be broken into Groups of Pictures (GOP)s, which group a number of frames together. The gop_start_index attribute specifies the index of the first frame of the GOP (starting at 1). Thus, frame_index = gop_start_index + gop_frame_index - 1.
 
    name                   hdr_acquisition_mode
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies how the HDR frames were acquired.
 
    name                   hdr_frame_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of frames that go into the HDR product.
    minimum value          0
 
    name                   hdr_clipping_threshold
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the threshold for pixel clipping.
    minimum value          0
 
    name                   height_pixels
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The height_pixels attribute provides the vertical dimension, in pixels.
    minimum value          1
    unit of measure type   Units_of_Misc
 
    name                   icer_quality
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            For ICER, the quality is the “minloss” parameter, which specifies the minimum number of bit planes that will not be encoded in each subband. Note that ICER may stop due a byte quota before minloss is achieved, so the actual quality may be less than specified. Unlike JPEG, a lower number means higher quality.
    minimum value          0
    maximum value          18
 
    name                   id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The id attribute supplies a short name (identifier) for the associated value in a group of related values. 
 
    name                   illuminant
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the illuminant that was used in order to process this image. The valid values are open-ended but examples of valid values include: None, D65, 3000K, 5000K.
 
    name                   illumination_wavelength
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The illumination_wavelength attribute provides the wavelength of an LED that was used to illuminate this image.
    unit of measure type   Units_of_Length
 
    name                   illumination_state
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The illumination_state attribute provides if the LED was On or Off.
 
    name                   interframe_delay
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The interframe_delay attribute provides the time between the end of one frame and the beginning of the next frame in a video product.
    minimum value          0
    unit of measure type   Units_of_Time
 
    name                   instrument_idle_timeout
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the amount of time in seconds the instrument may be idle before powering off the instrument.
    minimum value          0
    unit of measure type   Units_of_Time
 
    name                   jpeg_parameter
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The jpeg_parameter attribute is a JPEG specific variable which specifies on-board compression determination by image quality or by compression factor, based on a selected on-board compression mode. 
 
    name                   jpeg_quality
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The jpeg_quality attribute is a JPEG specific variable which identifies the resultant or targeted image quality index for on-board data compression.
    minimum value          0
    maximum value          100
 
    name                   lines
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The lines attribute indicates the total number of data instances along the vertical axis of an image or sub-image.
    minimum value          1
 
    name                   line_fov
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The line_fov attribute specifies the angular measure of the field of view of an imaged scene, as measured in the image line direction (generally vertical).
    minimum value          0.0
@@ -752,190 +758,190 @@ Parsed Input - Attributes:
    unit of measure type   Units_of_Angle
 
    name                   maximum_focus_distance
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.
    unit of measure type   Units_of_Length
 
    name                   focus_distance
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The nominal focus distance for the instrument (e.g. in meters or mm). This is often the commanded value, or autofocus seed value, but can also be used to indicate a nominal distance where the connotation of "best" is not appropriate (see best_focus_distance).
    unit of measure type   Units_of_Length
 
    name                   minimum_focus_distance
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The minimum_focus_distance attribute specifies the estimated distance to the nearest pixel with less than 1 pixel of gaussian blur.
    unit of measure type   Units_of_Length
 
    name                   missing_pixel_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The missing_pixel_count attribute identifies the total number of missing pixels defined by the image or image segment.
 
    name                   max_filter_window_line
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The maximum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
 
    name                   max_filter_window_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The maximum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
 
    name                   min_filter_window_line
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The minimum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
 
    name                   min_filter_window_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The minimum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
 
    name                   motor_count
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The motor_count attribute specifies the raw motor counts for the specified device, which indicates the position of the associated mechanism in a device-specific way.
 
    name                   observation_number
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Identifies which observation of many this data product pertains to.
    minimum value          0
 
    name                   onboard_compression_class
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed', 'StarPixel Lossless' and 'StarPixel Flexible'.
 
    name                   onboard_compression_mode
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The onboard_compression_mode attribute identifies the method used for on-board compression, performed for the purpose of data storage and transmission. The value for this attributes represents the raw integer value for compression, which is then translated to the full name captured by the onboard_compression_type attribute.
 
    name                   onboard_compression_quality
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description             The onboard_compression_quality attribute is an indication of compression quality, in the range of 0.0 to 1.0. Losslessly compressed or uncompressed data have a value of 1.0. Other values are assigned in a manner specific to the compression mode, but with the property that a higher value means better quality. Although the values are not directly comparable across compression types, this facilitates comparison of compression quality across images independent of compression mode.
    minimum value          0
    maximum value          1.0
 
    name                   onboard_compression_rate
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The onboard_compression_rate attribute provides the average number of bits needed to represent a pixel for image that was compressed on-board for data storage and transmission.
    minimum value          0
 
    name                   onboard_compression_ratio
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The onboard_compression_ratio attribute provides the ratio of the size, in bytes, of the original uncompressed data object to its compressed form (original size / compressed size). Onboard compression is performed for data storage and transmission.
    minimum value          0.0
 
    name                   onboard_compression_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.
    minimum characters     1
    maximum characters     255
 
    name                   onboard_compression_venue
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The onboard_compression_venue attribute specifies where the onboard compression was performed.
    minimum characters     1
    maximum characters     255
 
    name                   onboard_R_r
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Red value.
 
    name                   onboard_R_g
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Red value.
 
    name                   onboard_R_b
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Red value.
 
    name                   onboard_B_r
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Blue value.
 
    name                   onboard_B_g
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Blue value.
 
    name                   onboard_B_b
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Blue value.
 
    name                   onboard_G_r
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the R pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied G and B pixel values to produce the output Green value.
 
    name                   onboard_G_g
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the G pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and B pixel values to produce the output Green value.
 
    name                   onboard_G_b
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
 
    name                   parameter_table_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies which table of parameters to use, or were used. Tables are defined in a mission- and instrument-specific manner.
 
    name                   pointing_model_name
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The pointing_model_name attribute specifies which of several "pointing models" were used to transform the camera model based on updated pointing information. These updates are typically derived from mosaic seam corrections. This attribute and the associated Pointing_Model_Index classes define what the updated pointing information is, providing enough information to re-create the camera model from calibration data. If present, this attribute overrides the default pointing based on telemetry. The special value "NONE" shall be interpreted the same as if the attribute is absent (i.e. the default pointing model should be used). New model names can be created at any time; the models themselves should be described in a mission-specific ancillary file. See also the geom:solution_id attribute within the geom:Camera_Model_Parameters class.
 
    name                   pointing_model_solution_id
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The pointing_model_solution_id attribute specifies the identifier of the pointing correction solution used to derive the model specified via the enclosing Pointing_Correction class. This identifier should also appear in the pointing correction file referenced by the Data_Correction_File. If there is only one identifier in the correction file, then pointing_model_solution_id may be omitted. The pointing_model_solution_id attribute may be reused in the context of pointing corrections, although uniqueness is recommended. The pointing correction solution ID namespace is separate from the coordinate system namespace.
 
    name                   processing_algorithm
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The processing_algorithm attribute specifies the name of the algorithm used to perform the processing specified by the enclosing class. Algorithm names should be defined in the project documentation, and/or in the enclosing class definition. 
 
    name                   processing_venue
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The processing_venue attribute specifies where the processing described by the parent class was performed. 
 
    name                   product_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description            Indicates whether the product in the enclosing class was requested for downlink (when in Commanded_Parameters), or whether this product actually is the type in question (when in Imaging). For example, Commanded_Parameters.Histogram.product_flag = true indicates that a histogram was requested as part of the command that created the data product being labeled, while Imaging.Histogram.product_flag = true indicates that this data product itself is (or contains) a histogram.
 
    name                   progressive_stage
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            In cases where each pass of a progressive JPEG is downlinked separately, the progressive_stage attribute indicates the highest pass number contained in this image, which indicates the available level of detail.
    minimum value          0
 
    name                   mask_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            This identifies the type of mask file. Two enumerations are given, but these can be expanded if needed.
 
    name                   horizon_mask_elevation
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the elevation above which the image is masked off.
    minimum value          -90.0
@@ -943,114 +949,114 @@ Parsed Input - Attributes:
    unit of measure type   Units_of_Angle
 
    name                   mask_transparent_value
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the pixel value in the mask that will represent transparent (or NoData/null) for the characterized image. This is normally defined as 0 in the mask layer. Once defined, any other value in the mask represents opaque or translucent (in other words, valid) in the characterized image.
 
    name                   r0
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The r0 attribute specifies the 0th-order polynomial coefficient of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
 
    name                   r1
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The r1 attribute specifies the 1st-order polynomial coefficient of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
 
    name                   r2
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The r2 attribute specifies the 2nd-order polynomial coefficient of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
 
    name                   r3
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The r3 attribute specifies specifies the 3rd-order polynomial coefficient of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
 
    name                   radiometric_zenith_scaling_factor
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Defines the scaling factor used for Scaled Radiance or Scaled Spectral Radiance. Scaled radiance is created by dividing radiance by this factor, which scales the radiance to what it would be if the sun were at the zenith with a clear atmosphere.
 
    name                   radiometric_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The radiometric_type defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
 
    name                   raw_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The raw_count attribute provides the value of some parameter measured by a spacecraft or instrument sensor in the raw units reported by that sensor. A separate attribute should be included alongside the raw_count that translates this value into the appropriate engineering units. i.e. temperature_value in degrees C or voltage_value in Volts
 
    name                   readout_rate
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The readout_rate attribute specifies the clock rate at which values are read from the sensor.
    unit of measure type   Units_of_Frequency
 
    name                   responsivity_factor_b
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been applied to the B cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.
 
    name                   responsivity_factor_g
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been applied to the G cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.
 
    name                   responsivity_factor_r
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the factor that has been applied to the R cell of the Bayer pattern, before de-Bayering (demosaicking) takes place.
 
    name                   responsivity_b
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the blue channel of an image.
 
    name                   responsivity_g
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the green channel of an image.
 
    name                   responsivity_pan
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to a panchromatic image.
 
    name                   responsivity_r
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the red channel of an image.
 
    name                   atmospheric_opacity
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The atmospheric opacity (tau) value used in radiometric correction.
 
    name                   atmospheric_opacity_reference
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The atmospheric opacity (tau) target value to which the image was corrected.
 
    name                   samples
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The samples attribute indicates the total number of data instances along the horizontal axis of an image or sub-image.
    minimum value          1
 
    name                   sample_bit_mask
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The sample_bit_mask attribute Specifies the active bits in a sample. Any bit mask is valid in an non-raw product. Any 8-bit product, whether a scaled raw product or other, will have the value "2#11111111" and be stored in one byte. Any 12-bit product, whether an unscaled raw product, or an ILUT partially-processed product (see companding_method), will have the value "2#0000111111111111" and be stored in two bytes. A 15-bit product (e.g. Radiometrically-corrected Calibrated product type) will have the value "2#0111111111111111" and be stored in two bytes. Any 32-bit integer product (e.g. Histogram Raw product) will have the value "2#11111111111111111111111111111111" and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value in the sample_bits attribute and only applies to integer values.
 
    name                   sample_bits
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The sample_bits attribute specifies the logical or active number of bits in the data, which is distinct from the physical number of bits (for example, encoding 12-bit data within 16-bit words). These logical bits are stored in the low order (least significant) bits, with unused bits filled with 0 (or 1 for negative integers to preserve a two's complement representation). This is distinct from the valid data range (specified by valid_minimum and valid_maximum in Special_Constants class) because all values, including missing/invalid flag values, must fit within the sample_bits. The intent is that the data should be able to be sent through a communication channel that passes only sample_bits with no loss in fidelity.
 
    name                   sample_fov
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The sample_fov attribute specifies the angular measure of the field of view of an imaged scene, as measured in the image sample direction (generally horizontal).
    minimum value          0.0
@@ -1058,208 +1064,208 @@ Parsed Input - Attributes:
    unit of measure type   Units_of_Angle
 
    name                   sampling_factor
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The sampling_factor attribute provides the value N, where every Nth data point was kept from the original data set by selection, averaging, or taking the median. When applied to an image object, the single value represented in sampling_factor applies to both the lines and the samples.
 
    name                   saturated_pixel_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The saturated_pixel_count attribute provides the number of pixels which were saturated. This can happen when the sensor acquired a value too low or too high to be measured accurately or if post-processing cause the output pixel value to fall below or above the the output range of valid values for the data or data type.
 
    name                   valid_pixel_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The valid_pixel_count attribute provides the total number of pixels tagged as valid. This will generally not include pixels flagged as saturated_pixel_count or missing_pixel_count.
 
    name                   sequence_number
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The sequence_number attribute supplies the sequence identifier for the associated value in a group of related values. 
 
    name                   segment_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The segment_count attribute identifies the number of segments into which the image was partitioned for error containment purposes.
 
    name                   segment_number
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description             The segment_number attribute identifies which compression segment is described in the current Segment class. 
    minimum value          0
 
    name                   segment_quality
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description             The segment_quality attribute identifies the resultant or targeted image quality index for on-board ICER data compression. Upon return by the ICER decompress function, the output quantity segment_quality provides an indication of the quality of the reconstructed segment. Specifically, the value returned is a double for which the integer values correspond to attained min loss values, but in general is an interpolation between these values. Thus lower values of segment_quality correspond to higher reconstructed qualities, and a value of indicates lossless compression. Note that the compressed stream does not directly contain the value of min loss that was given to the compressor, but the decompressor does know how far along in the decompression process it got before it ran out of bits; this information is used to determine segment_quality. In rare circumstances the decompressor m ay not be able to determine segment_quality for a segment that it decompresses. In this case it sets segment_quality to 1.0. The reconstructed segment might be either lossy or lossless when this occurs. The technical condition under which a quality value is not determined is that the decompressor runs out of the data for the segment before decoding any bit plane information. 
 
    name                   segment_status
-   version                1.15
+   version                1.14
    value data type        ASCII_Numeric_Base2
    description             The segment_status attribute provides a bit mask which provides the status of decoding for the compression segment identified by segment_number. Upon return by the ICER decompress function, the output quantity of segment_status contains a number indicating the decode status. The decode status may have one or more of the following flags set: SHORTDATASEG FLAG (bit 0): If this flag is set, then the segment contained so little data that nothing could be reconstructed in the segment. INCONSISTENTDATA FLAG (bit 1): If this flag is set, then one or more pieces of information in the segment header (specifically, image width, image height, n segs, wavelet filter, n decomps) are inconsistent with the value(s) in the first (valid) segment. ICER will ignore the data in this segment. DUPLICATESEG FLAG (bit 2): If this flag is set, then the segment index given in the header equals that given by a previous segment. The decompressor will ignore the data in this segment. BADBITPLANENUMBER FLAG (bit 3): If this flag is set, then an ICER internal parameter in the header for this segment has probably been corrupted. The decompressor will ignore the data in this segment. BADBITPLANECOUNT FLAG (bit 4): If this flag is set, then an ICER internal parameter in the header for this segment has probably been corrupted. The decompressor will ignore the data in this segment. BADDATA FLAG (bit 5): If this flag is set, then either the parameter combination given in the header for this segment are not allowed by ICER, or the segment number is bad. This probably indicates corrupted data. The decompressor will ignore the data in this segment. 
    minimum characters     1
    maximum characters     6
 
    name                   shutter_subtraction_mode
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The shutter_subtraction_mode specifies whether shutter subtraction will be performed, or if it is dependent on the exposure_duration_threshold_count.
 
    name                   special_line
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Line number of the special point.
    minimum value          0
 
    name                   special_sample
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Sample number of the special point.
    minimum value          0
 
    name                   striping_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of stripes (N) used during dark current mitigation within image acquisition. Image “striping” is comprised of reading out the image in N different parts (“stripes”), often using a hardware windowing mode, using N separate exposures (with identical exposure times). These successive stripes correspond to physically different locations on the CCD. A commandable overlap (M rows) allows each successive row to "cover" the image pixels towards the readout region.
    minimum value          0
 
    name                   striping_overlap_rows
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of rows (M) of striping overlap used during dark current mitigation within image acquisition. Image “striping” is comprised of reading out the image in N different parts (“stripes”), often using a hardware windowing mode, using N separate exposures (with identical exposure times). These successive stripes correspond to physically different locations on the CCD. A commandable overlap (M rows) allows each successive row to "cover" the image pixels towards the readout region.
    minimum value          0
 
    name                   subframe_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description             The subframe_type attribute specifies the method of subframing performed on the image. These methods may vary by mission so the permissible values should be set by the mission dictionaries. The current enumerations were added for the MSL mission and can be expanded if needed.
 
    name                   temperature_status
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            The temperature_status attribute defines the status of the associated temperature measurement. The status is interpreted in a device-specific way, but generally 0 indicates a successful measurement.
 
    name                   temperature_value
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The temperature_value attribute provides the temperature, in the specified units, of some point on an imaging instrument or other imaging instrument device.
    nillable               true
    unit of measure type   Units_of_Temperature
 
    name                   tile_count
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the number of tiles in this set. Should be present and equal to the number of Tile objects if Tile is used; optional if Tile is not used.
    minimum value          0
 
    name                   tile_lines
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the number of lines in a regular tile. Not used for irregular tiles.
    minimum value          1
 
    name                   tile_num_bands
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the number of bands for this tile.
    minimum value          0
 
    name                   tile_number
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Specifies the tile number (array index), starting at 1.
    minimum value          1
 
    name                   tile_samples
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the number of samples in a regular tile. Not used for irregular tiles.
    minimum value          1
 
    name                   tile_type
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the type of tiles. Regular tiles are the same size throughout (although the last row or column of tiles might be smaller in order to fit the image size) and should have tile_lines and tile_samples defined. Irregular tiles may have different sizes per tile, described in each Tile class.
 
    name                   tile_upsample_method
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies how tiles were upsampled (if needed) to create the full image. Replication simply repeats the pixel value as many times as necessary, Bilinear is bilinear interpolation, and None means upsampling was not necessary.
 
    name                   tile_venue
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Specifies where the tiling was done. Generally, Onboard indicates that this image is a reassembly of tiles sent from the spacecraft, while Ground indicates a tile decomposition after processing.
 
    name                   num_line_tiles
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the number of tiles in the line direction for a regular tile. Not used for irregular tiles.
    minimum value          1
 
    name                   num_sample_tiles
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            Defines the number of tiles in the sample direction for a regular tile. Not used for irregular tiles.
    minimum value          1
 
    name                   valid_maximum_pixel
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            Specifies the maximum pixel DN value for pixels used by the autoexposure algorithm.
 
    name                   valid_minimum_pixel
-   version                1.15
+   version                1.14
    value data type        ASCII_Integer
    description            Specifies the minimum DN threshold for pixels used by the autoexposure algorithm.
 
    name                   value_number
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The value_number attribute provides the value with no applicable units as named by the associated id, name, or sequence_number. 
 
    name                   value_string
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The value_string attribute provides the value with no applicable units as named by the associated id, name, or sequence_number. 
 
    name                   video_flag
-   version                1.15
+   version                1.14
    value data type        ASCII_Boolean
    description             The video_flag attribute indicates whether or not video products were commanded. 
 
    name                   voltage_value
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The voltage_value attribute provides provides the voltage, in the specified units, of an imaging instrument or some part of the imaging instrument.
    unit of measure type   Units_of_Voltage
 
    name                   wavelet_filter
-   version                1.15
+   version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            The wavelet_filter attribute specifies thefilter used in the compression and decompression algorithm.
 
    name                   width_pixels
-   version                1.15
+   version                1.14
    value data type        ASCII_NonNegative_Integer
    description            The width_pixels attribute provides the horizontal dimension, in pixels.
    minimum value          1
    unit of measure type   Units_of_Misc
 
    name                   x_center
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The x_center attribute specifies the sample coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
    unit of measure type   Units_of_Misc
 
    name                   y_center
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The y_center attribute specifies the line coordinate of the center of the function used to describe an algorithmic flat field. See Radial_Flat_Field_Function for the formula.
    unit of measure type   Units_of_Misc
 
    name                   zoom_position
-   version                1.15
+   version                1.14
    value data type        ASCII_Real
    description            The zoom_position attribute defined, in a camera-specific way, the zoom metric that should be used for geometric processing of the data (e.g. for creating camera models). This will often be the zoom motor count.
 
@@ -2594,6 +2600,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      center_filter_wavelength
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      array_band_number
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of

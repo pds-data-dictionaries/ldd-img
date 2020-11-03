@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.15.0.0" ,
-      "Date": "Tue Nov 03 16:30:52 UTC 2020" ,
+      "Date": "Tue Nov 03 16:51:41 UTC 2020" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -6631,6 +6631,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Optical_Filter.img.array_band_number" ,
+                "title": "array_band_number" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1070" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Optical_Filter.img.array_band_number"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Optical_Filter.pds.comment" ,
                 "title": "comment" ,
                 "assocType": "attribute_of" ,
@@ -6640,7 +6656,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Optical_Filter.pds.comment"
                  ]
@@ -6656,7 +6672,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "classId": [
                   "0001_NASA_PDS_1.pds.Local_Internal_Reference"
                  ]
@@ -13527,6 +13543,31 @@
             "minimumValue": "-1.7976931348623157e308" ,
             "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Optical_Filter.img.array_band_number" ,
+            "title": "array_band_number" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "The array_band_number is the image plane (band) in the array that corresponds to the optical filter with which the image was acquired." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
