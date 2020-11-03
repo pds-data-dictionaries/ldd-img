@@ -147,6 +147,7 @@
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+    - Add array_band_number attribute to Optical_Filter
 
   </comment>
   <last_modification_date_time>2020-08-30T07:37:00Z</last_modification_date_time>
@@ -185,6 +186,21 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>array_band_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>array_band_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The array_band_number is the image plane (band) in the array that corresponds to 
+      the optical filter with which the image was acquired.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -5524,6 +5540,12 @@
     </DD_Association>
     <DD_Association>
         <identifier_reference>center_filter_wavelength</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>array_band_number</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
