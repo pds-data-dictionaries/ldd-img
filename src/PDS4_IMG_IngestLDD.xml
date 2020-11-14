@@ -148,9 +148,10 @@
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
+    - Add original_sample_bits to Sampling class
 
   </comment>
-  <last_modification_date_time>2020-08-30T07:37:00Z</last_modification_date_time>
+  <last_modification_date_time>2020-11-14T15:05:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -2571,6 +2572,23 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
+  <DD_Attribute>
+    <name>original_sample_bits</name>
+    <version_id>1.0</version_id>
+    <local_identifier>original_sample_bits</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The original_sample_bits specifies the number of bits actually acquired by the 
+      sensor, before companding or other manipulations. Contrast this with img:sample_bits, 
+      which describes the current state of the image. Generally in a companded image, sample_bits 
+      will be less than original_sample_bits, while in a decompanded image they would be equal.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>parameter_table_id</name>
     <version_id>1.0</version_id>
@@ -6628,6 +6646,12 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>original_sample_bits</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>sample_bits</identifier_reference>
