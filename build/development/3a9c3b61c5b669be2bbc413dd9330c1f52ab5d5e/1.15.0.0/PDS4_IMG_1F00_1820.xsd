@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Tue Nov 03 16:51:41 UTC 2020 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Sat Nov 14 22:17:09 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -153,6 +153,7 @@
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
+    - Add original_sample_bits to Sampling class
 
   
     </xs:documentation>
@@ -1497,6 +1498,7 @@
       <xs:element name="crosstrack_summing" type="img:crosstrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="downtrack_summing" type="img:downtrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="original_sample_bits" type="img:original_sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bits" type="img:sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bit_mask" type="img:sample_bit_mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sampling_factor" type="img:sampling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -3665,6 +3667,22 @@
       <xs:documentation> The onboard_compression_venue attribute
         specifies where the onboard compression was
         performed.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="original_sample_bits">
+    <xs:annotation>
+      <xs:documentation>The original_sample_bits specifies the number of
+        bits actually acquired by the sensor, before companding or other
+        manipulations. Contrast this with img:sample_bits, which
+        describes the current state of the image. Generally in a
+        companded image, sample_bits will be less than
+        original_sample_bits, while in a decompanded image they would be
+        equal.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
