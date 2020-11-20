@@ -143,7 +143,7 @@
     1.8.2.0 T.Hare
     - Added Tiling Class and uts attributes
     - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
-        for Hayabusa 2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
+        for Hayabusa2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
@@ -2230,7 +2230,7 @@
   
   <DD_Attribute>
     <name>onboard_compression_class</name>
-    <version_id>1.2</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>onboard_compression_class</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -2239,8 +2239,8 @@
       storage and transmission. Note that the onboard_compression_type 
       identifies the specific compression algorithm used (for example, ICER), 
       whereas the onboard_compression_class gives a simple indicator of the type of 
-      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed',
-      'StarPixel Lossless' and 'StarPixel Flexible'.</definition>
+      compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'.
+      </definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2254,16 +2254,6 @@
         <value>Lossy</value>
         <value_meaning>Lossy compression means that the data after decompression differs in some way 
           from the data before compression.</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>StarPixel Flexible</value>
-        <value_meaning>StarPixel Flexible is a lossy hardware enabled compression, for example used for both
-           Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
-      </DD_Permissible_Value>
-      <DD_Permissible_Value>
-        <value>StarPixel Lossless</value>
-        <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
-           Hayabusa 2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Uncompressed</value>
@@ -2346,13 +2336,14 @@
   
   <DD_Attribute>
     <name>onboard_compression_type</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>onboard_compression_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
-      'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.</definition>
+      'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None',
+      'StarPixel Lossless', and 'StarPixel Flexible'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -2396,9 +2387,19 @@
         <value>Lossless</value>
         <value_meaning>Lossless compression method was used.</value_meaning>
       </DD_Permissible_Value>
-    <DD_Permissible_Value>
+      <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>No on-board compression was used.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>StarPixel Flexible</value>
+        <value_meaning>StarPixel Flexible is a lossy hardware enabled compression, for example used for both
+           Hayabusa2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>StarPixel Lossless</value>
+        <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
+           Hayabusa2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
