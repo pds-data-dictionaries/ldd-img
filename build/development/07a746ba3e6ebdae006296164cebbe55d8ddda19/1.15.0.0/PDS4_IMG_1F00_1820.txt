@@ -1,18 +1,18 @@
 PDS4 Local Data Dictionary Processing Report
 
 Configuration:
-   LDDTool Version        10.1.0
+   LDDTool Version        12.0.3
    LDD Version Id:        1.8.2.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Sat Nov 14 22:17:09 UTC 2020
+   Time                   Wed Dec 23 21:05:37 UTC 2020
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
    IM Namespace Id:       pds
-   IM Label Version Id:   1.0
+   IM Label Version Id:   1.21
    IM Object Model        [UpperModel.pont]
    IM Data Dictionary     [dd11179.pins]
    IM Configuration File  [MDPTNConfigClassDisp.xml]
@@ -172,7 +172,7 @@ Parsed Input - Header:
     1.8.2.0 T.Hare
     - Added Tiling Class and uts attributes
     - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
-        for Hayabusa 2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
+        for Hayabusa2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
     - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
@@ -815,7 +815,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_class
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed', 'StarPixel Lossless' and 'StarPixel Flexible'.
+   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'. 
 
    name                   onboard_compression_mode
    version                1.15
@@ -844,7 +844,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_type
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'.
    minimum characters     1
    maximum characters     255
 
