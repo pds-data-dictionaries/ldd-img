@@ -7,9 +7,6 @@ on:
      branches:
        - '*'
        - '!master'
-     paths:
-      - 'src/*.xml'
-      - '.github/workflows/*.yml'
 
 env:
   REGRESSION_TEST_PATH: ${{ format('{0}/{1}/', github.workspace, 'test') }}
@@ -18,17 +15,39 @@ env:
   DEPLOY_PATH: ${{ format('{0}/{1}/{2}/{3}', github.workspace, 'build', 'development', github.sha) }}
 
 jobs:
-  build: # job 1
+  get_versions:
+    name: Get Applicable PDS4 Versions
+    runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - id: set-matrix
+        run: |
+          while read -r line; do
+              if [[ ! -z "$line" ]]; then
+                  versions=$versions'"'$line'"',
+              fi
+          done < $GITHUB_WORKSPACE/pds4_versions.txt
+          versions="[${versions::-1}]"
+          echo "{\"pds4_version\":${versions}}"
+          echo "::set-output name=matrix::{\"pds4_version\": $versions}"
+
+  build:
     name: 'LDD Build'
+    needs: get_versions
     runs-on: ubuntu-latest
     if: github.actor != 'pdsen-ci'
 
     strategy:
-      matrix:
-        pds4_version: [ '1.14.0.0', '1.15.0.0' ]
+      matrix: ${{fromJson(needs.get_versions.outputs.matrix)}}
 
         # include:
-          # Example of including older version with LDDTool dev version
+          # Example of using LDDTool dev version for in development builds
           # - pds4_version: '1.14.0.0'
           #   lddtool_development_release: True
 
@@ -100,6 +119,11 @@ jobs:
           git fetch --prune --unshallow --tags
           git tag -l | grep 'dev' | xargs -t -I arg sh -c 'git tag -d arg;git push --delete origin arg;'
 
+      - name: Clean out old LDDs
+        run: |
+          path=$(dirname ${{ env.DEPLOY_PATH }})
+          rm -fr $path/*
+
       - name: Move the LDDs to their new home
         run: |
           mkdir -p ${{ env.DEPLOY_PATH }}
@@ -113,7 +137,7 @@ jobs:
         run: |
           if [[ "${{github.ref}}" == *"release"* ]]; then
             echo "DEPLOY_PATH=${{github.workspace}}/build/release" >> $GITHUB_ENV
-            cp -R ${{ env.DEPLOY_PATH }}/* ${{github.workspace}}/build/release/
+            cp -R ${{ env.DEPLOY_PATH }}/* ${{github.workspace}}/build/release/            
           fi
 
       - name: Push LDDs to Github
