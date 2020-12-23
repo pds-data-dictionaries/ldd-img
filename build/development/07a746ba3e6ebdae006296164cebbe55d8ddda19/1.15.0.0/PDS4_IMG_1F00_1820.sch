@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.1.0 - Wed Oct 14 02:55:04 UTC 2020 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.2.0 - Wed Dec 23 21:05:37 UTC 2020 -->
   <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -251,39 +251,9 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:max_filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:max_filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:min_filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Image_Filter/img:min_filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+    <sch:rule context="img:Image_Mask/img:horizon_mask_elevation">
+      <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
+        The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -336,8 +306,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_type">
-      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None')">
-        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None'.</sch:assert>
+      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
+        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -419,42 +389,6 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:max_filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:max_filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:min_filter_window_line">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Spatial_Filter/img:min_filter_window_sample">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
     <sch:rule context="img:Subframe/img:line_fov">
       <sch:assert test="@unit = ('arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad')">
         The attribute @unit must be equal to one of the following values 'arcmin', 'arcsec', 'deg', 'hr', 'mrad', 'rad'.</sch:assert>
@@ -486,6 +420,24 @@
     <sch:rule context="img:Thumbnail/img:frame_type_name">
       <sch:assert test=". = ('Mono', 'Stereo')">
         The attribute img:frame_type_name must be equal to one of the following values 'Mono', 'Stereo'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Tile/img:tile_upsample_method">
+      <sch:assert test=". = ('Bilinear', 'None', 'Replication')">
+        The attribute img:tile_upsample_method must be equal to one of the following values 'Bilinear', 'None', 'Replication'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Tiling/img:tile_type">
+      <sch:assert test=". = ('Irregular', 'Regular')">
+        The attribute img:tile_type must be equal to one of the following values 'Irregular', 'Regular'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Tiling/img:tile_venue">
+      <sch:assert test=". = ('Ground', 'Onboard')">
+        The attribute img:tile_venue must be equal to one of the following values 'Ground', 'Onboard'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.2.0 - Tue Nov 03 16:30:52 UTC 2020 -->
-  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.2.0 - Wed Dec 23 21:05:44 UTC 2020 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -152,8 +152,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
-        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
+      <sch:assert test="@unit = ('Hz')">
+        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -300,14 +300,14 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_class">
-      <sch:assert test=". = ('Lossless', 'Lossy', 'StarPixel Flexible', 'StarPixel Lossless', 'Uncompressed')">
-        The attribute img:onboard_compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'StarPixel Flexible', 'StarPixel Lossless', 'Uncompressed'.</sch:assert>
+      <sch:assert test=". = ('Lossless', 'Lossy', 'Uncompressed')">
+        The attribute img:onboard_compression_class must be equal to one of the following values 'Lossless', 'Lossy', 'Uncompressed'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_type">
-      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None')">
-        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None'.</sch:assert>
+      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
+        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

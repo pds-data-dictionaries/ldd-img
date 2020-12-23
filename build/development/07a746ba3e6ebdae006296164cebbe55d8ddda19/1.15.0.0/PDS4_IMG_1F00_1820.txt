@@ -1,13 +1,13 @@
 PDS4 Local Data Dictionary Processing Report
 
 Configuration:
-   LDDTool Version        12.0.0
-   LDD Version Id:        1.8.1.0
+   LDDTool Version        12.0.3
+   LDD Version Id:        1.8.2.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Wed Oct 14 02:55:04 UTC 2020
+   Time                   Wed Dec 23 21:05:37 UTC 2020
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
@@ -29,9 +29,9 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                74
-   Attributes             189
-   Associations           382
+   Classes                76
+   Attributes             201
+   Associations           408
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -40,7 +40,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.8.1.0
+   LDD Version            1.8.2.0
    Full Name              Trent Hare
    Steward                img
    Namespace Id           img
@@ -168,9 +168,19 @@ Parsed Input - Header:
     - Allow decomposition_stages to have a minimum of 0
     - Updated exposure_time_delta to Units_of_Time
     - Updated High_Dynamic_Range_Exposure to be unbounded
+
+    1.8.2.0 T.Hare
+    - Added Tiling Class and uts attributes
+    - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
+        for Hayabusa2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
+    - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
+    - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
+    - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+    - Add array_band_number attribute to Optical_Filter
+    - Add original_sample_bits to Sampling class
+
   
-  
-   Last Modification Time 2020-08-26T17:30:00Z
+   Last Modification Time 2020-11-14T15:05:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -184,6 +194,11 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Integer
    description            The analog_offset attribute identifies the analog value that is subtracted from the signal prior to the analog/digital conversion.
+
+   name                   array_band_number
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            The array_band_number is the image plane (band) in the array that corresponds to the optical filter with which the image was acquired.
 
    name                   auto_exposure_data_cut
    version                1.15
@@ -529,13 +544,11 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Real
    description            The size in pixels of the window used for filtering in the line dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
-   unit of measure type   Units_of_Misc
 
    name                   filter_window_sample
    version                1.15
    value data type        ASCII_Real
    description            The size in pixels of the window used for filtering in the sample dimension. If the window varies across the image, this could contain the average window or initial window, as needed by the specific algorithm.
-   unit of measure type   Units_of_Misc
 
    name                   first_line
    version                1.15
@@ -772,25 +785,21 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Real
    description            The maximum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
-   unit of measure type   Units_of_Misc
 
    name                   max_filter_window_sample
    version                1.15
    value data type        ASCII_Real
    description            The maximum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
-   unit of measure type   Units_of_Misc
 
    name                   min_filter_window_line
    version                1.15
    value data type        ASCII_Real
    description            The minimum size in pixels of the window used for filtering in the line dimension. If the window is constant across the image, filter_window_line should be used instead.
-   unit of measure type   Units_of_Misc
 
    name                   min_filter_window_sample
    version                1.15
    value data type        ASCII_Real
    description            The minimum size in pixels of the window used for filtering in the sample dimension. If the window is constant across the image, filter_window_sample should be used instead.
-   unit of measure type   Units_of_Misc
 
    name                   motor_count
    version                1.15
@@ -806,7 +815,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_class
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'
+   description            The onboard_compression_class attribute identifies the type of on-board compression used for data storage and transmission. Note that the onboard_compression_type identifies the specific compression algorithm used (for example, ICER), whereas the onboard_compression_class gives a simple indicator of the type of compression mode. Valid values: 'Lossless', 'Lossy', 'Uncompressed'. 
 
    name                   onboard_compression_mode
    version                1.15
@@ -835,7 +844,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_type
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None'.
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'.
    minimum characters     1
    maximum characters     255
 
@@ -890,6 +899,11 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Real
    description            Specifies the factor that has been multiplied by the B pixel value after de-Bayering (demosaicking) takes place. This value is summed with the multiplied R and G pixel values to produce the output Green value.
+
+   name                   original_sample_bits
+   version                1.15
+   value data type        ASCII_Short_String_Collapsed
+   description            The original_sample_bits specifies the number of bits actually acquired by the sensor, before companding or other manipulations. Contrast this with img:sample_bits, which describes the current state of the image. Generally in a companded image, sample_bits will be less than original_sample_bits, while in a decompanded image they would be equal.
 
    name                   parameter_table_id
    version                1.15
@@ -1144,6 +1158,63 @@ Parsed Input - Attributes:
    nillable               true
    unit of measure type   Units_of_Temperature
 
+   name                   tile_count
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the number of tiles in this set. Should be present and equal to the number of Tile objects if Tile is used; optional if Tile is not used.
+   minimum value          0
+
+   name                   tile_lines
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the number of lines in a regular tile. Not used for irregular tiles.
+   minimum value          1
+
+   name                   tile_num_bands
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the number of bands for this tile.
+   minimum value          0
+
+   name                   tile_number
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the tile number (array index), starting at 1.
+   minimum value          1
+
+   name                   tile_samples
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the number of samples in a regular tile. Not used for irregular tiles.
+   minimum value          1
+
+   name                   tile_type
+   version                1.15
+   value data type        ASCII_Short_String_Collapsed
+   description            Defines the type of tiles. Regular tiles are the same size throughout (although the last row or column of tiles might be smaller in order to fit the image size) and should have tile_lines and tile_samples defined. Irregular tiles may have different sizes per tile, described in each Tile class.
+
+   name                   tile_upsample_method
+   version                1.15
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies how tiles were upsampled (if needed) to create the full image. Replication simply repeats the pixel value as many times as necessary, Bilinear is bilinear interpolation, and None means upsampling was not necessary.
+
+   name                   tile_venue
+   version                1.15
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies where the tiling was done. Generally, Onboard indicates that this image is a reassembly of tiles sent from the spacecraft, while Ground indicates a tile decomposition after processing.
+
+   name                   num_line_tiles
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the number of tiles in the line direction for a regular tile. Not used for irregular tiles.
+   minimum value          1
+
+   name                   num_sample_tiles
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Defines the number of tiles in the sample direction for a regular tile. Not used for irregular tiles.
+   minimum value          1
+
    name                   valid_maximum_pixel
    version                1.15
    value data type        ASCII_Integer
@@ -1294,6 +1365,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Image_Filter
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Image_Mask
       minimum occurrences   0
       maximum occurrences   1
@@ -1344,9 +1420,19 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Spatial_Filter
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Subframe
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Tiling
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Thumbnail
@@ -1721,6 +1807,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Image_Filter
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Image_Mask
       minimum occurrences   0
       maximum occurrences   1
@@ -1771,6 +1862,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        component_of
 
+      local identifier      Spatial_Filter
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
       local identifier      Subframe
       minimum occurrences   0
       maximum occurrences   1
@@ -1779,6 +1875,11 @@ Parsed Input - Classes:
       local identifier      Thumbnail
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Tiling
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Video
@@ -2047,6 +2148,11 @@ Parsed Input - Classes:
    Associations
 
       local identifier      active_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      horizon_mask_elevation
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -2500,6 +2606,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      center_filter_wavelength
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      array_band_number
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -3331,6 +3442,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      original_sample_bits
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      sample_bits
       minimum occurrences   0
       maximum occurrences   1
@@ -3603,6 +3719,107 @@ Parsed Input - Classes:
       minimum occurrences   1
       maximum occurrences   1
       reference type        parent_of
+
+   name                   Tile
+   description            Contains parameters that describe how an image was or will be broken into tiles, before reassembly into a whole. This is generally intended for cameras that break up an exposure into tiles for transmission, but can also be used to describe tiling done by a ground system (e.g. for display purposes) if needed. Tiles need not be regular nor do they need to cover the entire area, and irregular tiles may overlap. Note that the image in which this class appears is expected to contain all the tiles (i.e. not just a single tile).
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      tile_number
+      minimum occurrences   1
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_num_bands
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_upsample_method
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      pds.Local_Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      pds.External_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Pixel_Averaging_Dimensions
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Subframe
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   Tiling
+   description            Contains parameters that describe how an image was or will be broken into tiles, before reassembly into a whole. This is generally intended for cameras that break up an exposure into tiles for transmission, but can also be used to describe tiling done by a ground system (e.g. for display purposes) if needed. Tiles need not be regular nor do they need to cover the entire area, and irregular tiles may overlap. Note that the image in which this class appears is expected to contain all the tiles (i.e. not just a single tile).
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pds.description
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      num_line_tiles
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      num_sample_tiles
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_lines
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_samples
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_type
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      tile_venue
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Tile
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
 
    name                   Image_Filter
    description            The Image_Filter class specifies what kind of image filtering has been done to the image. Image filtering looks at image intensity rather the geometry of pixels (cf. Spatial_Filter).

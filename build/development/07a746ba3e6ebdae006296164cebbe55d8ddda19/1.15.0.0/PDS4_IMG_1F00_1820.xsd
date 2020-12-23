@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.1.0 - Wed Oct 14 02:54:53 UTC 2020 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Wed Dec 23 21:05:37 UTC 2020 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.8.1.0 - img: - Imaging                                                  -->
+  <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.8.2.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,9 +14,9 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.8.1.0">
+    version="1.8.2.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -144,7 +144,17 @@
     - Allow decomposition_stages to have a minimum of 0
     - Updated exposure_time_delta to Units_of_Time
     - Updated High_Dynamic_Range_Exposure to be unbounded
-  
+
+    1.8.2.0 T.Hare
+    - Added Tiling Class and uts attributes
+    - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
+        for Hayabusa2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
+    - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
+    - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
+    - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
+    - Add array_band_number attribute to Optical_Filter
+    - Add original_sample_bits to Sampling class
+
   
     </xs:documentation>
   </xs:annotation>
@@ -381,6 +391,7 @@
       <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Illumination" type="img:Illumination" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Filter" type="img:Image_Filter" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
@@ -391,8 +402,10 @@
       <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Spatial_Filter" type="img:Spatial_Filter" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Tiling" type="img:Tiling" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
@@ -1036,6 +1049,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="active_flag" type="img:active_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="horizon_mask_elevation" type="img:horizon_mask_elevation" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="processing_venue" type="img:processing_venue" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="processing_algorithm" type="img:processing_algorithm" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sequence_number" type="img:sequence_number" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1093,6 +1107,7 @@
       <xs:element ref="img:High_Dynamic_Range" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Histogram" type="img:Histogram" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Illumination" type="img:Illumination" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Image_Filter" type="img:Image_Filter" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Image_Mask" type="img:Image_Mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Onboard_Compression" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Optical_Filter" minOccurs="0" maxOccurs="unbounded"> </xs:element>
@@ -1103,7 +1118,9 @@
       <xs:element name="Row_Sum" type="img:Row_Sum" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Sampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Shutter_Subtraction" type="img:Shutter_Subtraction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Spatial_Filter" type="img:Spatial_Filter" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Tiling" type="img:Tiling" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element name="Thumbnail" type="img:Thumbnail" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Video" type="img:Video" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Instrument_State" minOccurs="0" maxOccurs="unbounded"> </xs:element>
@@ -1266,7 +1283,7 @@
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:onboard_compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')"/> -->
     <!-- <xs:assert test="img:onboard_compression_venue = ('Hardware', 'Software')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
@@ -1304,6 +1321,7 @@
       <xs:element name="filter_position_count" type="img:filter_position_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="bandwidth" type="img:bandwidth" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="center_filter_wavelength" type="img:center_filter_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="array_band_number" type="img:array_band_number" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="pds:Local_Internal_Reference" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
@@ -1480,6 +1498,7 @@
       <xs:element name="crosstrack_summing" type="img:crosstrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="downtrack_summing" type="img:downtrack_summing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="missing_pixel_count" type="img:missing_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="original_sample_bits" type="img:original_sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bits" type="img:sample_bits" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sample_bit_mask" type="img:sample_bit_mask" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="sampling_factor" type="img:sampling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1587,6 +1606,66 @@
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
 
+  <xs:complexType name="Tile">
+    <xs:annotation>
+      <xs:documentation>Contains parameters that describe how an image
+        was or will be broken into tiles, before reassembly into a
+        whole. This is generally intended for cameras that break up an
+        exposure into tiles for transmission, but can also be used to
+        describe tiling done by a ground system (e.g. for display
+        purposes) if needed. Tiles need not be regular nor do they need
+        to cover the entire area, and irregular tiles may overlap. Note
+        that the image in which this class appears is expected to
+        contain all the tiles (i.e. not just a single
+        tile).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tile_number" type="img:tile_number" minOccurs="1" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_num_bands" type="img:tile_num_bands" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_upsample_method" type="img:tile_upsample_method" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="0" maxOccurs="1">
+        <xs:element ref="pds:Internal_Reference"> </xs:element>
+        <xs:element ref="pds:Local_Internal_Reference"> </xs:element>
+        <xs:element ref="pds:External_Reference"> </xs:element>
+      </xs:choice>
+      <xs:element name="Pixel_Averaging_Dimensions" type="img:Pixel_Averaging_Dimensions" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element ref="img:Subframe" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:tile_upsample_method = ('Bilinear', 'None', 'Replication')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
+  <xs:complexType name="Tiling">
+    <xs:annotation>
+      <xs:documentation>Contains parameters that describe how an image
+        was or will be broken into tiles, before reassembly into a
+        whole. This is generally intended for cameras that break up an
+        exposure into tiles for transmission, but can also be used to
+        describe tiling done by a ground system (e.g. for display
+        purposes) if needed. Tiles need not be regular nor do they need
+        to cover the entire area, and irregular tiles may overlap. Note
+        that the image in which this class appears is expected to
+        contain all the tiles (i.e. not just a single
+        tile).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="description" type="pds:description" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="num_line_tiles" type="img:num_line_tiles" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="num_sample_tiles" type="img:num_sample_tiles" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_count" type="img:tile_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_lines" type="img:tile_lines" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_samples" type="img:tile_samples" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_type" type="img:tile_type" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="tile_venue" type="img:tile_venue" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Tile" type="img:Tile" minOccurs="0" maxOccurs="unbounded"> </xs:element>
+    </xs:sequence>
+    <!-- Begin assert statements for schematron - Enumerated Values -->
+    <!-- <xs:assert test="img:tile_type = ('Irregular', 'Regular')"/> -->
+    <!-- <xs:assert test="img:tile_venue = ('Ground', 'Onboard')"/> -->
+    <!-- End assert statements for schematron - Enumerated Values -->
+  </xs:complexType>
+
   <xs:complexType name="Video">
     <xs:annotation>
       <xs:documentation>The Video class contains attributes related to
@@ -1644,6 +1723,19 @@
     <xs:restriction base="pds:ASCII_Integer">
      <xs:minInclusive value="-9223372036854775808"/>
      <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="array_band_number">
+    <xs:annotation>
+      <xs:documentation>The array_band_number is the image plane (band)
+        in the array that corresponds to the optical filter with which
+        the image was acquired.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -2553,47 +2645,31 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="filter_window_line_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="filter_window_line">
+  <xs:simpleType name="filter_window_line">
     <xs:annotation>
       <xs:documentation>The size in pixels of the window used for
         filtering in the line dimension. If the window varies across the
         image, this could contain the average window or initial window,
         as needed by the specific algorithm.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:filter_window_line_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="filter_window_sample_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="filter_window_sample">
+  <xs:simpleType name="filter_window_sample">
     <xs:annotation>
       <xs:documentation>The size in pixels of the window used for
         filtering in the sample dimension. If the window varies across
         the image, this could contain the average window or initial
         window, as needed by the specific algorithm.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:filter_window_sample_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="first_line">
     <xs:annotation>
@@ -3222,47 +3298,31 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="max_filter_window_line_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="max_filter_window_line">
+  <xs:simpleType name="max_filter_window_line">
     <xs:annotation>
       <xs:documentation>The maximum size in pixels of the window used
         for filtering in the line dimension. If the window is constant
         across the image, filter_window_line should be used
         instead.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:max_filter_window_line_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="max_filter_window_sample_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="max_filter_window_sample">
+  <xs:simpleType name="max_filter_window_sample">
     <xs:annotation>
       <xs:documentation>The maximum size in pixels of the window used
         for filtering in the sample dimension. If the window is constant
         across the image, filter_window_sample should be used
         instead.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:max_filter_window_sample_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="maximum_focus_distance_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -3284,47 +3344,31 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:simpleType name="min_filter_window_line_WO_Units">
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="min_filter_window_line">
+  <xs:simpleType name="min_filter_window_line">
     <xs:annotation>
       <xs:documentation>The minimum size in pixels of the window used
         for filtering in the line dimension. If the window is constant
         across the image, filter_window_line should be used
         instead.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:min_filter_window_line_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:simpleType name="min_filter_window_sample_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="min_filter_window_sample">
+  <xs:simpleType name="min_filter_window_sample">
     <xs:annotation>
       <xs:documentation>The minimum size in pixels of the window used
         for filtering in the sample dimension. If the window is constant
         across the image, filter_window_sample should be used
         instead.</xs:documentation>
     </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="img:min_filter_window_sample_WO_Units">
-        <xs:attribute name="unit" type="pds:Units_of_Misc" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="minimum_focus_distance_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -3369,6 +3413,32 @@
     <xs:restriction base="pds:ASCII_Integer">
      <xs:minInclusive value="-9223372036854775808"/>
      <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="num_line_tiles">
+    <xs:annotation>
+      <xs:documentation>Defines the number of tiles in the line
+        direction for a regular tile. Not used for irregular
+        tiles.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="num_sample_tiles">
+    <xs:annotation>
+      <xs:documentation>Defines the number of tiles in the sample
+        direction for a regular tile. Not used for irregular
+        tiles.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3509,7 +3579,7 @@
         identifies the specific compression algorithm used (for example,
         ICER), whereas the onboard_compression_class gives a simple
         indicator of the type of compression mode. Valid values:
-        'Lossless', 'Lossy', 'Uncompressed'</xs:documentation>
+        'Lossless', 'Lossy', 'Uncompressed'. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -3583,7 +3653,8 @@
         identifies the type of on-board compression used for data
         storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO',
         'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless',
-        'None'.</xs:documentation>
+        'None', 'StarPixel Lossless', and 'StarPixel
+        Flexible'.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -3596,6 +3667,22 @@
       <xs:documentation> The onboard_compression_venue attribute
         specifies where the onboard compression was
         performed.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="original_sample_bits">
+    <xs:annotation>
+      <xs:documentation>The original_sample_bits specifies the number of
+        bits actually acquired by the sensor, before companding or other
+        manipulations. Contrast this with img:sample_bits, which
+        describes the current state of the image. Generally in a
+        companded image, sample_bits will be less than
+        original_sample_bits, while in a decompanded image they would be
+        equal.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -4267,6 +4354,109 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="tile_count">
+    <xs:annotation>
+      <xs:documentation>Defines the number of tiles in this set. Should
+        be present and equal to the number of Tile objects if Tile is
+        used; optional if Tile is not used.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_lines">
+    <xs:annotation>
+      <xs:documentation>Defines the number of lines in a regular tile.
+        Not used for irregular tiles.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_num_bands">
+    <xs:annotation>
+      <xs:documentation>Specifies the number of bands for this
+        tile.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_number">
+    <xs:annotation>
+      <xs:documentation>Specifies the tile number (array index),
+        starting at 1.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_samples">
+    <xs:annotation>
+      <xs:documentation>Defines the number of samples in a regular tile.
+        Not used for irregular tiles.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_type">
+    <xs:annotation>
+      <xs:documentation>Defines the type of tiles. Regular tiles are the
+        same size throughout (although the last row or column of tiles
+        might be smaller in order to fit the image size) and should have
+        tile_lines and tile_samples defined. Irregular tiles may have
+        different sizes per tile, described in each Tile
+        class.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_upsample_method">
+    <xs:annotation>
+      <xs:documentation>Specifies how tiles were upsampled (if needed)
+        to create the full image. Replication simply repeats the pixel
+        value as many times as necessary, Bilinear is bilinear
+        interpolation, and None means upsampling was not
+        necessary.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tile_venue">
+    <xs:annotation>
+      <xs:documentation>Specifies where the tiling was done. Generally,
+        Onboard indicates that this image is a reassembly of tiles sent
+        from the spacecraft, while Ground indicates a tile decomposition
+        after processing.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="valid_maximum_pixel">
     <xs:annotation>
