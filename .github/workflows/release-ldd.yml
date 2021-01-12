@@ -17,10 +17,36 @@ env:
   LOGS_PATH: ${{ format('{0}/{1}', github.workspace, 'logs') }}
 
 jobs:
-  build: # job 1
-    name: 'Tag and Release LDD'
+  get_versions:
+    name: Get Applicable PDS4 Versions
     runs-on: ubuntu-latest
     if: github.actor != 'pdsen-ci'
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - id: set-matrix
+        run: |
+          while read -r line; do
+              if [[ ! -z "$line" ]]; then
+                  versions=$versions'"'$line'"',
+              fi
+          done < $GITHUB_WORKSPACE/pds4_versions.txt
+          versions="[${versions::-1}]"
+          echo "{\"pds4_version\":${versions}}"
+          echo "::set-output name=matrix::{\"pds4_version\": $versions}"
+
+  build: # job 1
+    name: 'Tag and Release LDD'
+    needs: get_versions
+    runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
+
+    strategy:
+      matrix: ${{fromJson(needs.get_versions.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +70,7 @@ jobs:
       - name: Publish new release
         run: |
            pip install pds-github-util
-           ldd-release --ingest_ldd_src_dir ${{github.workspace}}/src --ldd_output_path ${{ env.DEPLOY_PATH }} --token ${{ secrets.GITHUB_TOKEN }}
+           ldd-release --ingest_ldd_src_dir ${{github.workspace}}/src --ldd_output_path ${{ env.DEPLOY_PATH }} --token ${{ secrets.GITHUB_TOKEN }} --pds4_version ${{matrix.pds4_version}}
 
       # - name: Push changes
       #   uses: ad-m/github-push-action@master
