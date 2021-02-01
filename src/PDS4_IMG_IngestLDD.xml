@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.2.0</ldd_version_id>
+  <ldd_version_id>1.8.3.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -149,9 +149,12 @@
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
     - Add original_sample_bits to Sampling class
-
+    
+    1.8.3.0 T.Hare
+    - add illumination_mode as an optional child of lllumination
+    
   </comment>
-  <last_modification_date_time>2020-11-14T15:05:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-02-01T11:15:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1933,6 +1936,22 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>illumination_mode</name>
+    <version_id>1.0</version_id>
+    <local_identifier>illumination_mode</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>illumination_mode describes what mode the illumination device is in. It 
+      could be used to indicate a common name for a particular configuration of activated 
+      lights, where there are many such devices. Current examples used include:
+      Red, Green, Blue, White, UV, SLI-A Dense, SLI-B Sparse, Other, Off</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -5852,6 +5871,12 @@
     <element_flag>false</element_flag>
     <DD_Association>
       <identifier_reference>pds.name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>illumination_mode</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
