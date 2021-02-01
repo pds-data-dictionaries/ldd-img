@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        0.0.0
-   LDD Version Id:        1.8.2.0
+   LDD Version Id:        1.8.3.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Feb 01 17:53:56 UTC 2021
+   Time                   Mon Feb 01 18:16:10 UTC 2021
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -30,8 +30,8 @@ Parameters:
 
 Summary:
    Classes                76
-   Attributes             201
-   Associations           408
+   Attributes             202
+   Associations           409
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -40,7 +40,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.8.2.0
+   LDD Version            1.8.3.0
    Full Name              Trent Hare
    Steward                img
    Namespace Id           img
@@ -178,9 +178,12 @@ Parsed Input - Header:
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
     - Add original_sample_bits to Sampling class
-
+    
+    1.8.3.0 T.Hare
+    - add illumination_mode as an optional child of lllumination
+    
   
-   Last Modification Time 2020-11-14T15:05:00Z
+   Last Modification Time 2021-02-01T11:15:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -706,6 +709,11 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Short_String_Collapsed
    description            Defines the illuminant that was used in order to process this image. The valid values are open-ended but examples of valid values include: None, D65, 3000K, 5000K.
+
+   name                   illumination_mode
+   version                1.14
+   value data type        ASCII_Short_String_Collapsed
+   description            illumination_mode describes what mode the illumination device is in. It could be used to indicate a common name for a particular configuration of activated lights, where there are many such devices. Current examples used include: Red, Green, Blue, White, UV, SLI-A Dense, SLI-B Sparse, Other, Off
 
    name                   illumination_wavelength
    version                1.14
@@ -2827,6 +2835,11 @@ Parsed Input - Classes:
    Associations
 
       local identifier      pds.name
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      illumination_mode
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
