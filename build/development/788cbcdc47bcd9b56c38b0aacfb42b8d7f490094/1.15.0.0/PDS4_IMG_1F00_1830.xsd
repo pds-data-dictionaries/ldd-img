@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.2.0 - Wed Dec 23 21:05:44 UTC 2020 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.3.0 - Mon Feb 01 18:30:16 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.8.2.0 - img: - Imaging                                                  -->
+  <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.8.3.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,9 +14,9 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.8.2.0">
+    version="1.8.3.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -154,7 +154,10 @@
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
     - Add original_sample_bits to Sampling class
-
+    
+    1.8.3.0 T.Hare
+    - add illumination_mode as an optional child of lllumination
+    
   
     </xs:documentation>
   </xs:annotation>
@@ -995,6 +998,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="illumination_mode" type="img:illumination_mode" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="LED_Illumination_Source" type="img:LED_Illumination_Source" minOccurs="0" maxOccurs="unbounded"> </xs:element>
     </xs:sequence>
   </xs:complexType>
@@ -3097,6 +3101,21 @@
         process this image. The valid values are open-ended but examples
         of valid values include: None, D65, 3000K,
         5000K.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="illumination_mode">
+    <xs:annotation>
+      <xs:documentation>illumination_mode describes what mode the
+        illumination device is in. It could be used to indicate a common
+        name for a particular configuration of activated lights, where
+        there are many such devices. Current examples used include: Red,
+        Green, Blue, White, UV, SLI-A Dense, SLI-B Sparse, Other,
+        Off</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>

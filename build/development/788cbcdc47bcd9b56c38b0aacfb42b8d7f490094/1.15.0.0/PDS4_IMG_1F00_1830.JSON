@@ -3,7 +3,7 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "Version": "1.15.0.0" ,
-      "Date": "Wed Dec 23 21:05:37 UTC 2020" ,
+      "Date": "Mon Feb 01 18:30:16 UTC 2021" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "classDictionary": [
         {
@@ -4495,6 +4495,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Illumination.img.illumination_mode" ,
+                "title": "illumination_mode" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Illumination.img.illumination_mode"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Illumination.img.LED_Illumination_Source" ,
                 "title": "LED_Illumination_Source" ,
                 "assocType": "component_of" ,
@@ -4504,7 +4520,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1020" ,
+                "classOrder": "1030" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.LED_Illumination_Source"
                  ]
@@ -11799,6 +11815,31 @@
             "steward": "img" ,
             "versionId": "1.15" ,
             "description": "The wavelet_filter attribute specifies thefilter used in the compression and decompression algorithm." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Illumination.img.illumination_mode" ,
+            "title": "illumination_mode" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.15" ,
+            "description": "illumination_mode describes what mode the illumination device is in. It could be used to indicate a common name for a particular configuration of activated lights, where there are many such devices. Current examples used include: Red, Green, Blue, White, UV, SLI-A Dense, SLI-B Sparse, Other, Off" ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
