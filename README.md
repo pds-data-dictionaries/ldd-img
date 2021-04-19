@@ -7,7 +7,7 @@ Steward: [IMG Node](https://pds-imaging.jpl.nasa.gov/)
 
 Only one LDD source version is kept such that it can be managed by github.
 
-- [PDS4_IMG_IngestLDD.xml](src) for PDS4 version 1.E.0.0 and 1.F.0.0
+- [src](src) for PDS4 version 1.E.0.0, 1.F.0.0, 1.G.0.0
 
 ## Versions
 
