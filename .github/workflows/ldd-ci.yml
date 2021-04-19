@@ -5,7 +5,7 @@ name: LDD Automation with PDSEN CI Bot
 on:
    push:
      branches:
-       - '*'
+       - '**'
        - '!master'
 
 env:
