@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.3.0 - Mon Feb 01 18:30:21 UTC 2021 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.4.0 - Mon Apr 19 16:27:24 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.8.3.0 - img: - Imaging                                                  -->
+  <!-- 1.8.4.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,7 +14,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.8.3.0">
+    version="1.8.4.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
  
@@ -156,7 +156,11 @@
     - Add original_sample_bits to Sampling class
     
     1.8.3.0 T.Hare
-    - add illumination_mode as an optional child of lllumination
+    - Added illumination_mode as an optional child of lllumination
+    
+    1.8.4.0 T.Hare
+    - Added "Always" and "None" as additional valids for shutter_subtraction_mode
+	  - Added frame_index to Focus_Stack class
     
   
     </xs:documentation>
@@ -898,6 +902,7 @@
         <xs:sequence>
           <xs:element name="focus_stack_flag" type="img:focus_stack_flag" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="frame_count" type="img:frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="frame_index" type="img:frame_index" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="focus_merge_blending_flag" type="img:focus_merge_blending_flag" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="focus_merge_registration_flag" type="img:focus_merge_registration_flag" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="delta_focus_count" type="img:delta_focus_count" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1525,7 +1530,7 @@
           <xs:element name="exposure_duration_threshold_count" type="img:exposure_duration_threshold_count" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
-        <!-- <xs:assert test="img:shutter_subtraction_mode = ('Conditional', 'True')"/> -->
+        <!-- <xs:assert test="img:shutter_subtraction_mode = ('Always', 'Conditional', 'None', 'True')"/> -->
         <!-- End assert statements for schematron - Enumerated Values -->
       </xs:extension>
     </xs:complexContent>

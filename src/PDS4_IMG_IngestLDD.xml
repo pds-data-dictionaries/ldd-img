@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.3.0</ldd_version_id>
+  <ldd_version_id>1.8.4.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -151,10 +151,14 @@
     - Add original_sample_bits to Sampling class
     
     1.8.3.0 T.Hare
-    - add illumination_mode as an optional child of lllumination
+    - Added illumination_mode as an optional child of lllumination
+    
+    1.8.4.0 T.Hare
+    - Added "Always" and "None" as additional valids for shutter_subtraction_mode
+	  - Added frame_index to Focus_Stack class
     
   </comment>
-  <last_modification_date_time>2021-02-01T11:15:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-04-19T09:00:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -3322,7 +3326,7 @@
   
   <DD_Attribute>
     <name>shutter_subtraction_mode</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>shutter_subtraction_mode</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
@@ -3339,6 +3343,14 @@
       <DD_Permissible_Value>
         <value>Conditional</value>
         <value_meaning>the exposure_duration_threshold_count will determine whether or not shutter subtraction will be performed</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Always</value>
+        <value_meaning>Always indicates the subtraction is, or will be, on regardless of other conditions</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>shutter subtraction was not used</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -5730,7 +5742,7 @@
   <!-- Class: Focus_Stack  -->
   <DD_Class>
     <name>Focus_Stack</name>
-    <version_id>1.1</version_id>
+    <version_id>1.2</version_id>
     <local_identifier>Focus_Stack</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The Focus_Stack class contains attributes that describe a set of images
@@ -5747,6 +5759,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>frame_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_index</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
