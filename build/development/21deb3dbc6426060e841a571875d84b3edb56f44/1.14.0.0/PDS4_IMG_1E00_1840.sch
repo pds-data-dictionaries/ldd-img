@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.3.0 - Tue Mar 30 00:23:58 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.4.0 - Mon Apr 19 16:27:24 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -152,8 +152,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
-        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
+      <sch:assert test="@unit = ('Hz')">
+        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -384,8 +384,8 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Shutter_Subtraction/img:shutter_subtraction_mode">
-      <sch:assert test=". = ('Conditional', 'True')">
-        The attribute img:shutter_subtraction_mode must be equal to one of the following values 'Conditional', 'True'.</sch:assert>
+      <sch:assert test=". = ('Always', 'Conditional', 'None', 'True')">
+        The attribute img:shutter_subtraction_mode must be equal to one of the following values 'Always', 'Conditional', 'None', 'True'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
