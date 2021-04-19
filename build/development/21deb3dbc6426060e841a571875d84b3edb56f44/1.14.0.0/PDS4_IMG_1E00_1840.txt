@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        0.0.0
-   LDD Version Id:        1.8.3.0
+   LDD Version Id:        1.8.4.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Tue Mar 30 00:23:57 UTC 2021
+   Time                   Mon Apr 19 16:27:24 UTC 2021
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                76
    Attributes             202
-   Associations           409
+   Associations           410
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -40,7 +40,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.8.3.0
+   LDD Version            1.8.4.0
    Full Name              Trent Hare
    Steward                img
    Namespace Id           img
@@ -180,10 +180,14 @@ Parsed Input - Header:
     - Add original_sample_bits to Sampling class
     
     1.8.3.0 T.Hare
-    - add illumination_mode as an optional child of lllumination
+    - Added illumination_mode as an optional child of lllumination
+    
+    1.8.4.0 T.Hare
+    - Added "Always" and "None" as additional valids for shutter_subtraction_mode
+	  - Added frame_index to Focus_Stack class
     
   
-   Last Modification Time 2021-02-01T11:15:00Z
+   Last Modification Time 2021-04-19T09:00:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -2741,6 +2745,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      frame_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      frame_index
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
