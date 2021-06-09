@@ -158,7 +158,7 @@
 	  - Added frame_index to Focus_Stack class
 
     1.8.5.0 T.Hare
-    - Added choice between Internal_Reference/External_Reference in Video class
+    - Added choice between Internal_Reference/External_Reference in Video class, created reference rules for it also
     - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
     - Added "H.264 Frame" enumeration to onboard_compression_type
     - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
@@ -7628,6 +7628,26 @@ product_flag.</definition>
       <rule_type>Assert</rule_type>
       <rule_test>pds:reference_type = 'data_to_tile_source_data'</rule_test>
       <rule_message>In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <DD_Rule>
+    <local_identifier>int_reference_type_check_video</local_identifier>
+    <rule_context>img:Video/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'video_frame_to_video'</rule_test>
+      <rule_message>In img:Video, Internal_Reference.reference_type must be equal to 'video_frame_to_video'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <DD_Rule>
+    <local_identifier>ext_reference_type_check_video</local_identifier>
+    <rule_context>img:Video/pds:External_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'video_frame_to_video'</rule_test>
+      <rule_message>In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
