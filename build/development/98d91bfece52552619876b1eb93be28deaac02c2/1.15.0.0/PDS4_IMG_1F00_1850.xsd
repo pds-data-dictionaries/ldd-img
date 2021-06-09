@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.5.0 - Wed Jun 09 23:00:21 UTC 2021 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.5.0 - Wed Jun 09 23:20:36 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
@@ -163,7 +163,7 @@
 	  - Added frame_index to Focus_Stack class
 
     1.8.5.0 T.Hare
-    - Added choice between Internal_Reference/External_Reference in Video class
+    - Added choice between Internal_Reference/External_Reference in Video class, created reference rules for it also
     - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
     - Added "H.264 Frame" enumeration to onboard_compression_type
     - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)

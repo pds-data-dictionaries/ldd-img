@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jun 09 23:00:23 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jun 09 23:20:36 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -60,6 +60,13 @@
       <sch:assert test="count(child::*) > 0">
         <title>exposure_child_check/Rule</title>
         IMG:error:exposure_child_check: img:Exposure must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Video/pds:External_Reference">
+      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
+        <title>ext_reference_type_check_video/Rule</title>
+        In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -175,9 +182,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('Hz')">
+      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
         <title>img:Detector/img:readout_rate/img:readout_rate</title>
-        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -543,6 +550,13 @@
       <sch:assert test="count(child::*) > 0">
         <title>inst_state_child_check/Rule</title>
         IMG:error:inst_state_child_check: img:Instrument_State must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Video/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
+        <title>int_reference_type_check_video/Rule</title>
+        In img:Video, Internal_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
