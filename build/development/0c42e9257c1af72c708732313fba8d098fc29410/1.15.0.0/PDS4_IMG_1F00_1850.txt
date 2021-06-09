@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        13.0.2
-   LDD Version Id:        1.8.4.0
+   LDD Version Id:        1.8.5.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Wed Jun 09 22:13:26 UTC 2021
+   Time                   Wed Jun 09 23:00:21 UTC 2021
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                76
    Attributes             202
-   Associations           410
+   Associations           412
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -40,7 +40,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.8.4.0
+   LDD Version            1.8.5.0
    Full Name              Trent Hare
    Steward                img
    Namespace Id           img
@@ -137,7 +137,7 @@ Parsed Input - Header:
     1.8.0.0 T.Hare
     - Update to PDS IM 1.E.0.0
     - Added GZIP and LZO to onboard_compression_type enumeration options
-    - Added Optical_Properties class with focel_length, f_number, zoom_position attributes
+    - Added Optical_Properties class with focal_length, f_number, zoom_position attributes
     - Added focus_initialization_flag attribute under the Focus class
     - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
     - Updated img_temperature_value to allow nillable=true
@@ -185,9 +185,16 @@ Parsed Input - Header:
     1.8.4.0 T.Hare
     - Added "Always" and "None" as additional valids for shutter_subtraction_mode
 	  - Added frame_index to Focus_Stack class
+
+    1.8.5.0 T.Hare
+    - Added choice between Internal_Reference/External_Reference in Video class
+    - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
+    - Added "H.264 Frame" enumeration to onboard_compression_type
+    - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
+    - Updated definition for tile_num_bands
     
   
-   Last Modification Time 2021-04-19T09:00:00Z
+   Last Modification Time 2021-06-09T14:00:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -856,7 +863,7 @@ Parsed Input - Attributes:
    name                   onboard_compression_type
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'.
+   description            The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'.
    minimum characters     1
    maximum characters     255
 
@@ -1066,7 +1073,7 @@ Parsed Input - Attributes:
    name                   sample_bit_mask
    version                1.15
    value data type        ASCII_Short_String_Collapsed
-   description            The sample_bit_mask attribute Specifies the active bits in a sample. Any bit mask is valid in an non-raw product. Any 8-bit product, whether a scaled raw product or other, will have the value "2#11111111" and be stored in one byte. Any 12-bit product, whether an unscaled raw product, or an ILUT partially-processed product (see companding_method), will have the value "2#0000111111111111" and be stored in two bytes. A 15-bit product (e.g. Radiometrically-corrected Calibrated product type) will have the value "2#0111111111111111" and be stored in two bytes. Any 32-bit integer product (e.g. Histogram Raw product) will have the value "2#11111111111111111111111111111111" and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value in the sample_bits attribute and only applies to integer values.
+   description            The sample_bit_mask attribute Specifies the active bits in a sample. Any bit mask is valid in an non-raw product. Any 8-bit product, whether a scaled raw product or other, will have the value "2#11111111" and be stored in one byte. Any 12-bit product, whether an unscaled raw product, or an ILUT partially-processed product (see companding_method), will have the value "2#0000111111111111" and be stored in two bytes. A 15-bit product (e.g. Radiometrically-corrected Calibrated product type) will have the value "2#0111111111111111" and be stored in two bytes. Any 32-bit integer product (e.g. Histogram Raw product) will have the value "2#11111111111111111111111111111111" and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value in the sample_bits attribute and only applies to unsigned integer values. Thus sample_bit_mask is not allowed for signed or floating-point types.
 
    name                   sample_bits
    version                1.15
@@ -1185,7 +1192,7 @@ Parsed Input - Attributes:
    name                   tile_num_bands
    version                1.15
    value data type        ASCII_NonNegative_Integer
-   description            Specifies the number of bands for this tile.
+   description            Specified the number of bands for this tile. The tile number of bands may not match the number of bands for the overall image, in which case it reflects the number of bands the original tile had before assembly, or the number of bands the tile should have after disassembly.
    minimum value          0
 
    name                   tile_number
@@ -3649,7 +3656,7 @@ Parsed Input - Classes:
    name                   Video
    description            The Video class contains attributes related to video observations, defined as a regular time series of frames. The class can be used to describe a single frame within the video, or the video as a whole.
    is abstract            false
-   is choice              false
+   is choice              true
    subclass of            USER
 
    Associations
@@ -3698,6 +3705,16 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+      local identifier      pds.Internal_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      pds.External_Reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
 
    name                   Spatial_Filter
    description            The Spatial_Filter class specifies what kind of spatial filtering has been done on the image. Spatial filtering looks at the geometry of pixels (e.g. XYZ or range values) rather than their intensity (cf. Image_Filter).

@@ -3,8 +3,8 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "IM Version": "1.15.0.0" ,
-      "LDD Version": "1.8.4.0" ,
-      "Date": "Wed Jun 09 22:13:26 UTC 2021" ,
+      "LDD Version": "1.8.5.0" ,
+      "Date": "Wed Jun 09 23:00:21 UTC 2021" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "namespaces": ["pds:", "img:"] ,
       "classDictionary": [
@@ -8463,7 +8463,7 @@
                 "isAttribute": "false" ,
                 "isChoice": "true" ,
                 "isAny": "false" ,
-                "groupName": "XSChoice#18" ,
+                "groupName": "XSChoice#19" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
                 "classOrder": "1050" ,
@@ -8821,6 +8821,23 @@
                 "classOrder": "1090" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Video.img.gop_start_index"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Video.pds.Internal_Reference" ,
+                "title": "Internal_Reference" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "true" ,
+                "isAny": "false" ,
+                "groupName": "XSChoice#18" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1110" ,
+                "classId": [
+                  "0001_NASA_PDS_1.pds.Internal_Reference",
+                  "0001_NASA_PDS_1.pds.External_Reference"
                  ]
               }
             }
@@ -13444,7 +13461,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.15" ,
-            "description": "The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'." ,
+            "description": "The onboard_compression_type attribute identifies the type of on-board compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None', 'StarPixel Lossless', and 'StarPixel Flexible'." ,
             "isNillable": "false" ,
             "isEnumerated": "true" ,
             "isDeprecated": "false" ,
@@ -13463,6 +13480,12 @@
               {"PermissibleValue": {
                   "value": "GZIP" ,
                   "valueMeaning": "GNU Gzip lossless compression using Lempel-Ziv coding (LZ77)" ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "H.264 Frame" ,
+                  "valueMeaning": "Frame extracted from a video encoded using the H.264 codec" ,
                   "isDeprecated": "false"
                 }
              }
@@ -14677,7 +14700,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.15" ,
-            "description": "The sample_bit_mask attribute Specifies the active bits in a sample. Any bit mask is valid in an non-raw product. Any 8-bit product, whether a scaled raw product or other, will have the value \"2#11111111\" and be stored in one byte. Any 12-bit product, whether an unscaled raw product, or an ILUT partially-processed product (see companding_method), will have the value \"2#0000111111111111\" and be stored in two bytes. A 15-bit product (e.g. Radiometrically-corrected Calibrated product type) will have the value \"2#0111111111111111\" and be stored in two bytes. Any 32-bit integer product (e.g. Histogram Raw product) will have the value \"2#11111111111111111111111111111111\" and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value in the sample_bits attribute and only applies to integer values." ,
+            "description": "The sample_bit_mask attribute Specifies the active bits in a sample. Any bit mask is valid in an non-raw product. Any 8-bit product, whether a scaled raw product or other, will have the value \"2#11111111\" and be stored in one byte. Any 12-bit product, whether an unscaled raw product, or an ILUT partially-processed product (see companding_method), will have the value \"2#0000111111111111\" and be stored in two bytes. A 15-bit product (e.g. Radiometrically-corrected Calibrated product type) will have the value \"2#0111111111111111\" and be stored in two bytes. Any 32-bit integer product (e.g. Histogram Raw product) will have the value \"2#11111111111111111111111111111111\" and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value in the sample_bits attribute and only applies to unsigned integer values. Thus sample_bit_mask is not allowed for signed or floating-point types." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
@@ -15505,7 +15528,7 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.15" ,
-            "description": "Specifies the number of bands for this tile." ,
+            "description": "Specified the number of bands for this tile. The tile number of bands may not match the number of bands for the overall image, in which case it reflects the number of bands the original tile had before assembly, or the number of bands the tile should have after disassembly." ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.4.0 - Wed Jun 09 22:13:24 UTC 2021 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jun 09 23:00:23 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -354,9 +354,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_type">
-      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
+      <sch:assert test=". = ('GZIP', 'H.264 Frame', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
         <title>img:Onboard_Compression/img:onboard_compression_type/img:onboard_compression_type</title>
-        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
+        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'H.264 Frame', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -606,6 +606,13 @@
       <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
         <title>reference_type_check_hdre/Rule</title>
         In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Tile/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_tile_source_data'">
+        <title>reference_type_check_tile/Rule</title>
+        In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
