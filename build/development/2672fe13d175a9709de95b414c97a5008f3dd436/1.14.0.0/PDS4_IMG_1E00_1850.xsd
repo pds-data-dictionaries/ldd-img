@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.4.0 - Tue May 04 05:12:30 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.5.0 - Thu Jun 10 00:15:11 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.8.4.0 - img: - Imaging                                                  -->
+  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.8.5.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,9 +14,9 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.8.4.0">
+    version="1.8.5.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -113,7 +113,7 @@
     1.8.0.0 T.Hare
     - Update to PDS IM 1.E.0.0
     - Added GZIP and LZO to onboard_compression_type enumeration options
-    - Added Optical_Properties class with focel_length, f_number, zoom_position attributes
+    - Added Optical_Properties class with focal_length, f_number, zoom_position attributes
     - Added focus_initialization_flag attribute under the Focus class
     - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
     - Updated img_temperature_value to allow nillable=true
@@ -161,6 +161,13 @@
     1.8.4.0 T.Hare
     - Added "Always" and "None" as additional valids for shutter_subtraction_mode
 	  - Added frame_index to Focus_Stack class
+
+    1.8.5.0 T.Hare
+    - Added choice between Internal_Reference/External_Reference in Video class, created reference rules for it also
+    - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
+    - Added "H.264 Frame" enumeration to onboard_compression_type
+    - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
+    - Updated definition for tile_num_bands
     
   
     </xs:documentation>
@@ -1292,7 +1299,7 @@
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test="img:onboard_compression_class = ('Lossless', 'Lossy', 'Uncompressed')"/> -->
-    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')"/> -->
+    <!-- <xs:assert test="img:onboard_compression_type = ('GZIP', 'H.264 Frame', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')"/> -->
     <!-- <xs:assert test="img:onboard_compression_venue = ('Hardware', 'Software')"/> -->
     <!-- End assert statements for schematron - Enumerated Values -->
   </xs:complexType>
@@ -1692,6 +1699,10 @@
       <xs:element name="gop_frame_index" type="img:gop_frame_index" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="gop_frame_count" type="img:gop_frame_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="gop_start_index" type="img:gop_start_index" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:choice minOccurs="0" maxOccurs="1">
+        <xs:element ref="pds:Internal_Reference"> </xs:element>
+        <xs:element ref="pds:External_Reference"> </xs:element>
+      </xs:choice>
     </xs:sequence>
     <!-- Begin assert statements for schematron - Enumerated Values -->
     <!-- <xs:assert test=")"/> -->
@@ -3675,10 +3686,10 @@
     <xs:annotation>
       <xs:documentation>The onboard_compression_type attribute
         identifies the type of on-board compression used for data
-        storage and transmission. Valid Values: 'GZIP', 'ICER', 'LOCO',
-        'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless',
-        'None', 'StarPixel Lossless', and 'StarPixel
-        Flexible'.</xs:documentation>
+        storage and transmission. Valid Values: 'GZIP', 'ICER', 'H.264
+        Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS
+        Lossless', 'Lossless', 'None', 'StarPixel Lossless', and
+        'StarPixel Flexible'.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -4056,7 +4067,8 @@
         may be absent. If present, it should be ignored. NOTE: In the
         PDS, the domain of sample_bit_mask is dependent upon the
         currently-described value in the sample_bits attribute and only
-        applies to integer values.</xs:documentation>
+        applies to unsigned integer values. Thus sample_bit_mask is not
+        allowed for signed or floating-point types.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -4406,8 +4418,11 @@
 
   <xs:simpleType name="tile_num_bands">
     <xs:annotation>
-      <xs:documentation>Specifies the number of bands for this
-        tile.</xs:documentation>
+      <xs:documentation>Specified the number of bands for this tile. The
+        tile number of bands may not match the number of bands for the
+        overall image, in which case it reflects the number of bands the
+        original tile had before assembly, or the number of bands the
+        tile should have after disassembly.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_NonNegative_Integer">
     	<xs:pattern value='[0-9]+'/>

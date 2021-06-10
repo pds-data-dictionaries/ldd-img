@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.4.0</ldd_version_id>
+  <ldd_version_id>1.8.5.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -108,7 +108,7 @@
     1.8.0.0 T.Hare
     - Update to PDS IM 1.E.0.0
     - Added GZIP and LZO to onboard_compression_type enumeration options
-    - Added Optical_Properties class with focel_length, f_number, zoom_position attributes
+    - Added Optical_Properties class with focal_length, f_number, zoom_position attributes
     - Added focus_initialization_flag attribute under the Focus class
     - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
     - Updated img_temperature_value to allow nillable=true
@@ -156,9 +156,16 @@
     1.8.4.0 T.Hare
     - Added "Always" and "None" as additional valids for shutter_subtraction_mode
 	  - Added frame_index to Focus_Stack class
+
+    1.8.5.0 T.Hare
+    - Added choice between Internal_Reference/External_Reference in Video class, created reference rules for it also
+    - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
+    - Added "H.264 Frame" enumeration to onboard_compression_type
+    - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
+    - Updated definition for tile_num_bands
     
   </comment>
-  <last_modification_date_time>2021-04-19T09:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-06-09T14:00:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -2365,7 +2372,8 @@
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
-      'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 'Lossless', 'None',
+      'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 
+      'Lossless', 'None',
       'StarPixel Lossless', and 'StarPixel Flexible'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
@@ -2376,6 +2384,10 @@
       <DD_Permissible_Value>
         <value>GZIP</value>
         <value_meaning>GNU Gzip lossless compression using Lempel-Ziv coding (LZ77)</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>H.264 Frame</value>
+        <value_meaning>Frame extracted from a video encoded using the H.264 codec</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>ICER</value>
@@ -3126,7 +3138,7 @@
   
   <DD_Attribute>
     <name>sample_bit_mask</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>sample_bit_mask</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
@@ -3138,7 +3150,8 @@
       Any 32-bit integer product (e.g. Histogram Raw product) will have the value "2#11111111111111111111111111111111" 
       and be stored in four bytes. For floating-point data, sample_bit_mask is not valid and may be absent. If present, it 
       should be ignored. NOTE: In the PDS, the domain of sample_bit_mask is dependent upon the currently-described value 
-      in the sample_bits attribute and only applies to integer values.</definition>
+      in the sample_bits attribute and only applies to unsigned integer values. Thus sample_bit_mask is not allowed for
+      signed or floating-point types.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -3531,11 +3544,13 @@
 
   <DD_Attribute>
     <name>tile_num_bands</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>tile_num_bands</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>Specifies the number of bands for this tile.</definition>
+    <definition>Specified the number of bands for this tile. The tile number of bands may not match the 
+      number of bands for the overall image, in which case it reflects the number of bands the original 
+      tile had before assembly, or the number of bands the tile should have after disassembly.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -6985,6 +7000,14 @@ product_flag.</definition>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>pds.Internal_Reference</identifier_reference>
+      <identifier_reference>pds.External_Reference</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Spatial_Filter -->
@@ -7597,7 +7620,37 @@ product_flag.</definition>
       <rule_message>In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>reference_type_check_tile</local_identifier>
+    <rule_context>img:Tile/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'data_to_tile_source_data'</rule_test>
+      <rule_message>In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
 
+  <DD_Rule>
+    <local_identifier>int_reference_type_check_video</local_identifier>
+    <rule_context>img:Video/pds:Internal_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'video_frame_to_video'</rule_test>
+      <rule_message>In img:Video, Internal_Reference.reference_type must be equal to 'video_frame_to_video'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+
+  <DD_Rule>
+    <local_identifier>ext_reference_type_check_video</local_identifier>
+    <rule_context>img:Video/pds:External_Reference</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>pds:reference_type = 'video_frame_to_video'</rule_test>
+      <rule_message>In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
   <!--DD_Rule>  ** Not needed for now
     <local_identifier>reference_type_check_onboard_compression</local_identifier>
     <rule_context>img:Onboard_Compression/pds:Internal_Reference</rule_context>

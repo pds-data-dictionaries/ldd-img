@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.4.0 - Tue May 04 05:12:30 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Thu Jun 10 00:15:11 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.16.0.0 - System Build 11.1 -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -60,6 +60,13 @@
       <sch:assert test="count(child::*) > 0">
         <title>exposure_child_check/Rule</title>
         IMG:error:exposure_child_check: img:Exposure must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Video/pds:External_Reference">
+      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
+        <title>ext_reference_type_check_video/Rule</title>
+        In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -168,16 +175,16 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:instrument_idle_timeout">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Detector/img:instrument_idle_timeout/img:instrument_idle_timeout</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('Hz')">
+      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
         <title>img:Detector/img:readout_rate/img:readout_rate</title>
-        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -203,9 +210,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -277,16 +284,16 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_time_delta">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_time_delta/img:exposure_time_delta</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -354,9 +361,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Onboard_Compression/img:onboard_compression_type">
-      <sch:assert test=". = ('GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
+      <sch:assert test=". = ('GZIP', 'H.264 Frame', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless')">
         <title>img:Onboard_Compression/img:onboard_compression_type/img:onboard_compression_type</title>
-        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
+        The attribute img:onboard_compression_type must be equal to one of the following values 'GZIP', 'H.264 Frame', 'ICER', 'ICT', 'JPEG', 'JPEG Progressive', 'LOCO', 'LZO', 'Lossless', 'MSSS Lossless', 'None', 'StarPixel Flexible', 'StarPixel Lossless'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -396,30 +403,30 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:height_pixels">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:height_pixels/img:height_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:width_pixels">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:width_pixels/img:width_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:x_center">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:x_center/img:x_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:y_center">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:y_center/img:y_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -519,9 +526,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:frame_interval">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Video/img:frame_interval/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -533,9 +540,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:interframe_delay">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Video/img:interframe_delay/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -543,6 +550,13 @@
       <sch:assert test="count(child::*) > 0">
         <title>inst_state_child_check/Rule</title>
         IMG:error:inst_state_child_check: img:Instrument_State must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Video/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
+        <title>int_reference_type_check_video/Rule</title>
+        In img:Video, Internal_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -606,6 +620,13 @@
       <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
         <title>reference_type_check_hdre/Rule</title>
         In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Tile/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_tile_source_data'">
+        <title>reference_type_check_tile/Rule</title>
+        In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
