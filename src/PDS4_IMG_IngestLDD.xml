@@ -167,9 +167,11 @@
     - added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
     starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
     - updated to main (required github move)
+    - changed filter_position_count to allow for negative values
+    - changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
 
   </comment>
-  <last_modification_date_time>2021-06-09T14:00:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-13T17:55:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1194,7 +1196,7 @@
   
   <DD_Attribute>
     <name>exposure_duration_count</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>exposure_duration_count</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
@@ -1210,7 +1212,7 @@
       mission.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1424,7 +1426,7 @@
     <definition>The filter position count is the position in motor counts of the filter wheel motor.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
