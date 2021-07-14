@@ -70,7 +70,6 @@
     
     1.7.1.0, T.Hare
     - Added filter
-    - Added GOP_Frames
     - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
     - Added detector_to_image_flip
     - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
@@ -163,7 +162,12 @@
     - Added "H.264 Frame" enumeration to onboard_compression_type
     - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
     - Updated definition for tile_num_bands
-    
+
+    1.8.6.0. T.Hare
+    - added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
+    starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
+    - updated to main (required github move)
+
   </comment>
   <last_modification_date_time>2021-06-09T14:00:00Z</last_modification_date_time>
 
@@ -1680,9 +1684,13 @@
     <local_identifier>frame_index</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>The frame_index attribute specifies the sequence number of this frame in 
-      the context of the entire video, i.e. the first frame of the video would be 
-      index 1, up to frame_count.</definition>
+    <definition>When in a Video class, the frame_index attribute specifies the 
+      sequence number of this frame in the context of the entire video, 
+      i.e. the first frame of the video would be index 1, up to frame_count.
+      
+      When in a Focus_Stack class, the frame_index attribute specifies the 
+      index of the first frame used to make up the focus stack.
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -3336,6 +3344,21 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>segment_corrupted_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>segment_corrupted_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The segment_corrupted_flag specifies whether the segment is corrupted (or bad). Valid values are "true" or "false".
+      If the value is true, the segment is corrupted, and if the value is false, the segment is not corrupted.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>shutter_subtraction_mode</name>
@@ -3395,6 +3418,44 @@
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>starpixel_initial_subsampling_interval</name>
+    <version_id>1.0</version_id>
+    <local_identifier>starpixel_initial_subsampling_interval</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Shin-ya Murakami</submitter_name>
+    <definition>
+      The value gives exponent n for initial subsampling interval 2**n.
+      See Takada+2007 (https://doi.org/10.1109/IGARSS.2007.4422835) for the detail.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <maximum_value>8</maximum_value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>starpixel_degradation</name>
+    <version_id>1.0</version_id>
+    <local_identifier>starpixel_degradation</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Shin-ya Murakami</submitter_name>
+    <definition>
+      The value is degradation parameter. Then the value of the
+      degradation parameter is higher, the quality of lossy compressed image
+      will be worse, and the value is lower, the quality will be better.
+      If value of degradation parameter is 0, there will be no degradation.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>0</minimum_value>
+      <maximum_value>32</maximum_value>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -4892,12 +4953,14 @@
         <identifier_reference>LOCO_Parameters</identifier_reference>
         <identifier_reference>JPEG_Parameters</identifier_reference>
         <identifier_reference>JPEG_Progressive_Parameters</identifier_reference>
+        <identifier_reference>StarPixel_Flexible_Parameters</identifier_reference>
+        <identifier_reference>StarPixel_Lossless_Parameters</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>  
-  
+
   <!-- Class: Correction_Parameter  -->
   <DD_Class>
     <name>Correction_Parameter</name>
@@ -6011,6 +6074,12 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>segment_corrupted_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>missing_pixel_count</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -6813,6 +6882,69 @@ product_flag.</definition>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!--  Class: StarPixel_Lossless_Parameters  -->
+  <DD_Class>
+    <name>StarPixel_Lossless_Parameters</name>
+    <version_id>1.0</version_id>
+    <local_identifier>StarPixel_Lossless_Parameters</local_identifier>
+    <submitter_name>Shin-ya Murakami</submitter_name>
+    <definition>
+      The StarPixel_Lossless_Parameters class contains attributes describing onboard
+      compression parameters specific to StarPixel Lossless image compression.
+      StarPixel Lossless is developed based on FELICS and used by the JAXA's spacecrafts,
+      Akatsuki and Hayabusa2. StarPixel Lossless is a lossless compression algorithm
+      and also known as HIREW.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>starpixel_initial_subsampling_interval</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Image_Compression_Segment</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!--  Class: StarPixel_Flexible_Parameters  -->
+  <DD_Class>
+    <name>StarPixel_Flexible_Parameters</name>
+    <version_id>1.0</version_id>
+    <local_identifier>StarPixel_Flexible_Parameters</local_identifier>
+    <submitter_name>Shin-ya Murakami</submitter_name>
+    <definition>
+      The StarPixel_Flexible_Parameters class contains attributes describing onboard
+      compression parameters specific to StarPixel Flexible image compression.
+      StarPixel Flexible is developed based on StarPixel Lossless and used by the JAXA's spacecraft,
+      Hayabusa2. StarPixel Flexible is a lossy compression algorithm.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>starpixel_initial_subsampling_interval</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>starpixel_degradation</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>   
+    <DD_Association>
+      <identifier_reference>Image_Compression_Segment</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
 
@@ -7648,6 +7780,26 @@ product_flag.</definition>
       <rule_type>Assert</rule_type>
       <rule_test>pds:reference_type = 'video_frame_to_video'</rule_test>
       <rule_message>In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>starpixel_lossless_params_child_check</local_identifier>
+    <rule_context>//img:StarPixel_Lossless_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:starpixel_lossless_params_child_check: img:StarPixel_Lossless_Parameters must have at least 1 attribute or class specified.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>starpixel_flexible_params_child_check</local_identifier>
+    <rule_context>//img:StarPixel_Flexible_Parameters</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>count(child::*) > 0</rule_test>
+      <rule_message>IMG:error:starpixel_flexible_params_child_check: img:StarPixel_Flexible_Parameters must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
   
