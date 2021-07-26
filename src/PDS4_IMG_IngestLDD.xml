@@ -172,10 +172,10 @@
     - Allow frame_index to be negative as seen returned during M2020 mission
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
-    - Update modification time and planning for release to support M2020 PDS release #1
+    - Update modification time and planning for release to support first M2020 PDS release
 
   </comment>
-  <last_modification_date_time>2021-07-26T11:55:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-26T13:12:00Z</last_modification_date_time>
 
 
   <!--                     -->
