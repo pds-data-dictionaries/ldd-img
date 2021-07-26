@@ -170,9 +170,10 @@
     - Changed filter_position_count to allow for negative values
     - Changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
     - Allow frame_index to be negative as seen returned during M2020 mission
+    - Update modification time and planning for release to support M2020 PDS release #1
 
   </comment>
-  <last_modification_date_time>2021-07-13T17:55:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-26T11:40:00Z</last_modification_date_time>
 
 
   <!--                     -->
