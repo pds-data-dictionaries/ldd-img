@@ -170,10 +170,12 @@
     - Changed filter_position_count to allow for negative values
     - Changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
     - Allow frame_index to be negative as seen returned during M2020 mission
+    - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
+    deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
     - Update modification time and planning for release to support M2020 PDS release #1
 
   </comment>
-  <last_modification_date_time>2021-07-26T11:40:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-26T11:55:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -3099,6 +3101,20 @@
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
       to the red channel of an image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>responsivity_std</name>
+    <version_id>1.0</version_id>
+    <local_identifier>responsivity_std</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the 1-sigma standard deviation for the radiometric coefficients.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -6621,6 +6637,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>responsivity_pan</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>responsivity_std</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
