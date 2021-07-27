@@ -172,10 +172,12 @@
     - Allow frame_index to be negative as seen returned during M2020 mission
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
+    - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
+    and iof_conversion_coefficient_std to the Radiometric_Correction class 
     - Update modification time and planning for release to support first M2020 PDS release
 
   </comment>
-  <last_modification_date_time>2021-07-26T13:12:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-27T12:34:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1760,6 +1762,23 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>focus_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>focus_distance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The nominal focus distance for the instrument (e.g. in meters or mm). 
+      This is often the commanded value, or autofocus seed value, but can also be used 
+      to indicate a nominal distance where the connotation of "best" is not appropriate 
+      (see best_focus_distance).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>gain_mode_id</name>
     <version_id>1.0</version_id>
     <local_identifier>gain_mode_id</local_identifier>
@@ -2050,6 +2069,34 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>iof_conversion_coefficient</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iof_conversion_coefficient</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Radiance factor (IOF) conversion coefficient.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>iof_conversion_coefficient_std</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iof_conversion_coefficient_std</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>1-sigma standard deviation for the radiance factor (IOF) conversion coefficient.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>jpeg_parameter</name>
     <version_id>1.0</version_id>
     <local_identifier>jpeg_parameter</local_identifier>
@@ -2125,23 +2172,6 @@
     <submitter_name>Danika F. Wellington</submitter_name>
     <definition>The maximum_focus_distance attribute specifies the estimated distance to the 
       farthest pixel with less than 1 pixel of gaussian blur.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-
-  <DD_Attribute>
-    <name>focus_distance</name>
-    <version_id>1.0</version_id>
-    <local_identifier>focus_distance</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Trent Hare</submitter_name>
-    <definition>The nominal focus distance for the instrument (e.g. in meters or mm). 
-      This is often the commanded value, or autofocus seed value, but can also be used 
-      to indicate a nominal distance where the connotation of "best" is not appropriate 
-      (see best_focus_distance).</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2937,19 +2967,23 @@
   
   <DD_Attribute>
     <name>radiometric_type</name>
-    <version_id>1.1</version_id>
+    <version_id>1.2</version_id>
     <local_identifier>radiometric_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>The radiometric_type defines the specific type of radiance measurement. 
-      Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance".
-      Note: There are many more possible values, and this definition can be updated to include
-      more examples over time.
+      Possible values include "Radiance", "Radiance Factor", "Spectral Radiance", 
+      "Scaled Spectral Radiance", and "No CFA". Note: There are many more possible 
+      values, and this definition can be updated to include more examples over time.
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Radiance Factor</value>
+        <value_meaning>Radiance Factor (also called I/F or IOF).</value_meaning>
+      </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Spectral Radiance</value>
         <value_meaning>Radiometric correction results are expressed in units of Spectral 
@@ -6598,7 +6632,7 @@
   <!-- Class: Radiometric_Correction -->
   <DD_Class>
     <name>Radiometric_Correction</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Radiometric_Correction</local_identifier>
     <submitter_name>Jordan Padams</submitter_name>
     <definition> The Radiometric_Correction class is a container for the type and details
@@ -6655,6 +6689,18 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>atmospheric_opacity_reference</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>iof_conversion_coefficient</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>iof_conversion_coefficient_std</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
