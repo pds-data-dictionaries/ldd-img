@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Wed Jul 28 16:29:29 UTC 2021
+   Time                   Wed Jul 28 17:39:05 UTC 2021
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
@@ -30,8 +30,8 @@ Parameters:
 
 Summary:
    Classes                78
-   Attributes             208
-   Associations           423
+   Attributes             209
+   Associations           424
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -202,12 +202,12 @@ Parsed Input - Header:
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
     - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
-    and iof_conversion_coefficient_std to the Radiometric_Correction class 
+    and iof_conversion_coefficient_std to the Radiometric_Correction class
+    - Add effective_wavelength to Radiometric_Correction class
     - Update modification time and planning for release to support first M2020 PDS release
 
-	  
   
-   Last Modification Time 2021-07-27T12:34:00Z
+   Last Modification Time 2021-07-27T15:47:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -467,6 +467,12 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Boolean
    description            If true, indicates that the companding was or should be done "early" in the onboard processing chain, for instruments where there is an option. For MSL, early processing is where the image is prepared for use by any client, including those on board, such as rotation, bad pixels, flat field, early scaling, and camera model production. Contrast that with late processing, which includes compression and telemetry generation, and processing for thumbnails, subframes, histograms, and row/column sums.
+
+   name                   effective_wavelength
+   version                1.15
+   value data type        ASCII_Real
+   description            Defines the weighted average of the system response and solar spectrum.
+   unit of measure type   Units_of_Length
 
    name                   encoded_display_gamma
    version                1.15
@@ -3424,6 +3430,11 @@ Parsed Input - Classes:
       reference type        attribute_of
 
       local identifier      atmospheric_opacity_reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      effective_wavelength
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of

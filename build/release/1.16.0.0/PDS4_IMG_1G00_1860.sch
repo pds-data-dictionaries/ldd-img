@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Wed Jul 28 16:29:34 UTC 2021 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Wed Jul 28 17:39:03 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.16.0.0 - System Build 11.1 -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -434,6 +434,13 @@
       <sch:assert test="if (img:active_flag) then img:active_flag = ('true', 'false') else true()">
         <title>img:Radiometric_Correction/img:active_flag</title>
         The attribute img:active_flag must be equal to one of the following values 'true', 'false'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction/img:effective_wavelength">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        <title>img:Radiometric_Correction/img:effective_wavelength/img:effective_wavelength</title>
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

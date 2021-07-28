@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.6.0 - Wed Jul 28 16:29:29 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.6.0 - Wed Jul 28 17:39:04 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
   <!-- 1.8.6.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
@@ -16,7 +16,7 @@
     attributeFormDefault="unqualified"
     version="1.8.6.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -178,10 +178,10 @@
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
     - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
-    and iof_conversion_coefficient_std to the Radiometric_Correction class 
+    and iof_conversion_coefficient_std to the Radiometric_Correction class
+    - Add effective_wavelength to Radiometric_Correction class
     - Update modification time and planning for release to support first M2020 PDS release
 
-	  
   
     </xs:documentation>
   </xs:annotation>
@@ -1486,6 +1486,7 @@
           <xs:element name="responsivity_std" type="img:responsivity_std" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="atmospheric_opacity" type="img:atmospheric_opacity" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="atmospheric_opacity_reference" type="img:atmospheric_opacity_reference" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="effective_wavelength" type="img:effective_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="iof_conversion_coefficient" type="img:iof_conversion_coefficient" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="iof_conversion_coefficient_std" type="img:iof_conversion_coefficient_std" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -2431,6 +2432,25 @@
     <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="effective_wavelength_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="effective_wavelength">
+    <xs:annotation>
+      <xs:documentation>Defines the weighted average of the system
+        response and solar spectrum.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:effective_wavelength_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="encoded_display_gamma">
     <xs:annotation>
