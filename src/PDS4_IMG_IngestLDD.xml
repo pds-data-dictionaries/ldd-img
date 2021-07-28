@@ -173,12 +173,12 @@
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
     - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
-    and iof_conversion_coefficient_std to the Radiometric_Correction class 
+    and iof_conversion_coefficient_std to the Radiometric_Correction class
+    - Add effective_wavelength to Radiometric_Correction class
     - Update modification time and planning for release to support first M2020 PDS release
 
-	  
   </comment>
-  <last_modification_date_time>2021-07-27T12:34:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-27T15:47:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1115,6 +1115,20 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>effective_wavelength</name>
+    <version_id>1.0</version_id>
+    <local_identifier>effective_wavelength</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Defines the weighted average of the system response and solar spectrum.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -6690,6 +6704,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>atmospheric_opacity_reference</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>effective_wavelength</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
