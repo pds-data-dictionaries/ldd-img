@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.6.0 - Thu Jul 29 01:39:03 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.16.0.0 - System Build 11.1 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.6.0 - Thu Jul 29 01:49:06 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
-  <!-- 1.16.0.0 - pds: - Common Dictionary                                       -->
+  <!-- 1.14.0.0 - pds: - Common Dictionary                                       -->
   <!-- 1.8.6.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
@@ -16,7 +16,7 @@
     attributeFormDefault="unqualified"
     version="1.8.6.0">
  
-    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1G00.xsd"/>
+    <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd"/>
  
   <xs:annotation>
     <xs:documentation>
@@ -408,6 +408,7 @@
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Data_Quality" type="img:Data_Quality" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -4738,16 +4739,24 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="threshold_value">
-    <xs:annotation>
-      <xs:documentation>Value used to define a level that triggers a
-        defined behavior. </xs:documentation>
-    </xs:annotation>
+  <xs:simpleType name="threshold_value_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
      <xs:maxInclusive value="1.7976931348623157e308"/>
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="threshold_value">
+    <xs:annotation>
+      <xs:documentation>Value used to define a level that triggers a
+        defined behavior. </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:threshold_value_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="tile_count">
     <xs:annotation>

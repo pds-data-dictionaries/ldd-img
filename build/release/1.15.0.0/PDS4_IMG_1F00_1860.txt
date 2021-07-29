@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Jul 29 01:39:10 UTC 2021
+   Time                   Thu Jul 29 01:48:58 UTC 2021
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
@@ -31,7 +31,7 @@ Parameters:
 Summary:
    Classes                82
    Attributes             226
-   Associations           449
+   Associations           450
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -1413,6 +1413,7 @@ Parsed Input - Attributes:
    version                1.15
    value data type        ASCII_Real
    description            Value used to define a level that triggers a defined behavior. 
+   unit of measure type   Units_of_Spectral_Radiance
 
    name                   wrong_filter_flag
    version                1.15
@@ -1919,6 +1920,11 @@ Parsed Input - Classes:
       local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Data_Quality
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
