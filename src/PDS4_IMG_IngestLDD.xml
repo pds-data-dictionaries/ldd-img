@@ -172,13 +172,13 @@
     - Allow frame_index to be negative as seen returned during M2020 mission
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
-    - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
+    - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
     and iof_conversion_coefficient_std to the Radiometric_Correction class
-    - Add effective_wavelength to Radiometric_Correction class
-    - Update modification time and planning for release to support first M2020 PDS release
+    - Added effective_wavelength to Radiometric_Correction class
+    - Added new Data_Quality Class and required several required classes and attributes to support it. 
 
   </comment>
-  <last_modification_date_time>2021-07-27T15:47:00Z</last_modification_date_time>
+  <last_modification_date_time>2021-07-28T18:36:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -2997,7 +2997,11 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
         <value>Radiance Factor</value>
-        <value_meaning>Radiance Factor (also called I/F or IOF).</value_meaning>
+        <value_meaning>Radiance Factor also known as I/F or IOF. Some images are scaled to absolute 
+          radiance units, then divided by the absolute radiance of the Sun at the top of the planet's
+          atmosphere to generate radiance factor, or "I over F" values, where I is the radiance from
+          the surface (scene) and F is the radiance from the Sun at the top of the planet's atmosphere. 
+        </value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Spectral Radiance</value>
@@ -3829,9 +3833,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
-
-
+ 
   <DD_Attribute>
     <name>valid_maximum_pixel</name>
     <version_id>1.0</version_id>
@@ -3999,6 +4001,286 @@
   </DD_Attribute>
 
 
+  <!-- Start Attributes: for Data_Qulaity Class   -->
+ 
+  <DD_Attribute>
+    <name>above_aft_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>above_aft_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes the camera mechanism was above allowable 
+      flight temperature at time of acquisition.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>below_aft_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>below_aft_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes the camera mechanism was above allowable 
+      flight temperature at time of acquisition.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>dq_bayer_cell</name>
+    <version_id>1.0</version_id>
+    <local_identifier>dq_bayer_cell</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>Specifies the Bayer cell to which the data quality indicators apply. 
+      bayer_cell can be used even if the image has been debayered, in which case it 
+      refers to the original debayered image. Note that “green_1” and “green_2" can 
+      be used to refer to specific green Bayer cells, or “green” refers to both greens
+      together.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>dq_band</name>
+    <version_id>1.0</version_id>
+    <local_identifier>dq_band</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>Specifies the sequence number in the data array to which the data 
+      quality indicators apply.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>full_well_limit_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>full_well_limit_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes we have reached/exceeded the full well 
+      value of the CCD detector.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>missing_temperature_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>missing_temperature_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes temperature data was missing at time 
+      of image acquisition.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>no_signal_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>no_signal_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>Integer number of pixels that received no signal above bias.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>out_of_focus_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>out_of_focus_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes this image failed to find focus. Focus 
+      was commanded using autofocus or manual. 
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>pixel_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pixel_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>Integer number of pixels currently to list the total number of pixels as used 
+      in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>saturated_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>saturated_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes that there exists pixels within the 
+      image that have reached or exceeded the maximum pixel value. 
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>sequence_terminated_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>sequence_terminated_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes that there exists pixels within the 
+      image that have reached or exceeded the maximum pixel value. 
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>threshold_factor</name>
+    <version_id>1.0</version_id>
+    <local_identifier>threshold_factor</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Multiplicative factor used to isolate pixels that are X times 
+      greater than theie nearest neighbors.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>threshold_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>threshold_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Value used to define a level that triggers a defined behavior.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>wrong_filter_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>wrong_filter_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes the commanded filter does not match 
+      the actual filter used to acquire the image.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>wrong_pointing_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>wrong_pointing_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes this image has the wrong 
+      pointing as pre-determined through planned observations or image footprints. 
+      For example, the rover faulted while driving and did not make it to the intended
+      location and therefore the images have the wrong pointing. 
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>wrong_zoom_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>wrong_zoom_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes the commanded zoom does not match 
+      the actual zoom value. For example, commanded at 110mm but acquired at 63mm. 
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>zero_value_pixels_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>zero_value_pixels_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A boolean value that denotes this image has pixels with a DN value of zero.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <!-- End   Attributes: for Data_Qulaity Class   -->
+  
   
   <!--                   -->
   <!-- Attributes: END   -->
@@ -4058,6 +4340,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Quality</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Detector</identifier_reference>
@@ -7547,6 +7835,204 @@ product_flag.</definition>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Data_Quality -->
+  <DD_Class>
+    <name>Data_Quality</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Data_Quality</local_identifier>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>The Data_Quality class contain attributes which identify quality issues
+      in the observation including saturated pixels, hot pixels, nonlinear pixels and
+      flags for listing states for example the observation was out of focus, the pointing 
+      was incorrect, the defined zoomed was not achieved, and other states listed below.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>dq_band</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>dq_bayer_cell</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.comment</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Hot_Pixel</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Saturated_Pixel</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Nonlinear_Pixel</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>no_signal_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>above_aft_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>below_aft_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>full_well_limit_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>missing_temperature_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>out_of_focus_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>saturated_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sequence_terminated_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>wrong_filter_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>wrong_pointing_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>wrong_zoom_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>zero_value_pixels_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>    
+  </DD_Class>
+  
+  <!-- Class: Hot_Pixel Class for Data_Quality -->
+  <DD_Class>
+    <name>Hot_Pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Hot_Pixel</local_identifier>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>Specifies a  data class that describes pixels whose responsivity 
+      on the sensor exceeds by some amount that of the average detector element.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>pixel_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>threshold_factor</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+  </DD_Class>
+
+  <!-- Class: Saturated_Pixel Class for Data_Quality -->
+  <DD_Class>
+    <name>Nonlinear_Pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Nonlinear_Pixel</local_identifier>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A data class describing pixels where electronic non-linear behavior may occur.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>pixel_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>threshold_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+  </DD_Class>
+  
+
+  <!-- Class: Saturated_Pixel Class for Data_Quality -->
+  <DD_Class>
+    <name>Saturated_Pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Saturated_Pixel</local_identifier>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>A data class that describes pixels within the image have 
+      reached or exceeded the maximum pixel value.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>pixel_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
+    <DD_Association>
+      <identifier_reference>threshold_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>  
   </DD_Class>
 
   <!--                   -->
