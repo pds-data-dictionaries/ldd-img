@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Wed Jul 28 17:39:05 UTC 2021
+   Time                   Thu Jul 29 01:39:10 UTC 2021
    Common Schema          [PDS4_PDS_1F00.xsd]
    Common Schematron      [PDS4_PDS_1F00.sch]
    IM Version Id:         1.15.0.0
@@ -29,9 +29,9 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                78
-   Attributes             209
-   Associations           424
+   Classes                82
+   Attributes             226
+   Associations           449
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -201,13 +201,13 @@ Parsed Input - Header:
     - Allow frame_index to be negative as seen returned during M2020 mission
     - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
-    - Add new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
+    - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
     and iof_conversion_coefficient_std to the Radiometric_Correction class
-    - Add effective_wavelength to Radiometric_Correction class
-    - Update modification time and planning for release to support first M2020 PDS release
+    - Added effective_wavelength to Radiometric_Correction class
+    - Added new Data_Quality Class and required several required classes and attributes to support it. 
 
   
-   Last Modification Time 2021-07-27T15:47:00Z
+   Last Modification Time 2021-07-28T18:36:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -1347,6 +1347,93 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            The zoom_position attribute defined, in a camera-specific way, the zoom metric that should be used for geometric processing of the data (e.g. for creating camera models). This will often be the zoom motor count.
 
+   name                   above_aft_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. 
+
+   name                   below_aft_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. 
+
+   name                   dq_bayer_cell
+   version                1.15
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies the Bayer cell to which the data quality indicators apply. bayer_cell can be used even if the image has been debayered, in which case it refers to the original debayered image. Note that “green_1” and “green_2" can be used to refer to specific green Bayer cells, or “green” refers to both greens together. 
+   minimum value          1
+
+   name                   dq_band
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the sequence number in the data array to which the data quality indicators apply. 
+   minimum value          1
+
+   name                   full_well_limit_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes we have reached/exceeded the full well value of the CCD detector. 
+
+   name                   missing_temperature_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes temperature data was missing at time of image acquisition. 
+
+   name                   no_signal_count
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Integer number of pixels that received no signal above bias. 
+
+   name                   out_of_focus_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image failed to find focus. Focus was commanded using autofocus or manual. 
+
+   name                   pixel_count
+   version                1.15
+   value data type        ASCII_NonNegative_Integer
+   description            Integer number of pixels currently to list the total number of pixels as used in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes. 
+
+   name                   saturated_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. 
+
+   name                   sequence_terminated_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. 
+
+   name                   threshold_factor
+   version                1.15
+   value data type        ASCII_Real
+   description            Multiplicative factor used to isolate pixels that are X times greater than theie nearest neighbors. 
+
+   name                   threshold_value
+   version                1.15
+   value data type        ASCII_Real
+   description            Value used to define a level that triggers a defined behavior. 
+
+   name                   wrong_filter_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the commanded filter does not match the actual filter used to acquire the image. 
+
+   name                   wrong_pointing_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image has the wrong pointing as pre-determined through planned observations or image footprints. For example, the rover faulted while driving and did not make it to the intended location and therefore the images have the wrong pointing. 
+
+   name                   wrong_zoom_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the commanded zoom does not match the actual zoom value. For example, commanded at 110mm but acquired at 63mm. 
+
+   name                   zero_value_pixels_flag
+   version                1.15
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image has pixels with a DN value of zero. 
+
 Parsed Input - Classes:
 
    name                   Imaging
@@ -1385,6 +1472,11 @@ Parsed Input - Classes:
       local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Data_Quality
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
@@ -4092,5 +4184,157 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
+
+   name                   Data_Quality
+   description            The Data_Quality class contain attributes which identify quality issues in the observation including saturated pixels, hot pixels, nonlinear pixels and flags for listing states for example the observation was out of focus, the pointing was incorrect, the defined zoomed was not achieved, and other states listed below. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      dq_band
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      dq_bayer_cell
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.comment
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      no_signal_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      above_aft_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      below_aft_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      full_well_limit_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      missing_temperature_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      out_of_focus_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      saturated_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      sequence_terminated_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_filter_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_pointing_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_zoom_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      zero_value_pixels_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Hot_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Saturated_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Nonlinear_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   Hot_Pixel
+   description            Specifies a data class that describes pixels whose responsivity on the sensor exceeds by some amount that of the average detector element. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_factor
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Nonlinear_Pixel
+   description            A data class describing pixels where electronic non-linear behavior may occur. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Saturated_Pixel
+   description            A data class that describes pixels within the image have reached or exceeded the maximum pixel value. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
 End of Report
