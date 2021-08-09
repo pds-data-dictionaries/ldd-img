@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Jul 29 01:49:06 UTC 2021
+   Time                   Mon Aug 09 18:56:07 UTC 2021
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -204,7 +204,8 @@ Parsed Input - Header:
     - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
     and iof_conversion_coefficient_std to the Radiometric_Correction class
     - Added effective_wavelength to Radiometric_Correction class
-    - Added new Data_Quality Class and required several required classes and attributes to support it. 
+    - Added new Data_Quality Class and required several required classes and attributes to support it.
+    = Allowed responsivity_r,g,b,pan,std attributes to be nillable
 
   
    Last Modification Time 2021-07-28T18:36:00Z
@@ -1067,26 +1068,31 @@ Parsed Input - Attributes:
    version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the blue channel of an image.
+   nillable               true
 
    name                   responsivity_g
    version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the green channel of an image.
+   nillable               true
 
    name                   responsivity_pan
    version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to a panchromatic image.
+   nillable               true
 
    name                   responsivity_r
    version                1.14
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the red channel of an image.
+   nillable               true
 
    name                   responsivity_std
    version                1.14
    value data type        ASCII_Real
    description            Specifies the 1-sigma standard deviation for the radiometric coefficients.
+   nillable               true
 
    name                   atmospheric_opacity
    version                1.14

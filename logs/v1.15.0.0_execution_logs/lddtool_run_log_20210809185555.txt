@@ -1,20 +1,23 @@
 
 >>  INFO The configured IM Versions are:[1G00, 1F00, 1E00, 1D00, 1C00, 1B10, 1B00]
->>  INFO The provided IM Version 1E00 is valid
+>>  INFO The provided IM Version 1F00 is valid
 >>  INFO LDDTOOL Version: 13.0.2
->>  INFO IM Version Id: 1.14.0.0
+>>  INFO IM Version Id: 1.15.0.0
 >>  INFO IM Namespace Id: pds
 >>  INFO IM Label Version Id: 1.0
->>  INFO Date: Thu Jul 29 01:49:06 UTC 2021
+>>  INFO Date: Mon Aug 09 18:55:55 UTC 2021
 >>  INFO PARENT_DIR: /tmp/lddtool-13.0.2
 >>  INFO SCRIPT_DIR: /tmp/lddtool-13.0.2/bin
 >>  INFO LIB_DIR: /tmp/lddtool-13.0.2/lib
->>  WARNING Class omitted from build - Class Identifier:0001_NASA_PDS_1.pds.Schematron_Rule
->>  WARNING Class omitted from build - Class Identifier:0001_NASA_PDS_1.pds.Schematron_Assert
 
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
 >>> INFO Init:  - LDD Dictionary_Type is Discipline
+>>> INFO Attribute: <responsivity_b> - A 'nilable' attribute was found that is not a required attribute in at least one class.
+>>> INFO Attribute: <responsivity_g> - A 'nilable' attribute was found that is not a required attribute in at least one class.
+>>> INFO Attribute: <responsivity_pan> - A 'nilable' attribute was found that is not a required attribute in at least one class.
+>>> INFO Attribute: <responsivity_r> - A 'nilable' attribute was found that is not a required attribute in at least one class.
+>>> INFO Attribute: <responsivity_std> - A 'nilable' attribute was found that is not a required attribute in at least one class.
 >>> INFO Attribute: <temperature_value> - A 'nilable' attribute was found that is not a required attribute in at least one class.
 >>> INFO Attribute: <crosstrack_summing> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <decomposition_stages> - The default minimum value provided by the attribute's data type is being overridden with 0
@@ -123,7 +126,7 @@
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 
  -- LDDTool Execution Summary --
-     41 warning(s)
+     39 warning(s)
      0 error(s)
      0 fatal error(s)
 
