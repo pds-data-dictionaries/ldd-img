@@ -175,7 +175,8 @@
     - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
     and iof_conversion_coefficient_std to the Radiometric_Correction class
     - Added effective_wavelength to Radiometric_Correction class
-    - Added new Data_Quality Class and required several required classes and attributes to support it. 
+    - Added new Data_Quality Class and required several required classes and attributes to support it.
+    = Allowed responsivity_r,g,b,pan,std attributes to be nillable
 
   </comment>
   <last_modification_date_time>2021-07-28T18:36:00Z</last_modification_date_time>
@@ -3103,9 +3104,9 @@
 
   <DD_Attribute>
     <name>responsivity_b</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>responsivity_b</local_identifier>
-    <nillable_flag>false</nillable_flag>
+    <nillable_flag>true</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
       to the blue channel of an image.</definition>
@@ -3118,9 +3119,9 @@
   
   <DD_Attribute>
     <name>responsivity_g</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>responsivity_g</local_identifier>
-    <nillable_flag>false</nillable_flag>
+    <nillable_flag>true</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
       to the green channel of an image.</definition>
@@ -3133,9 +3134,9 @@
   
   <DD_Attribute>
     <name>responsivity_pan</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>responsivity_pan</local_identifier>
-    <nillable_flag>false</nillable_flag>
+    <nillable_flag>true</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
       to a panchromatic image.</definition>
@@ -3148,9 +3149,9 @@
   
   <DD_Attribute>
     <name>responsivity_r</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>responsivity_r</local_identifier>
-    <nillable_flag>false</nillable_flag>
+    <nillable_flag>true</nillable_flag>
     <submitter_name>Cristina De Cesare</submitter_name>
     <definition>Specifies the conversion factor between DN and radiance units that has been applied 
       to the red channel of an image.</definition>
@@ -3163,9 +3164,9 @@
 
   <DD_Attribute>
     <name>responsivity_std</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>responsivity_std</local_identifier>
-    <nillable_flag>false</nillable_flag>
+    <nillable_flag>true</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>Specifies the 1-sigma standard deviation for the radiometric coefficients.</definition>
     <DD_Value_Domain>
@@ -7991,7 +7992,7 @@ product_flag.</definition>
     </DD_Association>  
   </DD_Class>
 
-  <!-- Class: Saturated_Pixel Class for Data_Quality -->
+  <!-- Class: Nonlinear_Pixel Class for Data_Quality -->
   <DD_Class>
     <name>Nonlinear_Pixel</name>
     <version_id>1.0</version_id>
