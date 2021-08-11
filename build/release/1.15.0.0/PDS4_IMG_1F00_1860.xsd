@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.5.0 - Wed Jul 14 00:56:44 UTC 2021 -->
+  <!-- PDS4 XML/Schema for Name Space Id:img  Version:1.8.6.0 - Wed Aug 11 03:36:34 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 product schema is an operational deliverable. *** -->
   <!--                                                                           -->
   <!--               Dictionary Stack                                            -->
   <!-- 1.15.0.0 - pds: - Common Dictionary                                       -->
-  <!-- 1.8.5.0 - img: - Imaging                                                  -->
+  <!-- 1.8.6.0 - img: - Imaging                                                  -->
   <!--   file:/home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml       -->
   <!--                                                                           -->
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -14,7 +14,7 @@
     xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
-    version="1.8.5.0">
+    version="1.8.6.0">
  
     <xs:import namespace="http://pds.nasa.gov/pds4/pds/v1" schemaLocation="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd"/>
  
@@ -169,11 +169,19 @@
     - Updated definition for tile_num_bands
 
     1.8.6.0. T.Hare
-    - added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
+    - Added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
     starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
-    - updated to main (required github move)
-    - changed filter_position_count to allow for negative values
-    - changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
+    - Updated to main (required github move)
+    - Changed filter_position_count to allow for negative values
+    - Changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
+    - Allow frame_index to be negative as seen returned during M2020 mission
+    - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
+    deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
+    - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
+    and iof_conversion_coefficient_std to the Radiometric_Correction class
+    - Added effective_wavelength to Radiometric_Correction class
+    - Added new Data_Quality Class and required several required classes and attributes to support it.
+    - Allowed responsivity_r,g,b,pan,std attributes to be nillable
 
   
     </xs:documentation>
@@ -401,6 +409,7 @@
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Data_Quality" type="img:Data_Quality" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -595,6 +604,37 @@
         <xs:element ref="pds:External_Reference"> </xs:element>
       </xs:choice>
       <xs:element name="name" type="pds:name" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Data_Quality">
+    <xs:annotation>
+      <xs:documentation>The Data_Quality class contain attributes which
+        identify quality issues in the observation including saturated
+        pixels, hot pixels, nonlinear pixels and flags for listing
+        states for example the observation was out of focus, the
+        pointing was incorrect, the defined zoomed was not achieved, and
+        other states listed below. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="dq_band" type="img:dq_band" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="dq_bayer_cell" type="img:dq_bayer_cell" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Hot_Pixel" type="img:Hot_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Saturated_Pixel" type="img:Saturated_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Nonlinear_Pixel" type="img:Nonlinear_Pixel" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="no_signal_count" type="img:no_signal_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="above_aft_flag" type="img:above_aft_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="below_aft_flag" type="img:below_aft_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="full_well_limit_flag" type="img:full_well_limit_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="missing_temperature_flag" type="img:missing_temperature_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="out_of_focus_flag" type="img:out_of_focus_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="saturated_flag" type="img:saturated_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="sequence_terminated_flag" type="img:sequence_terminated_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="wrong_filter_flag" type="img:wrong_filter_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="wrong_pointing_flag" type="img:wrong_pointing_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="wrong_zoom_flag" type="img:wrong_zoom_flag" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="zero_value_pixels_flag" type="img:zero_value_pixels_flag" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -990,6 +1030,18 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Hot_Pixel">
+    <xs:annotation>
+      <xs:documentation>Specifies a data class that describes pixels
+        whose responsivity on the sensor exceeds by some amount that of
+        the average detector element. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="pixel_count" type="img:pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="threshold_factor" type="img:threshold_factor" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="ICER_Parameters">
     <xs:annotation>
       <xs:documentation> The ICER_Parameters class contains attributes
@@ -1120,6 +1172,7 @@
       <xs:element name="Color_Filter_Array" type="img:Color_Filter_Array" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Color_Processing" type="img:Color_Processing" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Dark_Current_Correction" type="img:Dark_Current_Correction" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="Data_Quality" type="img:Data_Quality" minOccurs="0" maxOccurs="unbounded"> </xs:element>
       <xs:element ref="img:Detector" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="Downsampling" type="img:Downsampling" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Exposure" minOccurs="0" maxOccurs="1"> </xs:element>
@@ -1253,6 +1306,17 @@
         <xs:element name="value_number" type="img:value_number"> </xs:element>
         <xs:element name="value_string" type="img:value_string"> </xs:element>
       </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Nonlinear_Pixel">
+    <xs:annotation>
+      <xs:documentation>A data class describing pixels where electronic
+        non-linear behavior may occur. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="pixel_count" type="img:pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="threshold_value" type="img:threshold_value" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1472,16 +1536,20 @@
         <xs:sequence>
           <xs:element name="radiometric_type" type="img:radiometric_type" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="radiometric_zenith_scaling_factor" type="img:radiometric_zenith_scaling_factor" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_r" type="img:responsivity_r" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_g" type="img:responsivity_g" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_b" type="img:responsivity_b" minOccurs="0" maxOccurs="1"> </xs:element>
-          <xs:element name="responsivity_pan" type="img:responsivity_pan" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_r" nillable="true" type="img:responsivity_r" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_g" nillable="true" type="img:responsivity_g" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_b" nillable="true" type="img:responsivity_b" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_pan" nillable="true" type="img:responsivity_pan" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="responsivity_std" nillable="true" type="img:responsivity_std" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="atmospheric_opacity" type="img:atmospheric_opacity" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="atmospheric_opacity_reference" type="img:atmospheric_opacity_reference" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="effective_wavelength" type="img:effective_wavelength" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="iof_conversion_coefficient" type="img:iof_conversion_coefficient" minOccurs="0" maxOccurs="1"> </xs:element>
+          <xs:element name="iof_conversion_coefficient_std" type="img:iof_conversion_coefficient_std" minOccurs="0" maxOccurs="1"> </xs:element>
           <xs:element name="comment" type="pds:comment" minOccurs="0" maxOccurs="1"> </xs:element>
         </xs:sequence>
         <!-- Begin assert statements for schematron - Enumerated Values -->
-        <!-- <xs:assert test="img:radiometric_type = ('No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance')"/> -->
+        <!-- <xs:assert test="img:radiometric_type = ('No CFA', 'Radiance Factor', 'Scaled Spectral Radiance', 'Spectral Radiance')"/> -->
         <!-- End assert statements for schematron - Enumerated Values -->
       </xs:extension>
     </xs:complexContent>
@@ -1530,6 +1598,18 @@
       <xs:element name="saturated_pixel_count" type="img:saturated_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element name="valid_pixel_count" type="img:valid_pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
       <xs:element ref="img:Companding" minOccurs="0" maxOccurs="1"> </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Saturated_Pixel">
+    <xs:annotation>
+      <xs:documentation>A data class that describes pixels within the
+        image have reached or exceeded the maximum pixel value.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="pixel_count" type="img:pixel_count" minOccurs="0" maxOccurs="1"> </xs:element>
+      <xs:element name="threshold_value" type="img:threshold_value" minOccurs="0" maxOccurs="1"> </xs:element>
     </xs:sequence>
   </xs:complexType>
 
@@ -1758,6 +1838,16 @@
         common namespace.
       </xs:documentation>
     </xs:annotation>
+
+  <xs:simpleType name="above_aft_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes the camera
+        mechanism was above allowable flight temperature at time of
+        acquisition. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="active_flag">
     <xs:annotation>
@@ -2038,6 +2128,16 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="below_aft_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes the camera
+        mechanism was above allowable flight temperature at time of
+        acquisition. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="best_focus_distance_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
@@ -2394,6 +2494,33 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="dq_band">
+    <xs:annotation>
+      <xs:documentation>Specifies the sequence number in the data array
+        to which the data quality indicators apply. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="1"/>
+     <xs:maxInclusive value="18446744073709551615"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="dq_bayer_cell">
+    <xs:annotation>
+      <xs:documentation>Specifies the Bayer cell to which the data
+        quality indicators apply. bayer_cell can be used even if the
+        image has been debayered, in which case it refers to the
+        original debayered image. Note that “green_1” and “green_2" can
+        be used to refer to specific green Bayer cells, or “green”
+        refers to both greens together. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Short_String_Collapsed">
+     <xs:minLength value="1"/>
+     <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="early_image_return">
     <xs:annotation>
       <xs:documentation>Indicates is there was a deferral of on-board
@@ -2421,6 +2548,25 @@
     <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="effective_wavelength_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="effective_wavelength">
+    <xs:annotation>
+      <xs:documentation>Defines the weighted average of the system
+        response and solar spectrum.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:effective_wavelength_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Length" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="encoded_display_gamma">
     <xs:annotation>
@@ -2914,12 +3060,13 @@
         the entire video, i.e. the first frame of the video would be
         index 1, up to frame_count. When in a Focus_Stack class, the
         frame_index attribute specifies the index of the first frame
-        used to make up the focus stack. </xs:documentation>
+        used to make up the focus stack. M2020 requested to allow
+        negative values which has been seen as returned values during
+        the mission. </xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_NonNegative_Integer">
-    	<xs:pattern value='[0-9]+'/>
-     <xs:minInclusive value="0"/>
-     <xs:maxInclusive value="18446744073709551615"/>
+    <xs:restriction base="pds:ASCII_Integer">
+     <xs:minInclusive value="-9223372036854775808"/>
+     <xs:maxInclusive value="9223372036854775807"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -2972,6 +3119,16 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="full_well_limit_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes we have
+        reached/exceeded the full well value of the CCD detector.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3275,6 +3432,28 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:simpleType name="iof_conversion_coefficient">
+    <xs:annotation>
+      <xs:documentation>Radiance factor (IOF) conversion
+        coefficient.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="iof_conversion_coefficient_std">
+    <xs:annotation>
+      <xs:documentation>1-sigma standard deviation for the radiance
+        factor (IOF) conversion coefficient.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="jpeg_parameter">
     <xs:annotation>
       <xs:documentation>The jpeg_parameter attribute is a JPEG specific
@@ -3479,6 +3658,15 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="missing_temperature_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes temperature data
+        was missing at time of image acquisition. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="motor_count">
     <xs:annotation>
       <xs:documentation>The motor_count attribute specifies the raw
@@ -3489,6 +3677,18 @@
     <xs:restriction base="pds:ASCII_Integer">
      <xs:minInclusive value="-9223372036854775808"/>
      <xs:maxInclusive value="9223372036854775807"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="no_signal_count">
+    <xs:annotation>
+      <xs:documentation>Integer number of pixels that received no signal
+        above bias. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3766,6 +3966,16 @@
 	   </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="out_of_focus_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes this image failed
+        to find focus. Focus was commanded using autofocus or manual.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="output_dn">
     <xs:annotation>
       <xs:documentation>The output_dn attribute provides the value of
@@ -3787,6 +3997,19 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pixel_count">
+    <xs:annotation>
+      <xs:documentation>Integer number of pixels currently to list the
+        total number of pixels as used in Hot_Pixel, Saturated_Pixel,
+        and Nonlinear_Pixel classes. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_NonNegative_Integer">
+    	<xs:pattern value='[0-9]+'/>
+     <xs:minInclusive value="0"/>
+     <xs:maxInclusive value="18446744073709551615"/>
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -3946,9 +4169,10 @@
     <xs:annotation>
       <xs:documentation>The radiometric_type defines the specific type
         of radiance measurement. Possible values include "Radiance",
-        "Spectral Radiance", "Scaled Spectral Radiance". Note: There are
-        many more possible values, and this definition can be updated to
-        include more examples over time. </xs:documentation>
+        "Radiance Factor", "Spectral Radiance", "Scaled Spectral
+        Radiance", and "No CFA". Note: There are many more possible
+        values, and this definition can be updated to include more
+        examples over time. </xs:documentation>
     </xs:annotation>
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
@@ -4006,17 +4230,18 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:simpleType name="responsivity_b">
+  <xs:complexType name="responsivity_b">
     <xs:annotation>
       <xs:documentation>Specifies the conversion factor between DN and
         radiance units that has been applied to the blue channel of an
         image.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Real">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="responsivity_factor_b">
     <xs:annotation>
@@ -4054,41 +4279,56 @@
 	   </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="responsivity_g">
+  <xs:complexType name="responsivity_g">
     <xs:annotation>
       <xs:documentation>Specifies the conversion factor between DN and
         radiance units that has been applied to the green channel of an
         image.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Real">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
-  <xs:simpleType name="responsivity_pan">
+  <xs:complexType name="responsivity_pan">
     <xs:annotation>
       <xs:documentation>Specifies the conversion factor between DN and
         radiance units that has been applied to a panchromatic
         image.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Real">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
-  <xs:simpleType name="responsivity_r">
+  <xs:complexType name="responsivity_r">
     <xs:annotation>
       <xs:documentation>Specifies the conversion factor between DN and
         radiance units that has been applied to the red channel of an
         image.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="pds:ASCII_Real">
-     <xs:minInclusive value="-1.7976931348623157e308"/>
-     <xs:maxInclusive value="1.7976931348623157e308"/>
-	   </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Real">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="responsivity_std">
+    <xs:annotation>
+      <xs:documentation>Specifies the 1-sigma standard deviation for the
+        radiometric coefficients.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="pds:ASCII_Real">
+        <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="sample_bit_mask">
     <xs:annotation>
@@ -4185,6 +4425,16 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="saturated_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes that there exists
+        pixels within the image that have reached or exceeded the
+        maximum pixel value. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -4319,6 +4569,16 @@
     <xs:restriction base="pds:ASCII_Short_String_Collapsed">
      <xs:minLength value="1"/>
      <xs:maxLength value="255"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sequence_terminated_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes that there exists
+        pixels within the image that have reached or exceeded the
+        maximum pixel value. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
 	   </xs:restriction>
   </xs:simpleType>
 
@@ -4469,6 +4729,37 @@
       <xs:extension base="img:temperature_value_WO_Units">
         <xs:attribute name="unit" type="pds:Units_of_Temperature" use="required" />
         <xs:attribute name="nilReason" type="pds:nil_reason" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="threshold_factor">
+    <xs:annotation>
+      <xs:documentation>Multiplicative factor used to isolate pixels
+        that are X times greater than theie nearest neighbors.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="threshold_value_WO_Units">
+    <xs:restriction base="pds:ASCII_Real">
+     <xs:minInclusive value="-1.7976931348623157e308"/>
+     <xs:maxInclusive value="1.7976931348623157e308"/>
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="threshold_value">
+    <xs:annotation>
+      <xs:documentation>Value used to define a level that triggers a
+        defined behavior. </xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="img:threshold_value_WO_Units">
+        <xs:attribute name="unit" type="pds:Units_of_Spectral_Radiance" use="required" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -4700,6 +4991,38 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:simpleType name="wrong_filter_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes the commanded
+        filter does not match the actual filter used to acquire the
+        image. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="wrong_pointing_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes this image has the
+        wrong pointing as pre-determined through planned observations or
+        image footprints. For example, the rover faulted while driving
+        and did not make it to the intended location and therefore the
+        images have the wrong pointing. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="wrong_zoom_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes the commanded zoom
+        does not match the actual zoom value. For example, commanded at
+        110mm but acquired at 63mm. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="x_center_WO_Units">
     <xs:restriction base="pds:ASCII_Real">
      <xs:minInclusive value="-1.7976931348623157e308"/>
@@ -4741,6 +5064,15 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="zero_value_pixels_flag">
+    <xs:annotation>
+      <xs:documentation>A boolean value that denotes this image has
+        pixels with a DN value of zero. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="pds:ASCII_Boolean">
+	   </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="zoom_position">
     <xs:annotation>

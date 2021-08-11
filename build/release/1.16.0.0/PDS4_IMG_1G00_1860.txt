@@ -2,12 +2,12 @@ PDS4 Local Data Dictionary Processing Report
 
 Configuration:
    LDDTool Version        13.0.2
-   LDD Version Id:        1.8.5.0
+   LDD Version Id:        1.8.6.0
    LDD Label Version Id:  1.0
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Wed Jul 14 00:56:41 UTC 2021
+   Time                   Wed Aug 11 03:36:34 UTC 2021
    Common Schema          [PDS4_PDS_1G00.xsd]
    Common Schematron      [PDS4_PDS_1G00.sch]
    IM Version Id:         1.16.0.0
@@ -29,9 +29,9 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                78
-   Attributes             205
-   Associations           420
+   Classes                82
+   Attributes             226
+   Associations           450
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -40,7 +40,7 @@ Detailed validation messages
 
 Parsed Input - Header:
    LDD Name               Imaging
-   LDD Version            1.8.5.0
+   LDD Version            1.8.6.0
    Full Name              Trent Hare
    Steward                img
    Namespace Id           img
@@ -193,14 +193,22 @@ Parsed Input - Header:
     - Updated definition for tile_num_bands
 
     1.8.6.0. T.Hare
-    - added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
+    - Added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
     starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
-    - updated to main (required github move)
-    - changed filter_position_count to allow for negative values
-    - changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
+    - Updated to main (required github move)
+    - Changed filter_position_count to allow for negative values
+    - Changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
+    - Allow frame_index to be negative as seen returned during M2020 mission
+    - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
+    deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
+    - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
+    and iof_conversion_coefficient_std to the Radiometric_Correction class
+    - Added effective_wavelength to Radiometric_Correction class
+    - Added new Data_Quality Class and required several required classes and attributes to support it.
+    - Allowed responsivity_r,g,b,pan,std attributes to be nillable
 
   
-   Last Modification Time 2021-07-13T17:55:00Z
+   Last Modification Time 2021-08-10T20:34:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -461,6 +469,12 @@ Parsed Input - Attributes:
    value data type        ASCII_Boolean
    description            If true, indicates that the companding was or should be done "early" in the onboard processing chain, for instruments where there is an option. For MSL, early processing is where the image is prepared for use by any client, including those on board, such as rotation, bad pixels, flat field, early scaling, and camera model production. Contrast that with late processing, which includes compression and telemetry generation, and processing for thumbnails, subframes, histograms, and row/column sums.
 
+   name                   effective_wavelength
+   version                1.16
+   value data type        ASCII_Real
+   description            Defines the weighted average of the system response and solar spectrum.
+   unit of measure type   Units_of_Length
+
    name                   encoded_display_gamma
    version                1.16
    value data type        ASCII_Short_String_Collapsed
@@ -641,8 +655,8 @@ Parsed Input - Attributes:
 
    name                   frame_index
    version                1.16
-   value data type        ASCII_NonNegative_Integer
-   description            When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. 
+   value data type        ASCII_Integer
+   description            When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. M2020 requested to allow negative values which has been seen as returned values during the mission. 
 
    name                   frame_interval
    version                1.16
@@ -660,6 +674,12 @@ Parsed Input - Attributes:
    version                1.16
    value data type        ASCII_Short_String_Collapsed
    description             The frame_type_name attribute specifies whether the image was commanded as part of a stereo pair or as a single left or right monoscopic image. If frame_type = 'Stereo', a left and a right image should be present.
+
+   name                   focus_distance
+   version                1.16
+   value data type        ASCII_Real
+   description            The nominal focus distance for the instrument (e.g. in meters or mm). This is often the commanded value, or autofocus seed value, but can also be used to indicate a nominal distance where the connotation of "best" is not appropriate (see best_focus_distance).
+   unit of measure type   Units_of_Length
 
    name                   gain_mode_id
    version                1.16
@@ -757,6 +777,16 @@ Parsed Input - Attributes:
    minimum value          0
    unit of measure type   Units_of_Time
 
+   name                   iof_conversion_coefficient
+   version                1.16
+   value data type        ASCII_Real
+   description            Radiance factor (IOF) conversion coefficient.
+
+   name                   iof_conversion_coefficient_std
+   version                1.16
+   value data type        ASCII_Real
+   description            1-sigma standard deviation for the radiance factor (IOF) conversion coefficient.
+
    name                   jpeg_parameter
    version                1.16
    value data type        ASCII_Integer
@@ -787,12 +817,6 @@ Parsed Input - Attributes:
    version                1.16
    value data type        ASCII_Real
    description            The maximum_focus_distance attribute specifies the estimated distance to the farthest pixel with less than 1 pixel of gaussian blur.
-   unit of measure type   Units_of_Length
-
-   name                   focus_distance
-   version                1.16
-   value data type        ASCII_Real
-   description            The nominal focus distance for the instrument (e.g. in meters or mm). This is often the commanded value, or autofocus seed value, but can also be used to indicate a nominal distance where the connotation of "best" is not appropriate (see best_focus_distance).
    unit of measure type   Units_of_Length
 
    name                   minimum_focus_distance
@@ -1012,7 +1036,7 @@ Parsed Input - Attributes:
    name                   radiometric_type
    version                1.16
    value data type        ASCII_Short_String_Collapsed
-   description            The radiometric_type defines the specific type of radiance measurement. Possible values include "Radiance", "Spectral Radiance", "Scaled Spectral Radiance". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
+   description            The radiometric_type defines the specific type of radiance measurement. Possible values include "Radiance", "Radiance Factor", "Spectral Radiance", "Scaled Spectral Radiance", and "No CFA". Note: There are many more possible values, and this definition can be updated to include more examples over time. 
 
    name                   raw_count
    version                1.16
@@ -1044,21 +1068,31 @@ Parsed Input - Attributes:
    version                1.16
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the blue channel of an image.
+   nillable               true
 
    name                   responsivity_g
    version                1.16
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the green channel of an image.
+   nillable               true
 
    name                   responsivity_pan
    version                1.16
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to a panchromatic image.
+   nillable               true
 
    name                   responsivity_r
    version                1.16
    value data type        ASCII_Real
    description            Specifies the conversion factor between DN and radiance units that has been applied to the red channel of an image.
+   nillable               true
+
+   name                   responsivity_std
+   version                1.16
+   value data type        ASCII_Real
+   description            Specifies the 1-sigma standard deviation for the radiometric coefficients.
+   nillable               true
 
    name                   atmospheric_opacity
    version                1.16
@@ -1319,6 +1353,94 @@ Parsed Input - Attributes:
    value data type        ASCII_Real
    description            The zoom_position attribute defined, in a camera-specific way, the zoom metric that should be used for geometric processing of the data (e.g. for creating camera models). This will often be the zoom motor count.
 
+   name                   above_aft_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. 
+
+   name                   below_aft_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. 
+
+   name                   dq_bayer_cell
+   version                1.16
+   value data type        ASCII_Short_String_Collapsed
+   description            Specifies the Bayer cell to which the data quality indicators apply. bayer_cell can be used even if the image has been debayered, in which case it refers to the original debayered image. Note that “green_1” and “green_2" can be used to refer to specific green Bayer cells, or “green” refers to both greens together. 
+   minimum value          1
+
+   name                   dq_band
+   version                1.16
+   value data type        ASCII_NonNegative_Integer
+   description            Specifies the sequence number in the data array to which the data quality indicators apply. 
+   minimum value          1
+
+   name                   full_well_limit_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes we have reached/exceeded the full well value of the CCD detector. 
+
+   name                   missing_temperature_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes temperature data was missing at time of image acquisition. 
+
+   name                   no_signal_count
+   version                1.16
+   value data type        ASCII_NonNegative_Integer
+   description            Integer number of pixels that received no signal above bias. 
+
+   name                   out_of_focus_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image failed to find focus. Focus was commanded using autofocus or manual. 
+
+   name                   pixel_count
+   version                1.16
+   value data type        ASCII_NonNegative_Integer
+   description            Integer number of pixels currently to list the total number of pixels as used in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes. 
+
+   name                   saturated_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. 
+
+   name                   sequence_terminated_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. 
+
+   name                   threshold_factor
+   version                1.16
+   value data type        ASCII_Real
+   description            Multiplicative factor used to isolate pixels that are X times greater than theie nearest neighbors. 
+
+   name                   threshold_value
+   version                1.16
+   value data type        ASCII_Real
+   description            Value used to define a level that triggers a defined behavior. 
+   unit of measure type   Units_of_Spectral_Radiance
+
+   name                   wrong_filter_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the commanded filter does not match the actual filter used to acquire the image. 
+
+   name                   wrong_pointing_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image has the wrong pointing as pre-determined through planned observations or image footprints. For example, the rover faulted while driving and did not make it to the intended location and therefore the images have the wrong pointing. 
+
+   name                   wrong_zoom_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes the commanded zoom does not match the actual zoom value. For example, commanded at 110mm but acquired at 63mm. 
+
+   name                   zero_value_pixels_flag
+   version                1.16
+   value data type        ASCII_Boolean
+   description            A boolean value that denotes this image has pixels with a DN value of zero. 
+
 Parsed Input - Classes:
 
    name                   Imaging
@@ -1357,6 +1479,11 @@ Parsed Input - Classes:
       local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Data_Quality
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
@@ -1799,6 +1926,11 @@ Parsed Input - Classes:
       local identifier      Dark_Current_Correction
       minimum occurrences   0
       maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Data_Quality
+      minimum occurrences   0
+      maximum occurrences   *
       reference type        component_of
 
       local identifier      Detector
@@ -3391,12 +3523,32 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      responsivity_std
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      atmospheric_opacity
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
 
       local identifier      atmospheric_opacity_reference
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      effective_wavelength
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      iof_conversion_coefficient
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      iof_conversion_coefficient_std
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
@@ -4044,5 +4196,157 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        component_of
+
+   name                   Data_Quality
+   description            The Data_Quality class contain attributes which identify quality issues in the observation including saturated pixels, hot pixels, nonlinear pixels and flags for listing states for example the observation was out of focus, the pointing was incorrect, the defined zoomed was not achieved, and other states listed below. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      dq_band
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      dq_bayer_cell
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      pds.comment
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      no_signal_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      above_aft_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      below_aft_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      full_well_limit_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      missing_temperature_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      out_of_focus_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      saturated_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      sequence_terminated_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_filter_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_pointing_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      wrong_zoom_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      zero_value_pixels_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Hot_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Saturated_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+      local identifier      Nonlinear_Pixel
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        component_of
+
+   name                   Hot_Pixel
+   description            Specifies a data class that describes pixels whose responsivity on the sensor exceeds by some amount that of the average detector element. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_factor
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Nonlinear_Pixel
+   description            A data class describing pixels where electronic non-linear behavior may occur. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+   name                   Saturated_Pixel
+   description            A data class that describes pixels within the image have reached or exceeded the maximum pixel value. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      pixel_count
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      threshold_value
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
 
 End of Report

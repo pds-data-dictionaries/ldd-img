@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jul 14 00:56:32 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Wed Aug 11 03:36:34 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -182,9 +182,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('Hz')">
+      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
         <title>img:Detector/img:readout_rate/img:readout_rate</title>
-        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -346,6 +346,32 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Nonlinear_Pixel/img:threshold_value">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        <title>img:Nonlinear_Pixel/img:threshold_value/img:threshold_value</title>
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Nonlinear_Pixel/img:threshold_value" role="warning">
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*Hz**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*Hz**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*nm**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*nm**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*um**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-3*sr**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-3*sr**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'uW*cm**-2*sr**-1*um**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value uW*cm**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Onboard_Compression">
       <sch:assert test="if (img:deferred_flag) then img:deferred_flag = ('true', 'false') else true()">
         <title>img:Onboard_Compression/img:deferred_flag</title>
@@ -437,10 +463,43 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction/img:effective_wavelength">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        <title>img:Radiometric_Correction/img:effective_wavelength/img:effective_wavelength</title>
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Radiometric_Correction/img:radiometric_type">
-      <sch:assert test=". = ('No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance')">
+      <sch:assert test=". = ('No CFA', 'Radiance Factor', 'Scaled Spectral Radiance', 'Spectral Radiance')">
         <title>img:Radiometric_Correction/img:radiometric_type/img:radiometric_type</title>
-        The attribute img:radiometric_type must be equal to one of the following values 'No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance'.</sch:assert>
+        The attribute img:radiometric_type must be equal to one of the following values 'No CFA', 'Radiance Factor', 'Scaled Spectral Radiance', 'Spectral Radiance'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Saturated_Pixel/img:threshold_value">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        <title>img:Saturated_Pixel/img:threshold_value/img:threshold_value</title>
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Saturated_Pixel/img:threshold_value" role="warning">
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*Hz**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*Hz**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*nm**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*nm**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*um**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-3*sr**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-3*sr**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'uW*cm**-2*sr**-1*um**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value uW*cm**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

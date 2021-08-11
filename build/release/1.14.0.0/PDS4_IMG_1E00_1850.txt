@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Thu Jun 10 00:24:53 UTC 2021
+   Time                   Wed Jul 14 00:56:32 UTC 2021
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -29,9 +29,9 @@ Parameters:
    Merge with Master      false
 
 Summary:
-   Classes                76
-   Attributes             202
-   Associations           412
+   Classes                78
+   Attributes             205
+   Associations           420
    Error messages         0
    Warning messages       0
    Information messages   0
@@ -99,7 +99,6 @@ Parsed Input - Header:
     
     1.7.1.0, T.Hare
     - Added filter
-    - Added GOP_Frames
     - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
     - Added detector_to_image_flip
     - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
@@ -192,9 +191,16 @@ Parsed Input - Header:
     - Added "H.264 Frame" enumeration to onboard_compression_type
     - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
     - Updated definition for tile_num_bands
-    
+
+    1.8.6.0. T.Hare
+    - added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
+    starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
+    - updated to main (required github move)
+    - changed filter_position_count to allow for negative values
+    - changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
+
   
-   Last Modification Time 2021-06-09T14:00:00Z
+   Last Modification Time 2021-07-13T17:55:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
@@ -485,7 +491,7 @@ Parsed Input - Attributes:
 
    name                   exposure_duration_count
    version                1.14
-   value data type        ASCII_NonNegative_Integer
+   value data type        ASCII_Real
    description            The exposure_duration_count attribute specifies the value, in raw counts, for the amount of time the instrument sensor was gathering light from the scene, such as between opening and closing of a shutter, or between flushing and readout of a CCD. This is the raw count either commanded or taken directly from telemetry as reported by the spacecraft. This attribute is the same as the exposure_duration but in DN counts instead of time, and the translation of exposure_duration_count to exposure_duration will differ by mission.
 
    name                   exposure_duration_threshold_count
@@ -551,7 +557,7 @@ Parsed Input - Attributes:
 
    name                   filter_position_count
    version                1.14
-   value data type        ASCII_NonNegative_Integer
+   value data type        ASCII_Integer
    description            The filter position count is the position in motor counts of the filter wheel motor.
 
    name                   filter_window_line
@@ -636,7 +642,7 @@ Parsed Input - Attributes:
    name                   frame_index
    version                1.14
    value data type        ASCII_NonNegative_Integer
-   description            The frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count.
+   description            When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. 
 
    name                   frame_interval
    version                1.14
@@ -1131,6 +1137,11 @@ Parsed Input - Attributes:
    minimum characters     1
    maximum characters     6
 
+   name                   segment_corrupted_flag
+   version                1.14
+   value data type        ASCII_Boolean
+   description            The segment_corrupted_flag specifies whether the segment is corrupted (or bad). Valid values are "true" or "false". If the value is true, the segment is corrupted, and if the value is false, the segment is not corrupted.
+
    name                   shutter_subtraction_mode
    version                1.14
    value data type        ASCII_Short_String_Collapsed
@@ -1147,6 +1158,20 @@ Parsed Input - Attributes:
    value data type        ASCII_NonNegative_Integer
    description            Sample number of the special point.
    minimum value          0
+
+   name                   starpixel_initial_subsampling_interval
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description             The value gives exponent n for initial subsampling interval 2**n. See Takada+2007 (https://doi.org/10.1109/IGARSS.2007.4422835) for the detail. 
+   minimum value          0
+   maximum value          8
+
+   name                   starpixel_degradation
+   version                1.14
+   value data type        ASCII_NonNegative_Integer
+   description             The value is degradation parameter. Then the value of the degradation parameter is higher, the quality of lossy compressed image will be worse, and the value is lower, the quality will be better. If value of degradation parameter is 0, there will be no degradation. 
+   minimum value          0
+   maximum value          32
 
    name                   striping_count
    version                1.14
@@ -2089,6 +2114,16 @@ Parsed Input - Classes:
       maximum occurrences   *
       reference type        component_of
 
+      local identifier      StarPixel_Flexible_Parameters
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+      local identifier      StarPixel_Lossless_Parameters
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
    name                   Correction_Parameter
    description             The Correction_Parameter class specifies identifier(s) and value for a data correction parameter applicable to the parent class.
    is abstract            false
@@ -2936,6 +2971,11 @@ Parsed Input - Classes:
       maximum occurrences   1
       reference type        attribute_of
 
+      local identifier      segment_corrupted_flag
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
       local identifier      missing_pixel_count
       minimum occurrences   0
       maximum occurrences   1
@@ -3556,6 +3596,47 @@ Parsed Input - Classes:
       minimum occurrences   0
       maximum occurrences   1
       reference type        attribute_of
+
+   name                   StarPixel_Lossless_Parameters
+   description             The StarPixel_Lossless_Parameters class contains attributes describing onboard compression parameters specific to StarPixel Lossless image compression. StarPixel Lossless is developed based on FELICS and used by the JAXA's spacecrafts, Akatsuki and Hayabusa2. StarPixel Lossless is a lossless compression algorithm and also known as HIREW. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      starpixel_initial_subsampling_interval
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Image_Compression_Segment
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
+
+   name                   StarPixel_Flexible_Parameters
+   description             The StarPixel_Flexible_Parameters class contains attributes describing onboard compression parameters specific to StarPixel Flexible image compression. StarPixel Flexible is developed based on StarPixel Lossless and used by the JAXA's spacecraft, Hayabusa2. StarPixel Flexible is a lossy compression algorithm. 
+   is abstract            false
+   is choice              false
+   subclass of            USER
+
+   Associations
+
+      local identifier      starpixel_initial_subsampling_interval
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      starpixel_degradation
+      minimum occurrences   0
+      maximum occurrences   1
+      reference type        attribute_of
+
+      local identifier      Image_Compression_Segment
+      minimum occurrences   0
+      maximum occurrences   *
+      reference type        component_of
 
    name                   Subframe
    description             The Subframe class describes the position and other optional characteristics of an image subframe, relative to the original image. 

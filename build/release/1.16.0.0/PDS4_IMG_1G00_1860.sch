@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jul 14 00:56:32 UTC 2021 -->
-  <!-- Generated from the PDS4 Information Model Version 1.14.0.0 - System Build 10b -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Wed Aug 11 03:36:34 UTC 2021 -->
+  <!-- Generated from the PDS4 Information Model Version 1.16.0.0 - System Build 11.1 -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -175,16 +175,16 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:instrument_idle_timeout">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Detector/img:instrument_idle_timeout/img:instrument_idle_timeout</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:readout_rate">
-      <sch:assert test="@unit = ('Hz')">
+      <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
         <title>img:Detector/img:readout_rate/img:readout_rate</title>
-        The attribute @unit must be equal to one of the following values 'Hz'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -210,9 +210,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -284,16 +284,16 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_time_delta">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_time_delta/img:exposure_time_delta</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -343,6 +343,32 @@
       <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
         <title>img:LED_Illumination_Source/img:illumination_wavelength/img:illumination_wavelength</title>
         The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Nonlinear_Pixel/img:threshold_value">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        <title>img:Nonlinear_Pixel/img:threshold_value/img:threshold_value</title>
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Nonlinear_Pixel/img:threshold_value" role="warning">
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*Hz**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*Hz**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*nm**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*nm**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*um**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-3*sr**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-3*sr**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'uW*cm**-2*sr**-1*um**-1'">
+        <title>img:Nonlinear_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value uW*cm**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -403,30 +429,30 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:height_pixels">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:height_pixels/img:height_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:width_pixels">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:width_pixels/img:width_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:x_center">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:x_center/img:x_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:y_center">
-      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:y_center/img:y_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -437,10 +463,43 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Radiometric_Correction/img:effective_wavelength">
+      <sch:assert test="@unit = ('AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm')">
+        <title>img:Radiometric_Correction/img:effective_wavelength/img:effective_wavelength</title>
+        The attribute @unit must be equal to one of the following values 'AU', 'Angstrom', 'cm', 'km', 'm', 'micrometer', 'mm', 'nm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Radiometric_Correction/img:radiometric_type">
-      <sch:assert test=". = ('No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance')">
+      <sch:assert test=". = ('No CFA', 'Radiance Factor', 'Scaled Spectral Radiance', 'Spectral Radiance')">
         <title>img:Radiometric_Correction/img:radiometric_type/img:radiometric_type</title>
-        The attribute img:radiometric_type must be equal to one of the following values 'No CFA', 'Scaled Spectral Radiance', 'Spectral Radiance'.</sch:assert>
+        The attribute img:radiometric_type must be equal to one of the following values 'No CFA', 'Radiance Factor', 'Scaled Spectral Radiance', 'Spectral Radiance'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Saturated_Pixel/img:threshold_value">
+      <sch:assert test="@unit = ('W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm')">
+        <title>img:Saturated_Pixel/img:threshold_value/img:threshold_value</title>
+        The attribute @unit must be equal to one of the following values 'W*m**-2*sr**-1*Hz**-1', 'W*m**-2*sr**-1*nm**-1', 'W*m**-2*sr**-1*um**-1', 'W*m**-3*sr**-1', 'W/m**2/sr/Hz', 'W/m**2/sr/nm', 'W/m**2/sr/μm', 'W/m**3/sr', 'uW*cm**-2*sr**-1*um**-1', 'μW/cm**2/sr/μm'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Saturated_Pixel/img:threshold_value" role="warning">
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*Hz**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*Hz**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*nm**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*nm**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-2*sr**-1*um**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'W*m**-3*sr**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value W*m**-3*sr**-1 is deprecated and should not be used.</sch:assert>
+      <sch:assert test="@unit != 'uW*cm**-2*sr**-1*um**-1'">
+        <title>img:Saturated_Pixel/img:threshold_value role="warning"/img:threshold_value</title>
+        The unit value uW*cm**-2*sr**-1*um**-1 is deprecated and should not be used.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -526,9 +585,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:frame_interval">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Video/img:frame_interval/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -540,9 +599,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:interframe_delay">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
         <title>img:Video/img:interframe_delay/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

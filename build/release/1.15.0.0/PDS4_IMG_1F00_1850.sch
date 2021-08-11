@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Thu Jun 10 00:24:53 UTC 2021 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.5.0 - Wed Jul 14 00:56:44 UTC 2021 -->
   <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
@@ -641,6 +641,20 @@
       <sch:assert test="(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))">
         <title>shutter_subtraction_check/Rule</title>
         IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:StarPixel_Flexible_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>starpixel_flexible_params_child_check/Rule</title>
+        IMG:error:starpixel_flexible_params_child_check: img:StarPixel_Flexible_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:StarPixel_Lossless_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>starpixel_lossless_params_child_check/Rule</title>
+        IMG:error:starpixel_lossless_params_child_check: img:StarPixel_Lossless_Parameters must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>

@@ -3,8 +3,8 @@
     "dataDictionary": {
       "Title": "PDS4 Data Dictionary" ,
       "IM Version": "1.16.0.0" ,
-      "LDD Version": "1.8.5.0" ,
-      "Date": "Wed Jul 14 00:56:41 UTC 2021" ,
+      "LDD Version": "1.8.6.0" ,
+      "Date": "Wed Aug 11 03:36:34 UTC 2021" ,
       "Description": "This document is a dump of the contents of the PDS4 Data Dictionary" ,
       "namespaces": ["pds:", "img:"] ,
       "classDictionary": [
@@ -1214,6 +1214,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Data_Quality" ,
+                "title": "Data_Quality" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1070" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Data_Quality"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Commanded_Parameters.img.Detector" ,
                 "title": "Detector" ,
                 "assocType": "component_of" ,
@@ -1223,7 +1239,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Detector"
                  ]
@@ -1239,7 +1255,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Downsampling"
                  ]
@@ -1255,7 +1271,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1090" ,
+                "classOrder": "1100" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Exposure"
                  ]
@@ -1271,7 +1287,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1100" ,
+                "classOrder": "1110" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Flat_Field_Correction"
                  ]
@@ -1287,7 +1303,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1110" ,
+                "classOrder": "1120" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Focus"
                  ]
@@ -1303,7 +1319,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1120" ,
+                "classOrder": "1130" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Focus_Stack"
                  ]
@@ -1319,7 +1335,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1130" ,
+                "classOrder": "1140" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Frame"
                  ]
@@ -1335,7 +1351,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1140" ,
+                "classOrder": "1150" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.High_Dynamic_Range"
                  ]
@@ -1351,7 +1367,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1150" ,
+                "classOrder": "1160" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Histogram"
                  ]
@@ -1367,7 +1383,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1160" ,
+                "classOrder": "1170" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Illumination"
                  ]
@@ -1383,7 +1399,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1170" ,
+                "classOrder": "1180" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Filter"
                  ]
@@ -1399,7 +1415,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1180" ,
+                "classOrder": "1190" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask"
                  ]
@@ -1415,7 +1431,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1190" ,
+                "classOrder": "1200" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -1431,7 +1447,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1200" ,
+                "classOrder": "1210" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Filter"
                  ]
@@ -1447,7 +1463,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1210" ,
+                "classOrder": "1220" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Properties"
                  ]
@@ -1463,7 +1479,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1220" ,
+                "classOrder": "1230" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
@@ -1479,7 +1495,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1230" ,
+                "classOrder": "1240" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -1495,7 +1511,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1240" ,
+                "classOrder": "1250" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Reference_Pixel"
                  ]
@@ -1511,7 +1527,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1250" ,
+                "classOrder": "1260" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Row_Sum"
                  ]
@@ -1527,7 +1543,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1260" ,
+                "classOrder": "1270" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -1543,7 +1559,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1270" ,
+                "classOrder": "1280" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Shutter_Subtraction"
                  ]
@@ -1559,7 +1575,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1280" ,
+                "classOrder": "1290" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Spatial_Filter"
                  ]
@@ -1575,7 +1591,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1290" ,
+                "classOrder": "1300" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -1591,7 +1607,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1300" ,
+                "classOrder": "1310" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Thumbnail"
                  ]
@@ -1607,7 +1623,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1310" ,
+                "classOrder": "1320" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Tiling"
                  ]
@@ -1623,7 +1639,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1320" ,
+                "classOrder": "1330" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Video"
                  ]
@@ -2344,6 +2360,309 @@
                 "classId": [
                   "0001_NASA_PDS_1.pds.Internal_Reference",
                   "0001_NASA_PDS_1.pds.External_Reference"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality" ,
+            "title": "Data_Quality" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "The Data_Quality class contain attributes which identify quality issues in the observation including saturated pixels, hot pixels, nonlinear pixels and flags for listing states for example the observation was out of focus, the pointing was incorrect, the defined zoomed was not achieved, and other states listed below. "
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.dq_band" ,
+                "title": "dq_band" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.dq_band"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.dq_bayer_cell" ,
+                "title": "dq_bayer_cell" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.dq_bayer_cell"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.pds.comment" ,
+                "title": "comment" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1030" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.pds.comment"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.no_signal_count" ,
+                "title": "no_signal_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1070" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.no_signal_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.above_aft_flag" ,
+                "title": "above_aft_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1080" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.above_aft_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.below_aft_flag" ,
+                "title": "below_aft_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1090" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.below_aft_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.full_well_limit_flag" ,
+                "title": "full_well_limit_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1100" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.full_well_limit_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.missing_temperature_flag" ,
+                "title": "missing_temperature_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1110" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.missing_temperature_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.out_of_focus_flag" ,
+                "title": "out_of_focus_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1120" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.out_of_focus_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.saturated_flag" ,
+                "title": "saturated_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1130" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.saturated_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.sequence_terminated_flag" ,
+                "title": "sequence_terminated_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1140" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.sequence_terminated_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_filter_flag" ,
+                "title": "wrong_filter_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1150" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.wrong_filter_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_pointing_flag" ,
+                "title": "wrong_pointing_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1160" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.wrong_pointing_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_zoom_flag" ,
+                "title": "wrong_zoom_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1170" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.wrong_zoom_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.zero_value_pixels_flag" ,
+                "title": "zero_value_pixels_flag" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1180" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Data_Quality.img.zero_value_pixels_flag"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.Hot_Pixel" ,
+                "title": "Hot_Pixel" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1040" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Hot_Pixel"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.Saturated_Pixel" ,
+                "title": "Saturated_Pixel" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1050" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Saturated_Pixel"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.Nonlinear_Pixel" ,
+                "title": "Nonlinear_Pixel" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1060" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Nonlinear_Pixel"
                  ]
               }
             }
@@ -4391,6 +4710,53 @@
         }
       , {
           "class": {
+            "identifier": "0001_NASA_PDS_1.img.Hot_Pixel" ,
+            "title": "Hot_Pixel" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "Specifies a data class that describes pixels whose responsivity on the sensor exceeds by some amount that of the average detector element. "
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Hot_Pixel.img.pixel_count" ,
+                "title": "pixel_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Hot_Pixel.img.pixel_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Hot_Pixel.img.threshold_factor" ,
+                "title": "threshold_factor" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Hot_Pixel.img.threshold_factor"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
             "identifier": "0001_NASA_PDS_1.img.ICER_Parameters" ,
             "title": "ICER_Parameters" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
@@ -5229,6 +5595,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Imaging.img.Data_Quality" ,
+                "title": "Data_Quality" ,
+                "assocType": "component_of" ,
+                "isAttribute": "false" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "*" ,
+                "classOrder": "1070" ,
+                "classId": [
+                  "0001_NASA_PDS_1.img.Data_Quality"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Imaging.img.Detector" ,
                 "title": "Detector" ,
                 "assocType": "component_of" ,
@@ -5238,7 +5620,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Detector"
                  ]
@@ -5254,7 +5636,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Downsampling"
                  ]
@@ -5270,7 +5652,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1090" ,
+                "classOrder": "1100" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Exposure"
                  ]
@@ -5286,7 +5668,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1100" ,
+                "classOrder": "1110" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Flat_Field_Correction"
                  ]
@@ -5302,7 +5684,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1110" ,
+                "classOrder": "1120" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Focus"
                  ]
@@ -5318,7 +5700,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1120" ,
+                "classOrder": "1130" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Focus_Stack"
                  ]
@@ -5334,7 +5716,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1130" ,
+                "classOrder": "1140" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Frame"
                  ]
@@ -5350,7 +5732,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1140" ,
+                "classOrder": "1150" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.High_Dynamic_Range"
                  ]
@@ -5366,7 +5748,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1150" ,
+                "classOrder": "1160" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Histogram"
                  ]
@@ -5382,7 +5764,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1160" ,
+                "classOrder": "1170" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Illumination"
                  ]
@@ -5398,7 +5780,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1170" ,
+                "classOrder": "1180" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Filter"
                  ]
@@ -5414,7 +5796,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1180" ,
+                "classOrder": "1190" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Image_Mask"
                  ]
@@ -5430,7 +5812,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1190" ,
+                "classOrder": "1200" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Onboard_Compression"
                  ]
@@ -5446,7 +5828,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1200" ,
+                "classOrder": "1210" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Filter"
                  ]
@@ -5462,7 +5844,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1210" ,
+                "classOrder": "1220" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Optical_Properties"
                  ]
@@ -5478,7 +5860,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1220" ,
+                "classOrder": "1230" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Pointing_Correction"
                  ]
@@ -5494,7 +5876,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1230" ,
+                "classOrder": "1240" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction"
                  ]
@@ -5510,7 +5892,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1240" ,
+                "classOrder": "1250" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Reference_Pixel"
                  ]
@@ -5526,7 +5908,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1250" ,
+                "classOrder": "1260" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Row_Sum"
                  ]
@@ -5542,7 +5924,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1260" ,
+                "classOrder": "1270" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Sampling"
                  ]
@@ -5558,7 +5940,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1270" ,
+                "classOrder": "1280" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Shutter_Subtraction"
                  ]
@@ -5574,7 +5956,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1280" ,
+                "classOrder": "1290" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Spatial_Filter"
                  ]
@@ -5590,7 +5972,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1290" ,
+                "classOrder": "1300" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Subframe"
                  ]
@@ -5606,7 +5988,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1300" ,
+                "classOrder": "1310" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Tiling"
                  ]
@@ -5622,7 +6004,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1310" ,
+                "classOrder": "1320" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Thumbnail"
                  ]
@@ -5638,7 +6020,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1320" ,
+                "classOrder": "1330" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Video"
                  ]
@@ -5654,7 +6036,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "*" ,
-                "classOrder": "1330" ,
+                "classOrder": "1340" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Instrument_State"
                  ]
@@ -5670,7 +6052,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1340" ,
+                "classOrder": "1350" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Commanded_Parameters"
                  ]
@@ -6166,6 +6548,53 @@
                 "attributeId": [
                   "0001_NASA_PDS_1.img.List_Index_No_Units_Imaging.img.value_number",
                   "0001_NASA_PDS_1.img.List_Index_No_Units_Imaging.img.value_string"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Nonlinear_Pixel" ,
+            "title": "Nonlinear_Pixel" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "A data class describing pixels where electronic non-linear behavior may occur. "
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.pixel_count" ,
+                "title": "pixel_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.pixel_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.threshold_value" ,
+                "title": "threshold_value" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.threshold_value"
                  ]
               }
             }
@@ -7396,6 +7825,22 @@
               }
             }
            , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.responsivity_std" ,
+                "title": "responsivity_std" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1070" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.responsivity_std"
+                 ]
+              }
+            }
+           , {"association": {
                 "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.atmospheric_opacity" ,
                 "title": "atmospheric_opacity" ,
                 "assocType": "attribute_of" ,
@@ -7405,7 +7850,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1070" ,
+                "classOrder": "1080" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction.img.atmospheric_opacity"
                  ]
@@ -7421,9 +7866,57 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1080" ,
+                "classOrder": "1090" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction.img.atmospheric_opacity_reference"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.effective_wavelength" ,
+                "title": "effective_wavelength" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1100" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.effective_wavelength"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient" ,
+                "title": "iof_conversion_coefficient" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1110" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient_std" ,
+                "title": "iof_conversion_coefficient_std" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1120" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient_std"
                  ]
               }
             }
@@ -7437,7 +7930,7 @@
                 "groupName": "null" ,
                 "minimumCardinality": "0" ,
                 "maximumCardinality": "1" ,
-                "classOrder": "1090" ,
+                "classOrder": "1130" ,
                 "attributeId": [
                   "0001_NASA_PDS_1.img.Radiometric_Correction.pds.comment"
                  ]
@@ -7725,6 +8218,53 @@
                 "classOrder": "1100" ,
                 "classId": [
                   "0001_NASA_PDS_1.img.Companding"
+                 ]
+              }
+            }
+           ]
+          }
+        }
+      , {
+          "class": {
+            "identifier": "0001_NASA_PDS_1.img.Saturated_Pixel" ,
+            "title": "Saturated_Pixel" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.0.0.0" ,
+            "isAbstract": "false" ,
+            "isDeprecated": "false" ,
+            "description": "A data class that describes pixels within the image have reached or exceeded the maximum pixel value. "
+              , "associationList": [
+             {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Saturated_Pixel.img.pixel_count" ,
+                "title": "pixel_count" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1010" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Saturated_Pixel.img.pixel_count"
+                 ]
+              }
+            }
+           , {"association": {
+                "identifier": "0001_NASA_PDS_1.img.Saturated_Pixel.img.threshold_value" ,
+                "title": "threshold_value" ,
+                "assocType": "attribute_of" ,
+                "isAttribute": "true" ,
+                "isChoice": "false" ,
+                "isAny": "false" ,
+                "groupName": "null" ,
+                "minimumCardinality": "0" ,
+                "maximumCardinality": "1" ,
+                "classOrder": "1020" ,
+                "attributeId": [
+                  "0001_NASA_PDS_1.img.Saturated_Pixel.img.threshold_value"
                  ]
               }
             }
@@ -10298,6 +10838,381 @@
         }
       , {
           "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.above_aft_flag" ,
+            "title": "above_aft_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.below_aft_flag" ,
+            "title": "below_aft_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes the camera mechanism was above allowable flight temperature at time of acquisition. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.dq_band" ,
+            "title": "dq_band" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Specifies the sequence number in the data array to which the data quality indicators apply. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "1" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.dq_bayer_cell" ,
+            "title": "dq_bayer_cell" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Specifies the Bayer cell to which the data quality indicators apply. bayer_cell can be used even if the image has been debayered, in which case it refers to the original debayered image. Note that “green_1” and “green_2\" can be used to refer to specific green Bayer cells, or “green” refers to both greens together. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "1" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.full_well_limit_flag" ,
+            "title": "full_well_limit_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes we have reached\/exceeded the full well value of the CCD detector. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.missing_temperature_flag" ,
+            "title": "missing_temperature_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes temperature data was missing at time of image acquisition. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.no_signal_count" ,
+            "title": "no_signal_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Integer number of pixels that received no signal above bias. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.out_of_focus_flag" ,
+            "title": "out_of_focus_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes this image failed to find focus. Focus was commanded using autofocus or manual. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.saturated_flag" ,
+            "title": "saturated_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.sequence_terminated_flag" ,
+            "title": "sequence_terminated_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes that there exists pixels within the image that have reached or exceeded the maximum pixel value. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_filter_flag" ,
+            "title": "wrong_filter_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes the commanded filter does not match the actual filter used to acquire the image. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_pointing_flag" ,
+            "title": "wrong_pointing_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes this image has the wrong pointing as pre-determined through planned observations or image footprints. For example, the rover faulted while driving and did not make it to the intended location and therefore the images have the wrong pointing. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.wrong_zoom_flag" ,
+            "title": "wrong_zoom_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes the commanded zoom does not match the actual zoom value. For example, commanded at 110mm but acquired at 63mm. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.img.zero_value_pixels_flag" ,
+            "title": "zero_value_pixels_flag" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "A boolean value that denotes this image has pixels with a DN value of zero. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Boolean" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Boolean" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Data_Quality.pds.comment" ,
+            "title": "comment" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "pds" ,
+            "steward": "pds" ,
+            "versionId": "1.16" ,
+            "description": "The comment attribute is a character string expressing one or more remarks or thoughts relevant to the object." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Short_String_Collapsed" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Short_String_Collapsed" ,
+            "minimumCharacters": "1" ,
+            "maximumCharacters": "255" ,
+            "minimumValue": "Unbounded" ,
+            "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
             "identifier": "0001_NASA_PDS_1.img.Detector.img.analog_offset" ,
             "title": "analog_offset" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
@@ -11562,17 +12477,17 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.16" ,
-            "description": "When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. " ,
+            "description": "When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. M2020 requested to allow negative values which has been seen as returned values during the mission. " ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
-            "dataType": "ASCII_NonNegative_Integer" ,
-            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "dataType": "ASCII_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Integer" ,
             "minimumCharacters": "Unbounded" ,
             "maximumCharacters": "Unbounded" ,
-            "minimumValue": "0" ,
-            "maximumValue": "18446744073709551615" ,
-            "pattern": "[0-9]+" ,
+            "minimumValue": "-9223372036854775808" ,
+            "maximumValue": "9223372036854775807" ,
+            "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
@@ -11912,6 +12827,56 @@
             "maximumCharacters": "Unbounded" ,
             "minimumValue": "Unbounded" ,
             "maximumValue": "Unbounded" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Hot_Pixel.img.pixel_count" ,
+            "title": "pixel_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Integer number of pixels currently to list the total number of pixels as used in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Hot_Pixel.img.threshold_factor" ,
+            "title": "threshold_factor" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Multiplicative factor used to isolate pixels that are X times greater than theie nearest neighbors. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
             "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
@@ -13188,6 +14153,56 @@
         }
       , {
           "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.pixel_count" ,
+            "title": "pixel_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Integer number of pixels currently to list the total number of pixels as used in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Nonlinear_Pixel.img.threshold_value" ,
+            "title": "threshold_value" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Value used to define a level that triggers a defined behavior. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "Units_of_Spectral_Radiance" ,
+            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Spectral_Radiance" ,
+            "unitId": "W*m**-2*sr**-1*Hz**-1, W*m**-2*sr**-1*nm**-1, W*m**-2*sr**-1*um**-1, W*m**-3*sr**-1, W\/m**2\/sr\/Hz, W\/m**2\/sr\/nm, W\/m**2\/sr\/μm, W\/m**3\/sr, uW*cm**-2*sr**-1*um**-1, μW\/cm**2\/sr\/μm" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
             "identifier": "0001_NASA_PDS_1.img.Onboard_Color_Matrix.img.onboard_B_b" ,
             "title": "onboard_B_b" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
@@ -14452,13 +15467,88 @@
         }
       , {
           "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.effective_wavelength" ,
+            "title": "effective_wavelength" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Defines the weighted average of the system response and solar spectrum." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "Units_of_Length" ,
+            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Length" ,
+            "unitId": "AU, Angstrom, cm, km, m, micrometer, mm, nm" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient" ,
+            "title": "iof_conversion_coefficient" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Radiance factor (IOF) conversion coefficient." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.iof_conversion_coefficient_std" ,
+            "title": "iof_conversion_coefficient_std" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "1-sigma standard deviation for the radiance factor (IOF) conversion coefficient." ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
             "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.radiometric_type" ,
             "title": "radiometric_type" ,
             "registrationAuthorityId": "0001_NASA_PDS_1" ,
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.16" ,
-            "description": "The radiometric_type defines the specific type of radiance measurement. Possible values include \"Radiance\", \"Spectral Radiance\", \"Scaled Spectral Radiance\". Note: There are many more possible values, and this definition can be updated to include more examples over time. " ,
+            "description": "The radiometric_type defines the specific type of radiance measurement. Possible values include \"Radiance\", \"Radiance Factor\", \"Spectral Radiance\", \"Scaled Spectral Radiance\", and \"No CFA\". Note: There are many more possible values, and this definition can be updated to include more examples over time. " ,
             "isNillable": "false" ,
             "isEnumerated": "true" ,
             "isDeprecated": "false" ,
@@ -14477,6 +15567,12 @@
               {"PermissibleValue": {
                   "value": "No CFA" ,
                   "valueMeaning": "Indicates the image is not and has never been CFA encoded. In this case, Color_Filter_Array would simply not be present in the label. This value is present in case it needs to be explicitly stated that there is no CFA." ,
+                  "isDeprecated": "false"
+                }
+             }
+            , {"PermissibleValue": {
+                  "value": "Radiance Factor" ,
+                  "valueMeaning": "Radiance Factor also known as I\/F or IOF. Some images are scaled to absolute radiance units, then divided by the absolute radiance of the Sun at the top of the planet's atmosphere to generate radiance factor, or \"I over F\" values, where I is the radiance from the surface (scene) and F is the radiance from the Sun at the top of the planet's atmosphere. " ,
                   "isDeprecated": "false"
                 }
              }
@@ -14529,7 +15625,7 @@
             "steward": "img" ,
             "versionId": "1.16" ,
             "description": "Specifies the conversion factor between DN and radiance units that has been applied to the blue channel of an image." ,
-            "isNillable": "false" ,
+            "isNillable": "true" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Real" ,
@@ -14554,7 +15650,7 @@
             "steward": "img" ,
             "versionId": "1.16" ,
             "description": "Specifies the conversion factor between DN and radiance units that has been applied to the green channel of an image." ,
-            "isNillable": "false" ,
+            "isNillable": "true" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Real" ,
@@ -14579,7 +15675,7 @@
             "steward": "img" ,
             "versionId": "1.16" ,
             "description": "Specifies the conversion factor between DN and radiance units that has been applied to a panchromatic image." ,
-            "isNillable": "false" ,
+            "isNillable": "true" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Real" ,
@@ -14604,7 +15700,32 @@
             "steward": "img" ,
             "versionId": "1.16" ,
             "description": "Specifies the conversion factor between DN and radiance units that has been applied to the red channel of an image." ,
-            "isNillable": "false" ,
+            "isNillable": "true" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Radiometric_Correction.img.responsivity_std" ,
+            "title": "responsivity_std" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Specifies the 1-sigma standard deviation for the radiometric coefficients." ,
+            "isNillable": "true" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
             "dataType": "ASCII_Real" ,
@@ -14967,6 +16088,56 @@
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Saturated_Pixel.img.pixel_count" ,
+            "title": "pixel_count" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Integer number of pixels currently to list the total number of pixels as used in Hot_Pixel, Saturated_Pixel, and Nonlinear_Pixel classes. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_NonNegative_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "0" ,
+            "maximumValue": "18446744073709551615" ,
+            "pattern": "[0-9]+" ,
+            "unitOfMeasure": "null" ,
+            "unitOfMeasureId": "null" ,
+            "unitId": "null" ,
+            "defaultUnitId": "null"
+          }
+        }
+      , {
+          "attribute": {
+            "identifier": "0001_NASA_PDS_1.img.Saturated_Pixel.img.threshold_value" ,
+            "title": "threshold_value" ,
+            "registrationAuthorityId": "0001_NASA_PDS_1" ,
+            "nameSpaceId": "img" ,
+            "steward": "img" ,
+            "versionId": "1.16" ,
+            "description": "Value used to define a level that triggers a defined behavior. " ,
+            "isNillable": "false" ,
+            "isEnumerated": "false" ,
+            "isDeprecated": "false" ,
+            "dataType": "ASCII_Real" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Real" ,
+            "minimumCharacters": "Unbounded" ,
+            "maximumCharacters": "Unbounded" ,
+            "minimumValue": "-1.7976931348623157e308" ,
+            "maximumValue": "1.7976931348623157e308" ,
+            "pattern": "null" ,
+            "unitOfMeasure": "Units_of_Spectral_Radiance" ,
+            "unitOfMeasureId": "0001_NASA_PDS_1.pds.Units_of_Spectral_Radiance" ,
+            "unitId": "W*m**-2*sr**-1*Hz**-1, W*m**-2*sr**-1*nm**-1, W*m**-2*sr**-1*um**-1, W*m**-3*sr**-1, W\/m**2\/sr\/Hz, W\/m**2\/sr\/nm, W\/m**2\/sr\/μm, W\/m**3\/sr, uW*cm**-2*sr**-1*um**-1, μW\/cm**2\/sr\/μm" ,
             "defaultUnitId": "null"
           }
         }
@@ -16104,17 +17275,17 @@
             "nameSpaceId": "img" ,
             "steward": "img" ,
             "versionId": "1.16" ,
-            "description": "When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. " ,
+            "description": "When in a Video class, the frame_index attribute specifies the sequence number of this frame in the context of the entire video, i.e. the first frame of the video would be index 1, up to frame_count. When in a Focus_Stack class, the frame_index attribute specifies the index of the first frame used to make up the focus stack. M2020 requested to allow negative values which has been seen as returned values during the mission. " ,
             "isNillable": "false" ,
             "isEnumerated": "false" ,
             "isDeprecated": "false" ,
-            "dataType": "ASCII_NonNegative_Integer" ,
-            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_NonNegative_Integer" ,
+            "dataType": "ASCII_Integer" ,
+            "dataTypeId": "0001_NASA_PDS_1.pds.ASCII_Integer" ,
             "minimumCharacters": "Unbounded" ,
             "maximumCharacters": "Unbounded" ,
-            "minimumValue": "0" ,
-            "maximumValue": "18446744073709551615" ,
-            "pattern": "[0-9]+" ,
+            "minimumValue": "-9223372036854775808" ,
+            "maximumValue": "9223372036854775807" ,
+            "pattern": "null" ,
             "unitOfMeasure": "null" ,
             "unitOfMeasureId": "null" ,
             "unitId": "null" ,
