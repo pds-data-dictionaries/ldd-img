@@ -7,7 +7,7 @@ Configuration:
    LDD Discipline (T/F):  true
    LDD Namespace URL:     http://pds.nasa.gov/pds4/
    LDD URN Prefix:        urn:nasa:pds:
-   Time                   Mon Aug 09 18:56:07 UTC 2021
+   Time                   Wed Aug 11 03:36:34 UTC 2021
    Common Schema          [PDS4_PDS_1E00.xsd]
    Common Schematron      [PDS4_PDS_1E00.sch]
    IM Version Id:         1.14.0.0
@@ -205,10 +205,10 @@ Parsed Input - Header:
     and iof_conversion_coefficient_std to the Radiometric_Correction class
     - Added effective_wavelength to Radiometric_Correction class
     - Added new Data_Quality Class and required several required classes and attributes to support it.
-    = Allowed responsivity_r,g,b,pan,std attributes to be nillable
+    - Allowed responsivity_r,g,b,pan,std attributes to be nillable
 
   
-   Last Modification Time 2021-07-28T18:36:00Z
+   Last Modification Time 2021-08-10T20:34:00Z
    PDS4 Merge Flag        false
 
 Parsed Input - Attributes:
