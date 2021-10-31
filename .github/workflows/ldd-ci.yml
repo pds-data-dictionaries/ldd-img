@@ -76,6 +76,10 @@ jobs:
           logs_path: ${{ env.LOGS_PATH }}
           token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
 
+      - name: Check logs
+        run: |
+          ls -R ${{ env.LOGS_PATH }}
+
       - name: Upload LDDs to Github Action Artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -149,7 +153,8 @@ jobs:
           path: /tmp/artifacts
 
       - name: Display structure of downloaded files
-        run: ls -R /tmp/artifacts
+        run: |
+          ls -R /tmp/artifacts
 
       - name: Clean previous dev/snapshot tags
         run: |
@@ -161,13 +166,14 @@ jobs:
           path=$(dirname ${{ env.DEPLOY_PATH }})
           rm -fr $path/*
 
-          path=$(dirname ${{ env.LOGS_PATH }})
+          path=${{ env.LOGS_PATH }}
           rm -fr $path/*
 
       - name: Move the LDDs to their new home
         run: |
           mkdir -p ${{ env.DEPLOY_PATH }}
-          cp -R /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
+          ls -R /tmp/artifacts/*LDDs/*
+          rsync -av /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
 
       - name: Display structure of downloaded files
         run: ls -R ${{ env.DEPLOY_PATH }}
@@ -176,15 +182,15 @@ jobs:
         shell: bash
         run: |
           if [[ "${{github.ref}}" == *"release"* ]]; then
-            echo "DEPLOY_PATH=${{github.workspace}}/build/release" >> $GITHUB_ENV
-            cp -R ${{ env.DEPLOY_PATH }}/* ${{github.workspace}}/build/release/            
+            rsync -av /tmp/artifacts/*LDDs/* ${{github.workspace}}/build/release/
+            ls -R ${{github.workspace}}/build/release/
           fi
 
       - name: Move the execution logs to their new home
         run: |
           rm -fr ${{ env.LOGS_PATH }}
           mkdir -p ${{ env.LOGS_PATH }}
-          cp -R /tmp/artifacts/*logs ${{ env.LOGS_PATH }}/
+          rsync -av /tmp/artifacts/*logs ${{ env.LOGS_PATH }}/
 
       - name: Display structure of downloaded files
         run: ls -R ${{ env.LOGS_PATH }}
@@ -193,7 +199,7 @@ jobs:
         run: |
           git config --local user.email "pdsen-ci@jpl.nasa.gov"
           git config --local user.name "PDSEN CI Bot"
-          git add -A $(dirname ${{ env.DEPLOY_PATH }}) ${{ env.LOGS_PATH }}
+          git add -A $(dirname ${{ env.DEPLOY_PATH }}) ${{ env.LOGS_PATH }} ${{github.workspace}}/build/release/
           git commit -m "Auto-generated LDD by PDSEN CI Bot"
           git push origin HEAD
 
