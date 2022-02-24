@@ -132,7 +132,7 @@ jobs:
           git config --local user.email "pdsen-ci@jpl.nasa.gov"
           git config --local user.name "PDSEN CI Bot"
           git add -A ${{ env.LOGS_PATH }}
-          git commit -m "Add logs from auto-generated LDD"
+          git commit -m "Add logs from failed LDD generation"
           git push origin HEAD
 
 
