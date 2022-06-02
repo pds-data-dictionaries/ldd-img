@@ -1,12 +1,12 @@
 
->>  INFO LDDTOOL Version: 13.1.0
->>  INFO IM Version Id: 1.17.0.0
+>>  INFO LDDTOOL Version: 14.0.1
+>>  INFO IM Version Id: 1.18.0.0
 >>  INFO IM Namespace Id: pds
->>  INFO IM Label Version Id: 1.23
->>  INFO Date: Mon Nov 01 15:12:30 UTC 2021
->>  INFO PARENT_DIR: /tmp/lddtool-13.1.0
->>  INFO SCRIPT_DIR: /tmp/lddtool-13.1.0/bin
->>  INFO LIB_DIR: /tmp/lddtool-13.1.0/lib
+>>  INFO IM Label Version Id: 1.24
+>>  INFO Date: Thu Jun 02 19:09:37 UTC 2022
+>>  INFO PARENT_DIR: /tmp/lddtool-14.0.1
+>>  INFO SCRIPT_DIR: /tmp/lddtool-14.0.1/bin
+>>  INFO LIB_DIR: /tmp/lddtool-14.0.1/lib
 
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
@@ -89,7 +89,6 @@
 >>> WARNING Attribute: <frame_interval> - An attribute with the enumeration_flag = true must have at least one permissible value.
 >>> WARNING Attribute: <interframe_delay> - An attribute with the enumeration_flag = true must have at least one permissible value.
 >>> WARNING Attribute: <processing_venue> - An attribute with the enumeration_flag = false must not have any permissible values.
->>> WARNING Header:  - New namespace id has been specified:img
 >>> WARNING Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Focus> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
@@ -124,13 +123,13 @@
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 
  -- LDDTool Execution Summary --
-     39 warning(s)
+     38 warning(s)
      0 error(s)
      0 fatal error(s)
 
 Input:
 
-     - IM Version: 1H00
+     - IM Version: 1I00
      - PDS4 Flag: true
      - LDD Flag: true
      - Export JSON Flag: true
@@ -139,9 +138,9 @@ Input:
 
 Output:
 
-     - ./PDS4_IMG_1H00_1860.xsd
-     - ./PDS4_IMG_1H00_1860.sch
-     - ./PDS4_IMG_1H00_1860.xml
-     - ./PDS4_IMG_1H00_1860.JSON
+     - ./PDS4_IMG_1I00_1860.xsd
+     - ./PDS4_IMG_1I00_1860.sch
+     - ./PDS4_IMG_1I00_1860.xml
+     - ./PDS4_IMG_1I00_1860.JSON
 
 >>  INFO Exit(0)
