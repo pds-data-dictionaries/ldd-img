@@ -16,7 +16,7 @@ env:
 
 jobs:
   get_versions:
-    name: Get Latest 2 PDS4 Versions
+    name: Get PDS4 Versions
     runs-on: ubuntu-latest
     if: github.actor != 'pdsen-ci'
     outputs:
@@ -29,15 +29,12 @@ jobs:
 
       - id: set-matrix
         run: |
-          # Remove blank links from file
-          sed '/^$/d' $GITHUB_WORKSPACE/pds4_versions.txt | tail -4 > subset_pds4_versions.txt
-
           # Look through lines and pull out the versions
           while read -r line; do
               if [[ ! -z "$line" ]]; then
                   versions=$versions'"'$line'"',
               fi
-          done < subset_pds4_versions.txt
+          done < pds4_versions.txt
           versions="[${versions::-1}]"
           echo "{\"pds4_version\":${versions}}"
 
