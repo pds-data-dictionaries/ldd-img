@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Thu Jun 02 19:09:37 UTC 2022 -->
-  <!-- Generated from the PDS4 Information Model Version 1.18.0.0 - System Build 12.1 -->
+  <!-- PDS4 Schematron for Name Space Id:img  Version:1.8.6.0 - Thu Sep 29 00:16:10 UTC 2022 -->
+  <!-- Generated from the PDS4 Information Model Version 1.15.0.0 - System Build 11a -->
   <!-- *** This PDS4 schematron file is an operational deliverable. *** -->
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
 
@@ -21,7 +21,7 @@
   <sch:pattern>
     <sch:rule context="//img:Color_Filter_Array">
       <sch:assert test="img:color_filter_array_state = ('Encoded', 'Decoded', 'No CFA')">
-        <title>color_filter_array_state_check/Rule</title>
+        <title>//img:Color_Filter_Array/Rule</title>
         IMG:error:img:color_filter_array_state_check: img:color_filter_array_state must be equal to one of the following values: 
         'Encoded', 'Decoded', 'No CFA'.
       </sch:assert>
@@ -30,85 +30,169 @@
   <sch:pattern>
     <sch:rule context="//img:Color_Processing">
       <sch:assert test="count(child::*) > 0">
-        <title>color_processing_child_check/Rule</title>
+        <title>//img:Color_Processing/Rule</title>
         IMG:error:color_processing_child_check: img:color must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Commanded_Parameters">
       <sch:assert test="count(child::*) > 0">
-        <title>commanded_params_child_check/Rule</title>
+        <title>//img:Commanded_Parameters/Rule</title>
         IMG:error:commanded_params_child_check: img:Commanded_Parameters must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Detector">
       <sch:assert test="count(child::*) > 0">
-        <title>detector_child_check/Rule</title>
+        <title>//img:Detector/Rule</title>
         IMG:error:detector_params_child_check: img:Detector must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Downsampling">
       <sch:assert test="count(child::*) > 0">
-        <title>downsampling_child_check/Rule</title>
+        <title>//img:Downsampling/Rule</title>
         IMG:error:downsampling_child_check: img:Downsampling must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Exposure">
       <sch:assert test="count(child::*) > 0">
-        <title>exposure_child_check/Rule</title>
+        <title>//img:Exposure/Rule</title>
         IMG:error:exposure_child_check: img:Exposure must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Video/pds:External_Reference">
-      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
-        <title>ext_reference_type_check_video/Rule</title>
-        In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Focus">
       <sch:assert test="count(child::*) > 0">
-        <title>focus_child_check/Rule</title>
+        <title>//img:Focus/Rule</title>
         IMG:error:focus_child_check: img:Focus must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Focus_Stack">
       <sch:assert test="count(child::*) > 0">
-        <title>focus_stack_child_check/Rule</title>
+        <title>//img:Focus_Stack/Rule</title>
         IMG:error:focus_stack_child_check: img:Focus_Stack must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Frame">
       <sch:assert test="count(child::*) > 0">
-        <title>frame_child_check/Rule</title>
+        <title>//img:Frame/Rule</title>
         IMG:error:frame_child_check: img:Frame must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:ICER_Parameters">
       <sch:assert test="(count(img:Image_Compression_Segment) = img:segment_count) or (count(img:Image_Compression_Segment) = 0)">
-        <title>icer_comprs_segment_check/Rule</title>
+        <title>//img:ICER_Parameters/Rule</title>
         IMG:error:icer_comprs_segment_check: img:ICER_Parameters/img:segment_count must match the number of img:Image_Compression_Segment classes.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:ICER_Parameters">
-      <sch:assert test="count(child::*) > 0">
-        <title>icer_params_child_check/Rule</title>
-        IMG:error:icer_params_child_check: img:ICER_Parameters must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="//img:Imaging">
       <sch:assert test="count(child::*) > 0">
-        <title>imaging_child_check/Rule</title>
+        <title>//img:Imaging/Rule</title>
         IMG:error:imaging_child_check: img:Imaging class must contain at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Imaging/pds:Local_Internal_Reference">
+      <sch:assert test="pds:local_reference_type = 'imaging_parameters_to_image_object'">
+        <title>//img:Imaging/pds:Local_Internal_Reference/Rule</title>
+        In img:Imaging, Local_Internal_Reference.local_reference_type must be equal to 'imaging_parameters_to_image_object'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Instrument_State">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Instrument_State/Rule</title>
+        IMG:error:inst_state_child_check: img:Instrument_State must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:JPEG_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:JPEG_Parameters/Rule</title>
+        IMG:error:jpeg_params_child_check: img:JPEG_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:LOCO_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:LOCO_Parameters/Rule</title>
+        IMG:error:loco_params_child_check: img:LOCO_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Onboard_Compression">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Onboard_Compression/Rule</title>
+        IMG:error:onboard_compression_child_check: img:Onboard_Compression must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Optical_Filter">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Optical_Filter/Rule</title>
+        IMG:error:optical_filter_child_check: img:Optical_Filter must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Optical_Filter/pds:Local_Internal_Reference">
+      <sch:assert test="pds:local_reference_type = 'data_to_optical_filter'">
+        <title>//img:Optical_Filter/pds:Local_Internal_Reference/Rule</title>
+        In img:Optical_Filter, Local_Internal_Reference.local_reference_type must be equal to 'data_to_optical_filter'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Sampling">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Sampling/Rule</title>
+        IMG:error:sampling_child_check: img:Sampling must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Shutter_Subtraction">
+      <sch:assert test="(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))">
+        <title>//img:Shutter_Subtraction/Rule</title>
+        IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:StarPixel_Flexible_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:StarPixel_Flexible_Parameters/Rule</title>
+        IMG:error:starpixel_flexible_params_child_check: img:StarPixel_Flexible_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:StarPixel_Lossless_Parameters">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:StarPixel_Lossless_Parameters/Rule</title>
+        IMG:error:starpixel_lossless_params_child_check: img:StarPixel_Lossless_Parameters must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Subframe">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Subframe/Rule</title>
+        IMG:error:subframe_child_check: img:Subframe must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="//img:Video">
+      <sch:assert test="count(child::*) > 0">
+        <title>//img:Video/Rule</title>
+        IMG:error:video_child_check: img:Video must have at least 1 attribute or class specified.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Brightness_Correction_Image/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_brightness_correction'">
+        <title>img:Brightness_Correction_Image/pds:Internal_Reference/Rule</title>
+        In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -175,9 +259,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Detector/img:instrument_idle_timeout">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:Detector/img:instrument_idle_timeout/img:instrument_idle_timeout</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -185,6 +269,13 @@
       <sch:assert test="@unit = ('GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz')">
         <title>img:Detector/img:readout_rate/img:readout_rate</title>
         The attribute @unit must be equal to one of the following values 'GHz', 'Hz', 'MHz', 'THz', 'kHz', 'mHz'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:Detector/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
+        <title>img:Detector/pds:Internal_Reference/Rule</title>
+        In img:Detector, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -210,9 +301,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -284,16 +375,23 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_duration">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_duration/img:exposure_duration</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:High_Dynamic_Range_Exposure/img:exposure_time_delta">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:High_Dynamic_Range_Exposure/img:exposure_time_delta/img:exposure_time_delta</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
+    <sch:rule context="img:High_Dynamic_Range_Exposure/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
+        <title>img:High_Dynamic_Range_Exposure/pds:Internal_Reference/Rule</title>
+        In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -429,30 +527,30 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:height_pixels">
-      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:height_pixels/img:height_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Pixel_Averaging_Dimensions/img:width_pixels">
-      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
         <title>img:Pixel_Averaging_Dimensions/img:width_pixels/img:width_pixels</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:x_center">
-      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:x_center/img:x_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Radial_Flat_Field_Function/img:y_center">
-      <sch:assert test="@unit = ('DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel')">
+      <sch:assert test="@unit = ('DN', 'electron/DN', 'pixel')">
         <title>img:Radial_Flat_Field_Function/img:y_center/img:y_center</title>
-        The attribute @unit must be equal to one of the following values 'DN', 'W/m**2/sr/nm/(DN/s)', 'electron/DN', 'pixel'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'DN', 'electron/DN', 'pixel'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -563,6 +661,13 @@
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
+    <sch:rule context="img:Tile/pds:Internal_Reference">
+      <sch:assert test="pds:reference_type = 'data_to_tile_source_data'">
+        <title>img:Tile/pds:Internal_Reference/Rule</title>
+        In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</sch:assert>
+    </sch:rule>
+  </sch:pattern>
+  <sch:pattern>
     <sch:rule context="img:Tiling/img:tile_type">
       <sch:assert test=". = ('Irregular', 'Regular')">
         <title>img:Tiling/img:tile_type/img:tile_type</title>
@@ -585,9 +690,9 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:frame_interval">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:Video/img:frame_interval/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
@@ -599,135 +704,23 @@
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/img:interframe_delay">
-      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr')">
+      <sch:assert test="@unit = ('day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr')">
         <title>img:Video/img:interframe_delay/TBD_attrNameSpaceNC:TBD_AttrTitle</title>
-        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 'ns', 's', 'yr'.</sch:assert>
+        The attribute @unit must be equal to one of the following values 'day', 'hr', 'julian day', 'microseconds', 'min', 'ms', 's', 'yr'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
-    <sch:rule context="//img:Instrument_State">
-      <sch:assert test="count(child::*) > 0">
-        <title>inst_state_child_check/Rule</title>
-        IMG:error:inst_state_child_check: img:Instrument_State must have at least 1 attribute or class specified.</sch:assert>
+    <sch:rule context="img:Video/pds:External_Reference">
+      <sch:assert test="pds:reference_type = 'video_frame_to_video'">
+        <title>img:Video/pds:External_Reference/Rule</title>
+        In img:Video, External_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
     </sch:rule>
   </sch:pattern>
   <sch:pattern>
     <sch:rule context="img:Video/pds:Internal_Reference">
       <sch:assert test="pds:reference_type = 'video_frame_to_video'">
-        <title>int_reference_type_check_video/Rule</title>
+        <title>img:Video/pds:Internal_Reference/Rule</title>
         In img:Video, Internal_Reference.reference_type must be equal to 'video_frame_to_video'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:JPEG_Parameters">
-      <sch:assert test="count(child::*) > 0">
-        <title>jpeg_params_child_check/Rule</title>
-        IMG:error:jpeg_params_child_check: img:JPEG_Parameters must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Imaging/pds:Local_Internal_Reference">
-      <sch:assert test="pds:local_reference_type = 'imaging_parameters_to_image_object'">
-        <title>local_reference_type_check_img/Rule</title>
-        In img:Imaging, Local_Internal_Reference.local_reference_type must be equal to 'imaging_parameters_to_image_object'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Optical_Filter/pds:Local_Internal_Reference">
-      <sch:assert test="pds:local_reference_type = 'data_to_optical_filter'">
-        <title>local_reference_type_check_optical_filter/Rule</title>
-        In img:Optical_Filter, Local_Internal_Reference.local_reference_type must be equal to 'data_to_optical_filter'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:LOCO_Parameters">
-      <sch:assert test="count(child::*) > 0">
-        <title>loco_params_child_check/Rule</title>
-        IMG:error:loco_params_child_check: img:LOCO_Parameters must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Onboard_Compression">
-      <sch:assert test="count(child::*) > 0">
-        <title>onboard_compression_child_check/Rule</title>
-        IMG:error:onboard_compression_child_check: img:Onboard_Compression must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Optical_Filter">
-      <sch:assert test="count(child::*) > 0">
-        <title>optical_filter_child_check/Rule</title>
-        IMG:error:optical_filter_child_check: img:Optical_Filter must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Brightness_Correction_Image/pds:Internal_Reference">
-      <sch:assert test="pds:reference_type = 'data_to_brightness_correction'">
-        <title>reference_type_check_brightness_correction_image/Rule</title>
-        In img:Brightness_Correction_Image, Internal_Reference.reference_type must be equal to 'data_to_brightness_correction'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Detector/pds:Internal_Reference">
-      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
-        <title>reference_type_check_detector/Rule</title>
-        In img:Detector, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:High_Dynamic_Range_Exposure/pds:Internal_Reference">
-      <sch:assert test="pds:reference_type = 'data_to_raw_source_product'">
-        <title>reference_type_check_hdre/Rule</title>
-        In img:High_Dynamic_Range_Exposure, Internal_Reference.reference_type must be equal to 'data_to_raw_source_product'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="img:Tile/pds:Internal_Reference">
-      <sch:assert test="pds:reference_type = 'data_to_tile_source_data'">
-        <title>reference_type_check_tile/Rule</title>
-        In img:Tile, Internal_Reference.reference_type must be equal to 'data_to_tile_source_data'.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Sampling">
-      <sch:assert test="count(child::*) > 0">
-        <title>sampling_child_check/Rule</title>
-        IMG:error:sampling_child_check: img:Sampling must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Shutter_Subtraction">
-      <sch:assert test="(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))">
-        <title>shutter_subtraction_check/Rule</title>
-        IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:StarPixel_Flexible_Parameters">
-      <sch:assert test="count(child::*) > 0">
-        <title>starpixel_flexible_params_child_check/Rule</title>
-        IMG:error:starpixel_flexible_params_child_check: img:StarPixel_Flexible_Parameters must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:StarPixel_Lossless_Parameters">
-      <sch:assert test="count(child::*) > 0">
-        <title>starpixel_lossless_params_child_check/Rule</title>
-        IMG:error:starpixel_lossless_params_child_check: img:StarPixel_Lossless_Parameters must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Subframe">
-      <sch:assert test="count(child::*) > 0">
-        <title>subframe_child_check/Rule</title>
-        IMG:error:subframe_child_check: img:Subframe must have at least 1 attribute or class specified.</sch:assert>
-    </sch:rule>
-  </sch:pattern>
-  <sch:pattern>
-    <sch:rule context="//img:Video">
-      <sch:assert test="count(child::*) > 0">
-        <title>video_child_check/Rule</title>
-        IMG:error:video_child_check: img:Video must have at least 1 attribute or class specified.</sch:assert>
     </sch:rule>
   </sch:pattern>
 </sch:schema>
