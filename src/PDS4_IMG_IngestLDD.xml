@@ -8287,7 +8287,7 @@ product_flag.</definition>
     <rule_context>//img:Shutter_Subtraction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))</rule_test>
+      <rule_test>if (exists(img:shutter_subtraction_mode)) then (img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count)) else true()</rule_test>
       <rule_message>IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
