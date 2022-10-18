@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.6.0</ldd_version_id>
+  <ldd_version_id>1.8.7.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -177,6 +177,9 @@
     - Added effective_wavelength to Radiometric_Correction class
     - Added new Data_Quality Class and required several required classes and attributes to support it.
     - Allowed responsivity_r,g,b,pan,std attributes to be nillable
+	  
+     1.8.7.0 T.Hare
+     - Fixed ordering, moved Tiling class under Thumbnail in Imaging Class to match other classes (and alpha ordering).
 
   </comment>
   <last_modification_date_time>2021-08-10T20:34:00Z</last_modification_date_time>
@@ -4487,16 +4490,16 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>Tiling</identifier_reference>
-      <reference_type>component_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>*</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
       <identifier_reference>Thumbnail</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Tiling</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Video</identifier_reference>
@@ -8284,7 +8287,7 @@ product_flag.</definition>
     <rule_context>//img:Shutter_Subtraction</rule_context>
     <DD_Rule_Statement>
       <rule_type>Assert</rule_type>
-      <rule_test>(img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count))</rule_test>
+      <rule_test>if (exists(img:shutter_subtraction_mode)) then (img:shutter_subtraction_mode != 'Conditional') or (img:shutter_subtraction_mode = 'Conditional' and exists(img:exposure_duration_threshold_count)) else true()</rule_test>
       <rule_message>IMG:error:shutter_subtraction_check: if img:shutter_subtraction_mode = 'Conditional', then img:exposure_duration_threshold_count must exist.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>

@@ -1,12 +1,12 @@
 
->>  INFO LDDTOOL Version: 14.0.1
->>  INFO IM Version Id: 1.18.0.0
+>>  INFO LDDTOOL Version: 10.0.0
+>>  INFO IM Version Id: 1.17.0.0
 >>  INFO IM Namespace Id: pds
->>  INFO IM Label Version Id: 1.24
->>  INFO Date: Thu Jun 02 19:09:37 UTC 2022
->>  INFO PARENT_DIR: /tmp/lddtool-14.0.1
->>  INFO SCRIPT_DIR: /tmp/lddtool-14.0.1/bin
->>  INFO LIB_DIR: /tmp/lddtool-14.0.1/lib
+>>  INFO IM Label Version Id: 1.23
+>>  INFO Date: Thu Sep 29 00:55:06 UTC 2022
+>>  INFO PARENT_DIR: /tmp/lddtool-14.1.0
+>>  INFO SCRIPT_DIR: /tmp/lddtool-14.1.0/bin
+>>  INFO LIB_DIR: /tmp/lddtool-14.1.0/lib
 
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
@@ -99,10 +99,10 @@
 >>> WARNING Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
->>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Onboard_Compression> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Sampling> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Instrument_State> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
@@ -129,18 +129,19 @@
 
 Input:
 
-     - IM Version: 1I00
+     - IM Version: 1H00
      - PDS4 Flag: true
      - LDD Flag: true
+     - IM Version: true
      - Export JSON Flag: true
 
      - Ingest LDD(s): /home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml
 
 Output:
 
-     - ./PDS4_IMG_1I00_1860.xsd
-     - ./PDS4_IMG_1I00_1860.sch
-     - ./PDS4_IMG_1I00_1860.xml
-     - ./PDS4_IMG_1I00_1860.JSON
+     - ./PDS4_IMG_1H00_1870.xsd
+     - ./PDS4_IMG_1H00_1870.sch
+     - ./PDS4_IMG_1H00_1870.xml
+     - ./PDS4_IMG_1H00_1870.JSON
 
 >>  INFO Exit(0)
