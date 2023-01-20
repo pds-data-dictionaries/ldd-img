@@ -1,8 +1,4 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
----
-
-name: Build Sphinx Docs
+name: Build and Deploy Docs
 
 on:
    push:
@@ -11,11 +7,63 @@ on:
      paths:
        - 'docs/**'
 
+   # Allows you to run this workflow manually from the Actions tab
+   workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  build: # job 1
-    name: 'Build HTML Docs'
+  # Single deploy job since we're just deploying
+  deploy:
+    name: 'Build and Deploy Sphinx Docs'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    environment: github-pages
+    if: github.actor != 'pdsen-ci'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+        
+      - name: Install dependencies
+        run: |
+          # Install Sphinx
+          pip install -r docs/requirements.txt
+      - name: Make Sphinx
+        id: make
+        run: |
+          cd docs
+          # Make the HTML docs and copy to main
+          make github
+          cd ..
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        
+  pdfgen: # job 1
+    name: 'Build PDF'
+    runs-on: ubuntu-latest
+    environment: main
     if: github.actor != 'pdsen-ci'
 
     steps:
@@ -32,63 +80,14 @@ jobs:
         run: |
           # Install Sphinx
           pip install -r docs/requirements.txt
-
-      - name: Make Sphinx
-        id: make
-        run: |
-          cd docs
-
-          # Make the HTML docs and copy to main
-          make github
-
-          cd ..
-
-      - name: Push LDDs to Github
-        run: |
-          git config --local user.email "pdsen-ci@jpl.nasa.gov"
-          git config --local user.name "PDSEN CI Bot"
-          git add -A .
-          git commit --allow-empty -m "Auto-generated docs by PDSEN CI Bot"
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
-          branch: gh-pages
-          force: true
-
-  pdfgen: # job 1
-    name: 'Build PDF'
-    runs-on: ubuntu-latest
-    environment: main
-    if: github.actor != 'pdsen-ci'
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
-
-      - name: Set up Python 3
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.7'
-
-      - name: Install dependencies
-        run: |
-          # Install Sphinx
-          pip install -r docs/requirements.txt
-
           # Install dependencies for PDF generation
           sudo apt install texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra latexmk
-
       - name: Make Sphinx
         id: make
         run: |
           cd docs
-
           make latexpdf
           cp build/latex/*.pdf .
-
       - name: Push LDDs to Github
         run: |
           git config --local user.email "pdsen-ci@jpl.nasa.gov"
