@@ -8,6 +8,8 @@ on:
        - '**'
        - '!main'
        - '!gh-pages'
+     paths:
+       - 'src/**'
 
 env:
   REGRESSION_TEST_PATH: ${{ format('{0}/{1}/', github.workspace, 'test') }}
