@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Example Namespace  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;My_First_LDD&gt;" href="../detailed/example.html" />
+    <link rel="prev" title="Example Namespace Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Example Namespace
+            <img src="../_static/PDS_Planets.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#overview-of-the-name-local-data-dictionary">Overview of the {name} Local Data Dictionary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#how-to-include-the-name-local-data-dictionary-in-a-pds4-label">How to Include the {name} Local Data Dictionary in a PDS4 Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#organization-of-classes-and-attributes">Organization of Classes and Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-1">Class 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-2">Class 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#definitions">Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Detailed Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../detailed/example.html">&lt;My_First_LDD&gt;</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Example Namespace</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pds-data-dictionaries/ldd-template/blob/main/docs/source/user/user-guide.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>{date}<br />
+{author}</p>
+<blockquote>
+<div><p>Note to authors who use this outline: The outline is a
+suggestion only. It includes the minimum of content needed to inform the
+dictionary user. Authors are expected to tailor the outline to their particular
+purposes, elaborating and providing context as needed.</p>
+</div></blockquote>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<ol class="arabic simple">
+<li><p>Purpose of this User’s Guide</p></li>
+<li><p>Audience</p></li>
+<li><p>Applicable Documents</p></li>
+</ol>
+</section>
+<section id="overview-of-the-name-local-data-dictionary">
+<h1>Overview of the {name} Local Data Dictionary<a class="headerlink" href="#overview-of-the-name-local-data-dictionary" title="Permalink to this headline"></a></h1>
+<p><em>What is this dictionary for? What kinds of products might
+use this dictionary? Who is the steward of this dictionary (person and node
+name)? How often is it updated? To whom should questions about it be directed?
+(Give an email address or link to a page with contact information.)</em></p>
+</section>
+<section id="how-to-include-the-name-local-data-dictionary-in-a-pds4-label">
+<h1>How to Include the {name} Local Data Dictionary in a PDS4 Label<a class="headerlink" href="#how-to-include-the-name-local-data-dictionary-in-a-pds4-label" title="Permalink to this headline"></a></h1>
+<p><em>Briefly explain the form that a discipline dictionary
+takes: the input ingest file, the output schema, Schematron, and other files,
+which ones are necessary and which ones may be ignored.</em></p>
+<p><em>Give the URL at PDS where the dictionary files may be downloaded.</em></p>
+<p><em>Give (and explain) a label snippet showing the beginning lines of a
+label to demonstrate the use of the dictionary schema and schematron
+in the xml prolog and the root tag (preferably Product_Observational).</em></p>
+<p><em>Give (and explain) a label snippet showing the location
+of the classes and attributes in the label; i.e., inside the Discipline_Area
+tag. Collapse the lower level classes if needed for brevity.</em></p>
+<p><em>In general, for label snippets use a fixed-width font and
+consistent indentation. Color-coding is helpful. Label snippets copied from an
+Oxygen editor window will retain their color-coding when pasted here.</em></p>
+</section>
+<section id="organization-of-classes-and-attributes">
+<h1>Organization of Classes and Attributes<a class="headerlink" href="#organization-of-classes-and-attributes" title="Permalink to this headline"></a></h1>
+<p><em>Give a schematic diagram or a list showing the hierarchy of
+classes in order of appearance in label. Refer the reader to the Definitions
+section for complete definitions. An example of such a list is given on the
+page <a class="reference external" href="http://sbndev.astro.umd.edu/wiki/Filling_Out_the_Spectral_Dictionary_Classes#.3CCircular_FOV.3E">Filling Out The Spectral Dictionary Classes</a>
+on the PDS Small Bodies Node wiki. In this example the names of classes and attributes have hyperlinks to
+their definitions further down the page, a useful lookup tool.</em></p>
+<p><em>The author should take into consideration the complexity
+of the dictionary when organizing this section.  If the hierarchy is large or
+complicated, it may be helpful to break it down by class as shown in the
+following subsections, but don’t forget to provide a high-level view of how the
+classes relate to one another.</em></p>
+<section id="class-1">
+<h2>Class 1<a class="headerlink" href="#class-1" title="Permalink to this headline"></a></h2>
+<p><em>What is this class for?</em></p>
+<p><em>Give a schematic diagram or a list of the attributes in this class in order of
+appearance in label. Refer reader to Definitions section for complete definitions.</em></p>
+<p><em>Give label snippets showing use of the class and attributes, with annotations
+as appropriate. Refer reader to Examples section for complete examples.</em></p>
+<p><em>Explain why some things are required and others are optional.</em></p>
+<p><em>List and explain any rules that apply to this class (e.g. from Schematron).</em></p>
+</section>
+<section id="class-2">
+<h2>Class 2<a class="headerlink" href="#class-2" title="Permalink to this headline"></a></h2>
+<p>[repeat this subsection for each class]</p>
+</section>
+</section>
+<section id="definitions">
+<h1>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline"></a></h1>
+<p><em>Give an alphabetical list of all classes and attributes
+with complete definitions. (Useful ones, not silly ones like “The
+map_projection_name attribute provides the name of the map projection.”)</em></p>
+<p><em>Include:</em></p>
+<ul class="simple">
+<li><p><em>Class or attribute name (indicate which it is; capitalize class names according to PDS4 standard)</em></p></li>
+<li><p><em>PDS4 data type (ASCII_Short_String_Collapsed, ASCII_Real, ASCII_Date, etc.)</em></p></li>
+<li><p><em>Definition in complete sentences</em></p></li>
+<li><p><em>Cardinality (minimum and maximum number of values permitted)</em></p></li>
+<li><p><em>Nillable, yes or no? Explain when it is appropriate to use a nil value</em></p></li>
+<li><p><em>Minimum and maximum numeric values, if applicable</em></p></li>
+<li><p><em>Minimum and maximum number of characters, if applicable</em></p></li>
+<li><p><em>List of valid values, if applicable.</em></p></li>
+</ul>
+</section>
+<section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<p><em>Give one or more examples of label snippets for real products, annotated as appropriate.
+Make sure the examples can be successfully validated using the latest version of the PDS4
+core dictionary and, of course, the dictionary described in this document.</em></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Example Namespace Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../detailed/example.html" class="btn btn-neutral float-right" title="&lt;My_First_LDD&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
