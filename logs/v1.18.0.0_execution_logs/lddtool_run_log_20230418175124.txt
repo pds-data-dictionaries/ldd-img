@@ -1,12 +1,12 @@
 
->>  INFO LDDTOOL Version: 14.1.2
->>  INFO IM Version Id: 1.19.0.0
+>>  INFO LDDTOOL Version: 14.1.3
+>>  INFO IM Version Id: 1.18.0.0
 >>  INFO IM Namespace Id: pds
->>  INFO IM Label Version Id: 1.25
->>  INFO Date: Thu Oct 20 21:51:50 UTC 2022
->>  INFO PARENT_DIR: /tmp/lddtool-14.1.2
->>  INFO SCRIPT_DIR: /tmp/lddtool-14.1.2/bin
->>  INFO LIB_DIR: /tmp/lddtool-14.1.2/lib
+>>  INFO IM Label Version Id: 1.24
+>>  INFO Date: Tue Apr 18 17:51:25 UTC 2023
+>>  INFO PARENT_DIR: /tmp/lddtool-14.1.3
+>>  INFO SCRIPT_DIR: /tmp/lddtool-14.1.3/bin
+>>  INFO LIB_DIR: /tmp/lddtool-14.1.3/lib
 
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
@@ -129,18 +129,19 @@
 
 Input:
 
-     - IM Version: 1J00
+     - IM Version: 1I00
      - PDS4 Flag: true
      - LDD Flag: true
+     - IM Version: true
      - Export JSON Flag: true
 
      - Ingest LDD(s): /home/runner/work/ldd-img/ldd-img/src/PDS4_IMG_IngestLDD.xml
 
 Output:
 
-     - ./PDS4_IMG_1J00_1870.xsd
-     - ./PDS4_IMG_1J00_1870.sch
-     - ./PDS4_IMG_1J00_1870.xml
-     - ./PDS4_IMG_1J00_1870.JSON
+     - ./PDS4_IMG_1I00_1870.xsd
+     - ./PDS4_IMG_1I00_1870.sch
+     - ./PDS4_IMG_1I00_1870.xml
+     - ./PDS4_IMG_1I00_1870.JSON
 
 >>  INFO Exit(0)
