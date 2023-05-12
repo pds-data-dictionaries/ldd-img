@@ -58,7 +58,7 @@ jobs:
       - name: Set up Python 3
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: '3.9'
 
       - name: Adding dependencies
         run: |
@@ -71,6 +71,6 @@ jobs:
 
       - name: Publish new release
         run: |
-           pip install pds-github-util
+           pip install pds.ldd-manager
            ldd-release --ingest_ldd_src_dir ${{github.workspace}}/src --ldd_output_path ${{ env.DEPLOY_PATH }} --token ${{ secrets.GITHUB_TOKEN }} --pds4_version ${{matrix.pds4_version}}
 
