@@ -73,7 +73,7 @@ jobs:
 
       - name: Generate LDDs
         id: generate
-        uses: NASA-PDS/sumo-gen-action@main
+        uses: NASA-PDS/ldd-gen-action@main
         with:
           data_path: ${{ format('{0}/{1}', env.DEPLOY_PATH, matrix.pds4_version) }}
           pds4_im_version: ${{ matrix.pds4_version }}
@@ -139,7 +139,7 @@ jobs:
           git config --local user.email "pdsen-ci@jpl.nasa.gov"
           git config --local user.name "PDSEN CI Bot"
           git add -A ${{ env.LOGS_PATH }}
-          git commit -m "Add logs from failed SuMo generation"
+          git commit -m "Add logs from failed LDD generation"
           git push origin HEAD
 
 
