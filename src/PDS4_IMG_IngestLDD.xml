@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.7.0</ldd_version_id>
+  <ldd_version_id>1.8.8.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -181,8 +181,12 @@
      1.8.7.0 T.Hare
      - Fixed ordering, moved Tiling class under Thumbnail in Imaging Class to match other classes (and alpha ordering).
 
+     1.8.8.0 T. Hare
+     - change height_pixels and width_pixels to real from integer as required for the Voyager labels. 
+	  Minimum for both set to 0.  
+	  
   </comment>
-  <last_modification_date_time>2021-08-10T20:34:00Z</last_modification_date_time>
+  <last_modification_date_time>2023-05-23T09:43:00Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1942,15 +1946,15 @@
 
    <DD_Attribute>
     <name>height_pixels</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>height_pixels</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The height_pixels attribute provides the vertical dimension, in pixels.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <minimum_value>1</minimum_value>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -3943,15 +3947,15 @@
   
   <DD_Attribute>
     <name>width_pixels</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>width_pixels</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The width_pixels attribute provides the horizontal dimension, in pixels.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
-      <minimum_value>1</minimum_value>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
