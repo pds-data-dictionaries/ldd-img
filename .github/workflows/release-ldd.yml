@@ -24,7 +24,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
           ssh-key: ${{ secrets.SSH_KEY }}
@@ -50,7 +50,7 @@ jobs:
       matrix: ${{fromJson(needs.get_versions.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
           ssh-key: ${{ secrets.SSH_KEY }}
