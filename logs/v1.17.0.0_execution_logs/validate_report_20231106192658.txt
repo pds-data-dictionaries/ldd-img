@@ -1,0 +1,46 @@
+
+PDS Validate Tool Report
+
+Configuration:
+   Version                       3.3.0
+   Date                          2023-11-06T19:27:00Z
+
+Parameters:
+   Targets                       [file:/home/runner/work/ldd-img/ldd-img/build/development/96ac91f75d2ac579929438ef04e3559f7731ae18/1.17.0.0/PDS4_IMG_1H00_1890.xml]
+   Rule Type                     pds4.label
+   User Specified Schemas        [file:/home/runner/work/ldd-img/ldd-img/build/development/96ac91f75d2ac579929438ef04e3559f7731ae18/1.17.0.0/PDS4_IMG_1H00_1890.xsd, file:/tmp/PDS4_PDS_1H00.xsd]
+   User Specified Schematrons    [file:/home/runner/work/ldd-img/ldd-img/build/development/96ac91f75d2ac579929438ef04e3559f7731ae18/1.17.0.0/PDS4_IMG_1H00_1890.sch, file:/tmp/PDS4_PDS_1H00.sch]
+   Severity Level                WARNING
+   Recurse Directories           true
+   File Filters Used             [*.xml, *.XML]
+   Data Content Validation       off
+   Product Level Validation      on
+   Max Errors                    100000
+   Registered Contexts File      /tmp/validate-3.3.0/resources/registered_context_products.json
+
+
+
+Product Level Validation Results
+
+  PASS: file:/home/runner/work/ldd-img/ldd-img/build/development/96ac91f75d2ac579929438ef04e3559f7731ae18/1.17.0.0/PDS4_IMG_1H00_1890.xml
+        1 product validation(s) completed
+
+Summary:
+
+  0 error(s)
+  0 warning(s)
+
+  Product Validation Summary:
+    1          product(s) passed
+    0          product(s) failed
+    0          product(s) skipped
+
+  Referential Integrity Check Summary:
+    0          check(s) passed
+    0          check(s) failed
+    0          check(s) skipped
+
+
+End of Report
+Completed execution in 7184 ms
+
