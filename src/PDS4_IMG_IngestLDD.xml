@@ -186,7 +186,9 @@
 	  Minimum for both set to 0.  
 
      1.8.9.0 T. Hare
-     - Added ISO Class to the Detector Class with iso_number and iso_mode_id attributes.	  
+     - Added ISO Class to the Detector Class with iso_number and iso_mode_id attributes.
+     - Added White_Balance Class to Data_Processing Class with existing attributes active_flag, processing_venue, 
+        processing_algorithm and new attribute white_balance_color_temp.
   </comment>
   <last_modification_date_time>2023-11-06T08:40Z</last_modification_date_time>
 
@@ -3999,7 +4001,23 @@
       <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+ 
+  <DD_Attribute>
+    <name>white_balance_color_temp</name>
+    <version_id>1.0</version_id>
+    <local_identifier>white_balance_color_temp</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The color temperature used to white-balance the image generally reported in Kelvins.
+      For example, on Earth 5000-6500K might be set when there are clear skies with the sun overhead.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Temperature</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+   
   <DD_Attribute>
     <name>x_center</name>
     <version_id>1.0</version_id>
@@ -4327,7 +4345,7 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
-  <!-- End   Attributes: for Data_Qulaity Class   -->
+  <!-- End   Attributes: for Data_Quality Class   -->
   
   
   <!--                   -->
@@ -5427,6 +5445,12 @@
     <DD_Association>
       <identifier_reference>sequence_number</identifier_reference>
       <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -8124,6 +8148,47 @@ product_flag.</definition>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>  
+  </DD_Class>
+
+  <!-- Class: White_Balance  -->
+  <DD_Class>
+    <name>White_Balance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>White_Balance</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The White_Balance class indicates what processing was used for 
+      white balance either onboard or on the ground. This class is added to support 
+      more commercial off-the-shelf (COTS) cameras. The white balance for a camera tries to 
+      capture the image using the correct colors in relation to the light source. 
+      For COTs cameras, the white balance is usually automatically adjusted depending 
+      on the light source.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>active_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>processing_venue</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>processing_algorithm</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>white_balance_color_temp</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!--                   -->
