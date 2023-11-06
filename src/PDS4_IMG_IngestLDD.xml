@@ -190,7 +190,7 @@
      - Added White_Balance Class to Data_Processing Class with existing attributes active_flag, processing_venue, 
         processing_algorithm and new attribute white_balance_color_temp.
   </comment>
-  <last_modification_date_time>2023-11-06T08:40Z</last_modification_date_time>
+  <last_modification_date_time>2023-11-06T12:25Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -4008,7 +4008,7 @@
     <local_identifier>white_balance_color_temp</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>The color temperature used to white-balance the image generally reported in Kelvins.
+    <definition>The color temperature used to white-balance the image generally reported in Kelvin.
       For example, on Earth 5000-6500K might be set when there are clear skies with the sun overhead.
     </definition>
     <DD_Value_Domain>

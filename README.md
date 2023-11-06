@@ -7,12 +7,12 @@ Steward: [IMG Node](https://pds-imaging.jpl.nasa.gov/)
 
 Only one LDD source version is kept such that it can be managed by github.
 
-- [src](src) for PDS4 version 1.F.0.0, 1.G.0.0, 1.H.0.0
+- [src](src)
 
 ## Versions
 
 A Local Data Dictionary (LDD) is built for selected versions of the [PDS4 Information Model](https://pds.nasa.gov/pds4/doc/im/).
-The build process insures compatiblity of the LDD with the core information model.
+The build process insures compatibility of the LDD with the core information model.
 
 ## Builds
 
