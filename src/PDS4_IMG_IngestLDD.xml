@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.8.0</ldd_version_id>
+  <ldd_version_id>1.8.9.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -184,9 +184,11 @@
      1.8.8.0 T. Hare
      - change height_pixels and width_pixels to real from integer as required for the Voyager labels. 
 	  Minimum for both set to 0.  
-	  
+
+     1.8.9.0 T. Hare
+     - Added ISO Class to the Detector Class with iso_number and iso_mode_id attributes.	  
   </comment>
-  <last_modification_date_time>2023-05-23T09:43:00Z</last_modification_date_time>
+  <last_modification_date_time>2023-11-06T08:40Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -1802,6 +1804,21 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>gain_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Elizabeth D. Rye</submitter_name>
+    <definition>The gain_number attribute specifies the gain value used in the analog to digital 
+      conversion. The gain value is a multiplicative factor used in the analog to digital conversion.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>gain_mode_id</name>
     <version_id>1.0</version_id>
     <local_identifier>gain_mode_id</local_identifier>
@@ -1817,22 +1834,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
-  <DD_Attribute>
-    <name>gain_number</name>
-    <version_id>1.0</version_id>
-    <local_identifier>gain_number</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The gain_number attribute specifies the gain value used in the analog to digital 
-      conversion. The gain value is a multiplicative factor used in the analog to digital conversion.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-  
+ 
   <DD_Attribute>
     <name>gop_frame_count</name>
     <version_id>1.0</version_id>
@@ -2119,6 +2121,44 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
+  <DD_Attribute>
+    <name>iso_number</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iso_number</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>Specifies the ISO level set for the camera. ISO Sensitivity is a 
+      standard set by the International Organization for Standardization (ISO) that 
+      represents sensitivity to light as a numerical value as it pertains to either 
+      film or a digital sensor. A lower ISO value means less sensitivity to light, 
+      while a higher ISO means more sensitivity. The most common ISO values are 100, 
+      200, 400, 800, 1600, and 3000. The lowest ISO setting or base ISO is typically 
+      100, although some cameras go as low as 50 or even 25. Some older cameras will 
+      start at ISO 200. This should generally conform to ISO 12232:2019</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>iso_mode_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iso_mode_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The iso_mode_id attribute is a mission specific definition of how
+      the ISO value is actually used. For example, this could be set as "ISO 12232:2019" 
+      if the iso_number attribute follows the ISO standard 12232:2019, otherwise how it
+      used should be defined here.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>jpeg_parameter</name>
     <version_id>1.0</version_id>
@@ -5642,6 +5682,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>ISO</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Special_Point</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -6499,6 +6545,37 @@
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: ISO -->
+  <DD_Class>
+    <name>ISO</name>
+    <version_id>1.0</version_id>
+    <local_identifier>ISO</local_identifier>
+    <submitter_name>Trent Hare</submitter_name>
+    <definition>The ISO Class contains the iso_number and iso_mode_id attributes.
+      This class is added to support more commercial off-the-shelf (COTS) cameras or
+      instruments which typically use this value to specify a setting for the 
+      instrument's sensitivty to light. If is often analogous to gain.
+      
+      ISO Sensitivity is a standard set by the International Organization for 
+      Standardization (ISO). A lower ISO value means less sensitivity to light, 
+      while a higher ISO means more sensitivity. Values defined here should 
+      generally conform to the ISO standard 12232:2019</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>iso_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>iso_mode_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
   
