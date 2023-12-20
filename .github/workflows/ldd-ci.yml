@@ -1,0 +1,212 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
+---
+name: PDS4 LDD Automation
+on:
+   push:
+     branches:
+       - '**'
+       - '!main'
+       - '!gh-pages'
+     paths:
+       - src/**
+       - .github/**
+       - pds4_versions.txt
+   workflow_dispatch:
+
+env:
+  REGRESSION_TEST_PATH: ${{ format('{0}/{1}/', github.workspace, 'test') }}
+  # TODO - Have to hard-code this for now since Actions don't yet allow the use of env here.
+  LOGS_PATH: ${{ format('{0}/{1}', github.workspace, 'logs') }}
+  DEPLOY_PATH: ${{ format('{0}/{1}/{2}/{3}', github.workspace, 'build', 'development', github.sha) }}
+
+jobs:
+  get_versions:
+    name: Get PDS4 Versions
+    runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      - id: set-matrix
+        run: |
+          # Look through lines and pull out the versions
+          while read -r line; do
+              if [[ ! -z "$line" ]]; then
+                  versions=$versions'"'$line'"',
+              fi
+          done < pds4_versions.txt
+          versions="[${versions::-1}]"
+          echo "{\"pds4_version\":${versions}}"
+
+          # Baseline: Set pds4 version to versions from file
+          echo "matrix={\"pds4_version\": $versions}" >> $GITHUB_OUTPUT
+
+  build:
+    name: 'Generate and Validate'
+    needs: get_versions
+    runs-on: ubuntu-latest
+    if: github.actor != 'pdsen-ci'
+
+    strategy:
+      matrix: ${{fromJson(needs.get_versions.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Update submodules for dependencies
+        run: |
+          git submodule update --init --force --remote
+
+      - name: Generate LDDs
+        id: generate
+        uses: NASA-PDS/ldd-gen-action@main
+        with:
+          data_path: ${{ format('{0}/{1}', env.DEPLOY_PATH, matrix.pds4_version) }}
+          pds4_im_version: ${{ matrix.pds4_version }}
+          pds4_development_release: ${{ matrix.pds4_development_release }}
+          lddtool_development_release: ${{ matrix.lddtool_development_release }}
+          test_path: ${{ env.REGRESSION_TEST_PATH }}
+          logs_path: ${{ env.LOGS_PATH }}
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+
+      - name: Check logs
+        run: |
+          ls -R ${{ env.LOGS_PATH }}
+
+      - name: Upload LDDs to Github Action Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v${{matrix.pds4_version}}_LDDs
+          path: ${{ env.DEPLOY_PATH }}
+        if: ${{ always() }}
+
+      - name: Upload Logs to Github Action Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v${{matrix.pds4_version}}_execution_logs
+          path: ${{ env.LOGS_PATH }}
+        if: ${{ always() }}
+
+  upload_logs_only: # job 3
+    name: 'Add Run Logs to Github'
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ failure() && github.actor != 'pdsen-ci' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: /tmp/artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R /tmp/artifacts
+
+      - name: Clean out old logs
+        run: |
+          path=$(dirname ${{ env.LOGS_PATH }})
+          rm -fr $path/*
+
+      - name: Move the execution logs to their new home
+        run: |
+          rm -fr ${{ env.LOGS_PATH }}
+          mkdir -p ${{ env.LOGS_PATH }}
+          cp -R /tmp/artifacts/*logs ${{ env.LOGS_PATH }}/
+
+      - name: Display structure of downloaded files
+        run: ls -R ${{ env.LOGS_PATH }}
+
+      - name: Push logs to Github
+        run: |
+          git config --local user.email "pdsen-ci@jpl.nasa.gov"
+          git config --local user.name "PDSEN CI Bot"
+          git add -A ${{ env.LOGS_PATH }}
+          git commit -m "Add logs from failed LDD generation"
+          git push origin HEAD
+
+
+  upload_all: # job 3
+    name: 'Add LDDs and Logs to Github'
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.actor != 'pdsen-ci' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: /tmp/artifacts
+
+      - name: Display structure of downloaded files
+        run: |
+          ls -R /tmp/artifacts
+
+      - name: Clean previous dev/snapshot tags
+        run: |
+          git fetch --prune --unshallow --tags
+          git tag -l | grep 'dev' | xargs -t -I arg sh -c 'git tag -d arg;git push --delete origin arg;'
+
+      - name: Clean out old LDDs and logs
+        run: |
+          path=$(dirname ${{ env.DEPLOY_PATH }})
+          rm -fr $path/*
+
+          path=${{ env.LOGS_PATH }}
+          rm -fr $path/*
+
+      - name: Move the LDDs to their new home
+        run: |
+          mkdir -p ${{ env.DEPLOY_PATH }}
+          ls -R /tmp/artifacts/*LDDs/*
+          rsync -av /tmp/artifacts/*LDDs/* ${{ env.DEPLOY_PATH }}
+
+      - name: Display structure of downloaded files
+        run: ls -R ${{ env.DEPLOY_PATH }}
+
+      - name: If Release Branch, move to release dir
+        shell: bash
+        run: |
+          if [[ "${{github.ref}}" == *"release"* ]]; then
+            rsync -av /tmp/artifacts/*LDDs/* ${{github.workspace}}/build/release/
+            ls -R ${{github.workspace}}/build/release/
+          fi
+
+      - name: Move the execution logs to their new home
+        run: |
+          rm -fr ${{ env.LOGS_PATH }}
+          mkdir -p ${{ env.LOGS_PATH }}
+          rsync -av /tmp/artifacts/*logs ${{ env.LOGS_PATH }}/
+
+      - name: Display structure of downloaded files
+        run: ls -R ${{ env.LOGS_PATH }}
+
+      - name: Push LDDs and Logs to Github
+        run: |
+          git config --local user.email "pdsen-ci@jpl.nasa.gov"
+          git config --local user.name "PDSEN CI Bot"
+          git add -A $(dirname ${{ env.DEPLOY_PATH }}) ${{ env.LOGS_PATH }} ${{github.workspace}}/build/release/
+          git commit -m "Auto-generated LDDs by PDSEN CI Bot"
+          git push origin HEAD
+
