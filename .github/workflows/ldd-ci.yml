@@ -67,10 +67,6 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Update submodules for dependencies
-        run: |
-          git submodule update --init --force --remote
-
       - name: Generate LDDs
         id: generate
         uses: NASA-PDS/ldd-gen-action@main
