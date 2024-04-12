@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.8.9.0</ldd_version_id>
+  <ldd_version_id>1.9.0.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -18,17 +18,19 @@
   <comment> This dictionary contains high level classes and attributes used in imaging and
     spectrometer products. It also contains classes with attributes used during active mission
     operations. Many of these classes are designed to be extended into local mission dictionaries.
-    
+
     ## CHANGE LOG ##
     1.4.0.0
     - upgraded to v1900 of the IM
-    - removed specific Autoexposure algorithm classes and introduced generic Algorithm_Parameter class
-    - new/improved definitions for Companding_Parameters, Downsampling_Parameters, Exposure_Parameters
+    - removed specific Autoexposure algorithm classes and introduced generic Algorithm_Parameter
+    class
+    - new/improved definitions for Companding_Parameters, Downsampling_Parameters,
+    Exposure_Parameters
     - removed the following attributes: Data_Correction.data_correction_subtype
     - removed the following classes because they were insufficiently multi-mission:
     - Derived_Product_Parameters
     - Frame_Parameters
-    - Product_Identification 
+    - Product_Identification
     - Stereo_Product_Parameters
     - Vector_Range_Origin
     - added exposure_type enumeration
@@ -36,38 +38,45 @@
     - changed compression_type to compression_class and compression_mode_name to compression_type
     - added new enumerations for compression_class and compression_type
     - added new Instrument_Device_Currents class
-    
+
     1.5.0.0
     - upgraded to v1A10 of the IM
     - removed old blocks of commented out XML
-    
+
     1.5.1.0
     - changed unit of bandwidth attribute from Units_of_Frequency to Units_of_Length
-    
+
     1.6.0.0
     - Upgraded to v1B00 of the IM.
     - Re-organized attributes into alphabetical order.
     - Re-organized classes to make most commonly used parts of label easier to find.
-    - Created new classes for housekeeping data (Instrument_State_Parameters, Commanded_Parameters) and placed them at the bottom.
-    - Re-wrote numerous class and attribute definitions, to make dictionary easier for users to understand.
+    - Created new classes for housekeeping data (Instrument_State_Parameters, Commanded_Parameters)
+    and placed them at the bottom.
+    - Re-wrote numerous class and attribute definitions, to make dictionary easier for users to
+    understand.
     - Renamed some classes and attributes to remove redundant words.
-    - Re-designed data correction classes (such as Flat_Field_Correction, Radiometric_Correction, etc.) and 
-      other data processing classes such as Companding, Downsampling, etc. to share a common base class.
-    - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it clear 
-      that any image compression was performed for data storage/transmission. PDS4 does not allow compressed images.
+    - Re-designed data correction classes (such as Flat_Field_Correction, Radiometric_Correction,
+    etc.) and
+    other data processing classes such as Companding, Downsampling, etc. to share a common base
+    class.
+    - Renamed Compression class and related attributes to Onboard_Compression_*. This is to make it
+    clear
+    that any image compression was performed for data storage/transmission. PDS4 does not allow
+    compressed images.
     - Renamed Filter_Parameters to Optical_Filter
-    
+
     1.6.1.0
     - Added Brightness_Correction class and associated subclasses/attributes
-    - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE LDD)
+    - Added Pointing_Correction class and associated subclasses/attributes (moved from IMG_SURFACE
+    LDD)
     - Added attributes to Color_Processing class: color_dn_scaling_method, color_dn_scaling_factor
     - Corrected typo in local_reference_type_check_optical_filter rule
-    
+
     1.7.0.0
     - Upgraded to v1D00 of core IM.
     - Added Illumination class and associated subclasses/attributes.
     - Added Video class to Commanded_Parameters. (bugfix)
-    
+
     1.7.1.0, T.Hare
     - Added filter
     - Added atmospheric_opacity and atmospheric_opacity_reference under Radiometric_Correction class
@@ -75,57 +84,64 @@
     - Changed Flat_Field_Correction from 0:1 to 0:* (unbounded)
     - Added Spatial_Filter and Image_Filter classes and 6 new children (*filter_window*)
     - Under Video added frame_index and gop_start_index
-    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count attributes
-    - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation attributes.
-        anded new Image_Mask added under both Imaging and Commanded_Parameters classes
+    - Under Sampling added saturated_pixel_count, valid_pixel_count and missing pixel_count
+    attributes
+    - Added Image_Mask, Image_Mask_File clases and under mask_type, horizon_mask_elevation
+    attributes.
+    anded new Image_Mask added under both Imaging and Commanded_Parameters classes
     - Added mask_transparent_value attribute to Image_Mask_File class
-    
+
     1.7.2.0 P.Geissler
     - added classes Companding_Table and Companding_Table_Mapping to accomodate attributes:
-        input_dn_min, input_dn_max, and output_dn
-    - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count, valid_pixel_count
+    input_dn_min, input_dn_max, and output_dn
+    - added the missing y_center attribute. Fixed saturated_pixel_count, missing_pixel_count,
+    valid_pixel_count
 
     1.7.3.0, T.Hare
     - Fixes for new enforced rules at LDDTool v11.2.2
-    - No longer can one use *_type as non enumerated so changing: 
-        radiometric_type, mask_type, and subframe_type to have enumerations
+    - No longer can one use *_type as non enumerated so changing:
+    radiometric_type, mask_type, and subframe_type to have enumerations
     - Add "Sun Subframe Or Full" and None to subframe_type
-    - If an optional attribute, don't set nilable to true, 
-        so setting current_value, erase_count and voltage_value to nilable=false
+    - If an optional attribute, don't set nilable to true,
+    so setting current_value, erase_count and voltage_value to nilable=false
     - Added abstract_flag and element_flag for all Classes with defaults of false
-    - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter, 
-      Subframe, and Instrument_State to element_flag = true (allows to be exposed class)
+    - Changed Companding, Detector, Exposure, Focus, Onboard_Compression, Optical_Filter,
+    Subframe, and Instrument_State to element_flag = true (allows to be exposed class)
     - update lots of indentations in the classes to be more consistent
     - Add focus_distance to Focus.
     - Add Manual Last, Auto Last, and None to exposure_type
     - Change the minimum for icer_quality to 0 and updated definition
-    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout, early_image_return to Detector
+    - Add bad_pixel_replacement_flag, bad_pixel_replacement_table, instrument_idle_timeout,
+    early_image_return to Detector
     - Add exposure_table, exposure_table_update_flag to Autoexposure
     - Add exposure_scale_factor, exposure_coadd_count, exposure_readout_count to Exposure
     - Add early_scaling to Companding
-    
+
     1.8.0.0 T.Hare
     - Update to PDS IM 1.E.0.0
     - Added GZIP and LZO to onboard_compression_type enumeration options
     - Added Optical_Properties class with focal_length, f_number, zoom_position attributes
     - Added focus_initialization_flag attribute under the Focus class
-    - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have minOccurs=0
+    - Updated Subframe class for first_line, first_sample, lines, and samples attributes to have
+    minOccurs=0
     - Updated img_temperature_value to allow nillable=true
     - Added auto_exposure_lower_threshold, auto_exposure_lower_limit, auto_exposure_upper_threshold,
-        auto_exposure_upper_limit, auto_exposure_roi_lines, auto_exposure_roi_samples,
-        auto_exposure_roi_first_line, auto_exposure_roi_first_sample attributes to Autoexposure
+    auto_exposure_upper_limit, auto_exposure_roi_lines, auto_exposure_roi_samples,
+    auto_exposure_roi_first_line, auto_exposure_roi_first_sample attributes to Autoexposure
     - Added Image_Compression_Segment under JPEG_Parameters class
-    - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated definition
+    - Renamed attribute bad_pixel_replacement_table to bad_pixel_replacement_table_id and updated
+    definition
     - Added Special_Point class and special_line, special_sample attributes
     - Added High_Dynamic_Range and High_Dynamic_Range_Exposure classes
-       and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clexposure_count ipping_threshold, exposure_time_delta
+    and attibutes hdr_acquisition_mode, hdr_frame_count, hdr_clexposure_count ipping_threshold,
+    exposure_time_delta
     - Added observation_number under Frame class and parameter_table_id under Detector class
     - Added valid_minimum_pixel and valid_maximum_pixel under Autoexposure class
     - Created Thumbnail, Row_Sum, Col_Sum, Reference_Pixel, Histogram classes and attributes added
-        to Imaging and Commanded_Parameters class
+    to Imaging and Commanded_Parameters class
     - Added delta_focus_count attribute for Focus_Stack class
     - set LED_Illumination_Source to min occurance=0 to any
-    
+
     1.8.1.0 T.Hare
     - Updated exposure_count set minimum to 0
     - Added Image_Compression_Segment class to LOCO_Parameters
@@ -141,56 +157,71 @@
 
     1.8.2.0 T.Hare
     - Added Tiling Class and uts attributes
-    - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under onboard_compression_type
-        for Hayabusa2 ONC and TIR instruments. For more see: https://www.mdpi.com/1424-8220/15/10/24926/htm
-    - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not yet added)
+    - Added "StarPixel Lossless" and "StarPixel Flexible" as compression types under
+    onboard_compression_type
+    for Hayabusa2 ONC and TIR instruments. For more see:
+    https://www.mdpi.com/1424-8220/15/10/24926/htm
+    - Added Spatial_Filter and Image_Filter under Imaging and Commanded_Parameters (both were not
+    yet added)
     - Updated attrbiutes under Spatial/Image_Filter to be Units_of_None
     - Updated horizon_mask_elevation attribute to be allowed as a direct child under Image_Mask
     - Add array_band_number attribute to Optical_Filter
     - Add original_sample_bits to Sampling class
-    
+
     1.8.3.0 T.Hare
     - Added illumination_mode as an optional child of lllumination
-    
+
     1.8.4.0 T.Hare
     - Added "Always" and "None" as additional valids for shutter_subtraction_mode
-	  - Added frame_index to Focus_Stack class
+    - Added frame_index to Focus_Stack class
 
     1.8.5.0 T.Hare
-    - Added choice between Internal_Reference/External_Reference in Video class, created reference rules for it also
+    - Added choice between Internal_Reference/External_Reference in Video class, created reference
+    rules for it also
     - Added rule for Tile Internal_Reference for reference type to be "data_to_tile_source_data"
     - Added "H.264 Frame" enumeration to onboard_compression_type
-    - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need to still add rule)
+    - Updated definition to specify only unsigned integer are valid to have a sample_bit_mask (need
+    to still add rule)
     - Updated definition for tile_num_bands
 
     1.8.6.0. T.Hare
     - Added StarPixel_Lossless_Parameters and StarPixel_Flexible_Parameters class and attributes:
-    starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two rules
+    starpixel_initial_subsampling_interval, starpixel_degradation segment_corrupted_flag, and two
+    rules
     - Updated to main (required github move)
     - Changed filter_position_count to allow for negative values
     - Changed exposure_duration_count to ASCII_Real (for Mars2020 helicopter)
     - Allow frame_index to be negative as seen returned during M2020 mission
-    - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard 
+    - Added responsivity_std (to Class Radiometric_Correction) to describe the 1-sigma standard
     deviation in the "responsivity_pan" radiometric coefficients. Added for M2020 Mastcam-Z
     - Added new enumeration radiance factor for radiometric_type and add iof_conversion_coefficient
     and iof_conversion_coefficient_std to the Radiometric_Correction class
     - Added effective_wavelength to Radiometric_Correction class
-    - Added new Data_Quality Class and required several required classes and attributes to support it.
+    - Added new Data_Quality Class and required several required classes and attributes to support
+    it.
     - Allowed responsivity_r,g,b,pan,std attributes to be nillable
-	  
-     1.8.7.0 T.Hare
-     - Fixed ordering, moved Tiling class under Thumbnail in Imaging Class to match other classes (and alpha ordering).
 
-     1.8.8.0 T. Hare
-     - change height_pixels and width_pixels to real from integer as required for the Voyager labels. 
-	  Minimum for both set to 0.  
+    1.8.7.0 T.Hare
+    - Fixed ordering, moved Tiling class under Thumbnail in Imaging Class to match other classes
+    (and alpha ordering).
 
-     1.8.9.0 T. Hare
-     - Added ISO Class to the Detector Class with iso_number and iso_mode_id attributes.
-     - Added White_Balance Class to Data_Processing Class with existing attributes active_flag, processing_venue, 
-        processing_algorithm and new attribute white_balance_color_temp.
+    1.8.8.0 T. Hare
+    - change height_pixels and width_pixels to real from integer as required for the Voyager labels.
+    Minimum for both set to 0.
+
+    1.8.9.0 T. Hare
+    - Added ISO Class to the Detector Class with iso_number and iso_mode_id attributes.
+    - Added White_Balance Class to Data_Processing Class with existing attributes active_flag,
+    processing_venue, processing_algorithm and new attribute white_balance_color_temp.
+
+    1.9.0.0 T. Hare
+    - Changed crosstrack_summing and downtrack_summing to Units_of_Misc to support pixels and
+    set the default to specified_unit_id=pixel
+    - added to Autoexposure class: auto_exposure_target_msv, auto_exposure_max_delta, auto_exposure_alpha
+    to support the CADRE rovers.
+    - for CADRE SACA camera add "any" to Video cardinality and pre_video_delay and frame-source_id attributes
   </comment>
-  <last_modification_date_time>2023-11-06T12:25Z</last_modification_date_time>
+  <last_modification_date_time>2024-04-12T10:25Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -244,7 +275,59 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>auto_exposure_alpha</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_exposure_alpha</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>auto_exposure_alpha is a weighting parameter that decides whether to prefer
+      exposure changes more or gain changes. Values closer to 1 mean exposure changes are
+      preferred more. For example, this will be used by the CADRE rovers which have a different 
+      autoexposure algorithm called "ModalAI MSV 2022".</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>auto_exposure_max_delta</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_exposure_max_delta</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>The maximum exposure change that is allowed across image frames. Limiting
+      the change makes it more friendly to feature tracking algorithms, in that successive
+      scenes do not vary greatly in brightness. For example, this will be used by the 
+      CADRE rovers which have a different autoexposure algorithm called "ModalAI MSV 2022".</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>auto_exposure_target_msv</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_exposure_target_msv</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>The algorithm attempts to make the Mean Sample Value (MSV) of the image match
+      for this value. For example, this will be used by the CADRE rovers as the setpoint for the
+      algorithm called "ModalAI MSV 2022".</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>auto_exposure_data_cut</name>
     <version_id>1.0</version_id>
@@ -908,7 +991,7 @@
   
   <DD_Attribute>
     <name>crosstrack_summing</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>crosstrack_summing</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -918,7 +1001,8 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <minimum_value>1</minimum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <specified_unit_id>pixel</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1081,7 +1165,7 @@
   
   <DD_Attribute>
     <name>downtrack_summing</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>downtrack_summing</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
@@ -1091,7 +1175,8 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
       <minimum_value>1</minimum_value>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Misc</unit_of_measure_type>
+      <specified_unit_id>pixel</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1224,6 +1309,7 @@
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -1396,7 +1482,9 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1573,7 +1661,7 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
-<!--
+      <!--
    comments: this will be free text, some examples below
 
    ZSTACK - Images were acquired at multiple autofocus positions.
@@ -1745,7 +1833,9 @@
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1802,6 +1892,21 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>frame_source_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_source_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>frame_source_id is a mission-specific ID string identifying the source of the video. For 
+      example, for the CADRE rover's SACA instrument, it would be a camera ID.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2066,7 +2171,7 @@
   
   <DD_Attribute>
     <name>interframe_delay</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
@@ -2077,6 +2182,7 @@
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -2092,6 +2198,7 @@
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>s</specified_unit_id>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -2794,6 +2901,22 @@
     </DD_Value_Domain>
   </DD_Attribute>
   
+  <DD_Attribute>
+    <name>pre_video_delay</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pre_video_delay</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>pre_video_delay indicates the delay, generally in milliseconds or seconds, before the video starts.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>processing_algorithm</name>
     <version_id>1.0</version_id>
@@ -4346,17 +4469,17 @@
   </DD_Attribute>
 
   <!-- End   Attributes: for Data_Quality Class   -->
-  
-  
+
+
   <!--                   -->
   <!-- Attributes: END   -->
   <!--                   -->
-  
-  
+
+
   <!--                   -->
   <!--  Classes: BEGIN   -->
   <!--                   -->
-  
+
   <!-- Class: Imaging    -->
   <!-- See schematron rule below for ensuring at least one subclass are present -->
   <DD_Class>
@@ -4567,7 +4690,7 @@
         <identifier_reference>Video</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Instrument_State</identifier_reference>
@@ -4582,11 +4705,11 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Autoexposure -->
   <DD_Class>
     <name>Autoexposure</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Autoexposure</local_identifier>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The Autoexposure class contains attributes used to identify or describe
@@ -4598,6 +4721,12 @@
       "Maurice 2012" used on MSL ChemCam; "Smith 1997" used on Mars Pathfinder Imager.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>auto_exposure_alpha</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
         <identifier_reference>auto_exposure_data_cut</identifier_reference>
         <reference_type>attribute_of</reference_type>
@@ -4629,6 +4758,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>auto_exposure_max_delta</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>auto_exposure_roi_first_line</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -4652,7 +4787,13 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
-   <DD_Association>
+    <DD_Association>
+      <identifier_reference>auto_exposure_target_msv</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>auto_exposure_upper_threshold</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -4701,7 +4842,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Brightness_Correction -->
   <DD_Class>
     <name>Brightness_Correction</name>
@@ -4737,7 +4878,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Brightness_Correction_File -->
   <DD_Class>
     <name>Brightness_Correction_File</name>
@@ -4757,7 +4898,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-    
+
   <!-- Class: Brightness_Correction_Image -->
   <DD_Class>
     <name>Brightness_Correction_Image</name>
@@ -4786,7 +4927,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Brightness_Correction_HSI_Linear -->
   <DD_Class>
     <name>Brightness_Correction_HSI_Linear</name>
@@ -4812,7 +4953,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Brightness_Correction_Linear -->
   <DD_Class>
     <name>Brightness_Correction_Linear</name>
@@ -4839,7 +4980,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-    
+
   <!-- Class: Color_Filter_Array -->
   <DD_Class>
     <name>Color_Filter_Array</name>
@@ -4876,7 +5017,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Color -->
   <DD_Class>
     <name>Color_Processing</name>
@@ -4942,7 +5083,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Commanded_Parameters -->
   <DD_Class>
     <name>Commanded_Parameters</name>
@@ -5151,10 +5292,10 @@
         <identifier_reference>Video</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
+        <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Companding -->
   <DD_Class>
     <name>Companding</name>
@@ -5211,7 +5352,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Companding_File class definition -->
   <DD_Class>
     <name>Companding_File</name>
@@ -5283,7 +5424,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
 
   <!-- Class: Dark_Current_Correction class definition -->
   <DD_Class>
@@ -5390,7 +5531,7 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
-  </DD_Class>  
+  </DD_Class>
 
   <!-- Class: Correction_Parameter  -->
   <DD_Class>
@@ -5409,7 +5550,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Data_Processing  -->
   <DD_Class>
     <name>Data_Processing</name>
@@ -5455,7 +5596,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Data_Processing_File  -->
   <DD_Class>
     <name>Data_Processing_File</name>
@@ -5493,7 +5634,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Image_Mask  -->
   <DD_Class>
     <name>Image_Mask</name>
@@ -5543,7 +5684,7 @@
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Image_Mask_File  -->
   <DD_Class>
     <name>Image_Mask_File</name>
@@ -5593,7 +5734,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Detector -->
   <DD_Class>
     <name>Detector</name>
@@ -5724,7 +5865,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Component_States -->
   <DD_Class>
     <name>Device_Component_States</name>
@@ -5742,7 +5883,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Component_State -->
   <DD_Class>
     <name>Device_Component_State</name>
@@ -5767,7 +5908,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Currents -->
   <DD_Class>
     <name>Device_Currents</name>
@@ -5785,7 +5926,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Current -->
   <DD_Class>
     <name>Device_Current</name>
@@ -5809,7 +5950,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Motor_Counts -->
   <DD_Class>
     <name>Device_Motor_Counts</name>
@@ -5828,7 +5969,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Motor_Count -->
   <DD_Class>
     <name>Device_Motor_Count</name>
@@ -5855,7 +5996,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Parameters  -->
   <DD_Class>
     <name>Device_Parameters</name>
@@ -5878,7 +6019,7 @@
       <maximum_occurrences>3</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Temperatures -->
   <DD_Class>
     <name>Device_Temperatures</name>
@@ -5897,7 +6038,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Temperature -->
   <DD_Class>
       <name>Device_Temperature</name>
@@ -5934,7 +6075,7 @@
           <maximum_occurrences>1</maximum_occurrences>
         </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Voltages -->
   <DD_Class>
     <name>Device_Voltages</name>
@@ -5952,7 +6093,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Device_Voltage -->
   <DD_Class>
     <name>Device_Voltage</name>
@@ -5977,7 +6118,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Downsampling  -->
   <DD_Class>
     <name>Downsampling</name>
@@ -6005,7 +6146,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Exposure -->
   <DD_Class>
     <name>Exposure</name>
@@ -6067,7 +6208,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Optical_Filter  -->
   <DD_Class>
     <name>Optical_Filter</name>
@@ -6134,7 +6275,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Flat_Field_Correction -->
   <DD_Class>
     <name>Flat_Field_Correction</name>
@@ -6165,7 +6306,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Flat_Field_File -->
   <DD_Class>
     <name>Flat_Field_File</name>
@@ -6185,7 +6326,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Focus  -->
   <DD_Class>
     <name>Focus</name>
@@ -6259,7 +6400,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Focus_Stack  -->
   <DD_Class>
     <name>Focus_Stack</name>
@@ -6315,7 +6456,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Frame -->
   <DD_Class>
     <name>Frame</name>
@@ -6353,7 +6494,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: ICER_Parameters -->
   <DD_Class>
     <name>ICER_Parameters</name>
@@ -6397,7 +6538,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Illumination -->
   <DD_Class>
     <name>Illumination</name>
@@ -6427,7 +6568,7 @@
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Illumination_Source -->
   <DD_Class>
     <name>LED_Illumination_Source</name>
@@ -6463,7 +6604,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Image_Compression_Segment -->
   <DD_Class>
     <name>Image_Compression_Segment</name>
@@ -6529,7 +6670,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Instrument_State -->
   <DD_Class>
     <name>Instrument_State</name>
@@ -6602,7 +6743,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: JPEG_Parameters -->
   <DD_Class>
     <name>JPEG_Parameters</name>
@@ -6638,7 +6779,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: JPEG_Progressive_Parameters -->
   <DD_Class>
     <name>JPEG_Progressive_Parameters</name>
@@ -6664,7 +6805,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: List_Index_No_Units_Imaging -->
   <DD_Class>
     <name>List_Index_No_Units_Imaging</name>
@@ -6693,7 +6834,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: LOCO_Parameters -->
   <DD_Class>
     <name>LOCO_Parameters</name>
@@ -6730,7 +6871,7 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Onboard_Color_Matrix -->
   <DD_Class>
     <name>Onboard_Color_Matrix</name>
@@ -6800,7 +6941,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Onboard_Responsivity -->
   <DD_Class>
     <name>Onboard_Responsivity</name>
@@ -6833,7 +6974,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Optical_Properties -->
   <DD_Class>
     <name>Optical_Properties</name>
@@ -6862,7 +7003,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Pixel_Averaging_Dimensions -->
   <DD_Class>
     <name>Pixel_Averaging_Dimensions</name>
@@ -6886,7 +7027,7 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Pointing_Correction -->
   <DD_Class>
     <name>Pointing_Correction</name>
@@ -6911,7 +7052,7 @@
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Pointing_Correction_File -->
   <DD_Class>
     <name>Pointing_Correction_File</name>
@@ -6929,7 +7070,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-    
+
   <!-- Class: Pointing_Correction_Image -->
   <DD_Class>
     <name>Pointing_Correction_Image</name>
@@ -6960,7 +7101,7 @@
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Pointing_Model_Parameter    -->
   <DD_Class>
     <name>Pointing_Model_Parameter</name>
@@ -6986,7 +7127,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Radial_Flat_Field_Function -->
   <DD_Class>
     <name>Radial_Flat_Field_Function</name>
@@ -7046,7 +7187,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Radiometric_Correction -->
   <DD_Class>
     <name>Radiometric_Correction</name>
@@ -7316,7 +7457,7 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Shutter_Subtraction -->
   <DD_Class>
     <name>Shutter_Subtraction</name>
@@ -7411,7 +7552,7 @@ product_flag.</definition>
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!--  Class: StarPixel_Flexible_Parameters  -->
   <DD_Class>
     <name>StarPixel_Flexible_Parameters</name>
@@ -7564,11 +7705,11 @@ product_flag.</definition>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Video -->
   <DD_Class>
     <name>Video</name>
-    <version_id>2.0</version_id>
+    <version_id>2.1</version_id>
     <local_identifier>Video</local_identifier>
     <submitter_name>Trent Hare</submitter_name>
     <definition>The Video class contains attributes related to video 
@@ -7581,7 +7722,7 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
     <DD_Association>
       <identifier_reference>frame_count</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -7590,6 +7731,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>interframe_delay</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pre_video_delay</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -7608,6 +7755,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>frame_index</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_source_id</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -7818,7 +7971,7 @@ product_flag.</definition>
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
   <!-- Class: Image_Filter -->
   <DD_Class>
     <name>Image_Filter</name>
@@ -7872,8 +8025,8 @@ product_flag.</definition>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
-  </DD_Class>  
-  
+  </DD_Class>
+
   <!-- Class: High_Dynamic_Range -->
   <DD_Class>
     <name>High_Dynamic_Range</name>
@@ -7916,8 +8069,8 @@ product_flag.</definition>
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
-   <!-- Class: High_Dynamic_Range_Exposure -->
+
+  <!-- Class: High_Dynamic_Range_Exposure -->
   <DD_Class>
     <name>High_Dynamic_Range_Exposure</name>
     <version_id>1.0</version_id>
@@ -8074,7 +8227,7 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>    
   </DD_Class>
-  
+
   <!-- Class: Hot_Pixel Class for Data_Quality -->
   <DD_Class>
     <name>Hot_Pixel</name>
@@ -8123,7 +8276,7 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>  
   </DD_Class>
-  
+
 
   <!-- Class: Saturated_Pixel Class for Data_Quality -->
   <DD_Class>
@@ -8194,7 +8347,6 @@ product_flag.</definition>
   <!--                   -->
   <!--   Classes: END    -->
   <!--                   -->
-  
 
 
   <!-- ======================================================================== -->
@@ -8211,7 +8363,7 @@ product_flag.</definition>
       <rule_message>IMG:error:imaging_child_check: img:Imaging class must contain at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
-  
+
   <!-- TODO need to make this rule handle different possible reference_type values depending on
        the context of Data_Processing_File -->
   <!--
@@ -8539,7 +8691,7 @@ product_flag.</definition>
       <rule_message>IMG:error:starpixel_flexible_params_child_check: img:StarPixel_Flexible_Parameters must have at least 1 attribute or class specified.</rule_message>
     </DD_Rule_Statement>
   </DD_Rule>
-  
+
   <!--DD_Rule>  ** Not needed for now
     <local_identifier>reference_type_check_onboard_compression</local_identifier>
     <rule_context>img:Onboard_Compression/pds:Internal_Reference</rule_context>
