@@ -77,7 +77,7 @@ jobs:
           lddtool_development_release: ${{ matrix.lddtool_development_release }}
           test_path: ${{ env.REGRESSION_TEST_PATH }}
           logs_path: ${{ env.LOGS_PATH }}
-          token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN ||  github.token }}
 
       - name: Check logs
         run: |
