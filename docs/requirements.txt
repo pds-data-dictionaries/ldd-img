@@ -1,5 +1,5 @@
 sphinx==7.2.6
 sphinx-rtd-theme==2.0.0
-gitpython==3.1.42
-sphinxemoji==0.2.0
+gitpython==3.1.43
+sphinxemoji==0.3.1
 myst-parser==2.0.0
