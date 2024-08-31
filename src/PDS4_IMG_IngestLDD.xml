@@ -217,9 +217,22 @@
     1.9.0.0 T. Hare
     - Changed crosstrack_summing and downtrack_summing to Units_of_Misc to support pixels and
     set the default to specified_unit_id=pixel
-    - added to Autoexposure class: auto_exposure_target_msv, auto_exposure_max_delta, auto_exposure_alpha
+    - added to Autoexposure class: auto_exposure_target_msv, auto_exposure_max_delta,
+    auto_exposure_alpha
     to support the CADRE rovers.
-    - for CADRE SACA camera add "any" to Video cardinality and pre_video_delay and frame-source_id attributes
+    - for CADRE SACA camera add "any" to Video cardinality and pre_video_delay and frame-source_id
+    attributes
+
+    1.9.1.0 T. Hare
+    - For CLPS SCALPSS instrument (on several missions), create and add attributes:
+      - image_corrupt_flag under Data_Quality class
+      - auto_expose_target_dn under Autoexposure class
+      - gain_count under Detector class
+      - gain_db under Detector class
+      - analog_offset_count under Detector class
+      - analog_offset_percent under Detector class
+    - For CLPS SCALPSS instrument (on several missions), add attributes:
+      - frame_count under Detector class
   </comment>
   <last_modification_date_time>2024-04-12T10:25Z</last_modification_date_time>
 
@@ -257,6 +270,36 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Raw counts for analog offset.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_percent</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_percent</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Multiplier applied to pixel depth to get black level (also known as 
+      analog_offset). For example: 4% = .04 * 256 = 10.24 for 8-bit images 
+      or 4% * 4096 = 163.84 for 12-bit images.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -309,6 +352,21 @@
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
       <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>auto_expose_target_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_expose_target_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Target DN for an autoexpose algorithm. Specific definition is algorithm-dependent,
+      but often means the desired average DN after autoexposure completes.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1894,7 +1952,7 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
   <DD_Attribute>
     <name>frame_source_id</name>
     <version_id>1.0</version_id>
@@ -1909,7 +1967,37 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>gain_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Raw counts for gain.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>gain_db</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_db</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Gain is the amount of amplification that is applied to a pixel by the A/D
+      converter. For example, an increase in gain can result in a brighter image but also an
+      increase in noise.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>gain_number</name>
     <version_id>1.0</version_id>
@@ -2168,7 +2256,23 @@
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>image_corrupt_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>image_corrupt_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Indicates whether or not this image was corrupted after it was acquired (i.e. it was
+      corrupted somewhere downstream not part of acquisition). Valid values are "true",
+      "false", "1" (one, as true), and "0" (zero, as false).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>interframe_delay</name>
     <version_id>1.1</version_id>
@@ -4788,6 +4892,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>auto_expose_target_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>auto_exposure_target_msv</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -5793,7 +5903,25 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>frame_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>readout_rate</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>gain_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>gain_db</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5812,6 +5940,18 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>analog_offset</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>analog_offset_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>analog_offset_percent</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -8174,6 +8314,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>full_well_limit_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>image_corrupt_flag</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
