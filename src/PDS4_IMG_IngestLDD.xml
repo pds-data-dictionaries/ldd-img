@@ -233,8 +233,9 @@
       - analog_offset_percent under Detector class
     - For CLPS SCALPSS instrument (on several missions), add attributes:
       - frame_count under Detector class
+    - Add data_received under Data_Quality class
   </comment>
-  <last_modification_date_time>2024-09-30T17:47Z</last_modification_date_time>
+  <last_modification_date_time>2024-09-07T09:30Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -4294,7 +4295,7 @@
   </DD_Attribute>
 
 
-  <!-- Start Attributes: for Data_Qulaity Class   -->
+  <!-- Start Attributes: for Data_Quality Class   -->
  
   <DD_Attribute>
     <name>above_aft_flag</name>
@@ -4325,6 +4326,21 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>data_received</name>
+    <version_id>1.0</version_id>
+    <local_identifier>data_received</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>This field defines if all parts of the data or image is received 
+      without detected checksum or sequence errors. Example use case from MRO CTX is either
+      "OK" if all fragments of the image were received or "ERROR" if not.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -8314,6 +8330,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>full_well_limit_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>data_received</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
