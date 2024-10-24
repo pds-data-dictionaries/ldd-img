@@ -236,10 +236,11 @@
     - Add data_received under Data_Quality class
     - Updated White_Balance class to fix placement bug adding Data_Processing
     - Updated Image_Mask adding Data_Processing and remove redundant attributes from there
-    - Added "shutter_type" attributes, not used just yet
+    - Added Shutter Class under Detector with new shutter attributes.
+      - Currently only global or rolling are defined.
 
   </comment>
-  <last_modification_date_time>2024-10-23T16:50Z</last_modification_date_time>
+  <last_modification_date_time>2024-10-24T13:07Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -3194,8 +3195,7 @@
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the time between readout of each adjacent pixel. 
       It is the time from the start of one pixel to the start of the next. 
-      Generally important only for rolling shutters, but can be specified 
-      for any camera if desired.</definition>
+      </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -3213,8 +3213,7 @@
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the time between readout of the same pixel on 
       adjacent lines. It it the time from the start of one pixel to the 
-      start of the same pixel on the following line. Generally important 
-      only for rolling shutters, but can be specified for any camera if desired.</definition>
+      start of the same pixel on the following line.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -3231,8 +3230,8 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the time it takes for readout of the entire camera 
-      frame. This is the time from readout of the first pixel to readout of 
-      the last and does not include exposure time or other delays.</definition>
+      frame. This is the time from readout of the first pixel to the readout of 
+      the last pixel and does not include exposure time or other delays.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -3401,10 +3400,9 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the Bottom to Top from 
-      a camera. Generally important only for rolling shutters, but can be 
-      specified for any camera if desired. Directions are relative to the 
-      image as displayed (thus there may be an interaction with 
-      disp:Display_Direction).</definition>
+      a camera. Directions are relative to the 
+      image as displayed (thus there may be an 
+      interaction with disp:Display_Direction).</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -3435,10 +3433,9 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the direction in which lines are read from a 
-      camera. Generally important only for rolling shutters, but can be 
-      specified for any camera if desired. Directions are relative to the 
-      image as displayed (thus there may be an interaction with 
-      disp:Display_Direction)..</definition>
+      camera. Directions are relative to the image as displayed 
+      (thus there may be an interaction with 
+      disp:Display_Direction).</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -3894,6 +3891,10 @@
       <DD_Permissible_Value>
         <value>Rolling</value>
         <value_meaning>shutter is of type rolling</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Unknown</value>
+        <value_meaning>shutter is of type unkown or not assigned</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -6152,6 +6153,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>Special_Point</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Shutter</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -8612,6 +8619,59 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>  
   </DD_Class>
+
+  <!-- Class: Shutter for Detector  -->
+  <DD_Class>
+    <name>Shutter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Shutter</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Shutter is a class to hold information for shutter type of camera. 
+      Currently only  "Global" or "Rolling" are allowed. Global normally exposes all 
+      pixels at the same time, so the image captures a consistent view of moving objects. 
+      Rolling scans across the scene, meaning each pixel is exposed at a slightly 
+      different time, which can introduce distortions for rapidly moving objects. 
+      This is generally a property of the camera itself and does not vary from frame to frame.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>shutter_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>readout_direction_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>readout_direction_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pixel_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>line_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
 
   <!-- Class: White_Balance  -->
   <DD_Class>
