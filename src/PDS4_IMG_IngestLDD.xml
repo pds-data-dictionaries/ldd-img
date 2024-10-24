@@ -234,7 +234,9 @@
     - For CLPS SCALPSS instrument (on several missions), add attributes:
       - frame_count under Detector class
     - Add data_received under Data_Quality class
-    - Updated White_Balance class to fix placement bug
+    - Updated White_Balance class to fix placement bug adding Data_Processing
+    - Updated Image_Mask adding Data_Processing and remove redundant attributes from there
+    - Added "shutter_type" attributes, not used just yet
 
   </comment>
   <last_modification_date_time>2024-10-23T16:50Z</last_modification_date_time>
@@ -3185,6 +3187,62 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>pixel_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pixel_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time between readout of each adjacent pixel. 
+      It is the time from the start of one pixel to the start of the next. 
+      Generally important only for rolling shutters, but can be specified 
+      for any camera if desired.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>line_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>line_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time between readout of the same pixel on 
+      adjacent lines. It it the time from the start of one pixel to the 
+      start of the same pixel on the following line. Generally important 
+      only for rolling shutters, but can be specified for any camera if desired.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>frame_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time it takes for readout of the entire camera 
+      frame. This is the time from readout of the first pixel to readout of 
+      the last and does not include exposure time or other delays.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>r0</name>
     <version_id>1.0</version_id>
     <local_identifier>r0</local_identifier>
@@ -3335,7 +3393,75 @@
       <unit_of_measure_type>Units_of_Frequency</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>readout_direction_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>readout_direction_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the Bottom to Top from 
+      a camera. Generally important only for rolling shutters, but can be 
+      specified for any camera if desired. Directions are relative to the 
+      image as displayed (thus there may be an interaction with 
+      disp:Display_Direction).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Left to Right</value>
+        <value_meaning>pixels are read left to right.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Right to Left</value>
+        <value_meaning>pixels are read right to left.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Top to Bottom</value>
+        <value_meaning>pixels are read top to bottom.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bottom to Top</value>
+        <value_meaning>pixels are read bottom to top.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>readout_direction_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>readout_direction_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the direction in which lines are read from a 
+      camera. Generally important only for rolling shutters, but can be 
+      specified for any camera if desired. Directions are relative to the 
+      image as displayed (thus there may be an interaction with 
+      disp:Display_Direction)..</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Left to Right</value>
+        <value_meaning>pixels are read left to right.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Right to Left</value>
+        <value_meaning>pixels are read right to left.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Top to Bottom</value>
+        <value_meaning>pixels are read top to bottom.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bottom to Top</value>
+        <value_meaning>pixels are read bottom to top.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>responsivity_factor_b</name>
     <version_id>1.0</version_id>
@@ -3742,6 +3868,32 @@
       <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>shutter subtraction was not used</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>shutter_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>shutter_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the type of shutter the camera uses. "Global" exposes all pixels at 
+      the same time, so the image captures a consistent view of moving objects. "Rolling" scans 
+      across the scene, meaning each pixel is exposed at a slightly different time, which can 
+      introduce distortions for rapidly moving objects. This is generally a property of the camera 
+      itself and does not vary from frame to frame.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Global</value>
+        <value_meaning>shutter is of type global</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Rolling</value>
+        <value_meaning>shutter is of type rolling</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -4815,6 +4967,12 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Instrument_State</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -5422,6 +5580,12 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Companding -->
@@ -5770,31 +5934,7 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
-      <identifier_reference>active_flag</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
       <identifier_reference>horizon_mask_elevation</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_venue</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_algorithm</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>sequence_number</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5804,6 +5944,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
 
