@@ -3399,10 +3399,9 @@
     <local_identifier>readout_direction_pixel</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>R. Deen</submitter_name>
-    <definition>Specifies the Bottom to Top from 
-      a camera. Directions are relative to the 
-      image as displayed (thus there may be an 
-      interaction with disp:Display_Direction).</definition>
+    <definition>Specifies the direction in which adjacent pixels are 
+      read from a camera. Directions are relative to the image as displayed 
+      (thus there may be an interaction with disp:Display_Direction).</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
