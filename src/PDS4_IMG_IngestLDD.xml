@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.0.0</ldd_version_id>
+  <ldd_version_id>1.9.1.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -217,11 +217,30 @@
     1.9.0.0 T. Hare
     - Changed crosstrack_summing and downtrack_summing to Units_of_Misc to support pixels and
     set the default to specified_unit_id=pixel
-    - added to Autoexposure class: auto_exposure_target_msv, auto_exposure_max_delta, auto_exposure_alpha
+    - added to Autoexposure class: auto_exposure_target_msv, auto_exposure_max_delta,
+    auto_exposure_alpha
     to support the CADRE rovers.
-    - for CADRE SACA camera add "any" to Video cardinality and pre_video_delay and frame-source_id attributes
+    - for CADRE SACA camera add "any" to Video cardinality and pre_video_delay and frame-source_id
+    attributes
+
+    1.9.1.0 T. Hare
+    - For CLPS SCALPSS instrument (on several missions), create and add attributes:
+      - image_corrupt_flag under Data_Quality class
+      - auto_expose_target_dn under Autoexposure class
+      - gain_count under Detector class
+      - gain_db under Detector class
+      - analog_offset_count under Detector class
+      - analog_offset_percent under Detector class
+    - For CLPS SCALPSS instrument (on several missions), add attributes:
+      - frame_count under Detector class
+    - Add data_received under Data_Quality class
+    - Updated White_Balance class to fix placement bug adding Data_Processing
+    - Updated Image_Mask adding Data_Processing and remove redundant attributes from there
+    - Added Shutter Class under Detector with new shutter attributes.
+      - Currently only global or rolling are defined.
+
   </comment>
-  <last_modification_date_time>2024-04-12T10:25Z</last_modification_date_time>
+  <last_modification_date_time>2024-10-24T13:07Z</last_modification_date_time>
 
 
   <!--                     -->
@@ -257,6 +276,36 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Raw counts for analog offset.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_percent</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_percent</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Multiplier applied to pixel depth to get black level (also known as 
+      analog_offset). For example: 4% = .04 * 256 = 10.24 for 8-bit images 
+      or 4% * 4096 = 163.84 for 12-bit images.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -309,6 +358,21 @@
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
       <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>auto_expose_target_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>auto_expose_target_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Target DN for an autoexpose algorithm. Specific definition is algorithm-dependent,
+      but often means the desired average DN after autoexposure completes.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1894,7 +1958,7 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
   <DD_Attribute>
     <name>frame_source_id</name>
     <version_id>1.0</version_id>
@@ -1909,7 +1973,37 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>gain_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Raw counts for gain.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>gain_db</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_db</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Gain is the amount of amplification that is applied to a pixel by the A/D
+      converter. For example, an increase in gain can result in a brighter image but also an
+      increase in noise.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>gain_number</name>
     <version_id>1.0</version_id>
@@ -2168,7 +2262,23 @@
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>image_corrupt_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>image_corrupt_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Indicates whether or not this image was corrupted after it was acquired (i.e. it was
+      corrupted somewhere downstream not part of acquisition). Valid values are "true",
+      "false", "1" (one, as true), and "0" (zero, as false).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>interframe_delay</name>
     <version_id>1.1</version_id>
@@ -3078,6 +3188,60 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>pixel_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>pixel_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time between readout of each adjacent pixel. 
+      It is the time from the start of one pixel to the start of the next. 
+      </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>line_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>line_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time between readout of the same pixel on 
+      adjacent lines. It it the time from the start of one pixel to the 
+      start of the same pixel on the following line.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>frame_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>frame_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time it takes for readout of the entire camera 
+      frame. This is the time from readout of the first pixel to the readout of 
+      the last pixel and does not include exposure time or other delays.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>r0</name>
     <version_id>1.0</version_id>
     <local_identifier>r0</local_identifier>
@@ -3228,7 +3392,72 @@
       <unit_of_measure_type>Units_of_Frequency</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>readout_direction_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>readout_direction_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the direction in which adjacent pixels are 
+      read from a camera. Directions are relative to the image as displayed 
+      (thus there may be an interaction with disp:Display_Direction).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Left to Right</value>
+        <value_meaning>pixels are read left to right.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Right to Left</value>
+        <value_meaning>pixels are read right to left.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Top to Bottom</value>
+        <value_meaning>pixels are read top to bottom.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bottom to Top</value>
+        <value_meaning>pixels are read bottom to top.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>readout_direction_line</name>
+    <version_id>1.0</version_id>
+    <local_identifier>readout_direction_line</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the direction in which lines are read from a 
+      camera. Directions are relative to the image as displayed 
+      (thus there may be an interaction with 
+      disp:Display_Direction).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Left to Right</value>
+        <value_meaning>pixels are read left to right.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Right to Left</value>
+        <value_meaning>pixels are read right to left.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Top to Bottom</value>
+        <value_meaning>pixels are read top to bottom.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bottom to Top</value>
+        <value_meaning>pixels are read bottom to top.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>responsivity_factor_b</name>
     <version_id>1.0</version_id>
@@ -3635,6 +3864,36 @@
       <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>shutter subtraction was not used</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>shutter_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>shutter_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the type of shutter the camera uses. "Global" exposes all pixels at 
+      the same time, so the image captures a consistent view of moving objects. "Rolling" scans 
+      across the scene, meaning each pixel is exposed at a slightly different time, which can 
+      introduce distortions for rapidly moving objects. This is generally a property of the camera 
+      itself and does not vary from frame to frame.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Global</value>
+        <value_meaning>shutter is of type global</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Rolling</value>
+        <value_meaning>shutter is of type rolling</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Unknown</value>
+        <value_meaning>shutter is of type unkown or not assigned</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -4190,7 +4449,7 @@
   </DD_Attribute>
 
 
-  <!-- Start Attributes: for Data_Qulaity Class   -->
+  <!-- Start Attributes: for Data_Quality Class   -->
  
   <DD_Attribute>
     <name>above_aft_flag</name>
@@ -4221,6 +4480,21 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>data_received</name>
+    <version_id>1.0</version_id>
+    <local_identifier>data_received</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>This field defines if all parts of the data or image is received 
+      without detected checksum or sequence errors. Example use case from MRO CTX is either
+      "OK" if all fragments of the image were received or "ERROR" if not.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -4693,6 +4967,12 @@
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Instrument_State</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -4783,6 +5063,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>auto_exposure_roi_samples</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>auto_expose_target_dn</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5294,6 +5580,12 @@
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Companding -->
@@ -5589,12 +5881,6 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
-    <DD_Association>
-      <identifier_reference>White_Balance</identifier_reference>
-      <reference_type>component_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
   </DD_Class>
 
   <!-- Class: Data_Processing_File  -->
@@ -5648,31 +5934,7 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
-      <identifier_reference>active_flag</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
       <identifier_reference>horizon_mask_elevation</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_venue</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_algorithm</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>sequence_number</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5682,6 +5944,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
 
@@ -5793,7 +6061,25 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>frame_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>readout_rate</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>gain_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>gain_db</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5812,6 +6098,18 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>analog_offset</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>analog_offset_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>analog_offset_percent</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -5854,6 +6152,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>Special_Point</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Shutter</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -8179,6 +8483,18 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>data_received</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>image_corrupt_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>missing_temperature_flag</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -8303,6 +8619,59 @@ product_flag.</definition>
     </DD_Association>  
   </DD_Class>
 
+  <!-- Class: Shutter for Detector  -->
+  <DD_Class>
+    <name>Shutter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Shutter</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Shutter is a class to hold information for shutter type of camera. 
+      Currently only  "Global" or "Rolling" are allowed. Global normally exposes all 
+      pixels at the same time, so the image captures a consistent view of moving objects. 
+      Rolling scans across the scene, meaning each pixel is exposed at a slightly 
+      different time, which can introduce distortions for rapidly moving objects. 
+      This is generally a property of the camera itself and does not vary from frame to frame.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>shutter_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>readout_direction_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>readout_direction_line</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pixel_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>line_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>frame_readout_time</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+
   <!-- Class: White_Balance  -->
   <DD_Class>
     <name>White_Balance</name>
@@ -8319,27 +8688,15 @@ product_flag.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
-      <identifier_reference>active_flag</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_venue</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_algorithm</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
       <identifier_reference>white_balance_color_temp</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
