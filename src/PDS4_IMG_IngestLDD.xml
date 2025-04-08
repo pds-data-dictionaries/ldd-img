@@ -241,7 +241,9 @@
 
     1.9.2.0 T. Hare
     - Mars2020 Mastcam-Z updates, new attribute inband_fsun and iof_conversion_correction 
-    added to Radiometric_Correction class. 
+    added to Radiometric_Correction class.
+    - Add analog_offset_voltage under Detector class for a JUICE instrument (for Thomas C.). 
+    - Update analog_offset definition.
 
   </comment>
   <last_modification_date_time>2025-02-08T18:03Z</last_modification_date_time>
@@ -274,8 +276,12 @@
     <local_identifier>analog_offset</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The analog_offset attribute identifies the analog value that is subtracted from the
-      signal prior to the analog/digital conversion.</definition>
+    <definition>The analog_offset attribute identifies the analog value that is
+      subtracted from the signal prior to the analog/digital conversion.  This
+      is a unitless integer and should generally be avoided in favor of
+      analog_offset_count, if the value is a raw DN value, or one of the other
+      analog_offset attributes if it has a physical unit
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
@@ -310,6 +316,21 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_voltage</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_voltage</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>Specifies the analog voltage value that is
+      subtracted from the signal prior to the analog/digital conversion.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Voltage</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -6155,6 +6176,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>analog_offset_percent</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>analog_offset_voltage</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
