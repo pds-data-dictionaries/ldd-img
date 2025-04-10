@@ -9,6 +9,8 @@ Only one LDD source version is kept such that it can be managed by github.
 
 - [src](src)
 
+## Documentation
+* **User Guide:** See included file `docs/source/user/user-guide.md` or go to https://pds-data-dictionaries.github.io/ldd-img/
 ## Versions
 
 A Local Data Dictionary (LDD) is built for selected versions of the [PDS4 Information Model](https://pds.nasa.gov/pds4/doc/im/).
