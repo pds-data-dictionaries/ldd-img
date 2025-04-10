@@ -19,9 +19,7 @@ https://github.com/pds-data-dictionaries/PDS4-LDD-Issue-Repo/issues
 ## Extensibility 
 
 Most importantly, IMG is designed to be extensible.  It was not feasible to try to define every camera-related concept of which we can think.  Camera developers are far too creative for that.  
-So the bottom line is, we designed a structure around which new concepts could be added as needed.<br>
-
-That said, we want IMG to be comprehensive, and eventually to cover all camera-related concepts.  To be fair, there are some concepts that are truly instrument-specific that belong in a 
+So the bottom line is, we designed a structure around which new concepts could be added as needed.That said, we want IMG to be comprehensive, and eventually to cover all camera-related concepts.  To be fair, there are some concepts that are truly instrument-specific that belong in a 
 mission-specific data dictionary, but the vast majority of camera and image concepts have the potential for reuse in other instruments or missions.  We want to capture these concepts in the IMG dictionary.  
 It doesn’t matter if your instrument is the only one currently using a concept – if it is reasonably plausible that the same concept could apply to other instruments or missions, it belongs in IMG.<br>
 
@@ -41,10 +39,7 @@ in the details across instruments, even when the concept is the same.  For examp
 All of these benefit from using a shared attribute or class, because it makes searching easier.  Tools can present a list of filter names that’s dynamically built from the available images, 
 regardless of the fact that it varies across missions.  Search facets can be constructed that allow easy search of these metadata values, even though the definition is slightly different 
 (see the section on Definitional Nuances, below).  Trends can be found in data sets even when the physical interpretation (such as DN to physical unit conversion) varies across missions.  
-Some may question this, but it is our belief that it is the philosophy behind the PDS4 Information Model.  Regardless of that, it is the foundation around which IMG is built.  
-So we ask data providers to please try to reuse items as much as feasible when working on new missions.<br>
-As an example, the MSL and Mars 2020 engineering cameras do not actually use a mission-specific data dictionary.  All the concepts can be expressed using IMG’s and other disciplines’ data dictionaries.  
-That is in fact the goal - being able to describe everything in a multimission way.
+Some may question this, but it is our belief that it is the philosophy behind the PDS4 Information Model. Regardless of that, it is the foundation around which IMG is built. So we ask data providers to please try to reuse items as much as feasible when working on new missions. As an example, the MSL and Mars 2020 engineering cameras do not actually use a mission-specific data dictionary.  All the concepts can be expressed using IMG’s and other disciplines’ data dictionaries. That is in fact the goal - being able to describe everything in a multimission way.
 
 ## Relationship to Other Dictionaries
 IMG is intended to be the primary dictionary used to describe cameras and images. There are several other dictionaries that can be used to augment image data products by working in conjunction with IMG. 
@@ -166,17 +161,8 @@ Note that there are no real cases in which every single class and attribute woul
 A complete list of classes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
-This list is regenerated automatically with each release of the PDS4 Information Model. <br>
-
-To find the Imaging dictionary class list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for “Classes in the img namespace.” 
-Select that item and the list of classes will be presented on both the left and right as clickable links. <br>
-
-Clicking on the specific class name will produce a grid with the full, formal definition of the class. <br>
-
-Clicking on the class name in the “Referenced from:” line at the bottom of the grid will take you to the containing class, where you can see the cardinality 
-of the class (i.e., whether it is required, optional, or repeatable) in the containing class. <br>
-
-You can also click on the attribute names listed to see details of the attribute definitions. 
+This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging dictionary class list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for “Classes in the img namespace.” 
+Select that item and the list of classes will be presented on both the left and right as clickable links. Clicking on the specific class name will produce a grid with the full, formal definition of the class. Clicking on the class name in the “Referenced from:” line at the bottom of the grid will take you to the containing class, where you can see the cardinality of the class (i.e., whether it is required, optional, or repeatable) in the containing class. You can also click on the attribute names listed to see details of the attribute definitions. 
 
 
 ## Alphabetical List of Attributes
@@ -184,17 +170,7 @@ You can also click on the attribute names listed to see details of the attribute
 A complete list of attributes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
-This list is regenerated automatically with each release of the PDS4 Information Model. <br>
-
-To find the Imaging (IMG) attribute list, look down the list of (alphabetically sorted) dictionary prefixes in the left 
-menu for “Attributes in the img namespace”. Select that item and the list of attributes will be presented on both the left and the right as clickable links.
-
-Clicking on the specific attribute name will produce a grid with the full, formal definition of the attribute, including data type, restrictions on values, 
-and the list of defined permissible values (if any) and their definitions.
-
-Note that attributes might appear as members of different classes, and that their definitions, or more likely their permissible values, might be context-dependent.
-
-Clicking on the class name in the title bar of the attribute grid will take you to the definition of the class containing that attribute.
+This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging (IMG) attribute list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for “Attributes in the img namespace”. Select that item and the list of attributes will be presented on both the left and the right as clickable links.Clicking on the specific attribute name will produce a grid with the full, formal definition of the attribute, including data type, restrictions on values, and the list of defined permissible values (if any) and their definitions.Note that attributes might appear as members of different classes, and that their definitions, or more likely their permissible values, might be context-dependent.Clicking on the class name in the title bar of the attribute grid will take you to the definition of the class containing that attribute.
 
 
 
@@ -229,11 +205,7 @@ Note that several other discipline data dictionaries use this same mechanism (fo
 ## Comanded_Parameters
 Sometimes when commanding a camera, what you ask for is not exactly what you get.  This is particularly common on the Mars surface missions, 
 where the flight software (FSW) has a fair amount of autonomy.  In order to accommodate this, most of the meaningful IMG classes are available 
-in two places: in the img:Imaging class itself, and in img:Commanded_Parameters, which is itself a child of img:Imaging.
-
-Anything directly in Imaging is intended to represent the state of the data as it was actually acquired.
-
-Anything in Comanded_Parameters indicates what the camera was asked to do, regardless of what it actually did.  Commanded_Parameters is 
+in two places: in the img:Imaging class itself, and in img:Commanded_Parameters, which is itself a child of img:Imaging. Anything directly in Imaging is intended to represent the state of the data as it was actually acquired.Anything in Comanded_Parameters indicates what the camera was asked to do, regardless of what it actually did.  Commanded_Parameters is 
 entirely optional; you can dispense with it entirely if it does not make sense for your instrument.  
  Some things could appear in Commanded_Parameters only; for example autoexposure parameters are commanded but the actual result is the exposure time, not the autoexposure parameters.
  
@@ -248,19 +220,19 @@ The Data_Processing class describes how or where processing was done on the data
 for quite a number of other classes (for example, Autoexposure, Color_Filter_Array, Color_Processing, Flat_Field_Correction, Spatial_Filter - this is far from an exhaustive list), 
 which inherit from it.  That means that all of these classes have the attributes in Data_Processing as well as their own attributes.  For this reason, we will walk through all the Data_Processing attributes here.
 
-active_flag - indicates that the class is active.  This is optional, because the simple presence of the class implies it is active (i.e. the presence of Color_Processing means that color processing was done).  
+**active_flag** - indicates that the class is active.  This is optional, because the simple presence of the class implies it is active (i.e. the presence of Color_Processing means that color processing was done).  
 This flag primarily exists so you can say “false” to indicate the processing is NOT active - for example if you want to explicitly note that it was turned off, or if it is providing parameters for historical 
 reasons that may no longer apply to the image.  It can be set to “true” if you want to explicitly say this is turned on to remove any ambiguity.
 
-processing_venue - indicates where the processing was done.  Common values are “Onboard” or “Ground” (use these if you can), but others can be defined as needed.  For example, sometimes “Software” vs “Hardware” 
+**processing_venue** - indicates where the processing was done.  Common values are “Onboard” or “Ground” (use these if you can), but others can be defined as needed.  For example, sometimes “Software” vs “Hardware” 
 is used to indicate whether the processing was done by the FSW onboard the spacecraft or by the camera hardware.
 
-processing_algorithm - specifies the name of the algorithm used to do the processing.  Algorithm names should be defined in the project documentation and/or definitional nuances.  This is entirely open-ended, 
+**processing_algorithm** - specifies the name of the algorithm used to do the processing.  Algorithm names should be defined in the project documentation and/or definitional nuances.  This is entirely open-ended, 
 so no validation is done at the IMG level, but missions can restrict valid values for each type of processing if they wish.  Many algorithms require parameters to describe the processing.  
 These parameters are sometimes in a subclass within the processing class (for example, Radial_Flat_Field_Function under Flat_Field_Correction) but are more commonly directly in the processing class 
 (for example Focus_Stack or Image_Filter).
 
-sequence_number - if more than one of the same processing was done (for example, two different Spatial_Filters), this specifies the order in which they were done.
+**sequence_number** - if more than one of the same processing was done (for example, two different Spatial_Filters), this specifies the order in which they were done.
 
 Note that it is not the intent of the Data_Processing classes to completely specify everything that was done to the image - that is the job of the proc:Processing dictionary.  
  Rather, it is to capture the primary properties of the image that are relevant to understanding it.
@@ -352,7 +324,7 @@ in some way that is specific to the mission at hand.  These can be seen in the f
 
 [Insight-Specific Product Label Keyword Definitions, Values](https://planetarydata.jpl.nasa.gov/img/data/nsyt/insight_cameras/document/pds4_attribute_definitions_sort_pds.html)
 
-[Voyager Documentation](https://pds-imaging.jpl.nasa.gov/beta/archive-explorer?mission=vgr&bundle=wenkert_pdart16_vgr_rav1ciun&uri=atlas:pds4:vgr:voyager_1:/wenkert_pdart16_vgr_rav1ciun/document/RAV1CIUN_SIS_Labels_sort_pds.html-)
+[Voyager Documentation](https://pds-imaging.jpl.nasa.gov/archive/archive/vgr/pdart/r1/wenkert_pdart16_vgr_rav1ciun/document/RAV1CIUN_SIS_Labels_sort_pds.html)
  
 
 Look for entries under Description that say "For Mars 2020" or "For InSight" or "For Voyager”.  This is a mechanism currently being standardized for describing 
