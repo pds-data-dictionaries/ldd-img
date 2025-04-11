@@ -3,21 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Example Namespace Documentation
+Welcome to the Imaging Data Dictionary Documentation!
 ===================================
 
 .. include:: intro.md
 
-             
+
 .. toctree::
     :maxdepth: 3
     :caption: User Guide
 
     user/user-guide
-
-    
-.. toctree::
-    :maxdepth: 3
-    :caption: Detailed Documentation
-
-    detailed/example
