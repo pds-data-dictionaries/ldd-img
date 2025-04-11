@@ -244,6 +244,8 @@
     added to Radiometric_Correction class.
     - Add analog_offset_voltage under Detector class for a JUICE instrument (for Thomas C.). 
     - Update analog_offset definition.
+    - Add compression type 'Wavelet' to onboard_compression_type within Onboard_Compression class
+    - Add a "Bayer RGYB" to color_filter_array_type for Color_Filter_Array Class
 
   </comment>
   <last_modification_date_time>2025-04-08T14:43Z</last_modification_date_time>
@@ -896,6 +898,13 @@
           in each 2x2 square of pixels. The RGGB type indicates the phasing of
           the colors, in the order upper left, upper right, lower left, and lower
           right. RGGB is the most common phasing but others are possible</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bayer RGYB</value>
+        <value_meaning>The Bayer CFA pattern contains one red, one green, one yellow, 
+          and one blue pixel in each 2x2 square of pixels. The RGYB type indicates 
+          the phasing of the colors, in the order upper left, upper right, lower left, 
+          and lower right.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>None</value>
@@ -2829,6 +2838,10 @@
         <value>StarPixel Lossless</value>
         <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
            Hayabusa2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Wavelet</value>
+        <value_meaning>Wavelet compression works by identifying repeating patterns in the content and representing them mathematically.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
