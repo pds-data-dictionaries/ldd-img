@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.1.0</ldd_version_id>
+  <ldd_version_id>1.9.2.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -239,9 +239,16 @@
     - Added Shutter Class under Detector with new shutter attributes.
       - Currently only global or rolling are defined.
 
-  </comment>
-  <last_modification_date_time>2024-10-24T13:07Z</last_modification_date_time>
+    1.9.2.0 T. Hare
+    - Mars2020 Mastcam-Z updates, new attribute inband_fsun and iof_conversion_correction 
+    added to Radiometric_Correction class.
+    - Add analog_offset_voltage under Detector class for a JUICE instrument (for Thomas C.). 
+    - Update analog_offset definition.
+    - Add compression type 'Wavelet' to onboard_compression_type within Onboard_Compression class
+    - Add a "Bayer RGYB" to color_filter_array_type for Color_Filter_Array Class
 
+  </comment>
+  <last_modification_date_time>2025-04-11T11:50Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -271,8 +278,12 @@
     <local_identifier>analog_offset</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>The analog_offset attribute identifies the analog value that is subtracted from the
-      signal prior to the analog/digital conversion.</definition>
+    <definition>The analog_offset attribute identifies the analog value that is
+      subtracted from the signal prior to the analog/digital conversion.  This
+      is a unitless integer and should generally be avoided in favor of
+      analog_offset_count, if the value is a raw DN value, or one of the other
+      analog_offset attributes if it has a physical unit
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Integer</value_data_type>
@@ -307,6 +318,21 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>analog_offset_voltage</name>
+    <version_id>1.0</version_id>
+    <local_identifier>analog_offset_voltage</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>B. Deen</submitter_name>
+    <definition>Specifies the analog voltage value that is
+      subtracted from the signal prior to the analog/digital conversion.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Voltage</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -872,6 +898,13 @@
           in each 2x2 square of pixels. The RGGB type indicates the phasing of
           the colors, in the order upper left, upper right, lower left, and lower
           right. RGGB is the most common phasing but others are possible</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Bayer RGYB</value>
+        <value_meaning>The Bayer CFA pattern contains one red, one green, one yellow, 
+          and one blue pixel in each 2x2 square of pixels. The RGYB type indicates 
+          the phasing of the colors, in the order upper left, upper right, lower left, 
+          and lower right.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>None</value>
@@ -2280,6 +2313,27 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>inband_fsun</name>
+    <version_id>1.0</version_id>
+    <local_identifier>inband_fsun</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>This is the average solar flux at the top of the planetary atmosphere (or surface 
+      if there is no atmosphere) weighted by the system spectral response of the camera for the 
+      image in question. "Inband" means it is limited to the part of the spectrum that is in 
+      the passband of the camera, and "fsun" is mathematically written as F subscript sun. The 
+      value is in units of spectral radiance, and is calculated by dividing the weighted in-band 
+      integrated radiance of the sun by the bandpass of the camera (taking into account filter, 
+      zoom, and any other relevant settings).
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Spectral_Radiance</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>interframe_delay</name>
     <version_id>1.1</version_id>
     <local_identifier>interframe_delay</local_identifier>
@@ -2318,14 +2372,16 @@
     <local_identifier>iof_conversion_coefficient</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>Radiance factor (IOF) conversion coefficient.</definition>
+    <definition>The iof_conversion_coefficient is a direct conversion factor from units of 
+    radiance to units of reflectance, calculated by plotting the observed reflected radiance 
+    of a calibration target versus modeled reflectance values.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+ 
   <DD_Attribute>
     <name>iof_conversion_coefficient_std</name>
     <version_id>1.0</version_id>
@@ -2333,6 +2389,25 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>1-sigma standard deviation for the radiance factor (IOF) conversion coefficient.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>iof_conversion_correction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iof_conversion_correction</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Kate Crombie</submitter_name>
+    <definition>The iof_conversion_correction attribute is the correction factor applied to I/F. 
+      Can be used to account for differences in time of day between the calibration target and 
+      image acquisitions. For Mars2020 Mastcam-Z, this factor accounts for the differences in 
+      time of day between calibration target and image acquisitions and is only used when the 
+      factor is between 0.9 and 1.1.
+    </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2763,6 +2838,10 @@
         <value>StarPixel Lossless</value>
         <value_meaning>StarPixel Lossless is a lossless hardware enabled compression, for example used for both
            Hayabusa2 ONC and TIR instruments. for more: https://www.mdpi.com/1424-8220/15/10/24926/htm</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Wavelet</value>
+        <value_meaning>Wavelet compression works by identifying repeating patterns in the content and representing them mathematically.</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -6115,6 +6194,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>analog_offset_voltage</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>bad_pixel_replacement_flag</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -7569,7 +7654,19 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>iof_conversion_correction</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>iof_conversion_coefficient_std</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>inband_fsun</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
