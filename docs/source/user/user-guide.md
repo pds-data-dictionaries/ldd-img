@@ -80,7 +80,7 @@ Note that Xs are used to denote locations where specific version identifiers are
 The Imaging class is then inserted into the label as indicated in the label example below. Note that the example label only shows items at the class level.
 
     <Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" 
-    xmlns:img="http://pds.nasa.gov/pds4/img/v1” … > 
+    xmlns:img="http://pds.nasa.gov/pds4/img/v1" … > 
         <Identification_Area>
         <Observation_Area>
             <comment>
@@ -161,8 +161,8 @@ Note that there are no real cases in which every single class and attribute woul
 A complete list of classes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
-This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging dictionary class list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for “Classes in the img namespace.” 
-Select that item and the list of classes will be presented on both the left and right as clickable links. Clicking on the specific class name will produce a grid with the full, formal definition of the class. Clicking on the class name in the “Referenced from:” line at the bottom of the grid will take you to the containing class, where you can see the cardinality of the class (i.e., whether it is required, optional, or repeatable) in the containing class. You can also click on the attribute names listed to see details of the attribute definitions. 
+This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging dictionary class list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for "Classes in the img namespace." 
+Select that item and the list of classes will be presented on both the left and right as clickable links. Clicking on the specific class name will produce a grid with the full, formal definition of the class. Clicking on the class name in the "Referenced from:" line at the bottom of the grid will take you to the containing class, where you can see the cardinality of the class (i.e., whether it is required, optional, or repeatable) in the containing class. You can also click on the attribute names listed to see details of the attribute definitions. 
 
 
 ## Alphabetical List of Attributes
@@ -170,7 +170,7 @@ Select that item and the list of classes will be presented on both the left and 
 A complete list of attributes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
-This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging (IMG) attribute list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for “Attributes in the img namespace”. Select that item and the list of attributes will be presented on both the left and the right as clickable links.Clicking on the specific attribute name will produce a grid with the full, formal definition of the attribute, including data type, restrictions on values, and the list of defined permissible values (if any) and their definitions.Note that attributes might appear as members of different classes, and that their definitions, or more likely their permissible values, might be context-dependent.Clicking on the class name in the title bar of the attribute grid will take you to the definition of the class containing that attribute.
+This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging (IMG) attribute list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for "Attributes in the img namespace". Select that item and the list of attributes will be presented on both the left and the right as clickable links.Clicking on the specific attribute name will produce a grid with the full, formal definition of the attribute, including data type, restrictions on values, and the list of defined permissible values (if any) and their definitions.Note that attributes might appear as members of different classes, and that their definitions, or more likely their permissible values, might be context-dependent.Clicking on the class name in the title bar of the attribute grid will take you to the definition of the class containing that attribute.
 
 
 
@@ -180,7 +180,7 @@ This section describes some of the important Imaging classes whose use may not b
 
 ## Local_Internal_Reference
 
-It is possible to have multiple images in one product, for example frames from a movie.  For that reason, there is a Local_Internal_Reference at the top of Imaging, which refers to the specific data array being described by this Image instance.  If you have a second image, you can have a second instance of Imaging that points to that second array.  The local_reference type is generally “imaging_parameters_to_image_object” and the local_identifier_reference value matches the local_identifier in one of the Array_*_Image classes in the same label.  Often the value of this identifier is the filename, but that is not required.
+It is possible to have multiple images in one product, for example frames from a movie.  For that reason, there is a Local_Internal_Reference at the top of Imaging, which refers to the specific data array being described by this Image instance.  If you have a second image, you can have a second instance of Imaging that points to that second array.  The local_reference type is generally "imaging_parameters_to_image_object" and the local_identifier_reference value matches the local_identifier in one of the Array_*_Image classes in the same label.  Often the value of this identifier is the filename, but that is not required.
 
 This pointer is the only thing that is absolutely required to be present in order to use IMG.  PDS requires being explicit about what you are defining, so even if there’s only one image, this confirms that the parameters in img:Imaging are intended to match the actual image array.
 
@@ -221,10 +221,10 @@ for quite a number of other classes (for example, Autoexposure, Color_Filter_Arr
 which inherit from it.  That means that all of these classes have the attributes in Data_Processing as well as their own attributes.  For this reason, we will walk through all the Data_Processing attributes here.
 
 **active_flag** - indicates that the class is active.  This is optional, because the simple presence of the class implies it is active (i.e. the presence of Color_Processing means that color processing was done).  
-This flag primarily exists so you can say “false” to indicate the processing is NOT active - for example if you want to explicitly note that it was turned off, or if it is providing parameters for historical 
-reasons that may no longer apply to the image.  It can be set to “true” if you want to explicitly say this is turned on to remove any ambiguity.
+This flag primarily exists so you can say "false" to indicate the processing is NOT active - for example if you want to explicitly note that it was turned off, or if it is providing parameters for historical 
+reasons that may no longer apply to the image.  It can be set to "true" if you want to explicitly say this is turned on to remove any ambiguity.
 
-**processing_venue** - indicates where the processing was done.  Common values are “Onboard” or “Ground” (use these if you can), but others can be defined as needed.  For example, sometimes “Software” vs “Hardware” 
+**processing_venue** - indicates where the processing was done.  Common values are "Onboard" or "Ground" (use these if you can), but others can be defined as needed.  For example, sometimes "Software" vs "Hardware" 
 is used to indicate whether the processing was done by the FSW onboard the spacecraft or by the camera hardware.
 
 **processing_algorithm** - specifies the name of the algorithm used to do the processing.  Algorithm names should be defined in the project documentation and/or definitional nuances.  This is entirely open-ended, 
@@ -239,9 +239,9 @@ Note that it is not the intent of the Data_Processing classes to completely spec
 
 ## Data_Processing_File
 
-The Data_Processing_File class contains attributes which identify a file  containing calibration data that was applied to the science data. 
-It is not  intended to be used on its own; rather it is intended to be extended by classes specific to a particular type of file, such as Flat_Field_File, 
-and we generally want to create these “subclasses” to capture what kind of file it is.
+The Data_Processing_File class contains attributes which identify a file containing calibration data that was applied to the science data. 
+It is not intended to be used on its own; rather it is intended to be extended by classes specific to a particular type of file, such as Flat_Field_File, 
+and we generally want to create these "subclasses" to capture what kind of file it is.
 
 The file should be identified using an Internal_Reference if at all possible (meaning it’s part of a PDS delivery and this can be pointed at by a PDS LID). If it is not part of PDS4, the External_Reference can be used.  
 Note that there is a "name" attribute; this identifies just the filename and should only be used 
@@ -267,7 +267,7 @@ The Flat_Field_Correction class specifies how flat-field correction was performe
 Radial_Flat_Field_Correction (other algorithms can be added in the future), or using a Flat_Field_File. It can occur multiple times if needed.
 
 ## Flat Field File
-The Flat_Field_File class specifies the image used for flat field correction, and is a “subclass” of Data_Processing_FIle. In the most straightforward 
+The Flat_Field_File class specifies the image used for flat field correction, and is a "subclass" of Data_Processing_FIle. In the most straightforward 
 usage, the image is divided by this flat field image in order to apply the flat field correction (which is the opposite of Radial_Flat_Field_Function). There 
 are several types of Flat_Field_File, distinguished by the "type" attribute.  We could add several classes or instances of Flat_Field_File, or one that 
 encompasses all with a type, or anywhere in between, based on what makes sense. 
@@ -284,7 +284,7 @@ The Instrument_State class contains classes providing the values of any dynamic 
 not a required class and can be reused as many times as needed. It contains classes Device_Component_States, Device_Currents, Device_Motor_Counts, Device_Temperatures, and Device_Voltages. 
 
 Each of the Device_* classes are structured in a similar way to maximize re-usability. The structure is a container class that is plural 
-(ends in “s”), e.g. Device_Temperatures. Within the container class a specific class with similar name to the container class describes the specific item.  Within 
+(ends in "s"), e.g. Device_Temperatures. Within the container class a specific class with similar name to the container class describes the specific item.  Within 
 the specific class, the name, and parameters are given.  This structure allows more flexibility in the names of components (which vary greatly from instrument to 
 instrument) without having to update the Data Dictionary for each one.  See the Device_Temperature example below:
 
@@ -317,7 +317,7 @@ with respect to the full detector, before downsampling.  Thus if an image is bot
 
 # Advanced Concepts 
 ## Definitional Nuances
-In order to better accommodate the reuse described above, we use a concept of definitional “nuance.”  This modifies the base definition 
+In order to better accommodate the reuse described above, we use a concept of definitional "nuance."  This modifies the base definition 
 in some way that is specific to the mission at hand.  These can be seen in the following examples: 
 
 [Mars 2020 Cameras Product Label Keywords Definitions, Values](https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_mission/document_camera/Mars2020_Camera_SIS_Labels_sort_pds.html)
@@ -327,7 +327,7 @@ in some way that is specific to the mission at hand.  These can be seen in the f
 [Voyager Documentation](https://pds-imaging.jpl.nasa.gov/archive/archive/vgr/pdart/r1/wenkert_pdart16_vgr_rav1ciun/document/RAV1CIUN_SIS_Labels_sort_pds.html)
  
 
-Look for entries under Description that say "For Mars 2020" or "For InSight" or "For Voyager”.  This is a mechanism currently being standardized for describing 
+Look for entries under Description that say "For Mars 2020" or "For InSight" or "For Voyager".  This is a mechanism currently being standardized for describing 
 the mission-specific nuances of attribute definitions (not just for IMG). As of this writing, the mechanism to store these nuances is still in flux, but it 
 should be nailed down soon (talk to the IMG stewards if you want to add more).
 

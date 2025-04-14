@@ -244,11 +244,12 @@
     added to Radiometric_Correction class.
     - Add analog_offset_voltage under Detector class for a JUICE instrument (for Thomas C.). 
     - Update analog_offset definition.
-    - Add compression type 'Wavelet' to onboard_compression_type within Onboard_Compression class
-    - Add a "Bayer RGYB" to color_filter_array_type for Color_Filter_Array Class
+    - Add compression type Wavelet to onboard_compression_type within Onboard_Compression class
+    - Add a Bayer RGYB to color_filter_array_type for Color_Filter_Array Class
+    - replace non-UTF8 qutoes with typical double quotes.
 
   </comment>
-  <last_modification_date_time>2025-04-11T11:50Z</last_modification_date_time>
+  <last_modification_date_time>2025-04-14T13:43Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -897,7 +898,7 @@
         <value_meaning>The Bayer CFA pattern contains one red, one blue, and two green pixels
           in each 2x2 square of pixels. The RGGB type indicates the phasing of
           the colors, in the order upper left, upper right, lower left, and lower
-          right. RGGB is the most common phasing but others are possible</value_meaning>
+          right. RGGB is the most common phasing but others are possible.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Bayer RGYB</value>
@@ -2201,7 +2202,7 @@
     <local_identifier>icer_quality</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
-    <definition>For ICER, the quality is the “minloss” parameter, which specifies the minimum 
+    <definition>For ICER, the quality is the "minloss" parameter, which specifies the minimum 
       number of bit planes that will not be encoded in each subband. Note that ICER may stop 
       due a byte quota before minloss is achieved, so the actual quality may be less than specified. 
       Unlike JPEG, a lower number means higher quality.</definition>
@@ -4052,7 +4053,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>Specifies the number of stripes (N) used during dark current mitigation within image acquisition. 
-      Image “striping” is comprised of reading out the image in N different parts (“stripes”), often using a 
+      Image "striping" is comprised of reading out the image in N different parts ("stripes"), often using a 
       hardware windowing mode, using N separate exposures (with identical exposure times). These successive 
       stripes correspond to physically different locations on the CCD. A commandable overlap (M rows) allows 
       each successive row to "cover" the image pixels towards the readout region.</definition>
@@ -4071,8 +4072,8 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>Specifies the number of rows (M) of striping overlap used during dark current mitigation 
-      within image acquisition. Image “striping” is comprised of reading out the image in N different 
-      parts (“stripes”), often using a hardware windowing mode, using N separate exposures (with identical 
+      within image acquisition. Image "striping" is comprised of reading out the image in N different 
+      parts ("stripes"), often using a hardware windowing mode, using N separate exposures (with identical 
       exposure times). These successive stripes correspond to physically different locations on the CCD.
       A commandable overlap (M rows) allows each successive row to "cover" the image pixels towards 
       the readout region.</definition>
@@ -4440,7 +4441,7 @@
     <local_identifier>wavelet_filter</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
-    <definition>The wavelet_filter attribute specifies thefilter used in the compression and decompression algorithm.</definition>
+    <definition>The wavelet_filter attribute specifies the filter used in the compression and decompression algorithm.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
@@ -4585,8 +4586,8 @@
     <submitter_name>Kate Crombie</submitter_name>
     <definition>Specifies the Bayer cell to which the data quality indicators apply. 
       bayer_cell can be used even if the image has been debayered, in which case it 
-      refers to the original debayered image. Note that “green_1” and “green_2" can 
-      be used to refer to specific green Bayer cells, or “green” refers to both greens
+      refers to the original debayered image. Note that "green_1" and "green_2" can 
+      be used to refer to specific green Bayer cells, or "green" refers to both greens
       together.
     </definition>
     <DD_Value_Domain>
