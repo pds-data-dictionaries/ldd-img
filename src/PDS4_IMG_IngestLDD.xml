@@ -2778,7 +2778,7 @@
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
       'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 
       'Lossless', 'None',
-      'StarPixel Lossless', and 'StarPixel Flexible'.</definition>
+      'StarPixel Lossless', 'StarPixel Flexible', and 'Wavelet'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
