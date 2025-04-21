@@ -40,7 +40,7 @@ https://pds.nasa.gov/datastandards/dictionaries<br>
 New releases of the IMG dictionary are also available here:
 https://github.com/pds-data-dictionaries/ldd-img
 
-To use the IMG dictionary with your product, you need to include the dictionary in the label prolog as well as including the main dictionary class<img:Imaging> inside the <Discipline_Area> tag in your PDS4 .xml file. 
+To use the IMG dictionary with your product, you need to include the dictionary in the label prolog as well as including the main dictionary class `<img:Imaging>` inside the `<Discipline_Area>` tag in your PDS4 .xml file. 
 
 Your label prolog should include the PDS common dictionary and the IMG dictionary specifications (as well as the specifications for any other dictionary used) as indicated in the example below.  There are three definitions required in the prolog for any data dictionary: xml-model to point to the schematron, xmlns to define the namespace, and xsi:schemaLocation to point to the schema file.
 ```
@@ -77,10 +77,10 @@ The Imaging class is then inserted into the label as indicated in the label exam
        <Reference_List>
         <File_Area_Observational>
 ``` 
-Once the <img:Imaging> class is included in the label, the dictionary classes and attributes can be used. Remember that the order of classes and attributes are defined by the schema files and will cause a validation error if out of order.
+Once the `<img:Imaging>` class is included in the label, the dictionary classes and attributes can be used. Remember that the order of classes and attributes are defined by the schema files and will cause a validation error if out of order.
 
 # Imaging Class Summary Outline
-Below is a summary list of the top-level classes currently available in the Imaging dictionary. Because IMG is defined to be extensible, there may be classes not listed here (although we will try to keep this up to date).  The only required class is the pds:Local_Internal_Reference class, with all others being optional for maximum flexibility.  Normally, all classes appear under <img:Imaging>.  However, there are some circumstances where img: classes or attributes can be used in other data dictionaries (not covered further here, but see for example the msss_cam_mh dictionary).
+Below is a summary list of the top-level classes currently available in the Imaging dictionary. Because IMG is defined to be extensible, there may be classes not listed here (although we will try to keep this up to date).  The only required class is the pds:Local_Internal_Reference class, with all others being optional for maximum flexibility.  Normally, all classes appear under `<img:Imaging>`.  However, there are some circumstances where img: classes or attributes can be used in other data dictionaries (not covered further here, but see for example the msss_cam_mh dictionary).
 ```
     <img:Imaging>
         pds:Local_Internal_Reference
@@ -128,7 +128,7 @@ Below is a summary list of the top-level classes currently available in the Imag
  
  This is regenerated automatically with each release of the PDS4 Information Model.
  
-The <img:Imaging> class acts as a wrapper for all other IMG classes. At this level all attributes and (as of this writing) instrument classes are optional, with the exception of <Local_Internal_Reference>,
+The `<img:Imaging>` class acts as a wrapper for all other IMG classes. At this level all attributes and (as of this writing) instrument classes are optional, with the exception of `<Local_Internal_Reference>`,
 which is always required (see under Classes of Note, below). Note that there are no real cases in which every single class and attribute would appear in a single label.
 
 
