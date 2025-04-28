@@ -1,9 +1,9 @@
 
 >>  INFO LDDTOOL Version: 15.2.4
->>  INFO IM Version Id: 1.19.0.0
+>>  INFO IM Version Id: 1.22.0.0
 >>  INFO IM Namespace Id: pds
->>  INFO IM Label Version Id: 1.25
->>  INFO Date: Mon Apr 21 18:43:04 UTC 2025
+>>  INFO IM Label Version Id: 1.0
+>>  INFO Date: Mon Apr 28 18:37:38 UTC 2025
 >>  INFO PARENT_DIR: /tmp/lddtool-15.2.4/Data/
 
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
@@ -64,6 +64,10 @@
 >>> INFO Attribute: <samples> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <sample_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
 >>> INFO Attribute: <sample_fov> - The default maximum value provided by the attribute's data type is being overridden with 360.0
+>>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
+>>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
+>>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
+>>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
 >>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
 >>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
 >>> INFO Attribute: <sequence_number> - This local attribute has a duplicate in the PDS4 data dictionary.
@@ -138,7 +142,7 @@
 
 Input:
 
-     - IM Version: 1J00
+     - IM Version: 1M00
      - PDS4 Flag: true
      - LDD Flag: true
      - IM Version: true
@@ -148,9 +152,9 @@ Input:
 
 Output:
 
-     - ./PDS4_IMG_1J00_1920.xsd
-     - ./PDS4_IMG_1J00_1920.sch
-     - ./PDS4_IMG_1J00_1920.xml
-     - ./export/PDS4_PDS_1J00.JSON
+     - ./PDS4_IMG_1M00_1920.xsd
+     - ./PDS4_IMG_1M00_1920.sch
+     - ./PDS4_IMG_1M00_1920.xml
+     - ./export/PDS4_PDS_1M00.JSON
 
 >>  INFO Exit(0)

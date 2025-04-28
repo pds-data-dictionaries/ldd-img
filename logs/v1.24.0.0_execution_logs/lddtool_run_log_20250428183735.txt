@@ -1,0 +1,48 @@
+>>  ERROR Invalid argument list
+usage: LDDTool [-h] [-p] [-l] [-d] [-D] [-J] [-m] [-M] [-n] [-N] [-1] [-T]
+               [-O] [-o] [-C] [-v]
+               [-V {1B00,1B10,1C00,1D00,1E00,1F00,1G00,1H00,1I00,1J00,1K00,1L00,1M00,1N00}]
+               [fileNameArr [fileNameArr ...]]
+
+LDDTool process control:
+
+positional arguments:
+  fileNameArr            Ingest_LDD files to process.
+
+named arguments:
+  -h, --help             show this help message and exit
+  -p, --PDS4 processing  Set the context to PDS4 (default: false)
+  -l, --LDD              Process one or  more  local  data dictionary input
+                         files (default: false)
+  -d, --discipline       Omit the term "mission"  from  the  namespace of a
+                         dictionary (default: false)
+  -D, --DataDict         Write the Data  Dictionary  DocBook file (default:
+                         false)
+  -J, --JSON             Write the  data  dictionary  to  a  JSON formatted
+                         file (default: false)
+  -m, --merge            Generate file to merge  the  local dictionary into
+                         the master dictionary (default: false)
+  -M, --Mission          This option has no  effect  starting  with PDS4 IM
+                         Version 1.14.0.0. See  the  LDDTool Usage document
+                         for  more  information  on  how  to  provide  this
+                         information. (default: false)
+  -n, --nuance           Write  nuance   property   maps   to   LDD  schema
+                         annotation in JSON (default: false)
+  -N, --Namespace        Print the list  of  configured  namespaces  to the
+                         log (default: false)
+  -1, --IM Spec          Write the Information  Model  Specification for an
+                         LDD (default: false)
+  -T, --TermMap          Terminological   mapping   to    alternate   names
+                         (default: false)
+  -O, --OWL/RDF/TTL      OWL/RDF/TTL   output    in    TTL    format    (IM
+                         Classification) (default: false)
+  -o, --OWL/RDF          OWL/RDF  output   in   RDF   format   (IM  Export)
+                         (default: false)
+  -C, --Custom           Customized  processing  and   reporting  (default:
+                         false)
+  -v, --version          Returns  the  LDDTool   version  number  (default:
+                         false)
+  -V {1B00,1B10,1C00,1D00,1E00,1F00,1G00,1H00,1I00,1J00,1K00,1L00,1M00,1N00}, --IM Version {1B00,1B10,1C00,1D00,1E00,1F00,1G00,1H00,1I00,1J00,1K00,1L00,1M00,1N00}
+                         Set the IM Version (default: 1N00)
+
+>>  INFO Exit(1)
