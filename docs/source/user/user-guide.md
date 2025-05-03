@@ -34,10 +34,13 @@ IMG is intended to be the primary dictionary used to describe cameras and images
 
 # How to Include the IMG Local Data Dictionary in a PDS4 Label
 
-From a user point of view, a data dictionary consists of a *.xsd schema file (which defines all the classes and attributes and their relationships) and a *.sch Schematron file (which contains validation rules). You can obtain the latest dictionary files here: <br>
-https://pds.nasa.gov/datastandards/dictionaries<br>
+From a user point of view, a data dictionary consists of a *.xsd schema file (which defines all the classes and attributes and their relationships) 
+and a *.sch Schematron file (which contains validation rules). You can obtain the latest dictionary files here:
+
+https://pds.nasa.gov/datastandards/dictionaries
 
 New releases of the IMG dictionary are also available here:
+
 https://github.com/pds-data-dictionaries/ldd-img
 
 To use the IMG dictionary with your product, you need to include the dictionary in the label prolog as well as including the main dictionary class `<img:Imaging>` inside the `<Discipline_Area>` tag in your PDS4 .xml file. 
@@ -123,7 +126,8 @@ Below is a summary list of the top-level classes currently available in the Imag
 ```
 # Organization of Classes and Attributes
 
- A complete list of classes and attributes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: <br>
+ A complete list of classes and attributes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here:
+ 
  https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
  
  This is regenerated automatically with each release of the PDS4 Information Model.
@@ -134,7 +138,8 @@ which is always required (see under Classes of Note, below). Note that there are
 
 ## Alphabetical List of Classes
 
-A complete list of classes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
+A complete list of classes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here:
+
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
 This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging dictionary class list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for "Classes in the img namespace."  Select that item and the list of classes will be presented on both the left and right as clickable links. Clicking on the specific class name will produce a grid with the full, formal definition of the class. Clicking on the class name in the "Referenced from:" line at the bottom of the grid will take you to the containing class, where you can see the cardinality of the class (i.e., whether it is required, optional, or repeatable) in the containing class. You can also click on the attribute names listed to see details of the attribute definitions. 
@@ -143,6 +148,7 @@ This list is regenerated automatically with each release of the PDS4 Information
 ## Alphabetical List of Attributes
 
 A complete list of attributes for the IMG dictionary can be found online at the PDS4 Data Dictionary page here: 
+
 https://pds.nasa.gov/datastandards/documents/dd/v1/PDS4_PDS_DD_1N00/webhelp/all/
 
 This list is regenerated automatically with each release of the PDS4 Information Model. To find the Imaging (IMG) attribute list, look down the list of (alphabetically sorted) dictionary prefixes in the left menu for "Attributes in the img namespace". Select that item and the list of attributes will be presented on both the left and the right as clickable links.Clicking on the specific attribute name will produce a grid with the full, formal definition of the attribute, including data type, restrictions on values, and the list of defined permissible values (if any) and their definitions.Note that attributes might appear as members of different classes, and that their definitions, or more likely their permissible values, might be context-dependent.Clicking on the class name in the title bar of the attribute grid will take you to the definition of the class containing that attribute.
@@ -277,7 +283,7 @@ Many millions of image labels have been delivered at this point, so there are pl
 
 Bundle ID: mars2020_navcam_ops_raw
 
-Taken from [here](https://pds-imaging.jpl.nasa.gov/beta/archive-explorer?mission=mars_2020&instrument=navcam&bundle=mars2020_navcam_ops_raw&uri=atlas:pds4:mars_2020:perseverance:/mars2020_navcam_ops_raw/data/sol/00629/ids/edr/ncam/NLF_0629_0722782785_631ECM_N0301344NCAM00427_06_095J01.IMG-)
+Taken from [here.](https://pds-imaging.jpl.nasa.gov/beta/archive-explorer?mission=mars_2020&instrument=navcam&bundle=mars2020_navcam_ops_raw&uri=atlas:pds4:mars_2020:perseverance:/mars2020_navcam_ops_raw/data/sol/00629/ids/edr/ncam/NLF_0629_0722782785_631ECM_N0301344NCAM00427_06_095J01.IMG-)
 
 
 ```
