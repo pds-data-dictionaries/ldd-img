@@ -250,6 +250,10 @@
 
     1.9.3.0 B. Deen
     - add metadata_corrupt_flag as boolean to Data_Quality class for SCALPSS
+    - found issues with enumerations color_component, color_space, and processing_venue. They are enumerations
+      but enumeration is set to false which has not added correct schema rules. Worried about updating to 
+      "true" to maintain backwards compatibility.
+    - fixed frame_id, frame_interval, image_corrupt_flag, interframe_delay to have enumeration as false.
 
   </comment>
   <last_modification_date_time>2025-06-11T13:43Z</last_modification_date_time>
@@ -1896,7 +1900,7 @@
       consists of a sequence of measurements made over a specified time interval, and may include measurements from different 
       instrument modes. These sequences repeat from cycle to cycle and sometimes within a cycle.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -1932,7 +1936,7 @@
     <submitter_name>Cristina M. De Cesare</submitter_name>
     <definition>The frame_interval attribute defines the time between the start of successive frames in a video product.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
@@ -2308,9 +2312,9 @@
     <submitter_name>T. Hare</submitter_name>
     <definition>Indicates whether or not this image was corrupted after it was acquired (i.e. it was
       corrupted somewhere downstream not part of acquisition). Valid values are "true",
-      "false", "1" (one, as true), and "0" (zero, as false).</definition>
+      "false".</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -2339,14 +2343,14 @@
 
   <DD_Attribute>
     <name>interframe_delay</name>
-    <version_id>1.1</version_id>
+    <version_id>1.2</version_id>
     <local_identifier>interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The interframe_delay attribute provides the time between the end of one frame and the 
       beginning of the next frame in a video product.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
@@ -2610,11 +2614,10 @@
     <submitter_name>T. Hare</submitter_name>
     <definition>Indicates whether or not the metadata for this image was corrupted 
        after it was acquired (i.e. it was corrupted somewhere downstream not part 
-       of acquisition). Valid values are "true", "false", "1" (one, as true), 
-       and "0" (zero, as false).
+       of acquisition). Valid values are "true", "false".
     </definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
