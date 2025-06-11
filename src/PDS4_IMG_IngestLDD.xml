@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.2.0</ldd_version_id>
+  <ldd_version_id>1.9.3.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -248,8 +248,11 @@
     - Add a Bayer RGYB to color_filter_array_type for Color_Filter_Array Class
     - replace non-UTF8 qutoes with typical double quotes.
 
+    1.9.3.0 B. Deen
+    - add metadata_corrupt_flag as boolean to Data_Quality class for SCALPSS
+
   </comment>
-  <last_modification_date_time>2025-04-14T13:43Z</last_modification_date_time>
+  <last_modification_date_time>2025-06-11T13:43Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -476,7 +479,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina M. De Cesare</submitter_name>
     <definition>The auto_exposure_pixel_fraction attribute specifies the percentage 
-      of pixels whose DN values may exceed the auto_expsoure_data_cut.</definition>
+      of pixels whose DN values may exceed the auto_exposure_data_cut.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -2598,7 +2601,25 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>metadata_corrupt_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>metadata_corrupt_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Indicates whether or not the metadata for this image was corrupted 
+       after it was acquired (i.e. it was corrupted somewhere downstream not part 
+       of acquisition). Valid values are "true", "false", "1" (one, as true), 
+       and "0" (zero, as false).
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>min_filter_window_line</name>
     <version_id>1.0</version_id>
@@ -8510,7 +8531,7 @@ product_flag.</definition>
   <!-- Class: Data_Quality -->
   <DD_Class>
     <name>Data_Quality</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Data_Quality</local_identifier>
     <submitter_name>Kate Crombie</submitter_name>
     <definition>The Data_Quality class contain attributes which identify quality issues
@@ -8588,6 +8609,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>image_corrupt_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>metadata_corrupt_flag</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
