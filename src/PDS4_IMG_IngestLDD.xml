@@ -256,7 +256,7 @@
     - fixed frame_id, frame_interval, image_corrupt_flag, interframe_delay to have enumeration as false.
 
   </comment>
-  <last_modification_date_time>2025-06-11T13:43Z</last_modification_date_time>
+  <last_modification_date_time>2025-06-12T20:40Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
