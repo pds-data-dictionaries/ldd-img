@@ -254,9 +254,10 @@
       but enumeration is set to false which has not added correct schema rules. Worried about updating to 
       "true" to maintain backwards compatibility.
     - fixed frame_id, frame_interval, image_corrupt_flag, interframe_delay to have enumeration as false.
+    - Changed minOccurs for hdr_acquisition_mode to 0 to allow its omission for SCALPSS
 
   </comment>
-  <last_modification_date_time>2025-06-12T20:40Z</last_modification_date_time>
+  <last_modification_date_time>2025-06-25T00:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -8473,7 +8474,7 @@ product_flag.</definition>
     <DD_Association>
       <identifier_reference>hdr_acquisition_mode</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>  
     <DD_Association>
