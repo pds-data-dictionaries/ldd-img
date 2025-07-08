@@ -257,12 +257,11 @@
     - Changed minOccurs for hdr_acquisition_mode to 0 to allow its omission for SCALPSS
     - Added Statistics class and related attributes (for DSCOVR-EPIC)
     - Added Calibration and Calibration_File classes (for DSCOVR-EPIC)
-    ##### TODO ######
-    add band either as attributes or to subframe
-    add description to either Calibration or Data_Processing
+    - Added first_band/bands and relative_to to Subframe (for DSCOVR-EPIC)
+    - Added pds:description to Data_Processing (for DSCOVR-EPIC)
 
   </comment>
-  <last_modification_date_time>2025-06-26T00:00Z</last_modification_date_time>
+  <last_modification_date_time>2025-07-08T00:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -675,6 +674,23 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
+  <DD_Attribute>
+    <name>bands</name>
+    <version_id>1.0</version_id>
+    <local_identifier>bands</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>
+      The bands attribute indicates the total number of bands within the sub-image.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>bandwidth</name>
     <version_id>1.0</version_id>
@@ -1694,7 +1710,23 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
+  
+  <DD_Attribute>
+    <name>first_band</name>
+    <version_id>1.0</version_id>
+    <local_identifier>first_band</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The first_band attribute indicates the band number within a source image or sensor that corresponds
+      to the first band in a sub-image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>first_line</name>
     <version_id>1.0</version_id>
@@ -3638,6 +3670,43 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
+  <DD_Attribute>
+    <name>relative_to</name>
+    <version_id>1.0</version_id>
+    <local_identifier>relative_to</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>
+      Specifies what the values in this Subframe instance are measured
+      relative to.  For historical reasons, if relative_to is omitted, a
+      default of "Sensor" should be assumed.
+      </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Image</value>
+        <value_meaning>
+          The values in the Subframe are coordinates within an image.  For
+          example, when used within a Statistics class, it indicates the
+          area of the image over which the statistics are gathered (having
+          nothing to do with the original sensor).
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Sensor</value>
+        <value_meaning>
+          The values in the Subframe are coordiantes on the original sensor.
+          Note that if downsampling is applied, these values are measured
+          before the downsampling (in which case "lines" for example will
+          not match the number of lines in the image because the latter
+          takes downsampling into account).
+        </value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>responsivity_factor_b</name>
     <version_id>1.0</version_id>
@@ -6160,6 +6229,12 @@
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>processing_venue</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8216,6 +8291,12 @@ product_flag.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>true</element_flag>
     <DD_Association>
+      <identifier_reference>first_band</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>first_line</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8228,6 +8309,12 @@ product_flag.</definition>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>bands</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>lines</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8238,6 +8325,12 @@ product_flag.</definition>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>relative_to</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>line_fov</identifier_reference>
