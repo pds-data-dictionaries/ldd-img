@@ -259,9 +259,10 @@
     - Added Calibration and Calibration_File classes (for DSCOVR-EPIC)
     - Added first_band/bands and relative_to to Subframe (for DSCOVR-EPIC)
     - Added pds:description to Data_Processing (for DSCOVR-EPIC)
+    - Added camera_information to Optical_Properties (for RAC-CLPS)
 
   </comment>
-  <last_modification_date_time>2025-07-08T00:00Z</last_modification_date_time>
+  <last_modification_date_time>2025-08-19T00:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -734,7 +735,6 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -749,6 +749,20 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>camera_information</name>
+    <version_id>1.0</version_id>
+    <local_identifier>camera_information</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Free-form text description of the camera.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>UTF8_Text_Preserved</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -7665,6 +7679,12 @@
     <definition>The Optical_Properties class describes properties of the optics used in acquiring the image.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>camera_information</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>focal_length</identifier_reference>
       <reference_type>attribute_of</reference_type>
