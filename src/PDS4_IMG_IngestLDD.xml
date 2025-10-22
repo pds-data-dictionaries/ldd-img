@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.2.0</ldd_version_id>
+  <ldd_version_id>1.9.3.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Trent Hare</full_name>
   <steward_id>img</steward_id>
@@ -248,8 +248,21 @@
     - Add a Bayer RGYB to color_filter_array_type for Color_Filter_Array Class
     - replace non-UTF8 qutoes with typical double quotes.
 
+    1.9.3.0 R. Deen
+    - Added metadata_corrupt_flag as boolean to Data_Quality class for SCALPSS
+    - Found issues with enumerations color_component, color_space, and processing_venue. They are enumerations
+      but enumeration is set to false which has not added correct schema rules. Worried about updating to 
+      "true" to maintain backwards compatibility.
+    - Fixed frame_id, frame_interval, image_corrupt_flag, interframe_delay to have enumeration as false.
+    - Changed minOccurs for hdr_acquisition_mode to 0 to allow its omission for SCALPSS
+    - Added Statistics class and related attributes (for DSCOVR-EPIC)
+    - Added Calibration and Calibration_File classes (for DSCOVR-EPIC)
+    - Added first_band/bands and relative_to to Subframe (for DSCOVR-EPIC)
+    - Added pds:description to Data_Processing (for DSCOVR-EPIC)
+    - Added camera_information to Optical_Properties (for RAC-CLPS)
+
   </comment>
-  <last_modification_date_time>2025-04-14T13:43Z</last_modification_date_time>
+  <last_modification_date_time>2025-08-19T00:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -327,7 +340,7 @@
     <version_id>1.0</version_id>
     <local_identifier>analog_offset_voltage</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>Specifies the analog voltage value that is
       subtracted from the signal prior to the analog/digital conversion.</definition>
     <DD_Value_Domain>
@@ -357,7 +370,7 @@
     <version_id>1.0</version_id>
     <local_identifier>auto_exposure_alpha</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>auto_exposure_alpha is a weighting parameter that decides whether to prefer
       exposure changes more or gain changes. Values closer to 1 mean exposure changes are
       preferred more. For example, this will be used by the CADRE rovers which have a different 
@@ -374,7 +387,7 @@
     <version_id>1.0</version_id>
     <local_identifier>auto_exposure_max_delta</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>The maximum exposure change that is allowed across image frames. Limiting
       the change makes it more friendly to feature tracking algorithms, in that successive
       scenes do not vary greatly in brightness. For example, this will be used by the 
@@ -408,7 +421,7 @@
     <version_id>1.0</version_id>
     <local_identifier>auto_exposure_target_msv</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>The algorithm attempts to make the Mean Sample Value (MSV) of the image match
       for this value. For example, this will be used by the CADRE rovers as the setpoint for the
       algorithm called "ModalAI MSV 2022".</definition>
@@ -476,7 +489,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Cristina M. De Cesare</submitter_name>
     <definition>The auto_exposure_pixel_fraction attribute specifies the percentage 
-      of pixels whose DN values may exceed the auto_expsoure_data_cut.</definition>
+      of pixels whose DN values may exceed the auto_exposure_data_cut.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -663,6 +676,23 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>bands</name>
+    <version_id>1.0</version_id>
+    <local_identifier>bands</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>
+      The bands attribute indicates the total number of bands within the sub-image.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>bandwidth</name>
     <version_id>1.0</version_id>
     <local_identifier>bandwidth</local_identifier>
@@ -705,7 +735,6 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -720,6 +749,20 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>camera_information</name>
+    <version_id>1.0</version_id>
+    <local_identifier>camera_information</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Free-form text description of the camera.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>UTF8_Text_Preserved</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1681,7 +1724,23 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
+  
+  <DD_Attribute>
+    <name>first_band</name>
+    <version_id>1.0</version_id>
+    <local_identifier>first_band</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The first_band attribute indicates the band number within a source image or sensor that corresponds
+      to the first band in a sub-image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>first_line</name>
     <version_id>1.0</version_id>
@@ -1893,7 +1952,7 @@
       consists of a sequence of measurements made over a specified time interval, and may include measurements from different 
       instrument modes. These sequences repeat from cycle to cycle and sometimes within a cycle.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -1929,7 +1988,7 @@
     <submitter_name>Cristina M. De Cesare</submitter_name>
     <definition>The frame_interval attribute defines the time between the start of successive frames in a video product.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
@@ -1998,7 +2057,7 @@
     <version_id>1.0</version_id>
     <local_identifier>frame_source_id</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>frame_source_id is a mission-specific ID string identifying the source of the video. For 
       example, for the CADRE rover's SACA instrument, it would be a camera ID.</definition>
     <DD_Value_Domain>
@@ -2305,9 +2364,9 @@
     <submitter_name>T. Hare</submitter_name>
     <definition>Indicates whether or not this image was corrupted after it was acquired (i.e. it was
       corrupted somewhere downstream not part of acquisition). Valid values are "true",
-      "false", "1" (one, as true), and "0" (zero, as false).</definition>
+      "false".</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -2336,14 +2395,14 @@
 
   <DD_Attribute>
     <name>interframe_delay</name>
-    <version_id>1.1</version_id>
+    <version_id>1.2</version_id>
     <local_identifier>interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Jordan Padams</submitter_name>
     <definition>The interframe_delay attribute provides the time between the end of one frame and the 
       beginning of the next frame in a video product.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>true</enumeration_flag>
+      <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
@@ -2488,6 +2547,20 @@
   </DD_Attribute>
   
   <DD_Attribute>
+    <name>kurtosis</name>
+    <version_id>1.0</version_id>
+    <local_identifier>kurtosis</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The kurtosis in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>lines</name>
     <version_id>1.0</version_id>
     <local_identifier>lines</local_identifier>
@@ -2536,7 +2609,49 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
+  
+  <DD_Attribute>
+    <name>maximum_pixel_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>maximum_pixel_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The maximum pixel value in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>mean_pixel_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>mean_pixel_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The mean pixel value in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>median_pixel_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>median_pixel_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The median pixel value in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>minimum_focus_distance</name>
     <version_id>1.0</version_id>
@@ -2549,6 +2664,20 @@
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>minimum_pixel_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>minimum_pixel_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The minimum pixel value in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2598,7 +2727,24 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>metadata_corrupt_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>metadata_corrupt_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>T. Hare</submitter_name>
+    <definition>Indicates whether or not the metadata for this image was corrupted 
+       after it was acquired (i.e. it was corrupted somewhere downstream not part 
+       of acquisition). Valid values are "true", "false".
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>min_filter_window_line</name>
     <version_id>1.0</version_id>
@@ -3096,7 +3242,7 @@
     <version_id>1.0</version_id>
     <local_identifier>pre_video_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
-    <submitter_name>B. Deen</submitter_name>
+    <submitter_name>R. Deen</submitter_name>
     <definition>pre_video_delay indicates the delay, generally in milliseconds or seconds, before the video starts.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -3539,6 +3685,43 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>relative_to</name>
+    <version_id>1.0</version_id>
+    <local_identifier>relative_to</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>
+      Specifies what the values in this Subframe instance are measured
+      relative to.  For historical reasons, if relative_to is omitted, a
+      default of "Sensor" should be assumed.
+      </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Image</value>
+        <value_meaning>
+          The values in the Subframe are coordinates within an image.  For
+          example, when used within a Statistics class, it indicates the
+          area of the image over which the statistics are gathered (having
+          nothing to do with the original sensor).
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Sensor</value>
+        <value_meaning>
+          The values in the Subframe are coordiantes on the original sensor.
+          Note that if downsampling is applied, these values are measured
+          before the downsampling (in which case "lines" for example will
+          not match the number of lines in the image because the latter
+          takes downsampling into account).
+        </value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>responsivity_factor_b</name>
     <version_id>1.0</version_id>
     <local_identifier>responsivity_factor_b</local_identifier>
@@ -3979,6 +4162,20 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>skewness</name>
+    <version_id>1.0</version_id>
+    <local_identifier>skewness</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The skewness in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
     <name>special_line</name>
     <version_id>1.0</version_id>
     <local_identifier>special_line</local_identifier>
@@ -4008,6 +4205,20 @@
     </DD_Value_Domain>
   </DD_Attribute>
 
+  <DD_Attribute>
+    <name>standard_deviation</name>
+    <version_id>1.0</version_id>
+    <local_identifier>standard_deviation</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The standard deviation in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
   <DD_Attribute>
     <name>starpixel_initial_subsampling_interval</name>
     <version_id>1.0</version_id>
@@ -4402,6 +4613,20 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>variance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>variance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The variance in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -4861,6 +5086,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Calibration</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Col_Sum</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -5021,6 +5252,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Statistics</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Subframe</identifier_reference>
@@ -5347,6 +5584,56 @@
     </DD_Association>
   </DD_Class>
 
+  <!-- Class: Calibration -->
+  <DD_Class>
+    <name>Calibration</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Calibration</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Calibration class is a container for describing
+      calibration performed on the image.  It may be used standalone, or as
+      a parent for more specific types of calibration (for example
+      Radiometric_Correction, although for historical reasons that does not
+      derive from Calibration).  Each instance of Calibration should describe
+      one aspect of calibration; multiple instances of Calibration can be used
+      in one product.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Calibration_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Class: Calibration_File -->
+  <DD_Class>
+    <name>Calibration_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Calibration_File</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Calibration_File class identifies a file used for
+      calibration.  Mission documentation and/or the description attribute
+      should describe the file in more detail.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
   <!-- Class: Color_Filter_Array -->
   <DD_Class>
     <name>Color_Filter_Array</name>
@@ -5473,6 +5760,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Calibration</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Col_Sum</identifier_reference>
@@ -5635,6 +5928,12 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Statistics</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>Subframe</identifier_reference>
@@ -5942,6 +6241,12 @@
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
         <identifier_reference>processing_venue</identifier_reference>
@@ -7375,6 +7680,12 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+      <identifier_reference>camera_information</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>focal_length</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -8000,6 +8311,12 @@ product_flag.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>true</element_flag>
     <DD_Association>
+      <identifier_reference>first_band</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>first_line</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8012,6 +8329,12 @@ product_flag.</definition>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>bands</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>lines</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8022,6 +8345,12 @@ product_flag.</definition>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>relative_to</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>line_fov</identifier_reference>
@@ -8251,6 +8580,85 @@ product_flag.</definition>
     </DD_Association>
   </DD_Class>
 
+  <!-- Class: Statistics -->
+  <DD_Class>
+    <name>Statistics</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Statistics</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Statistics class specifies statistics for the pixels
+      of an image.  This generally should exclude invalid/saturated/etc
+      pixels, although that may vary per mission.  A Subframe child class may
+      be used to define the area over which the statistics are gathered
+      (defaults to the entire image)  For multiband images, the band attribute
+      identifies which band the statistics apply to.  If not specified, the
+      statistics cover all bands.  More than one instance of Statistics can
+      be used in order to cover multiple bands or subframes independently.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>kurtosis</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>maximum_pixel_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>minimum_pixel_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>mean_pixel_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>median_pixel_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>skewness</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>standard_deviation</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>variance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Subframe</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
   <!-- Class: Tile -->
   <DD_Class>
     <name>Tile</name>
@@ -8449,7 +8857,7 @@ product_flag.</definition>
     <DD_Association>
       <identifier_reference>hdr_acquisition_mode</identifier_reference>
       <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>1</minimum_occurrences>
+      <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>  
     <DD_Association>
@@ -8510,7 +8918,7 @@ product_flag.</definition>
   <!-- Class: Data_Quality -->
   <DD_Class>
     <name>Data_Quality</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Data_Quality</local_identifier>
     <submitter_name>Kate Crombie</submitter_name>
     <definition>The Data_Quality class contain attributes which identify quality issues
@@ -8588,6 +8996,12 @@ product_flag.</definition>
     </DD_Association>
     <DD_Association>
       <identifier_reference>image_corrupt_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>metadata_corrupt_flag</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
