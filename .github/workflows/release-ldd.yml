@@ -24,7 +24,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
           ssh-key: ${{ secrets.SSH_KEY }}
@@ -50,15 +50,15 @@ jobs:
       matrix: ${{fromJson(needs.get_versions.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
           ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Set up Python 3
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: '3.13'
 
       - name: Adding dependencies
         run: |
