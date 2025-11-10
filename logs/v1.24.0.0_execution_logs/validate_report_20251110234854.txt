@@ -1,0 +1,50 @@
+
+PDS Validate Tool Report
+
+Configuration:
+   Version      4.0.8
+   Date         2025-11-10T23:48:54Z
+   CLI args     -R pds4.label --skip-content-validation -x /home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.xsd /tmp/PDS4_PDS_1O00.xsd -S /home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.sch /tmp/PDS4_PDS_1O00.sch -t /home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.xml
+
+Parameters:
+   Targets                        [file:/home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.xml]
+   Rule Type                      pds4.label
+   User Specified Schemas         [file:/home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.xsd, file:/tmp/PDS4_PDS_1O00.xsd]
+   User Specified Schematrons     [file:/home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.sch, file:/tmp/PDS4_PDS_1O00.sch]
+   Severity Level                 WARNING
+   Recurse Directories            true
+   File Filters Used              [*.xml, *.XML]
+   Data Content Validation        off
+   Product Level Validation       on
+   Max Errors                     100000
+   Registered Contexts File       /tmp/validate-4.0.8/resources/registered_context_products.json
+
+
+
+Product Level Validation Results
+
+  PASS: file:/home/runner/work/ldd-img/ldd-img/build/development/e53ebf953ea5fc37f46bc2a7e4a8db2a661c9858/1.24.0.0/PDS4_IMG_1O00_1930.xml (urn:nasa:pds:system_bundle:xml_schema:img-xml_schema_1.24.0.0_1.9.3.0::1.0)
+        1 product validation(s) completed
+
+Summary:
+
+  1 product(s)
+  0 error(s)
+  0 warning(s)
+
+  Product Validation Summary:
+    1          product(s) passed
+    0          product(s) failed
+    0          product(s) skipped
+    1          product(s) total
+
+  Referential Integrity Check Summary:
+    0          check(s) passed
+    0          check(s) failed
+    0          check(s) skipped
+    0          check(s) total
+
+
+End of Report
+Completed execution in 6076 ms
+
