@@ -261,8 +261,11 @@
     - Added pds:description to Data_Processing (for DSCOVR-EPIC)
     - Added camera_information to Optical_Properties (for RAC-CLPS)
 
+    1.9.4.0 R. Deen
+    - Allow negative numbers for Device_Temperature.raw_count by switching from Ascii_NonNegative_Integer to Ascii_Integer (for PHX)
+    
   </comment>
-  <last_modification_date_time>2025-08-19T00:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-03-11T00:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -3600,7 +3603,7 @@
       engineering units. i.e. temperature_value in degrees C or voltage_value in Volts</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
