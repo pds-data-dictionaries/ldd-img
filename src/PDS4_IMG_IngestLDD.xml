@@ -12,7 +12,7 @@
   <name>Imaging</name>
   <ldd_version_id>1.9.4.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
-  <full_name>Trent Hare</full_name>
+  <full_name>Robert Deen</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
   <comment> This dictionary contains high level classes and attributes used in imaging and
@@ -263,9 +263,10 @@
 
     1.9.4.0 R. Deen
     - Allow negative numbers for Device_Temperature.raw_count by switching from Ascii_NonNegative_Integer to Ascii_Integer (for PHX)
+    - Added 'Rice' to img::Onboard_Compression::onboard_compression_type (for PHX)
     
   </comment>
-  <last_modification_date_time>2026-03-11T00:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-04-21T12:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -2926,7 +2927,7 @@
     <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
       'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 
-      'Lossless', 'None',
+      'Lossless', 'None', 'Rice',
       'StarPixel Lossless', 'StarPixel Flexible', and 'Wavelet'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
@@ -2978,6 +2979,11 @@
       <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>No on-board compression was used.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Rice</value>
+        <value_meaning>The Rice algorithm exploits a set of variable-length codes to achieve compression. Each code is 
+          nearly optimal for a particular geometrically distributed source. https://ccsds.org/Pubs/120x0g2s.pdf</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>StarPixel Flexible</value>
