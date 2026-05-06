@@ -263,6 +263,7 @@
 
     1.9.4.0 R. Deen
     - Allow negative numbers for Device_Temperature.raw_count by switching from Ascii_NonNegative_Integer to Ascii_Integer (for PHX)
+    - Add megapixels to Detector (for Artemis)
     
   </comment>
   <last_modification_date_time>2026-03-11T00:00Z</last_modification_date_time>
@@ -2562,7 +2563,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
   <DD_Attribute>
     <name>lines</name>
     <version_id>1.0</version_id>
@@ -2574,6 +2575,23 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>megapixels</name>
+    <version_id>1.0</version_id>
+    <local_identifier>megapixels</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the size of the detector in megapixels.
+      This is not intended to be a precise measurement but rather indicates
+      the general size or class of the detector.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
       <minimum_value>1</minimum_value>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
@@ -6420,6 +6438,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>lines</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>megapixels</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
