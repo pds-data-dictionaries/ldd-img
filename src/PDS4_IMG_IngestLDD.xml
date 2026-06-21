@@ -4800,6 +4800,21 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>artifact_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>artifact_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition> A boolean value that indicates whether this image has identified artifacts.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>below_aft_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>below_aft_flag</local_identifier>
@@ -9086,7 +9101,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>    
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>artifact_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Hot_Pixel Class for Data_Quality -->
