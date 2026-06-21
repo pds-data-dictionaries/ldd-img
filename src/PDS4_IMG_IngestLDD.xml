@@ -265,6 +265,7 @@
     - Allow negative numbers for Device_Temperature.raw_count by switching from Ascii_NonNegative_Integer to Ascii_Integer (for PHX)
     - Added 'Rice' to img::Onboard_Compression::onboard_compression_type (for PHX)
     - Add megapixels to Detector (for Artemis)
+    - Add artifact_flag to Data_Quality (for Artemis)
 
   </comment>
   <last_modification_date_time>2026-05-06T12:00Z</last_modification_date_time>
