@@ -266,6 +266,11 @@
     - Added 'Rice' to img::Onboard_Compression::onboard_compression_type (for PHX)
     - Add megapixels to Detector (for Artemis)
     - Add artifact_flag to Data_Quality (for Artemis)
+    - Update the max_occurrences for the Radiometric_Correction class from 1 to unbounded (for M20 MastCam-Z)
+    - Update definition of array_band_number attribute (for M20 MastCam-Z)
+    - Add array_band_number as an optional attribute within the Radiometric_Correction class (for M20 MastCam-Z)
+    - Add array_band_number as an optional attribute within the Data_Quality class (for M20 MastCam-Z)
+    - Add new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
 
   </comment>
   <last_modification_date_time>2026-05-06T12:00Z</last_modification_date_time>
@@ -362,8 +367,10 @@
     <local_identifier>array_band_number</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>The array_band_number is the image plane (band) in the array that corresponds to 
-      the optical filter with which the image was acquired.</definition>
+    <definition>The array_band_number is the image plane (band) in the image array that
+      corresponds to the information in the enclosing class (such as, the optical filter
+      with which the band was acquired or the radiometric correction parameters for that band).
+      If not specified, the information applies to all bands.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -5001,7 +5008,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>Multiplicative factor used to isolate pixels that are X times 
-      greater than theie nearest neighbors.
+      greater than their nearest neighbors.
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -5009,7 +5016,20 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
+  <DD_Attribute>
+    <name>threshold_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>threshold_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Value used to define a level that triggers a defined behavior. This is a pixel
+      value expressed in the same units as the pixels themselves in the image array.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   <DD_Attribute>
     <name>threshold_value</name>
     <version_id>1.0</version_id>
@@ -5264,7 +5284,7 @@
       <identifier_reference>Radiometric_Correction</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Reference_Pixel</identifier_reference>
@@ -7949,6 +7969,12 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+        <identifier_reference>array_band_number</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>radiometric_type</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -8978,6 +9004,12 @@ product_flag.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+      <identifier_reference>array_band_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>dq_band</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -9127,13 +9159,19 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_factor</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Nonlinear_Pixel Class for Data_Quality -->
@@ -9151,7 +9189,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_value</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -9177,7 +9221,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_value</identifier_reference>
       <reference_type>attribute_of</reference_type>
