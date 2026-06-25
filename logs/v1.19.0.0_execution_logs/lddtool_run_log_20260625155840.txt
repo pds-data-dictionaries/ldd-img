@@ -1,11 +1,29 @@
 
 >>  INFO LDDTOOL Version: 16.1.3
->>  INFO IM Version Id: 1.18.0.0
+>>  INFO IM Version Id: 1.19.0.0
 >>  INFO IM Namespace Id: pds
->>  INFO IM Label Version Id: 1.24
->>  INFO Date: Mon Jun 22 22:26:02 UTC 2026
+>>  INFO IM Label Version Id: 1.25
+>>  INFO Date: Thu Jun 25 15:58:40 UTC 2026
 >>  INFO PARENT_DIR: /tmp/lddtool-16.1.3/Data/
 
+>>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:Black_Reference_Point  Class:img:Black_Reference_Point - Missing Component Class
+>>> ERROR Association: img:Black_Reference_Point - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:White_Reference_Point  Class:img:White_Reference_Point - Missing Component Class
+>>> ERROR Association: img:White_Reference_Point - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:icc_profile_name  Class:img:icc_profile_name - Missing Component Class
+>>> ERROR Association: img:icc_profile_name - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Detector  Association:img:sensing_method  Class:img:sensing_method - Missing Component Class
+>>> ERROR Association: img:sensing_method - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Exposure  Association:img:exposure_type  Attribute: img:exposure_type - Missing Attribute
+>>> ERROR Association: img:exposure_type - Could not find referenced attribute - Reference Type: attribute_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Exposure  Association:img:light_value  Class:img:light_value - Missing Component Class
+>>> ERROR Association: img:light_value - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Exposure  Association:img:exposure_value  Class:img:exposure_value - Missing Component Class
+>>> ERROR Association: img:exposure_value - Missing Component - Reference Type: component_of
+>>> ERROR Class:0001_NASA_PDS_1.img.Focus  Association:img:circle_of_confusion  Attribute: img:circle_of_confusion - Missing Attribute
+>>> ERROR Association: img:circle_of_confusion - Could not find referenced attribute - Reference Type: attribute_of
+>>> ERROR Attribute:  - The attribute Black_Reference_Point must begin with a lower case letter.
+>>> ERROR Attribute:  - The attribute White_Reference_Point must begin with a lower case letter.
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
 >>> INFO Init:  - LDD Dictionary_Type is Discipline
@@ -27,6 +45,7 @@
 >>> INFO Attribute: <exposure_coadd_count> - The default minimum characters provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <exposure_readout_count> - The default minimum characters provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <exposure_time_delta> - The default minimum value provided by the attribute's data type is being overridden with 0
+>>> INFO Attribute: <exposure_value> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <filter_id> - The default minimum characters provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <filter_id> - The default maximum characters provided by the attribute's data type is being overridden with 16
 >>> INFO Attribute: <filter_name> - The default minimum characters provided by the attribute's data type is being overridden with 1
@@ -45,9 +64,10 @@
 >>> INFO Attribute: <jpeg_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <jpeg_quality> - The default maximum value provided by the attribute's data type is being overridden with 100
 >>> INFO Attribute: <lines> - The default minimum value provided by the attribute's data type is being overridden with 1
->>> INFO Attribute: <megapixels> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <line_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
 >>> INFO Attribute: <line_fov> - The default maximum value provided by the attribute's data type is being overridden with 360.0
+>>> INFO Attribute: <line_readout_time> - The default minimum value provided by the attribute's data type is being overridden with 0
+>>> INFO Attribute: <megapixels> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <observation_number> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <onboard_compression_quality> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <onboard_compression_quality> - The default maximum value provided by the attribute's data type is being overridden with 1.0
@@ -62,7 +82,6 @@
 >>> INFO Attribute: <horizon_mask_elevation> - The default minimum value provided by the attribute's data type is being overridden with -90.0
 >>> INFO Attribute: <horizon_mask_elevation> - The default maximum value provided by the attribute's data type is being overridden with 90.0
 >>> INFO Attribute: <pixel_readout_time> - The default minimum value provided by the attribute's data type is being overridden with 0
->>> INFO Attribute: <line_readout_time> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <frame_readout_time> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <samples> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <sample_fov> - The default minimum value provided by the attribute's data type is being overridden with 0.0
@@ -94,6 +113,7 @@
 >>> INFO Attribute: <width_pixels> - The default minimum value provided by the attribute's data type is being overridden with 0
 >>> INFO Attribute: <dq_bayer_cell> - The default minimum value provided by the attribute's data type is being overridden with 1
 >>> INFO Attribute: <dq_band> - The default minimum value provided by the attribute's data type is being overridden with 1
+>>> WARNING Attribute: <exposure_type> - This local attribute was not used in an Association.
 >>> WARNING Attribute: <color_component> - An attribute with the enumeration_flag = false must not have any permissible values.
 >>> WARNING Attribute: <color_space> - An attribute with the enumeration_flag = false must not have any permissible values.
 >>> WARNING Attribute: <processing_venue> - An attribute with the enumeration_flag = false must not have any permissible values.
@@ -137,13 +157,13 @@
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 
  -- LDDTool Execution Summary --
-     41 warning(s)
-     0 error(s)
+     42 warning(s)
+     18 error(s)
      0 fatal error(s)
 
 Input:
 
-     - IM Version: 1I00
+     - IM Version: 1J00
      - PDS4 Flag: true
      - LDD Flag: true
      - IM Version: true
@@ -153,9 +173,9 @@ Input:
 
 Output:
 
-     - ./PDS4_IMG_1I00_1940.xsd
-     - ./PDS4_IMG_1I00_1940.sch
-     - ./PDS4_IMG_1I00_1940.xml
-     - ./export/PDS4_PDS_1I00.JSON
+     - ./PDS4_IMG_1J00_1940.xsd
+     - ./PDS4_IMG_1J00_1940.sch
+     - ./PDS4_IMG_1J00_1940.xml
+     - ./export/PDS4_PDS_1J00.JSON
 
->>  INFO Exit(0)
+>>  INFO Exit(1)
