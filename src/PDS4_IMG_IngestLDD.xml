@@ -755,20 +755,6 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>Black_Reference_Point</name>
-    <version_id>1.0</version_id>
-    <local_identifier>Black_Reference_Point</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Namrata Malarout</submitter_name>
-    <definition>Black reference point of camera.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type> <!-- TODO: update the type -->
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
-
-  <DD_Attribute>
     <name>blue_to_green_balance</name>
     <version_id>1.0</version_id>
     <local_identifier>blue_to_green_balance</local_identifier>
@@ -5366,20 +5352,6 @@
       <unit_of_measure_type>Units_of_Temperature</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
-  <DD_Attribute>
-    <name>White_Reference_Point</name>
-    <version_id>1.0</version_id>
-    <local_identifier>White_Reference_Point</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>Namrata Malarout</submitter_name>
-    <definition>White reference point of camera.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type> <!-- TODO: update the type -->
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
-    </DD_Value_Domain>
-  </DD_Attribute>
    
   <DD_Attribute>
     <name>x_center</name>
@@ -6246,6 +6218,25 @@
     </DD_Association>
   </DD_Class>
 
+  <!-- Class: Black_Reference_Point -->
+  <DD_Class>
+    <name>Black_Reference_Point</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Black_Reference_Point</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Black reference point of camera</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Color_sRGB</identifier_reference>
+      <identifier_reference>Color_xyY</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!-- Class: Brightness_Correction -->
   <DD_Class>
     <name>Brightness_Correction</name>
@@ -6620,7 +6611,7 @@
   <!-- Class: Color_sRGB -->
   <DD_Class>
     <name>Color_sRGB</name>
-    <version_id>1.0</version_id>
+    <version_id>1.0</version_id>B
     <local_identifier>Color_sRGB</local_identifier>
     <submitter_name>Namrata Malarout</submitter_name>
     <definition>Specifies a color expressed in standard RGB color space</definition>
@@ -10314,6 +10305,25 @@ product_flag.</definition>
     <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: White_Reference_Point  -->
+  <DD_Class>
+    <name>White_Reference_Point</name>
+    <version_id>1.0</version_id>
+    <local_identifier>White_Reference_Point</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>White reference point of camera</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Color_sRGB</identifier_reference>
+      <identifier_reference>Color_xyY</identifier_reference>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
