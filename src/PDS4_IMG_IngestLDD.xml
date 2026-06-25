@@ -840,6 +840,45 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>chrominance_positioning</name>
+    <version_id>1.0</version_id>
+    <local_identifier>chrominance_positioning</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Defines the position of color (chrominance) samples relative to brightness (luminance) samples.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Centered</value>
+        <value_meaning>The chroma sample is located at the center of the 2x2 luma samples.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Co-sited</value>
+        <value_meaning>The chroma sample is aligned with one of the luma samples, usually the top-left.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>circle_of_confusion</name>
+    <version_id>1.0</version_id>
+    <local_identifier>circle_of_confusion</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Defines the maximum diameter of a blur spot on a camera sensor that the human eye till perceives as a
+      sharp point.  It is sometimes called blur spot and factors in to the camera's depth of field.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>color_component</name>
@@ -851,7 +890,7 @@
       of the color space is represented by this band.  This keyword is not
       needed for 3-band images, as all bands are represented.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
+      <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
@@ -1174,6 +1213,63 @@
         <value_meaning>indicates aggressive signal reduction to maintain proper exposure
           in extremely bright conditions.</value_meaning>
       </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>depth_of_field</name>
+    <version_id>1.0</version_id>
+    <local_identifier>depth_of_field</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Distance between the nearest and farthest objects that are in accceptably sharp focus.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>diagonal_fov</name>
+    <version_id>1.0</version_id>
+    <local_identifier>diagonal_fov</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>The angular field of view measured diagonally across the image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>diagonal_fov_length</name>
+    <version_id>1.0</version_id>
+    <local_identifier>diagonal_fov_length</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>The diagonal field of view expressed as a distance or size at the best_focus distance.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>hyperfocus_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hyperfocus_distance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Distance from a lens beyond which all objects can be brought into an acceptable focus.
+      It is the focus distance with the maximum depth of field.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -6296,6 +6392,17 @@
     </DD_Association>
   </DD_Class>
 
+  <!-- Class: Chromaticity_Coordinate -->
+  <DD_Class>
+    <name>Chromaticity_Coordinate</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Chromaticity_Coordinate</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies a color using one of several color spaces.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+  </DD_Class>
+
   <!-- Class: Color_Filter_Array -->
   <DD_Class>
     <name>Color_Filter_Array</name>
@@ -7810,6 +7917,30 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>depth_of_field</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>diagonal_fov</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>diagonal_fov_length</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>hyperfocus_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Focus_Stack  -->
@@ -8215,6 +8346,12 @@
     </DD_Association>
     <DD_Association>
         <identifier_reference>Image_Compression_Segment</identifier_reference>
+        <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>chrominance_positioning</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
