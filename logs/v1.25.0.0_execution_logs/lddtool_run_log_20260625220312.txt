@@ -3,13 +3,9 @@
 >>  INFO IM Version Id: 1.25.0.0
 >>  INFO IM Namespace Id: pds
 >>  INFO IM Label Version Id: 1.0
->>  INFO Date: Thu Jun 25 21:54:08 UTC 2026
+>>  INFO Date: Thu Jun 25 22:03:12 UTC 2026
 >>  INFO PARENT_DIR: /tmp/lddtool-16.1.3/Data/
 
->>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:Black_Reference_Point  Class:img:Black_Reference_Point - Missing Component Class
->>> ERROR Association: img:Black_Reference_Point - Missing Component - Reference Type: component_of
->>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:White_Reference_Point  Class:img:White_Reference_Point - Missing Component Class
->>> ERROR Association: img:White_Reference_Point - Missing Component - Reference Type: component_of
 >>> ERROR Class:0001_NASA_PDS_1.img.Color_Processing  Association:img:icc_profile_name  Class:img:icc_profile_name - Missing Component Class
 >>> ERROR Association: img:icc_profile_name - Missing Component - Reference Type: component_of
 >>> ERROR Class:0001_NASA_PDS_1.img.Detector  Association:img:sensing_method  Class:img:sensing_method - Missing Component Class
@@ -22,8 +18,6 @@
 >>> ERROR Association: img:exposure_value - Missing Component - Reference Type: component_of
 >>> ERROR Class:0001_NASA_PDS_1.img.JPEG_Parameters  Association:img:chrominance_positioning  Class:img:chrominance_positioning - Missing Component Class
 >>> ERROR Association: img:chrominance_positioning - Missing Component - Reference Type: component_of
->>> ERROR Attribute:  - The attribute Black_Reference_Point must begin with a lower case letter.
->>> ERROR Attribute:  - The attribute White_Reference_Point must begin with a lower case letter.
 >>> INFO Init:  - Config.Properties Namespace Id Found:img
 >>> INFO Init:  - Config.Properties Namespace Id Using:img
 >>> INFO Init:  - LDD Dictionary_Type is Discipline
@@ -123,7 +117,15 @@
 >>> WARNING Attribute: <relative_to> - An attribute with the enumeration_flag = false must not have any permissible values.
 >>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <ISO> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Black_Reference_Point> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <White_Reference_Point> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <ISO> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
@@ -142,6 +144,12 @@
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Instrument_State> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Black_Reference_Point> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <White_Reference_Point> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Detector> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <ISO> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Exposure> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
@@ -160,10 +168,12 @@
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Subframe> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 >>> WARNING Class: <Companding> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_sRGB> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
+>>> WARNING Class: <Color_xyY> - An exposed class was found nested within another exposed class. Nested exposed classes should only be present if there is a specific requirement to expose the additional class.
 
  -- LDDTool Execution Summary --
-     43 warning(s)
-     18 error(s)
+     59 warning(s)
+     12 error(s)
      0 fatal error(s)
 
 Input:
