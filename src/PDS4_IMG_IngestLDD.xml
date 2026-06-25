@@ -1227,7 +1227,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1246,9 +1246,9 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>hyperfocus_distance</name>
+    <name>hyperfocal_distance</name>
     <version_id>1.0</version_id>
-    <local_identifier>hyperfocus_distance</local_identifier>
+    <local_identifier>hyperfocal_distance</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Namrata Malarout</submitter_name>
     <definition>Distance from a lens beyond which all objects can be brought into an acceptable focus.
@@ -2196,7 +2196,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -6050,6 +6050,12 @@
       <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Camera_Settings</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Instrument_State</identifier_reference>
         <reference_type>component_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -6890,6 +6896,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Camera_Settings</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
@@ -8078,7 +8090,7 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>hyperfocus_distance</identifier_reference>
+      <identifier_reference>hyperfocal_distance</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -10291,13 +10303,13 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>blue_to_green_balance</identifier_reference>
+      <identifier_reference>red_to_green_balance</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-      <identifier_reference>red_to_green_balance</identifier_reference>
+      <identifier_reference>blue_to_green_balance</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
