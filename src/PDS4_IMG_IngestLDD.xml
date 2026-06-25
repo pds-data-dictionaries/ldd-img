@@ -1263,7 +1263,7 @@
   <DD_Attribute>
     <name>icc_profile_name</name>
     <version_id>1.0</version_id>
-    <local_identifier>Black_Reference_Point</local_identifier>
+    <local_identifier>icc_profile_name</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Namrata Malarout</submitter_name>
     <definition>Identifies the name of the ICC (International Color Consortium) color space/profile
@@ -1825,7 +1825,7 @@
   <DD_Attribute>
     <name>exposure_type</name>
     <version_id>1.0</version_id>
-    <local_identifier>e\</local_identifier>
+    <local_identifier>exposure_type</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Elizabeth D. Rye</submitter_name>
     <definition>The exposure_type attribute indicates the exposure setting on a camera. Valid values: 
@@ -6596,7 +6596,7 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>icc_profile_name</identifier_reference>
-      <reference_type>component_of</reference_type>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -7502,7 +7502,7 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>sensing_method</identifier_reference>
-      <reference_type>component_of</reference_type>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -7851,13 +7851,13 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>light_value</identifier_reference>
-      <reference_type>component_of</reference_type>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>exposure_value</identifier_reference>
-      <reference_type>component_of</reference_type>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -8494,7 +8494,7 @@
     </DD_Association>
     <DD_Association>
         <identifier_reference>chrominance_positioning</identifier_reference>
-        <reference_type>component_of</reference_type>
+        <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
