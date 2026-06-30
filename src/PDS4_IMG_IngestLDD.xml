@@ -272,9 +272,10 @@
     - Added array_band_number as an optional attribute within the Data_Quality class (for M20 MastCam-Z)
     - Added new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
     - Added new classes and attributes (for Artemis)
+    - Added "Nikon NEF Compressed" as valid for img:onboard_compression_type
 
   </comment>
-  <last_modification_date_time>2026-06-25T12:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-06-30T21:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -3405,6 +3406,10 @@
       <DD_Permissible_Value>
         <value>Lossless</value>
         <value_meaning>Lossless compression method was used.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Nikon NEF Compressed</value>
+        <value_meaning>Nikon-specific compression inside a Nikon Electronic Format (NEF) file.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>None</value>
