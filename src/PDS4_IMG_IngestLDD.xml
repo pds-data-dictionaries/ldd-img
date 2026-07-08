@@ -272,9 +272,10 @@
     - Added array_band_number as an optional attribute within the Data_Quality class (for M20 MastCam-Z)
     - Added new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
     - Added new classes and attributes (for Artemis)
+    - Added active_flag, processing_venue, and processing_algorithm within the Radiometric_Correction class (for M20 MastCam-Z)
 
   </comment>
-  <last_modification_date_time>2026-06-25T12:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-07-08T12:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -9052,6 +9053,24 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>pds.comment</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>active_flag</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>processing_venue</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>processing_algorithm</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
