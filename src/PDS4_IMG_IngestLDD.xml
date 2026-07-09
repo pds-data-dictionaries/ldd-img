@@ -273,10 +273,9 @@
     - Added new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
     - Added new classes and attributes (for Artemis)
     - Added "Nikon NEF Compressed" as valid for img:onboard_compression_type
-    - Added active_flag, processing_venue, and processing_algorithm within the Radiometric_Correction class (for M20 MastCam-Z)
 
   </comment>
-  <last_modification_date_time>2026-07-08T12:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-06-30T21:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
