@@ -9082,7 +9082,7 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
-      <reference_type>parent_of</reference_type>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
