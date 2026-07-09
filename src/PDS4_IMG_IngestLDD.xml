@@ -9063,24 +9063,6 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
-        <identifier_reference>active_flag</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-        <identifier_reference>processing_venue</identifier_reference>
-        <reference_type>attribute_of</reference_type>
-        <minimum_occurrences>0</minimum_occurrences>
-        <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
-      <identifier_reference>processing_algorithm</identifier_reference>
-      <reference_type>attribute_of</reference_type>
-      <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
-    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
