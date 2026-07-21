@@ -276,7 +276,7 @@
     - Added "NEF", "NEF High Efficiency Star" to img:onboard_compression_type (for Artemis)
 
   </comment>
-  <last_modification_date_time>2026-07-14T15:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-07-21T18:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -6846,7 +6846,7 @@
       <identifier_reference>Radiometric_Correction</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Reference_Pixel</identifier_reference>
