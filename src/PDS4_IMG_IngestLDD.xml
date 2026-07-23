@@ -274,9 +274,10 @@
     - Added new classes and attributes (for Artemis)
     - Added "Nikon NEF Compressed" as valid for img:onboard_compression_type
     - Added "NEF", "NEF High Efficiency Star" to img:onboard_compression_type (for Artemis)
+    - Updated cardinality of Image_Mask in both Imaging and Commanded_Parameters to 0:unbounded per request from T. Cornet
 
   </comment>
-  <last_modification_date_time>2026-07-21T18:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-07-22T23:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -5965,7 +5966,7 @@
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Onboard_Compression</identifier_reference>
@@ -6816,7 +6817,7 @@
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Onboard_Compression</identifier_reference>
