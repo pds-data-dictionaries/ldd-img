@@ -268,13 +268,21 @@
     - Added artifact_flag to Data_Quality (for Artemis)
     - Updated the max_occurrences for the Radiometric_Correction class from 1 to unbounded (for M20 MastCam-Z)
     - Updated definition of array_band_number attribute (for M20 MastCam-Z)
-    - Added array_band_number as an optional attribute within the Radiometric_Correction class (for M20 MastCam-Z)
-    - Added array_band_number as an optional attribute within the Data_Quality class (for M20 MastCam-Z)
+    - Added array_band_number as an optional attribute within the Radiometric_Correction and Data_Quality classes (for M20 MastCam-Z)
     - Added new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
-    - Added new classes and attributes (for Artemis)
+    - Added new attributes (for Artemis): aperture_value, blue_to_green_balance, chrominance_positioning,
+      circlee_of_confusion, contrast, gain_control, depth_of_field, diagonal_fov, diagonal_fov_length, hyperfocal_distance,
+      icc_profile_name, exposure_compensation, exposure_index, exposure_value, iso_speed, lens_description, lens_name,
+      light_value, megapixels, max_aperture_value, metering_mode, recommended_exposure_index, red_to_green_balance, saturation,
+      scene_capture_type, sensing_method, sharpness, sensitivity_type, standard_output_sensitivity, red_dn, green_dn, blue_dn,
+      threshold_pixels, xyy_x, xyy_y, xyy_luminance
+    - Added new classes (for Artemis): Black_Reference_Point, Camera_Settings, Chromaticity_Coordinate, Color_sRGB, Color_xyY,
+      White_Reference_Point
+    - Added "Auto Bracket" as permissible value for exposure_type
     - Added "Nikon NEF Compressed" as valid for img:onboard_compression_type
     - Added "NEF", "NEF High Efficiency Star" to img:onboard_compression_type (for Artemis)
     - Updated cardinality of Image_Mask in both Imaging and Commanded_Parameters to 0:unbounded per request from T. Cornet
+    - Changed units of f_number from Length to None as f_number is a unitless quantity (backwards-incompatible change but clear error)
 
   </comment>
   <last_modification_date_time>2026-07-22T23:00Z</last_modification_date_time>
