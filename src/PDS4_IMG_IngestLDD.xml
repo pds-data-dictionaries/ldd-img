@@ -283,9 +283,10 @@
     - Added "NEF", "NEF High Efficiency Star" to img:onboard_compression_type (for Artemis)
     - Updated cardinality of Image_Mask in both Imaging and Commanded_Parameters to 0:unbounded per request from T. Cornet
     - Changed units of f_number from Length to None as f_number is a unitless quantity (backwards-incompatible change but clear error)
+    - Added "Radiance" as an enum value for radiometric_type (it was in the description but not the value list)
 
   </comment>
-  <last_modification_date_time>2026-07-22T23:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-07-31T16:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -4003,6 +4004,10 @@
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
+        <value>Radiance</value>
+        <value_meaning>Radiometric correction results are expressed in units of Radiance (generally W/m^2/sr)
+        </value_meaning>
+      </DD_Permissible_Value>      <DD_Permissible_Value>
         <value>Radiance Factor</value>
         <value_meaning>Radiance Factor also known as I/F or IOF. Some images are scaled to absolute 
           radiance units, then divided by the absolute radiance of the Sun at the top of the planet's
