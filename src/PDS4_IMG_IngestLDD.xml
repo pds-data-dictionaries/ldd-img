@@ -5,14 +5,14 @@
 
 <!-- PDS4 Local Data Dictionary Extended Ingest File for Imaging Node            -->
 <Ingest_LDD 
-  xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+  xmlns="http://pds.nasa.gov/pds4/pds/v1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.3.0</ldd_version_id>
+  <ldd_version_id>1.9.4.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
-  <full_name>Trent Hare</full_name>
+  <full_name>Robert Deen</full_name>
   <steward_id>img</steward_id>
   <namespace_id>img</namespace_id>
   <comment> This dictionary contains high level classes and attributes used in imaging and
@@ -261,8 +261,33 @@
     - Added pds:description to Data_Processing (for DSCOVR-EPIC)
     - Added camera_information to Optical_Properties (for RAC-CLPS)
 
+    1.9.4.0 R. Deen, N. Malarout
+    - Allow negative numbers for Device_Temperature.raw_count by switching from Ascii_NonNegative_Integer to Ascii_Integer (for PHX)
+    - Added 'Rice' to img::Onboard_Compression::onboard_compression_type (for PHX)
+    - Added megapixels to Detector (for Artemis)
+    - Added artifact_flag to Data_Quality (for Artemis)
+    - Updated the max_occurrences for the Radiometric_Correction class from 1 to unbounded (for M20 MastCam-Z)
+    - Updated definition of array_band_number attribute (for M20 MastCam-Z)
+    - Added array_band_number as an optional attribute within the Radiometric_Correction and Data_Quality classes (for M20 MastCam-Z)
+    - Added new attribute threshold_pixel to Saturated, Nonlinear, and Hot Pixel classes (for M20 MastCam-Z)
+    - Added new attributes (for Artemis): aperture_value, blue_to_green_balance, chrominance_positioning,
+      circlee_of_confusion, contrast, gain_control, depth_of_field, diagonal_fov, diagonal_fov_length, hyperfocal_distance,
+      icc_profile_name, exposure_compensation, exposure_index, exposure_value, iso_speed, lens_description, lens_name,
+      light_value, megapixels, max_aperture_value, metering_mode, recommended_exposure_index, red_to_green_balance, saturation,
+      scene_capture_type, sensing_method, sharpness, sensitivity_type, standard_output_sensitivity, red_dn, green_dn, blue_dn,
+      threshold_pixels, xyy_x, xyy_y, xyy_luminance
+    - Added new classes (for Artemis): Black_Reference_Point, Camera_Settings, Chromaticity_Coordinate, Color_sRGB, Color_xyY,
+      White_Reference_Point
+    - Added "Auto Bracket" as permissible value for exposure_type
+    - Added "Nikon NEF Compressed" as valid for img:onboard_compression_type
+    - Added "NEF", "NEF High Efficiency Star" to img:onboard_compression_type (for Artemis)
+    - Updated cardinality of Image_Mask in both Imaging and Commanded_Parameters to 0:unbounded per request from T. Cornet
+    - Changed units of f_number from Length to None as f_number is a unitless quantity (backwards-incompatible change but clear error)
+    - Added "Radiance" as an enum value for radiometric_type (it was in the description but not the value list)
+    - Added Dark_Current_File and Radiometric_Correction_File for T. Cornet
+
   </comment>
-  <last_modification_date_time>2025-08-19T00:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-07-31T16:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -351,13 +376,31 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>aperture_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>aperture_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Represents the lens aperture using the APEX system (Additive System of Photographic Exposure),
+      not as a direct F-number.  It measures the lens opening in powers of 2 (stops) to indicate how many
+      stops from f/1 the aperture is set.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>array_band_number</name>
     <version_id>1.0</version_id>
     <local_identifier>array_band_number</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
-    <definition>The array_band_number is the image plane (band) in the array that corresponds to 
-      the optical filter with which the image was acquired.</definition>
+    <definition>The array_band_number is the image plane (band) in the image array that
+      corresponds to the information in the enclosing class (such as, the optical filter
+      with which the band was acquired or the radiometric correction parameters for that band).
+      If not specified, the information applies to all bands.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
@@ -723,7 +766,22 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>blue_to_green_balance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>blue_to_green_balance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the blue gain levels, relative to green (as a ratio), for white balance.
+      Often related to color temperature.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>brightness_scale</name>
     <version_id>1.0</version_id>
@@ -782,6 +840,45 @@
       <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>chrominance_positioning</name>
+    <version_id>1.0</version_id>
+    <local_identifier>chrominance_positioning</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Defines the position of color (chrominance) samples relative to brightness (luminance) samples.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Centered</value>
+        <value_meaning>The chroma sample is located at the center of the 2x2 luma samples.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Co-sited</value>
+        <value_meaning>The chroma sample is aligned with one of the luma samples, usually the top-left.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>circle_of_confusion</name>
+    <version_id>1.0</version_id>
+    <local_identifier>circle_of_confusion</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Defines the maximum diameter of a blur spot on a camera sensor that the human eye till perceives as a
+      sharp point.  It is sometimes called blur spot and factors in to the camera's depth of field.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>color_component</name>
@@ -793,7 +890,7 @@
       of the color space is represented by this band.  This keyword is not
       needed for 3-band images, as all bands are represented.</definition>
     <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
+      <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
@@ -1041,6 +1138,34 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>contrast</name>
+    <version_id>1.0</version_id>
+    <local_identifier>contrast</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates the contrast setting when the image was captured.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Normal</value>
+        <value_meaning>indicates standard, default contrast processing </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Low</value>
+        <value_meaning>indicates reduced contrast processing. This setting narrows the tonal
+          range between the brightest and darkest areas.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>High</value>
+        <value_meaning>indicates higher contrast processing. This setting elevates level
+          of tonal difference between the brightest and darkest areas.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>delta_focus_count</name>
     <version_id>1.0</version_id>
     <local_identifier>delta_focus_count</local_identifier>
@@ -1051,6 +1176,114 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>gain_control</name>
+    <version_id>1.0</version_id>
+    <local_identifier>gain_control</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates the degree of overall image gain adjustment applied by the camera.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>indicates No gain applied; the photo uses the sensor's native sensitivity</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Low gain up</value>
+        <value_meaning>indicates slight electrical amplification of the sensor signal in low light</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>High gain up</value>
+        <value_meaning>indicates strong amplification to brighten dark scenes.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Low gain down</value>
+        <value_meaning>indicates minor signal reduction (attenuation) applied to
+          prevent overexposure in bright light</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>High gain down</value>
+        <value_meaning>indicates aggressive signal reduction to maintain proper exposure
+          in extremely bright conditions.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>depth_of_field</name>
+    <version_id>1.0</version_id>
+    <local_identifier>depth_of_field</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Distance between the nearest and farthest objects that are in accceptably sharp focus.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>diagonal_fov</name>
+    <version_id>1.0</version_id>
+    <local_identifier>diagonal_fov</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>The angular field of view measured diagonally across the image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>diagonal_fov_length</name>
+    <version_id>1.0</version_id>
+    <local_identifier>diagonal_fov_length</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>The diagonal field of view expressed as a distance or size at the best_focus distance.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>hyperfocal_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hyperfocal_distance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Distance from a lens beyond which all objects can be brought into an acceptable focus.
+      It is the focus distance with the maximum depth of field.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>icc_profile_name</name>
+    <version_id>1.0</version_id>
+    <local_identifier>icc_profile_name</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Identifies the name of the ICC (International Color Consortium) color space/profile
+      embedded in the image.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -1435,6 +1668,21 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>exposure_compensation</name>
+    <version_id>1.0</version_id>
+    <local_identifier>exposure_compensation</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Documents any intentional +/- adjustments made to the camera's automatic exposure,
+      measured in Exposue Value (EV) steps (commonly called "stops").</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>exposure_duration</name>
@@ -1493,6 +1741,20 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>exposure_index</name>
+    <version_id>1.0</version_id>
+    <local_identifier>exposure_index</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Exposure Index as defined by ISO 12232:2019.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>exposure_scale_factor</name>
     <version_id>1.0</version_id>
     <local_identifier>exposure_scale_factor</local_identifier>
@@ -1524,6 +1786,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
 
   <DD_Attribute>
     <name>exposure_coadd_count</name>
@@ -1602,6 +1865,11 @@
         <value_meaning>Autoexposure using prior image as a seed.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
+        <value>Auto Bracket</value>
+        <value_meaning>Auto bracket varies parameters such as, exposure, flash level,
+          Active D-Lighting (ADL),or white balance slightly in successive images.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
         <value>Test</value>
         <value_meaning>Test exposure setting telling the camera to return a fixed-pattern test image.</value_meaning>
       </DD_Permissible_Value>
@@ -1626,6 +1894,24 @@
       <minimum_value>0</minimum_value>
       <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
       <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>exposure_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>exposure_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Exposure Value (Ev) is a combination of a camera's shutter speed and f-number,
+      such that all combinations that yield the same exposure have the same Ev for a fixed scene luminance.
+      It also is used to indicate an interval on the photographic exposure scale, with a difference of 1 Ev
+      corresponding to  a standard power-of-2 exposure step, commonly called a stop.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -1923,7 +2209,7 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
-      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2512,6 +2798,22 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>iso_speed</name>
+    <version_id>1.0</version_id>
+    <local_identifier>iso_speed</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>ISO Speed as defined by ISO_12232:2019.  Note that this attribute strictly
+      adheres to ISO 12232 whereas iso_number can be more loosely defined.  Use iso_number
+      if strict adherence to the ISO standard is not clear.  Both may be used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
   <DD_Attribute>
     <name>jpeg_parameter</name>
@@ -2559,7 +2861,49 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
+
+  <DD_Attribute>
+    <name>lens_description</name>
+    <version_id>1.0</version_id>
+    <local_identifier>lens_description</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Description of the lens used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
+  <DD_Attribute>
+    <name>lens_name</name>
+    <version_id>1.0</version_id>
+    <local_identifier>lens_name</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Name of the lens used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>light_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>light_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Light Value is the exposure value (EV) normalised to ISO 100.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>lines</name>
     <version_id>1.0</version_id>
@@ -2575,7 +2919,7 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
   <DD_Attribute>
     <name>line_fov</name>
     <version_id>1.0</version_id>
@@ -2592,6 +2936,109 @@
       <maximum_value>360.0</maximum_value>
       <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
       <specified_unit_id>deg</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>line_readout_time</name>
+    <version_id>1.0</version_id>
+    <local_identifier>line_readout_time</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies the time between readout of the same pixel on
+      adjacent lines. It it the time from the start of one pixel to the
+      start of the same pixel on the following line.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>0</minimum_value>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+      <specified_unit_id>ms</specified_unit_id>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>megapixels</name>
+    <version_id>1.0</version_id>
+    <local_identifier>megapixels</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the size of the detector in megapixels.
+      This is not intended to be a precise measurement but rather indicates
+      the general size or class of the detector.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <minimum_value>1</minimum_value>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>max_aperture_value</name>
+    <version_id>1.0</version_id>
+    <local_identifier>max_aperture_value</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Smallest f-number (widest aperture) a lens can achieve.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>metering_mode</name>
+    <version_id>1.0</version_id>
+    <local_identifier>metering_mode</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates which part of the frame was used to measure brightness for the
+      autoexposure algorithm.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Unknown</value>
+        <value_meaning>Indicates the camera could not identify the metering method
+          or did not record it</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Average</value>
+        <value_meaning>Indicates the camera takes a simple overall average of light across
+          the entire frame.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Center-weighted average</value>
+        <value_meaning>Measures the whole scene but gives heavy priority to the center
+          (usually 60–80% of the weight).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Spot</value>
+        <value_meaning>Exposes strictly for a tiny, precise point in the frame (usually 1–5%). Ideal for extreme
+          high-contrast scenes, like a backlit subject or a performer on a dark stage</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Multi-spot</value>
+        <value_meaning>Takes multiple localized spot readings across different points in the composition
+          and averages them.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Multi-segment</value>
+        <value_meaning>Divides the frame into an advanced grid (or zones) and compares light, color, and
+          focus distance against an internal database.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Partial</value>
+        <value_meaning>Similar to spot metering but covers a slightly wider specific area in the middle of
+          the frame (usually 6–10%).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Other</value>
+        <value_meaning>A manufacturer-specific or custom metering mode.</value_meaning>
+      </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
   
@@ -2923,7 +3370,7 @@
     <definition>The onboard_compression_type attribute identifies the type of on-board
       compression used for data storage and transmission. Valid Values: 'GZIP', 'ICER', 
       'H.264 Frame', 'LOCO', 'LZO', 'JPEG', 'JPEG Progressive', 'MSSS Lossless', 
-      'Lossless', 'None',
+      'Lossless', 'None', 'Rice',
       'StarPixel Lossless', 'StarPixel Flexible', and 'Wavelet'.</definition>
     <DD_Value_Domain>
       <enumeration_flag>true</enumeration_flag>
@@ -2973,8 +3420,17 @@
         <value_meaning>Lossless compression method was used.</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
+        <value>Nikon NEF Compressed</value>
+        <value_meaning>Nikon-specific compression inside a Nikon Electronic Format (NEF) file.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
         <value>None</value>
         <value_meaning>No on-board compression was used.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Rice</value>
+        <value_meaning>The Rice algorithm exploits a set of variable-length codes to achieve compression. Each code is
+          nearly optimal for a particular geometrically distributed source. https://ccsds.org/Pubs/120x0g2s.pdf</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>StarPixel Flexible</value>
@@ -2989,6 +3445,14 @@
       <DD_Permissible_Value>
         <value>Wavelet</value>
         <value_meaning>Wavelet compression works by identifying repeating patterns in the content and representing them mathematically.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>NEF</value>
+        <value_meaning>Lossless compression retains 100% of the image data</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>NEF High Efficiency Star</value>
+        <value_meaning>Compresses roughly 50% while preserving visually identical image quality</value_meaning>
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -3432,24 +3896,6 @@
   </DD_Attribute>
 
   <DD_Attribute>
-    <name>line_readout_time</name>
-    <version_id>1.0</version_id>
-    <local_identifier>line_readout_time</local_identifier>
-    <nillable_flag>false</nillable_flag>
-    <submitter_name>R. Deen</submitter_name>
-    <definition>Specifies the time between readout of the same pixel on 
-      adjacent lines. It it the time from the start of one pixel to the 
-      start of the same pixel on the following line.</definition>
-    <DD_Value_Domain>
-      <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_Real</value_data_type>
-      <minimum_value>0</minimum_value>
-      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
-      <specified_unit_id>ms</specified_unit_id>
-    </DD_Value_Domain>
-  </DD_Attribute>
-
-  <DD_Attribute>
     <name>frame_readout_time</name>
     <version_id>1.0</version_id>
     <local_identifier>frame_readout_time</local_identifier>
@@ -3559,6 +4005,10 @@
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
       <DD_Permissible_Value>
+        <value>Radiance</value>
+        <value_meaning>Radiometric correction results are expressed in units of Radiance (generally W/m^2/sr)
+        </value_meaning>
+      </DD_Permissible_Value>      <DD_Permissible_Value>
         <value>Radiance Factor</value>
         <value_meaning>Radiance Factor also known as I/F or IOF. Some images are scaled to absolute 
           radiance units, then divided by the absolute radiance of the Sun at the top of the planet's
@@ -3600,7 +4050,7 @@
       engineering units. i.e. temperature_value in degrees C or voltage_value in Volts</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
-      <value_data_type>ASCII_NonNegative_Integer</value_data_type>
+      <value_data_type>ASCII_Integer</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -3681,6 +4131,35 @@
         <value>Bottom to Top</value>
         <value_meaning>pixels are read bottom to top.</value_meaning>
       </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>recommended_exposure_index</name>
+    <version_id>1.0</version_id>
+    <local_identifier>recommended_exposure_index</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Recommended Exposure Index as defined by ISO 12232:2019.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>red_to_green_balance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>red_to_green_balance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the red gain levels, relative to green (as a ratio), for white balance.
+      Often related to color temperature.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
 
@@ -3978,7 +4457,140 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-  
+
+  <DD_Attribute>
+    <name>saturation</name>
+    <version_id>1.0</version_id>
+    <local_identifier>saturation</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates the level of color intensity enhancement applied by the camera during image capture.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Normal</value>
+        <value_meaning>Indicates a normal level of color intensity enhancement applied during image capture.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Low</value>
+        <value_meaning>Indicates a low level of color intensity enhancement applied during image capture.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>High</value>
+        <value_meaning>Indicates a high level of color intensity enhancement applied during image capture.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>scene_capture_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>scene_capture_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates the orientation of the camera.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Standard</value>
+        <value_meaning>Indicates default, general-purpose settings with no specific
+          scene preset applied</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Landscape</value>
+        <value_meaning>Indicates the camera is in a horizontal orientation.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Portrait</value>
+        <value_meaning>Indicates the camera is in a vertical orientation.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Night</value>
+        <value_meaning>Indicates the camera is optimized for low-light environments.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Other</value>
+        <value_meaning>Other</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>sensing_method</name>
+    <version_id>1.0</version_id>
+    <local_identifier>sensing_method</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the image sensor type.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Monochrome area</value>
+        <value_meaning>Need definition. Not used by corresponding EXIF tag 0xa217.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>One-chip color area</value>
+        <value_meaning>A single chip uses an alternating grid of red, green, and blue micro-filters
+          over individual pixels to capture color.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Two-chip color area</value>
+        <value_meaning>Indicates the light splits into two paths to be processed by two distinct sensors.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Three-chip color area</value>
+        <value_meaning>A prism is used to split light into pure Red, Green, and Blue beams,
+          directing each to its own dedicated sensor chip.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Color sequential area</value>
+        <value_meaning>A sensor that captures red, green, and blue data sequentially over time.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Monochrome linear</value>
+        <value_meaning>Need definition. Not used by corresponding EXIF tag 0xa217.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Trilinear</value>
+        <value_meaning>A line-scan sensor consisting of three linear arrays (one for R, G, and B).</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>sharpness</name>
+    <version_id>1.0</version_id>
+    <local_identifier>sharpness</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Indicates the in-camera processing applied to edges in the image.
+      This is a property of the camera software, not optical sharpness of the
+      lens or focus accuracy.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Normal</value>
+        <value_meaning>Indicates a normal level of processing applied to edges in the image.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Soft</value>
+        <value_meaning>Indicates a low level of processing applied to edges in the image.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Hard</value>
+        <value_meaning>Indicates a high level of processing applied to edges in the image.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>valid_pixel_count</name>
     <version_id>1.0</version_id>
@@ -3993,7 +4605,58 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-    
+
+  <DD_Attribute>
+    <name>sensitivity_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>sensitivity_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies which ISO 12232:2019 parameters are used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Unknown</value>
+        <value_meaning>Indicates that the ISO 12232:2019 parameters are used are unknown.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Standard Output Sensitivity</value>
+        <value_meaning>Indicates that sensitivity is measured based on the brightness of the final processed
+          image relative to exposure.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Recommended Exposure Index</value>
+        <value_meaning>Indicates the manufacturer's recommended exposure setting for
+          standard shooting.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>ISO Speed</value>
+        <value_meaning>Indicates the standard sensor sensitivity rating as defined by
+          the ISO 12232 standard</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Standard Output Sensitivity and Recommended Exposure Index</value>
+        <value_meaning>Indicates both Standard Output Sensitivity (SOS) and Recommended Exposure Index (REI).
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Standard Output Sensitivity and ISO Speed</value>
+        <value_meaning>Indicates both Standard Output Sensitivity (SOS) and ISO Speed.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Recommended Exposure Index and ISO Speed</value>
+        <value_meaning>Indicates both Recommended Exposure Index (REI) and ISO Speed.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Standard Output Sensitivity, Recommended Exposure Index and ISO Speed</value>
+        <value_meaning>Indicates all Standard Output Sensitivity (SOS), Recommended Exposure Index (REI)
+          and ISO Speed.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
   <DD_Attribute>
     <name>sequence_number</name>
     <version_id>1.0</version_id>
@@ -4212,6 +4875,20 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>R. Deen</submitter_name>
     <definition>The standard deviation in the area of interest.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>standard_output_sensitivity</name>
+    <version_id>1.0</version_id>
+    <local_identifier>standard_output_sensitivity</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Standard Output Sensitivity value as defined by ISO 12232:2019.</definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Real</value_data_type>
@@ -4773,6 +5450,21 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>artifact_flag</name>
+    <version_id>1.0</version_id>
+    <local_identifier>artifact_flag</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition> A boolean value that indicates whether this image has identified artifacts.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>below_aft_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>below_aft_flag</local_identifier>
@@ -4920,6 +5612,48 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>red_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>red_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Red pixel value in DN</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>green_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>green_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Green pixel value in DN</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>blue_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>blue_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Blue pixel value in DN</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
     <name>saturated_flag</name>
     <version_id>1.0</version_id>
     <local_identifier>saturated_flag</local_identifier>
@@ -4958,7 +5692,7 @@
     <nillable_flag>false</nillable_flag>
     <submitter_name>Trent Hare</submitter_name>
     <definition>Multiplicative factor used to isolate pixels that are X times 
-      greater than theie nearest neighbors.
+      greater than their nearest neighbors.
     </definition>
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
@@ -4966,7 +5700,20 @@
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
-
+  <DD_Attribute>
+    <name>threshold_pixel</name>
+    <version_id>1.0</version_id>
+    <local_identifier>threshold_pixel</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Value used to define a level that triggers a defined behavior. This is a pixel
+      value expressed in the same units as the pixels themselves in the image array.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
   <DD_Attribute>
     <name>threshold_value</name>
     <version_id>1.0</version_id>
@@ -5028,6 +5775,48 @@
     <DD_Value_Domain>
       <enumeration_flag>false</enumeration_flag>
       <value_data_type>ASCII_Boolean</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>xyy_x</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xyy_x</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the x coordinate of a color in xyY color space</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>xyy_y</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xyy_y</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the y coordinate of a color in xyY color space</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>xyy_luminance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xyy_luminance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the luminance or capital-Y coordinate of a color in xyY color space</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
     </DD_Value_Domain>
   </DD_Attribute>
@@ -5191,7 +5980,7 @@
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Onboard_Compression</identifier_reference>
@@ -5221,7 +6010,7 @@
       <identifier_reference>Radiometric_Correction</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Reference_Pixel</identifier_reference>
@@ -5285,6 +6074,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Camera_Settings</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
@@ -5439,10 +6234,41 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>exposure_compensation</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>metering_mode</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>Data_Processing</identifier_reference>
         <reference_type>parent_of</reference_type>
         <minimum_occurrences>1</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Black_Reference_Point -->
+  <DD_Class>
+    <name>Black_Reference_Point</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Black_Reference_Point</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Black reference point of camera</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Color_sRGB</identifier_reference>
+      <identifier_reference>Color_xyY</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
 
@@ -5633,7 +6459,69 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
   </DD_Class>
-  
+
+  <!-- Class: Camera_Settings -->
+  <DD_Class>
+    <name>Camera_Settings</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Camera_Settings</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies the camera settings, often used for handheld/human-operated
+      cameras.  The attributes generally correspond to EXIF tags and are often qualitative
+      rather than quantitative.</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>contrast</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>gain_control</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>saturation</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>scene_capture_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sharpness</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Chromaticity_Coordinate -->
+  <DD_Class>
+    <name>Chromaticity_Coordinate</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Chromaticity_Coordinate</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies a color using one of several color spaces</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Color_sRGB</identifier_reference>
+      <identifier_reference>Color_xyY</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!-- Class: Color_Filter_Array -->
   <DD_Class>
     <name>Color_Filter_Array</name>
@@ -5730,8 +6618,84 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Black_Reference_Point</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>White_Reference_Point</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>icc_profile_name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Color_sRGB -->
+  <DD_Class>
+    <name>Color_sRGB</name>
+    <version_id>1.0</version_id>B
+    <local_identifier>Color_sRGB</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies a color expressed in standard RGB color space</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>red_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>green_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>blue_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: Color_xyY -->
+  <DD_Class>
+    <name>Color_xyY</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Color_xyY</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>Specifies a color expressed in xyY color space</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>xyy_x</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xyy_y</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xyy_luminance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -5867,7 +6831,7 @@
       <identifier_reference>Image_Mask</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Onboard_Compression</identifier_reference>
@@ -5897,7 +6861,7 @@
       <identifier_reference>Radiometric_Correction</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
-      <maximum_occurrences>1</maximum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Reference_Pixel</identifier_reference>
@@ -5961,6 +6925,12 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>White_Balance</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Camera_Settings</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
@@ -6119,6 +7089,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Dark_Current_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -6126,6 +7102,25 @@
     </DD_Association>
   </DD_Class>
 
+      <!-- Class: Dark_Current_File -->
+  <DD_Class>
+    <name>Dark_Current_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Dark_Current_File</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Dark_Current_File class specifies an image or other file used for
+        dark current correction. 
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
   <!-- Class: Onboard_Compression class definition -->
   <DD_Class>
     <name>Onboard_Compression</name>
@@ -6422,6 +7417,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>megapixels</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>samples</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -6556,6 +7557,18 @@
     <DD_Association>
       <identifier_reference>pds.Internal_Reference</identifier_reference>
       <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.Internal_Reference</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sensing_method</identifier_reference>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -6902,6 +7915,18 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>light_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>exposure_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Optical_Filter  -->
@@ -7005,12 +8030,13 @@
   <!-- Class: Flat_Field_File -->
   <DD_Class>
     <name>Flat_Field_File</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Flat_Field_File</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Flat_Field_File class specifies the image used for flat field correction. 
-      The image is divided by this flat field image in order to apply the flat 
-      field correction (which is the opposite of Radial_Flat_Field_Function).
+    <definition>The Flat_Field_File class specifies an image or other file used for flat field
+      correction.  Typically the image is divided by this flat field image in order to apply the flat 
+      field correction (which is the opposite of Radial_Flat_Field_Function), although other
+      types of flat field files may be specified.
     </definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
@@ -7090,6 +8116,36 @@
     </DD_Association>
     <DD_Association>
       <identifier_reference>maximum_focus_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>circle_of_confusion</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>depth_of_field</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>diagonal_fov</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>diagonal_fov_length</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>hyperfocal_distance</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -7437,6 +8493,36 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>iso_speed</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>recommended_exposure_index</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sensitivity_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>standard_output_sensitivity</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>exposure_index</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: JPEG_Parameters -->
@@ -7470,6 +8556,12 @@
     <DD_Association>
         <identifier_reference>Image_Compression_Segment</identifier_reference>
         <reference_type>component_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+        <identifier_reference>chrominance_positioning</identifier_reference>
+        <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
         <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
@@ -7703,6 +8795,30 @@
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
+    <DD_Association>
+      <identifier_reference>lens_description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>lens_name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>max_aperture_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>aperture_value</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Pixel_Averaging_Dimensions -->
@@ -7900,6 +9016,12 @@
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+        <identifier_reference>array_band_number</identifier_reference>
+        <reference_type>attribute_of</reference_type>
+        <minimum_occurrences>0</minimum_occurrences>
+        <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
         <identifier_reference>radiometric_type</identifier_reference>
         <reference_type>attribute_of</reference_type>
         <minimum_occurrences>0</minimum_occurrences>
@@ -7990,6 +9112,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Radiometric_Correction_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
@@ -7997,6 +9125,25 @@
     </DD_Association>
   </DD_Class>
 
+      <!-- Class: Radiometric_Correction_File -->
+  <DD_Class>
+    <name>Radiometric_Correction_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Radiometric_Correction_File</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Radiometric_Correction class specifies an image or other file used for
+      radiometric correction.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
   <!-- Class: Reference_Pixel -->
   <DD_Class>
     <name>Reference_Pixel</name>
@@ -8929,6 +10076,12 @@ product_flag.</definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
     <DD_Association>
+      <identifier_reference>array_band_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>dq_band</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -9053,7 +10206,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>    
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>artifact_flag</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Hot_Pixel Class for Data_Quality -->
@@ -9072,13 +10231,19 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_factor</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
   </DD_Class>
 
   <!-- Class: Nonlinear_Pixel Class for Data_Quality -->
@@ -9096,7 +10261,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_value</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -9122,7 +10293,13 @@ product_flag.</definition>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>  
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>threshold_pixel</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
     <DD_Association>
       <identifier_reference>threshold_value</identifier_reference>
       <reference_type>attribute_of</reference_type>
@@ -9206,8 +10383,39 @@ product_flag.</definition>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>red_to_green_balance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>blue_to_green_balance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+  <!-- Class: White_Reference_Point  -->
+  <DD_Class>
+    <name>White_Reference_Point</name>
+    <version_id>1.0</version_id>
+    <local_identifier>White_Reference_Point</local_identifier>
+    <submitter_name>Namrata Malarout</submitter_name>
+    <definition>White reference point of camera</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>Color_sRGB</identifier_reference>
+      <identifier_reference>Color_xyY</identifier_reference>
+      <reference_type>component_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
