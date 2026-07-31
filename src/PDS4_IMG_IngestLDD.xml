@@ -284,6 +284,7 @@
     - Updated cardinality of Image_Mask in both Imaging and Commanded_Parameters to 0:unbounded per request from T. Cornet
     - Changed units of f_number from Length to None as f_number is a unitless quantity (backwards-incompatible change but clear error)
     - Added "Radiance" as an enum value for radiometric_type (it was in the description but not the value list)
+    - Added Dark_Current_File and Radiometric_Correction_File for T. Cornet
 
   </comment>
   <last_modification_date_time>2026-07-31T16:00Z</last_modification_date_time>
@@ -7088,6 +7089,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Dark_Current_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -7095,6 +7102,25 @@
     </DD_Association>
   </DD_Class>
 
+      <!-- Class: Dark_Current_File -->
+  <DD_Class>
+    <name>Dark_Current_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Dark_Current_File</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Dark_Current_File class specifies an image or other file used for
+        dark current correction. 
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
   <!-- Class: Onboard_Compression class definition -->
   <DD_Class>
     <name>Onboard_Compression</name>
@@ -8004,12 +8030,13 @@
   <!-- Class: Flat_Field_File -->
   <DD_Class>
     <name>Flat_Field_File</name>
-    <version_id>1.0</version_id>
+    <version_id>1.1</version_id>
     <local_identifier>Flat_Field_File</local_identifier>
     <submitter_name>Cristina De Cesare</submitter_name>
-    <definition>The Flat_Field_File class specifies the image used for flat field correction. 
-      The image is divided by this flat field image in order to apply the flat 
-      field correction (which is the opposite of Radial_Flat_Field_Function).
+    <definition>The Flat_Field_File class specifies an image or other file used for flat field
+      correction.  Typically the image is divided by this flat field image in order to apply the flat 
+      field correction (which is the opposite of Radial_Flat_Field_Function), although other
+      types of flat field files may be specified.
     </definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
@@ -9085,6 +9112,12 @@
       <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
+      <identifier_reference>Radiometric_Correction_File</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
       <identifier_reference>Data_Processing</identifier_reference>
       <reference_type>parent_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
@@ -9092,6 +9125,25 @@
     </DD_Association>
   </DD_Class>
 
+      <!-- Class: Radiometric_Correction_File -->
+  <DD_Class>
+    <name>Radiometric_Correction_File</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Radiometric_Correction_File</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>The Radiometric_Correction class specifies an image or other file used for
+      radiometric correction.
+    </definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>false</element_flag>
+    <DD_Association>
+      <identifier_reference>Data_Processing_File</identifier_reference>
+      <reference_type>parent_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+    
   <!-- Class: Reference_Pixel -->
   <DD_Class>
     <name>Reference_Pixel</name>
