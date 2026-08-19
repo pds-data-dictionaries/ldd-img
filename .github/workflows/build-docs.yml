@@ -34,12 +34,12 @@ jobs:
     if: github.actor != 'pdsen-ci'
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
 
       - name: Set up Python 3
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.13'
         
@@ -55,17 +55,17 @@ jobs:
           make github
           cd ..
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           # Upload entire repository
           path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         
   pdfgen: # job 1
     name: 'Build PDF'
@@ -73,12 +73,12 @@ jobs:
     if: github.actor != 'pdsen-ci'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.ADMIN_GITHUB_TOKEN || github.token }}
 
       - name: Set up Python 3
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.13'
 
@@ -108,10 +108,4 @@ jobs:
           git add -A docs/*.pdf
           git status
           git commit --allow-empty -m "Auto-gen PDF by PDSEN CI Bot"
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          force: true
+          git push origin ${{ github.ref }}
