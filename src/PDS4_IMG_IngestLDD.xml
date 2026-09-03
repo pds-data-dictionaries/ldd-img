@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.4.0</ldd_version_id>
+  <ldd_version_id>1.9.5.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Robert Deen</full_name>
   <steward_id>img</steward_id>
@@ -286,8 +286,11 @@
     - Added "Radiance" as an enum value for radiometric_type (it was in the description but not the value list)
     - Added Dark_Current_File and Radiometric_Correction_File for T. Cornet
 
+    1.9.5.0 R. Deen
+    - Added Color_Bayer class to black and white reference points
+
   </comment>
-  <last_modification_date_time>2026-07-31T16:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-09-03T16:00Z</last_modification_date_time>
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -5640,6 +5643,34 @@
   </DD_Attribute>
 
   <DD_Attribute>
+    <name>green1_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>green1_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>First green pixel value in a Bayer-pattern DN</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+  <DD_Attribute>
+    <name>green2_dn</name>
+    <version_id>1.0</version_id>
+    <local_identifier>green2_dn</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Second green pixel value in a Bayer-pattern DN</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute
+
+  <DD_Attribute>
     <name>blue_dn</name>
     <version_id>1.0</version_id>
     <local_identifier>blue_dn</local_identifier>
@@ -6266,6 +6297,7 @@
       <identifier_reference>XSChoice#</identifier_reference>
       <identifier_reference>Color_sRGB</identifier_reference>
       <identifier_reference>Color_xyY</identifier_reference>
+      <identifier_reference>Color_Bayer</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
@@ -6701,6 +6733,40 @@
     </DD_Association>
   </DD_Class>
 
+  <!-- Class: Color_Bayer -->
+  <DD_Class>
+    <name>Color_Bayer</name>
+    <version_id>1.0</version_id>B
+    <local_identifier>Color_Bayer</local_identifier>
+    <submitter_name>R. Deen</submitter_name>
+    <definition>Specifies a color expressed in terms of Bayer color components (R/G1/G2/B)</definition>
+    <abstract_flag>false</abstract_flag>
+    <element_flag>true</element_flag>
+    <DD_Association>
+      <identifier_reference>red_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>green1_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>green2_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>blue_dn</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
   <!-- Class: Commanded_Parameters -->
   <DD_Class>
     <name>Commanded_Parameters</name>
@@ -10415,6 +10481,7 @@ product_flag.</definition>
       <identifier_reference>XSChoice#</identifier_reference>
       <identifier_reference>Color_sRGB</identifier_reference>
       <identifier_reference>Color_xyY</identifier_reference>
+      <identifier_reference>Color_Bayer</identifier_reference>
       <reference_type>component_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
