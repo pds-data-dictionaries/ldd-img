@@ -10,7 +10,7 @@
   xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd">
   
   <name>Imaging</name>
-  <ldd_version_id>1.9.5.0</ldd_version_id>
+  <ldd_version_id>1.9.6.0</ldd_version_id>
   <dictionary_type>Discipline</dictionary_type>
   <full_name>Robert Deen</full_name>
   <steward_id>img</steward_id>
@@ -289,8 +289,14 @@
     1.9.5.0 R. Deen
     - Added Color_Bayer class to black and white reference points
 
+    1.9.6.0 T. Cornet, R. Alanis, R. Deen
+    - Added XCT (X-ray Computed Tomography) classes and attributes (T. Cornet)
+    - Changed some dashes to ASCII hyphens in descriptions to eliminate validation errors (R. Deen)
+    
   </comment>
-  <last_modification_date_time>2026-09-03T16:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-11-11T23:00Z</last_modification_date_time>
+
+
 
   <!--                     -->
   <!--  Attributes: BEGIN  -->
@@ -3016,11 +3022,11 @@
       <DD_Permissible_Value>
         <value>Center-weighted average</value>
         <value_meaning>Measures the whole scene but gives heavy priority to the center
-          (usually 60–80% of the weight).</value_meaning>
+          (usually 60-80% of the weight).</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Spot</value>
-        <value_meaning>Exposes strictly for a tiny, precise point in the frame (usually 1–5%). Ideal for extreme
+        <value_meaning>Exposes strictly for a tiny, precise point in the frame (usually 1-5%). Ideal for extreme
           high-contrast scenes, like a backlit subject or a performer on a dark stage</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
@@ -3036,7 +3042,7 @@
       <DD_Permissible_Value>
         <value>Partial</value>
         <value_meaning>Similar to spot metering but covers a slightly wider specific area in the middle of
-          the frame (usually 6–10%).</value_meaning>
+          the frame (usually 6-10%).</value_meaning>
       </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Other</value>
@@ -5869,6 +5875,405 @@
 
   <!-- End   Attributes: for Data_Quality Class   -->
 
+  <!-- ATTRIBUTES FOR XCT IMAGING -->
+  <DD_Attribute>
+    <name>scan_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>scan_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The scan_type attribute defines how an XCT scan is performed.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Continuous</value>
+        <value_meaning>Scan approach where the rotation stage moves continuously and CT projections are acquired at regular time intervals.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Step-shoot</value>
+        <value_meaning>Scan approach where the rotation stage moves step by step, and a projection image is acquired at each step.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>beam_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>beam_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The beam_type attribute defines the shape of the beam emitted by a X-ray source.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Cone beam</value>
+        <value_meaning>The X-ray photons are emitted by the source in a cone beam shape.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Parallel beam</value>
+        <value_meaning>The X-ray photons are emitted by the source as a (nearly) parallel beam in both directions orthogonal to the beam propagation direction.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Fan beam</value>
+        <value_meaning>The X-ray photons are emitted by the source as a fan beam, where one direction orthogonal to the beam propagation direction has very low divergence, and the direction orthogonal to this has large divergence.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>source_object_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>source_object_distance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Distance between the source and the targeted object.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>source_detector_distance</name>
+    <version_id>1.0</version_id>
+    <local_identifier>source_detector_distance</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Distance between the source and the detector.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>xct_coordinate_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xct_coordinate_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The xct_coordinate_type attribute provides the type of spatial coordinates used to define an XCT reference frame. Currently set as "Cartesian".</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Cartesian</value>
+        <value_meaning>Cartesian coordinate type.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>voxel_size_x</name>
+    <version_id>1.0</version_id>
+    <local_identifier>voxel_size_x</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Pixel length along along its X axis in a 3-dimensional voxel (horizontal axis).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>voxel_size_y</name>
+    <version_id>1.0</version_id>
+    <local_identifier>voxel_size_y</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Pixel length along along its Y axis in a 3-dimensional voxel.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>voxel_size_z</name>
+    <version_id>1.0</version_id>
+    <local_identifier>voxel_size_z</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Pixel length along along its Z axis in a 3-dimensional voxel.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>effective_pixel_size_horizontal</name>
+    <version_id>1.0</version_id>
+    <local_identifier>effective_pixel_size_horizontal</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Effective pixel length in an XCT image along the horizontal axis.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>effective_pixel_size_vertical</name>
+    <version_id>1.0</version_id>
+    <local_identifier>effective_pixel_size_vertical</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Effective pixel length in an XCT image along the vertical axis.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>xct_motion</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xct_motion</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The xct_motion attribute defines the motion used during an XCT scan.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Rotation</value>
+        <value_meaning>The motion is a rotation around one axis (provided by the axis attribute).</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Translation</value>
+        <value_meaning>The motion is a translation along one axis (provided by the axis attribute).</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>xct_motion_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xct_motion_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The xct_motion_type attribute defines the type of motion used during an XCT scan (uniform or irregularly spaced).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Uniform</value>
+        <value_meaning>The motion is uniform.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Irregularly spaced</value>
+        <value_meaning>The motion is irregularly spaced.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>xct_axis_name</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xct_axis_name</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The xct_axis attribute defines the axis name to be used as reference in the relevant class.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>X</value>
+        <value_meaning>X axis.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Y</value>
+        <value_meaning>Y axis.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Z</value>
+        <value_meaning>Z axis.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>step_angle</name>
+    <version_id>1.0</version_id>
+    <local_identifier>step_angle</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The step_angle attribute defines the step of motion in units of angle (e.g. in the case of a rotation).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>start_angle</name>
+    <version_id>1.0</version_id>
+    <local_identifier>start_angle</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The start_angle attribute defines start angle in the rotation.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>stop_angle</name>
+    <version_id>1.0</version_id>
+    <local_identifier>stop_angle</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The stop_angle attribute defines stop angle in the rotation.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Angle</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>step_length</name>
+    <version_id>1.0</version_id>
+    <local_identifier>step_length</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The step_length attribute defines the step of motion in units of length (e.g. in the case of a translation).</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>rotation_speed</name>
+    <version_id>1.0</version_id>
+    <local_identifier>rotation_speed</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The rotation_speed attribute defines the speed of the motion defined by the motion relative to the motion_axis.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Angular_Velocity</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>translation_speed</name>
+    <version_id>1.0</version_id>
+    <local_identifier>translation_speed</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The translation_speed attribute defines the speed of the motion defined by the motion relative to the motion_axis.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Velocity</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>moving_component</name>
+    <version_id>1.0</version_id>
+    <local_identifier>moving_component</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The moving_component attribute defines the moving part during the acquisition.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Sample</value>
+        <value_meaning>The moving part is the sample.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Source</value>
+        <value_meaning>The moving part is the source.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Detector</value>
+        <value_meaning>The moving part is the detector.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  
+  <!-- X-ray filter class attributes --> 
+  <DD_Attribute>
+    <name>xray_filter_type</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xray_filter_type</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>X-ray filter used to filter out the X-ray beam emitted from the X-ray source.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <DD_Permissible_Value>
+        <value>Alloy</value>
+        <value_meaning>Alloy filter. The composition of the alloy should be provided in the Filter/description attribute.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Aluminium</value>
+        <value_meaning>Aluminium (Al) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Copper</value>
+        <value_meaning>Copper (Cu) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Iron</value>
+        <value_meaning>Iron (Fe) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Gold</value>
+        <value_meaning>Gold (Au) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Tin</value>
+        <value_meaning>Tin (Sn) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Tungsten</value>
+        <value_meaning>Tungsten (W) filter.</value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Other</value>
+        <value_meaning>The filter is different from the other types of X-ray filter, and its composition should be provided in the Filter/description attribute.</value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+  <DD_Attribute>
+    <name>xray_filter_thickness</name>
+    <version_id>1.0</version_id>
+    <local_identifier>xray_filter_thickness</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Thickness of the X-ray filter used.</definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Length</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
 
   <!--                   -->
   <!-- Attributes: END   -->
@@ -6108,6 +6513,18 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Xray_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Scan</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Camera_Settings</identifier_reference>
@@ -6678,7 +7095,7 @@
   <!-- Class: Color_sRGB -->
   <DD_Class>
     <name>Color_sRGB</name>
-    <version_id>1.0</version_id>B
+    <version_id>1.0</version_id>
     <local_identifier>Color_sRGB</local_identifier>
     <submitter_name>Namrata Malarout</submitter_name>
     <definition>Specifies a color expressed in standard RGB color space</definition>
@@ -6736,7 +7153,7 @@
   <!-- Class: Color_Bayer -->
   <DD_Class>
     <name>Color_Bayer</name>
-    <version_id>1.0</version_id>B
+    <version_id>1.0</version_id>
     <local_identifier>Color_Bayer</local_identifier>
     <submitter_name>R. Deen</submitter_name>
     <definition>Specifies a color expressed in terms of Bayer color components (R/G1/G2/B)</definition>
@@ -6994,6 +7411,18 @@
       <reference_type>component_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Xray_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Scan</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
     </DD_Association>
     <DD_Association>
       <identifier_reference>Camera_Settings</identifier_reference>
@@ -10427,6 +10856,281 @@ product_flag.</definition>
   </DD_Class>
 
 
+  <!-- XCT_Scan child classes -->
+  <DD_Class>
+    <name>Voxel_Size</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Voxel_Size</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The Voxel_Size class captures the size of a 3-dimensional voxel in each of its dimensions. Voxels can be isotropic or non-isotropic.</definition>
+    <DD_Association>
+      <identifier_reference>voxel_size_x</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>voxel_size_y</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>voxel_size_z</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <DD_Class>
+    <name>Effective_Pixel_Size</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Effective_Pixel_Size</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The Effective_Pixel_Size class captures the horizontal and vertical size of a pixel in an XCT image.</definition>
+    <DD_Association>
+      <identifier_reference>effective_pixel_size_horizontal</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>effective_pixel_size_vertical</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  
+  <!-- XCT Scan geometry attributes and classes --> 
+  <DD_Class>
+    <name>XCT_Axis</name>
+    <version_id>1.0</version_id>
+    <local_identifier>XCT_Axis</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The XCT_Axis class allows to capture the axis definition (such as name and description) relevant to the XCT reference frame definition.</definition>
+    <DD_Association>
+      <identifier_reference>xct_axis_name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sequence_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <DD_Class>
+    <name>XCT_Reference_Frame</name>
+    <version_id>1.0</version_id>
+    <local_identifier>XCT_Reference_Frame</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The XCT_Reference_Frame class provides the defintion of the reference frame axes.</definition>
+    <DD_Association>
+      <identifier_reference>xct_coordinate_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Axis</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>3</minimum_occurrences>
+      <maximum_occurrences>3</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <DD_Class>
+    <name>XCT_Scan_Geometry</name>
+    <version_id>1.0</version_id>
+    <local_identifier>XCT_Scan_Geometry</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The XCT_Scan_Geometry class provides the overall geometry of the XCT acquisition.</definition>
+    <DD_Association>
+      <identifier_reference>source_detector_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>source_object_distance</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Reference_Frame</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  
+  <!-- XCT_Scan master class --> 
+  <DD_Class>
+    <name>XCT_Scan</name>
+    <version_id>1.0</version_id>
+    <local_identifier>XCT_Scan</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The XCT_Scan class captures the acquisition properties specific to X-ray Computed Tomography scanning. </definition>
+    <DD_Association>
+      <identifier_reference>beam_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>scan_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Effective_Pixel_Size</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Voxel_Size</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Axis_Motion</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>unbounded</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XCT_Scan_Geometry</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <DD_Class>
+    <name>Xray_Filter</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Xray_Filter</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>Type of X-ray filter used to filter out the X-ray beam emitted from the X-ray source. Multiple instances of the Xray_Filter class can be used.</definition>
+    <DD_Association>
+      <identifier_reference>xray_filter_thickness</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xray_filter_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>pds.description</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sequence_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  <!-- Do the axis motion class --> 
+  <DD_Class>
+    <name>XCT_Axis_Motion</name>
+    <version_id>1.0</version_id>
+    <local_identifier>XCT_Axis_Motion</local_identifier>
+    <submitter_name>Thomas Cornet</submitter_name>
+    <definition>The XCT_Axis_Motion class describes the movement of components during the data acquisition. This class can be repeated more than once in case of complex motion (e.g. helical scans).</definition>
+    <DD_Association>
+      <identifier_reference>moving_component</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xct_axis_name</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xct_motion</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>xct_motion_type</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>rotation_speed</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>start_angle</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>step_angle</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>stop_angle</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>step_length</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>translation_speed</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>sequence_number</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+  
+  
   <!-- Class: White_Balance  -->
   <DD_Class>
     <name>White_Balance</name>
@@ -10703,6 +11407,39 @@ product_flag.</definition>
   </DD_Rule>
 
   <!-- END child checks -->
+  
+  <!-- Rules to control the motion properties provided in the XCT_Axis_Motion class --> 
+  <DD_Rule>
+    <local_identifier>xct_rotation_attributes_check</local_identifier>
+    <rule_context>//img:XCT_Scan/img:XCT_Axis_Motion</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>if(img:xct_motion = 'Rotation') then (not(img:translation_speed) and not(img:step_length)) else true()</rule_test>
+      <rule_message>The translation_speed and step_length attributes must not be used if the xct_motion is a 'Rotation'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <DD_Rule>
+    <local_identifier>xct_translation_attributes_check</local_identifier>
+    <rule_context>//img:XCT_Scan/img:XCT_Axis_Motion</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>if(img:xct_motion = 'Translation') then (not(img:start_angle) and not(img:step_angle) and not(img:stop_angle) and not(img:rotation_speed)) else true()</rule_test>
+      <rule_message>The rotation_speed, start_angle, step_angle, and stop_angle attributes must not be used if the xct_motion is a 'Translation'.</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
+  <!-- Rule to force the use of the description in the Xray_Filter class if the xray_filter_type is Alloy or Other -->
+  <DD_Rule>
+    <local_identifier>xct_filter_type_check</local_identifier>
+    <rule_context>//img:Xray_Filter</rule_context>
+    <DD_Rule_Statement>
+      <rule_type>Assert</rule_type>
+      <rule_test>if(img:xray_filter_type = ('Alloy', 'Other')) then img:description else true()</rule_test>
+      <rule_message>The filter description must be provided in case xray_filter_type = ('Alloy', 'Other').</rule_message>
+    </DD_Rule_Statement>
+  </DD_Rule>
+  
   
   <DD_Rule>
     <local_identifier>local_reference_type_check_img</local_identifier>
