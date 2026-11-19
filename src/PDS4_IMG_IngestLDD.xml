@@ -292,9 +292,14 @@
     1.9.6.0 T. Cornet, R. Alanis, R. Deen
     - Added XCT (X-ray Computed Tomography) classes and attributes (T. Cornet)
     - Changed some dashes to ASCII hyphens in descriptions to eliminate validation errors (R. Deen)
+    - Updated the definition for the Statistics Class (R. Alanis)
+    - Added Bayer GRBG to the list of accepted values for img:color_filter_array_type (R. Alanis)
+    - Added new class "Time_Delay_Integration" and associated attributes (R. Alanis)
+    - Added new class "Framelets" and associated attributes (R. Alanis)
+    - Added new class "Framelet" and associated attributes (R. Alanis)
     
   </comment>
-  <last_modification_date_time>2026-11-11T23:00Z</last_modification_date_time>
+  <last_modification_date_time>2026-11-19T23:00Z</last_modification_date_time>
 
 
 
@@ -1042,6 +1047,13 @@
       <enumeration_flag>true</enumeration_flag>
       <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
       <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+            <DD_Permissible_Value>
+        <value>Bayer GRBG</value>
+        <value_meaning>The Bayer CFA pattern contains one red, one blue, and two green pixels
+          in each 2x2 square of pixels. The GRBG type indicates the phasing of
+          the colors, in the order upper left, upper right, lower left, and lower
+          right.</value_meaning>
+      </DD_Permissible_Value>
       <DD_Permissible_Value>
         <value>Bayer RGGB</value>
         <value_meaning>The Bayer CFA pattern contains one red, one blue, and two green pixels
@@ -2329,7 +2341,178 @@
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
+ 
+ 
+ <!-- Start Attributes: for Framelets Class   -->
+ 
+   <DD_Attribute>
+    <name>framelet_repeat_pattern</name>
+    <version_id>1.0</version_id>
+    <local_identifier>framelet_repeat_pattern</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies the repeat pattern for framelet archetypes, or None 
+    	for no repeat.  Repeating patterns should cover the entire image.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>None</value>
+        <value_meaning>No repeat, every framelet is specified.
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Vertical</value>
+        <value_meaning>The pattern is repeated vertically (resulting in horizontal strips).
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Horizontal</value>
+        <value_meaning>The pattern is repeated horizontally (resulting in vertical strips).
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Both</value>
+        <value_meaning>The pattern is repeated in both the horizontal and vertical directions (resulting in rectangles).
+        </value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
   
+    <DD_Attribute>
+    <name>framelet_hoizontal_repeat_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>framelet_hoizontal_repeat_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies how many repeats of the pattern there are in the 
+    	horizontal dimension.  If not specified, assume as many as are needed to 
+    	fill the image width.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>framelet_vertical_repeat_count</name>
+    <version_id>1.0</version_id>
+    <local_identifier>framelet_vertical_repeat_count</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies how many repeats of the pattern there are in the 
+    	vertical dimension.  If not specified, assume as many as are needed to 
+    	fill the image height.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>framelet_distinction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>framelet_distinction</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies how the framelets differ from each other.  More than 
+    	one of these may be listed.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>true</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Collapsed</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+      <DD_Permissible_Value>
+        <value>Optical_Filter</value>
+        <value_meaning>The framelets differ in which optical filter is used.
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Geometry</value>
+        <value_meaning>The framelets differ in observational geometry beyond what would be expected by their placement in the raster.
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Acquisition_Time</value>
+        <value_meaning>The framelets differ in acquisition time.
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Time_Delay_Integration</value>
+        <value_meaning>The framelets differ due to the use of Time Delay Integration.
+        </value_meaning>
+      </DD_Permissible_Value>
+      <DD_Permissible_Value>
+        <value>Compression</value>
+        <value_meaning>The framelets differ in their use of compression.
+        </value_meaning>
+      </DD_Permissible_Value>
+    </DD_Value_Domain>
+  </DD_Attribute>
+ 
+ <!-- End Attributes: for Framelets Class   -->
+  
+  
+ <!-- Start Attributes: for Framelet Class   -->
+ 
+     <DD_Attribute>
+    <name>hoizontal_sequence_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>hoizontal_sequence_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Identifies where in a repeating horizontal pattern this 
+    	framelet goes.  Count starts at 1.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+      <DD_Attribute>
+    <name>vertical_sequence_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>vertical_sequence_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>identifies where in a repeating vertical pattern this framelet 
+    	goes.  Count starts at 1.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+      <DD_Attribute>
+    <name>framelet_interplay_delay</name>
+    <version_id>1.0</version_id>
+    <local_identifier>framelet_interplay_delay</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Time interval between the end of this framelet and the start 
+    	of the next (which could be in a new repeat group if this is the last 
+    	framelet in the group).
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_Time</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+ 
+  <!-- End Attributes: for Framelet Class   -->
+ 
+ 
   <DD_Attribute>
     <name>focus_distance</name>
     <version_id>1.0</version_id>
@@ -5024,6 +5207,90 @@
       </DD_Permissible_Value>
     </DD_Value_Domain>
   </DD_Attribute>
+
+<!-- Start Attributes: for Time_Delay_Integration Class   -->
+
+  <DD_Attribute>
+    <name>tdi_detector_id</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tdi_detector_id</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Identifies the detector for which this TDI parameter set 
+    	applies.  Detector IDs are mission specific.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Preserved</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>tdi_rows</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tdi_rows</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>This is the same as tdi_stage_count for junocam, TDI in hirise 
+      edr. Specifies the number of detector rows that are integrated together 
+      for TDI.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Integer</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>tdi_direction</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tdi_direction</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies the direction of TDI integration in a 
+    	mission-specific manner.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Preserved</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>tdi_line_rate</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tdi_line_rate</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies the time interval from readout of one row to readout 
+    	of the next.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Real</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+  
+    <DD_Attribute>
+    <name>tdi_line_rate_code</name>
+    <version_id>1.0</version_id>
+    <local_identifier>tdi_line_rate_code</local_identifier>
+    <nillable_flag>false</nillable_flag>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Mission-specific identifier or commanded value for line_rate.
+    </definition>
+    <DD_Value_Domain>
+      <enumeration_flag>false</enumeration_flag>
+      <value_data_type>ASCII_Short_String_Preserved</value_data_type>
+      <unit_of_measure_type>Units_of_None</unit_of_measure_type>
+    </DD_Value_Domain>
+  </DD_Attribute>
+
+<!-- End Attributes: for Time_Delay_Integration Class   -->
 
   <DD_Attribute>
     <name>temperature_status</name>
@@ -8741,6 +9008,114 @@
     </DD_Association>
   </DD_Class>
 
+
+<!-- Class: Framelets  -->
+  <DD_Class>
+    <name>Framelets</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Framelets</local_identifier>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Framelets are rectangular subsets of pixels that share some 
+    	property not shared by the image as a whole.  For example, different 
+    	Framelets might have been acquired with different filters, have 
+    	different compression parameters, or be in separate Time Delay 
+    	Integration groups.  They are related to Tiles but are distinct in that 
+    	Tiles should be transparent to the end user, whereas Framelets could be 
+    	very visible (as in the case of different filters) or require geometric 
+    	processing to assemble into a standard image.  Framelets may be arranged 
+    	in repeating patterns, in which the archetypes are specified here, or 
+    	each Framelet may be listed separately.  Note that the last framelet in 
+    	the repeat pattern could be truncated if it goes off the end of the 
+    	image.
+    </definition>
+    <DD_Association>
+      <identifier_reference>framelet_repeat_pattern</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>framelet_hoizontal_repeat_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>framelet_vertical_repeat_count</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>framelet_distinction</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Framelet</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>*</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
+<!-- Class: Framelet  -->
+  <DD_Class>
+    <name>Framelet</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Framelet</local_identifier>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>Specifies parameters for an individual framelet (see Framelets). 
+    	The Subframe defines the extent of the framelet (and location for 
+    	non-repeating framelets), and other parameters describe its attributes.
+    </definition>
+    <DD_Association>
+      <identifier_reference>horizontal_sequence_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>vertical_sequence_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>XSChoice#</identifier_reference>
+      <identifier_reference>horizontal_sequence_id</identifier_reference>
+      <identifier_reference>vertical_sequence_id</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>2</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>framelet_interframe_delay</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Subframe</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>1</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Onboard_Compression</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>Optical_Filter</identifier_reference>
+      <reference_type>component_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>
+
   <!-- Class: ICER_Parameters -->
   <DD_Class>
     <name>ICER_Parameters</name>
@@ -10232,10 +10607,11 @@ product_flag.</definition>
       of an image.  This generally should exclude invalid/saturated/etc
       pixels, although that may vary per mission.  A Subframe child class may
       be used to define the area over which the statistics are gathered
-      (defaults to the entire image)  For multiband images, the band attribute
-      identifies which band the statistics apply to.  If not specified, the
-      statistics cover all bands.  More than one instance of Statistics can
-      be used in order to cover multiple bands or subframes independently.
+      (defaults to the entire image)  For multiband images, the first_band and
+      bands attributes in the Subframe identifies which band(s) the statistics
+      apply to.  If not specified, the statistics cover all bands.  More than
+      one instance of Statistics can be used in order to cover multiple bands
+      or subframes independently.
     </definition>
     <abstract_flag>false</abstract_flag>
     <element_flag>false</element_flag>
@@ -10855,6 +11231,44 @@ product_flag.</definition>
     </DD_Association>
   </DD_Class>
 
+<!-- Class: Time Delay Integration  -->
+  <DD_Class>
+    <name>Time_Delay_Integration</name>
+    <version_id>1.0</version_id>
+    <local_identifier>Time_Delay_Integration</local_identifier>
+    <submitter_name>Rafael Alanis</submitter_name>
+    <definition>The Time_Delay_Integration class contains parameters describing Time_Delay_Integration, which is where the detector is shifted by rows in synchronization with the motion of the image across the detector, in order to increase integration time.</definition>
+    <DD_Association>
+      <identifier_reference>tdi_detector_id</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>tdi_rows</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>tdi_direction</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>tdi_line_rate</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+    <DD_Association>
+      <identifier_reference>tdi_line_rate_code</identifier_reference>
+      <reference_type>attribute_of</reference_type>
+      <minimum_occurrences>0</minimum_occurrences>
+      <maximum_occurrences>1</maximum_occurrences>
+    </DD_Association>
+  </DD_Class>  
 
   <!-- XCT_Scan child classes -->
   <DD_Class>
