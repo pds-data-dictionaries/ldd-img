@@ -9070,7 +9070,7 @@
     	The Subframe defines the extent of the framelet (and location for 
     	non-repeating framelets), and other parameters describe its attributes.
     </definition>
-    <DD_Association>
+<!--<DD_Association>
       <identifier_reference>horizontal_sequence_id</identifier_reference>
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
@@ -9081,12 +9081,12 @@
       <reference_type>attribute_of</reference_type>
       <minimum_occurrences>0</minimum_occurrences>
       <maximum_occurrences>1</maximum_occurrences>
-    </DD_Association>
+    </DD_Association>-->
     <DD_Association>
       <identifier_reference>XSChoice#</identifier_reference>
       <identifier_reference>horizontal_sequence_id</identifier_reference>
       <identifier_reference>vertical_sequence_id</identifier_reference>
-      <reference_type>component_of</reference_type>
+      <reference_type>attribute_of</reference_type>
       <minimum_occurrences>1</minimum_occurrences>
       <maximum_occurrences>2</maximum_occurrences>
     </DD_Association>
