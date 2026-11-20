@@ -2462,9 +2462,9 @@
  <!-- Start Attributes: for Framelet Class   -->
  
      <DD_Attribute>
-    <name>hoizontal_sequence_id</name>
+    <name>horizontal_sequence_id</name>
     <version_id>1.0</version_id>
-    <local_identifier>hoizontal_sequence_id</local_identifier>
+    <local_identifier>horizontal_sequence_id</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Rafael Alanis</submitter_name>
     <definition>Identifies where in a repeating horizontal pattern this 
@@ -2494,9 +2494,9 @@
   </DD_Attribute>
   
       <DD_Attribute>
-    <name>framelet_interplay_delay</name>
+    <name>framelet_interframe_delay</name>
     <version_id>1.0</version_id>
-    <local_identifier>framelet_interplay_delay</local_identifier>
+    <local_identifier>framelet_interframe_delay</local_identifier>
     <nillable_flag>false</nillable_flag>
     <submitter_name>Rafael Alanis</submitter_name>
     <definition>Time interval between the end of this framelet and the start 
